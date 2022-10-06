@@ -6,7 +6,7 @@ import styles from './input.module.scss'
 // @ts-ignore
 import {FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister} from "react-hook-form";
 
-const cx = classNames.bind(styles)
+const cn = classNames.bind(styles)
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
     register: UseFormRegister<FieldValues>;
@@ -29,11 +29,11 @@ const InputComponent = ({register, name, required, placeHolder, error, type}: II
     const {reg,iconPath}:ICheckType = checkType(type);
 
     return (
-        <div className={cx('container')}>
-            <div className={cx('inputField')}>
+        <div className={cn('container')}>
+            <div className={cn('inputField')}>
                     <svg fill="#999" viewBox="0 0 20 20">
                         <path
-                              d={iconPath} className={cx('icon')}></path>
+                              d={iconPath} className={cn('icon')}></path>
                     </svg>
                     <input type={`${type}`} placeholder={`${placeHolder}`}  {...register(`${name}`, {
                         required: required,
