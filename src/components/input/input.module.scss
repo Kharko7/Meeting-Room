@@ -1,14 +1,5 @@
-* {
-  box-sizing: border-box;
-}
-body {
-  color:#555;
-  background: #cbc9c9;
-}
-
 .container{
   width: 400px;
-  margin: 100px;
   padding: 75px 5px 5px 5px;
 }
 
@@ -24,8 +15,8 @@ input {
 }
 .inputField{
   border-radius: 40px;
-  box-shadow: inset 8px 8px 8px #adabab,
-  inset -8px -8px 8px #e9e7e7;
+  box-shadow: inset 33px 33px 66px #bbb9b9,
+  inset -33px -33px 66px #dbd9d9;
   display: flex;
   align-items: center;
 }
