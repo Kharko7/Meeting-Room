@@ -5,30 +5,27 @@ import CheckIcon from '@mui/icons-material/Check';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 const cn = classNames.bind(styles);
-
 interface CheckboxWithLabelProps {
   checked: boolean;
   label?: string;
-  handleChange: () => void;
-}
+  onChange: () => void;
+};
 
-const CheckboxWithLabel = ({ checked, label, handleChange }: CheckboxWithLabelProps) => {
+const CheckboxWithLabel = ({ checked, label, onChange }: CheckboxWithLabelProps) => {
 
   return (
     <FormControlLabel
+      label={label ? label : null}
       sx={{ marginLeft: '0' }}
-      control={< Checkbox
-        sx={{
-          '& .MuiSvgIcon-root': { fontSize: 17, marginLeft: '0.6px' },
-        }}
+      control={<Checkbox
         className={cn((checked) ? ['checkbox', 'active'] : 'checkbox')}
         checked={checked}
-        onChange={handleChange}
+        onChange={onChange}
         icon={< CheckIcon sx={{ transition: 'all 0.3s ease', color: 'transparent' }} />}
-        checkedIcon={< CheckIcon sx={{ transition: 'all 0.5s ease', color: '#000' }} />}
+        checkedIcon={< CheckIcon fontSize='small' sx={{ transition: 'all 0.5s ease', color: '#1976d2', ml: '1px' }} />}
       />}
-      label={label ? label : null} />
-  )
-}
+    />
+  );
+};
 
-export default CheckboxWithLabel
+export default CheckboxWithLabel;
