@@ -1,0 +1,202 @@
+$background:#f4f6fa;
+$firstShadow:rgba(255, 255, 255, 0.5);
+$secondShadow: rgba(0, 0, 0, 0.15);
+$thirdShadow: rgba(255,255,255,0.1);
+$mainColor:#555;
+$linkColor:#aaa;
+$errorColor:#d55d5d;
+
+$secondColor:#5bbde0;
+$secondColorLighter:#99d0e3;
+
+$backgroundSwitch: #EBEDF0;
+$description:#a0a5a8;
+$registration:#505050;
+
+$linear-gradient:#dadde0;
+
+.switch_to_login_button{
+  box-shadow: none;
+  margin-top: 15px;
+}
+
+
+
+.switch_to_login_description{
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin: 5px 5px 5px 0;
+  color: $description;
+}
+
+.title_switch_to_login {
+  box-sizing: border-box;
+  font-size: 40px;
+  transition: 1s ease-in-out;
+}
+
+.switchToLogin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 50px;
+  transition: all 1.25s;
+  background-color: $background;
+  border-radius: 15px 30px 30px 15px;
+  box-sizing: border-box;
+
+
+  cursor: pointer;
+  box-shadow: 8px 8px 2px 1px $secondColor,
+  -2px -2px 12px $firstShadow,
+  2px 2px 8px $secondShadow,
+  2px 2px 4px $thirdShadow;
+
+}
+
+.switch_container{
+  height: 30%;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: 2s;
+
+
+  background-repeat: no-repeat;
+  background-image:   linear-gradient(to right, $linear-gradient 100%, $linear-gradient 100%),
+  linear-gradient(to bottom, $linear-gradient 100%, $linear-gradient 100%),
+  linear-gradient(to right, $linear-gradient 100%, $linear-gradient 100%),
+  linear-gradient(to bottom, $linear-gradient 100%, $linear-gradient 100%);
+  background-size:    100% 3px,
+  3px 100%,
+  100% 3px,
+  3px 100%;
+  background-position:    0 0,
+  100% 0,
+  100% 100%,
+  0 100%;
+  animation: bg 9.25s infinite;
+  animation-play-state: paused;
+}
+
+.switchToLogin:hover{
+  background-color: $backgroundSwitch;
+  box-shadow: 25px 25px 50px $firstShadow,
+  -25px -25px 50px $thirdShadow;
+}
+
+.switchToLogin:hover .title_switch_to_login{
+  letter-spacing: 1px;
+}
+
+
+
+@keyframes bg {
+  0% {
+    background-size:    0 5px,
+    5px 0,
+    0 5px,
+    5px 0;
+  }
+  25% {
+    background-size:    100% 5px,
+    5px 0,
+    0 5px,
+    5px 0;
+  }
+  50% {
+    background-size:    100% 5px,
+    5px 100%,
+    0 5px,
+    5px 0;
+  }
+  75% {
+    background-size:    100% 5px,
+    5px 100%,
+    100% 5px,
+    5px 0;
+  }
+  100% {
+    background-size:    100% 5px,
+    5px 100%,
+    100% 5px,
+    5px 100%;
+  }
+}
+
+
+.switchToLogin:hover .switch_container {
+  animation-play-state: running;
+}
+
+
+.switchToLogin:hover {
+  box-shadow: -8px 8px 2px -1px $secondColorLighter
+;
+}
+
+.title {
+  animation: color-animation 8s linear infinite;
+}
+
+
+.title-word-1 {
+  --color-1: #53aedf;
+  --color-2: #3D8DAE;
+  --color-3: #76c3da;
+}
+
+.title-word-2 {
+  --color-1: #4a8edb;
+  --color-2: #79b8d3;
+  --color-3: #9cb8dc;
+}
+
+.title-word-3 {
+  --color-1: #6e8ac9;
+  --color-2: #4e89a2;
+  --color-3: #848fd3;
+}
+
+.title-word-4 {
+  --color-1: #3D8DAE;
+  --color-2: #3D8DAE;
+  --color-3: #74abda;
+}
+
+//
+//.title-word-1 {
+//  --color-1: #DF8453;
+//  --color-2: #3D8DAE;
+//  --color-3: #E4A9A8;
+//}
+//
+//.title-word-2 {
+//  --color-1: #DBAD4A;
+//  --color-2: #ACCFCB;
+//  --color-3: #17494D;
+//}
+//
+//.title-word-3 {
+//  --color-1: #ACCFCB;
+//  --color-2: #E4A9A8;
+//  --color-3: #ACCFCB;
+//}
+//
+//.title-word-4 {
+//  --color-1: #3D8DAE;
+//  --color-2: #DF8453;
+//  --color-3: #E4A9A8;
+//}
+
+@keyframes color-animation {
+  0%    {color: var(--color-1)}
+  32%   {color: var(--color-1)}
+  33%   {color: var(--color-2)}
+  65%   {color: var(--color-2)}
+  66%   {color: var(--color-3)}
+  99%   {color: var(--color-3)}
+  100%  {color: var(--color-1)}
+}

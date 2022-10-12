@@ -1,25 +1,64 @@
+
+$background:#f4f6fa;
+$firstShadow:rgba(255, 255, 255, 0.5);
+$secondShadow: rgba(0, 0, 0, 0.15);
+$thirdShadow: rgba(255,255,255,0.1);
+$mainColor:#555;
+$linkColor:#aaa;
+$errorColor:#d55d5d;
+$secondColor:#5bbde0;
+
+
+$label:#a0a5a8;
+
+
+
 .container{
-  width: 400px;
-  padding: 75px 5px 5px 5px;
+  width: 380px;
+  margin:20px;
+  transition: ease-in-out, width .35s ease-in-out;
 }
 
-input {
+.inputField input {
   border: none;
   outline:none;
   background: none;
   font-size: 20px;
-  color: #555;
+  color: $mainColor;
   padding:20px 20px 20px 5px;
   width: 80%;
   box-sizing: border-box;
 }
 .inputField{
   border-radius: 40px;
-  box-shadow: inset 33px 33px 66px #bbb9b9,
-  inset -33px -33px 66px #dbd9d9;
+  box-shadow: inset -2px -2px 8px $background,
+  inset -2px -2px 12px $firstShadow,
+  inset  2px 2px 8px $secondShadow,
+  inset 2px 2px 4px $thirdShadow;
+  position:relative;
   display: flex;
   align-items: center;
 }
+
+.inputField input:focus ~ label,.inputField input:valid ~ label{
+  top:-22px;
+  font-size:16px;
+  color: $label;
+  letter-spacing: 1.5px;
+}
+
+.inputField label{
+  position:absolute;
+  top:20px;
+  left:70px;
+  font-family: 'Montserrat', sans-serif;
+  color: #757575;
+  font-size: 20px;
+  transition: all 0.5s ease-in-out;
+  pointer-events: none;
+  letter-spacing: 1px;
+}
+
 .inputField svg {
   height: 30px;
   margin-left: 25px;
@@ -28,4 +67,64 @@ input {
 
 
 
+
+.error_container{
+  color: $errorColor;
+  height: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  display: flex;
+  width: 100%;
+  margin: 5px;
+  justify-content: center;
+
+}
+
+.error_container span{
+  text-align: center;
+}
+
+.inputFieldError{
+  outline: 1px $errorColor solid;
+}
+
+.inputField:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 40px;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(-100%);
+
+  background: $background ;
+  background: linear-gradient(
+                  to right,
+                  rgba(255, 255, 255, 0.13) 0%,
+                  rgba(255, 255, 255, 0.13) 77%,
+                  rgba(255, 255, 255, 0.5) 92%,
+                  rgba(255, 255, 255, 0.3) 100%
+  );
+
+  pointer-events: none;
+}
+
+.inputField:hover:after {
+  opacity: 1;
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+  transition-property: transform, opacity;
+  transition-duration: 0.5s, 0.15s;
+  transition-timing-function: ease;
+  pointer-events: none;
+}
+
+.inputField:active:after {
+  opacity: 0;
+  pointer-events: none;
+}
 

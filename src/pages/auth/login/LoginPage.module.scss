@@ -1,0 +1,15 @@
+$background:#f4f6fa;
+$mainColor:#555;
+
+.container_login_page {
+  margin:0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:$mainColor;
+  background:$background;
+}

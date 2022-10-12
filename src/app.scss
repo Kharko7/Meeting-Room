@@ -1,6 +1,22 @@
-.App {
-   padding: 30px;
-   text-align: center;
-   background-color: rgb(203, 201, 201);
-   height: 100vh;
+
+* {
+   box-sizing: border-box;
+}
+
+body {
+   background-color: #f2f3f7;
+   -ms-user-select: none;
+   -moz-user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
+}
+
+
+@keyframes App-logo-spin {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
 }
