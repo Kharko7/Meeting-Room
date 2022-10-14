@@ -1,21 +1,30 @@
+* {
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 .btn {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px 30px;
 
+  color: #25cee0;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 2px;
-  color: #25cee0;
-  font-size: 18px;
 
   border-radius: 40px;
   box-shadow: -2px -2px 8px rgba(255, 255, 255, 1),
     -2px -2px 12px rgba(255, 255, 255, 0.5), 2px 2px 8px rgba(0, 0, 0, 0.15),
     inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+  background: #f4f6fa;
+  cursor: pointer;
 }
-.btnPressed {
+.pressed {
   box-shadow: inset -2px -2px 8px rgba(255, 255, 255, 1),
     inset -2px -2px 12px rgba(255, 255, 255, 0.5),
     inset 2px 2px 8px rgba(0, 0, 0, 0.15),
@@ -27,3 +36,22 @@
   color: #cfcfd4;
 }
 
+//sizes
+.small {
+  width: 150px;
+  height: 25px;
+
+  font-size: 12px;
+}
+.medium {
+  width: 204px;
+  height: 34px;
+
+  font-size: 14px;
+}
+.large {
+  width: 300px;
+  height: 50px;
+
+  font-size: 18px;
+}
