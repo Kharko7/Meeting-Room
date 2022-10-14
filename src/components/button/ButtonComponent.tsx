@@ -4,22 +4,20 @@ import cn from "classnames";
 
 interface ButtonInterface {
   label: string;
-  size:string;
-
+  size: string;
+  onclick:()=>void
 }
-const Button = ({ label, size ="medium" }: ButtonInterface) => {
-  const [pressed, setPress] = useState(false);
+
+const Button = ({ label, size = "medium", onclick }: ButtonInterface) => {
   const MainBtnCn = cn(
     styles.btn,
-     pressed ? styles.pressed : styles.none,
-      styles[size]);
-  const MainLabelCn = cn(pressed ? styles.labelPressed : styles.none);
-  
-  return (
-      <div className={MainBtnCn} onClick={() => setPress((prev) => !prev)}>
-        <span className={MainLabelCn}>{label}</span>
-      </div>
+    styles[size]
+  );
 
+  return (
+    <button className={MainBtnCn} onClick={() => onclick()}>
+      <span className={styles.label}>{label}</span>
+    </button>
   );
 };
 
