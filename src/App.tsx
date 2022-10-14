@@ -9,7 +9,7 @@ const App = () => {
         <Routes>
           <Route path={'/login'} element={<LoginPage/>}></Route>
           <Route path={'/register'} element={<RegisterPage/>}></Route>
-          <Route path={'/verifyAccount'} element={<VerifyEmailPage/>}></Route>
+          <Route path={'/getInvitation'} element={<VerifyEmailPage/>}></Route>
           <Route path={'/forgotPassword'} element={<ForgotPasswordPage/>}></Route>
           <Route path={'/changePassword'} element={<ChangePasswordPage/>}></Route>
         </Routes>

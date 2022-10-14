@@ -8,8 +8,8 @@ import ErrorComponent from "../error-container/ErrorComponent";
 import classNames from 'classnames/bind';
 import styles from './LoginComponent.module.scss'
 import Button from "../Button/ButtonComponent";
-const cn = classNames.bind(styles)
 
+const cn = classNames.bind(styles)
 
 
 const LoginComponent = () => {
@@ -22,9 +22,9 @@ const LoginComponent = () => {
     const submit:SubmitHandler<any> = async (data) => {
         // @ts-ignore
         const user = JSON.parse(localStorage.getItem('user'));
-        (user.login === data.login && user.password === data.password)
+        const login = user.name +" "+user.surname;
+        (login === data.login && user.password === data.password)
             ? navigate('/access') : setError(true);
-        console.log(data);
         reset();
     }
     return (
@@ -39,7 +39,7 @@ const LoginComponent = () => {
                 </div>
                 <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
                     <InputComponent IsRegister={false} error={errors.login} type={"login"} register={register}
-                                    name={'login'} placeHolder={'login'} required={true}/>
+                                    name={'login'} placeHolder={'full name'} required={true}/>
                     <InputComponent IsRegister={false} error={errors.password} type={"password"} register={register}
                                     name={'password'} placeHolder={'password'} required={true}/>
                     <div className={cn('error_container')}>{(error && !isDirty) &&

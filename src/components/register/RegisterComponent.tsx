@@ -23,12 +23,13 @@ const RegisterComponent = () => {
 
     const submit:SubmitHandler<any> = async (data) => {
         if (data.password === data.passwordConfirm) {
-            delete data.passwordConfirm;
-            data.email = "someMail@gmail.com";
+            let username = data.login.split(" ") ;
+            data.name = username[0];
+            data.surname = username[1];
+            delete data.passwordConfirm ;
+            delete data.login;
             localStorage.setItem('user', JSON.stringify(data));
-            const code = generateId();
-            console.log(code);
-            navigate('/verifyAccount',{state:code});
+            navigate('/login');
         }else {
             setError(true);
         }
@@ -43,7 +44,7 @@ const RegisterComponent = () => {
                         <span className={cn("registration")}>Registration</span>
 
                         <InputComponent IsRegister={true} error={errors.login} type={"login"} register={register}
-                                        name={'login'} placeHolder={'Create login'} required={true}/>
+                                        name={'login'} placeHolder={'Enter name and surname'} required={true}/>
                         <InputComponent IsRegister={true} error={errors.password} type={"password"} register={register}
                                         name={'password'} placeHolder={'Create password'} required={true}/>
                         <InputComponent IsRegister={true} error={errors.passwordConfirm} type={"password"}
@@ -53,6 +54,9 @@ const RegisterComponent = () => {
                         <div className={cn("register_button_container")}>
                             <button className={cn("register_button")}><Button label={"Register"}/></button>
                         </div>
+                        <NavLink to={"/getInvitation"} className={cn("dontHaveAnAccount")}>
+                            <div>Dont have an account?</div>
+                        </NavLink>
                     </form>
                 <NavLink to={'/login'} className={cn("switch")}><SwitchToLoginComponent/></NavLink>
             </div>

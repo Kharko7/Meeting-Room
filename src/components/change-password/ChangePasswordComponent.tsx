@@ -18,6 +18,7 @@ const ChangePasswordComponent = () => {
 
     // @ts-ignore
     const user = JSON.parse(localStorage.getItem('user'));
+    const login = user.name +" "+user.surname;
 
 
     const submit:SubmitHandler<any> = async (data) => {
@@ -36,9 +37,9 @@ const ChangePasswordComponent = () => {
                 <form onSubmit={handleSubmit
                 (submit)} className={cn("form_container")}>
                     <div className={cn("title")}>Password Change</div>
-                    <div className={cn("login")}>{user.login}</div>
+                    <div className={cn("login")}>{login}</div>
                     <InputComponent IsRegister={true} error={errors.password} type={"password"} register={register}
-                                    name={'password'} placeHolder={'Create your new password'} required={true}/>
+                                    name={'password'} placeHolder={'Create new password'} required={true}/>
                     <InputComponent IsRegister={true} error={errors.passwordConfirm} type={"password"}
                                     register={register}
                                     name={'passwordConfirm'} placeHolder={'Confirm new password'} required={true}/>

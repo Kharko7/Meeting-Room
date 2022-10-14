@@ -38,7 +38,7 @@ $linear-gradient:#dadde0;
   justify-content: center;
   align-items: center;
   width: 60%;
-  height: 85%;
+  height: 100%;
   padding: 25px;
   background-color: $background;
   transition: 3.25s;
@@ -80,7 +80,7 @@ $linear-gradient:#dadde0;
 }
 
 .register_button_container{
-  height: 20%;
+  height: 15%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -89,7 +89,7 @@ $linear-gradient:#dadde0;
 
 
 .wrongPassword{
-  height: 5%;
+  height: 10%;
   width: 100%;
   font-weight: 700;
   color: $errorColor;
@@ -102,16 +102,23 @@ $linear-gradient:#dadde0;
 .register_button {
   cursor: pointer;
   width:60%;
-  height: 60px;
+  height: 10%;
   font-family: 'Montserrat', sans-serif;
   transition: 0.5s;
-  margin-top: 15px;
   background: $background;
 
 }
 
 .register_button_container{
   box-sizing: border-box;
+}
+
+.dontHaveAnAccount{
+  height: 10%;
+  color:$linkColor;
+  padding-top: 40px;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 
