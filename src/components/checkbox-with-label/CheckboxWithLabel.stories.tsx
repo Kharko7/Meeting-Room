@@ -2,7 +2,7 @@ import CheckboxWithLabel from './CheckboxWithLabel'
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
-  title: 'UI/Checkbox',
+  title: 'Components/Checkbox',
   component: CheckboxWithLabel,
 } as ComponentMeta<typeof CheckboxWithLabel>;
 
