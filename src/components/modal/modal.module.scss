@@ -14,8 +14,8 @@
 .modalContainer {
   position: relative;
 
-  min-width: 600px;
-  min-height: 700px;
+  min-width: 300px;
+  min-height: 300px;
   padding: 15px;
 
   background-color: #f4f6fa;
@@ -27,5 +27,5 @@
 .close{
   position: absolute;
   top: 15px;
-  left: 15px;
+  right: 15px;
 }

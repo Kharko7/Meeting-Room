@@ -6,13 +6,13 @@ interface btn {
   onclick:()=>{}
 }
 export default {
-  title: "ActionButton",
+  title: "UI/ActionButton",
   component: ActionButton,
   argTypes: {
     type: {
       type: "string",
       defaultalue: "edit",
-      options: ["edit", "delete", "settings", "home"],
+      options: ["edit", "delete", "settings", "home","close"],
       control: {
         type: "radio",
       },

@@ -3,20 +3,17 @@ import styles from "./button.module.scss";
 import cn from "classnames";
 
 interface ButtonInterface {
-  label: string;
+  children: string;
   size: string;
   onclick:()=>void
 }
 
-const Button = ({ label, size = "medium", onclick }: ButtonInterface) => {
-  const MainBtnCn = cn(
-    styles.btn,
-    styles[size]
-  );
+const Button = ({ children, size = "medium", onclick }: ButtonInterface) => {
+  const MainBtnCn = cn(styles.btn, styles[size]);
 
   return (
     <button className={MainBtnCn} onClick={() => onclick()}>
-      <span className={styles.label}>{label}</span>
+      <span className={styles.label}>{children}</span>
     </button>
   );
 };

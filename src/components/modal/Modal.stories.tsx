@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 export default {
   title: "UI/Modal",
-  component: Modal,  
+  component: Modal,
 } as ComponentMeta<typeof Modal>;
 
-const Template: ComponentStory<typeof Modal> = (arg) => (
+export const Template: ComponentStory<typeof Modal> = () => {
 
-    <Modal {...arg}></Modal>
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  return (
+    <div>
+      <Modal closeModal={setOpenModal}></Modal>
+    </div>
+  );
+};
 
-);
 
-export const ModalComponent = Template.bind({});
 

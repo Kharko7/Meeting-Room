@@ -2,9 +2,10 @@ import styles from "./modal.module.scss";
 import ActionButton from "../action-button/ActionButton";
 interface modal {
   closeModal: (value: boolean) => void;
+  children?:React.ReactNode
 }
 
-const Modal = ({ closeModal }: modal) => {
+const Modal = ({ closeModal,children }: modal) => {
   
   return (
     <div className={styles.modalBackground}>
@@ -16,6 +17,7 @@ const Modal = ({ closeModal }: modal) => {
             onclick={() => closeModal(false)}
           ></ActionButton>
         </span>
+        {children}
       </div>
     </div>
   );

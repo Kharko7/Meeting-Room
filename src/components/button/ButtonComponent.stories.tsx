@@ -35,6 +35,7 @@ const Template: ComponentStory<typeof Button> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  label: "button",
+  children: "button",
   size: "small",
+  onclick: () => {},
 };

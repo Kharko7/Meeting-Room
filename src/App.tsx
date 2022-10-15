@@ -8,12 +8,10 @@ const App = () => {
 
   return (
     <div className="App">
-
       <Button
-        label="open modal"
         size="large"
         onclick={() => setOpenModal((prev) => !prev)}
-      />
+      > Open Modal</Button>
 
       {openModal && <Modal closeModal={setOpenModal} />}
     </div>

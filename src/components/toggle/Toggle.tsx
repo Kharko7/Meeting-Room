@@ -1,11 +1,13 @@
 import styles from './toggle.module.scss'
 import cn from 'classnames'
-interface toggle{
-  onclick:()=>{}
+interface toggle {
+  onclick: () => {};
+  size?:string;
 }
-const Toggle = ({ onclick }: toggle) => {
+const Toggle = ({ onclick,size="medium" }: toggle) => {
+  const MainCn = cn(styles.toggle,styles[size]);
   return (
-    <div className={styles.toggle} onClick={onclick}>
+    <div className={MainCn} onClick={onclick}>
       <input type="checkbox" />
     </div>
   );
