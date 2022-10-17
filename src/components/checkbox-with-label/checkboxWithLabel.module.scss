@@ -4,10 +4,10 @@
   width: 19px;
   height: 19px;
   border: 0.5px transparent solid !important;
-  box-shadow: -1px -1px 3px 0px #ffffff, 3px 3px 6px 0px rgb(0 0 0 / 17%), inset 1.5px 1.5px 2.5px 0px rgb(0 0 0 / 10%) !important;
+  box-shadow: -1px -1px 3px 0px #ffffff, 3px 3px 6px 0px rgb(0 0 0 / 17%), inset 1.5px 1.5px 2.5px 0px rgb(0 0 0 / 10%);
   &.active {
     border: 0.5px #989898 solid !important;
     box-shadow: inset -1px -1px 3px -1.5px #ffffff, inset 1px 1px 4px 0px rgb(0 0 0 / 17%),
-      inset 4px 3px 4px 0px rgb(0 0 0 / 10%) !important;
+      inset 4px 3px 4px 0px rgb(0 0 0 / 10%);
   }
 }
