@@ -47,7 +47,7 @@ $linear-gradient:#dadde0;
 }
 
 .createAccount{
-  font-size: 36px;
+  font-size: 34px;
   letter-spacing: 3px;
   box-shadow:
           -2px -2px 12px $firstShadow,
@@ -61,7 +61,7 @@ $linear-gradient:#dadde0;
 }
 
 .registration{
-  font-size: 24px;
+  font-size: 22px;
   letter-spacing: 1.5px;
   box-sizing: border-box;
   padding: 5px;
@@ -89,14 +89,14 @@ $linear-gradient:#dadde0;
 
 
 .wrongPassword{
-  height: 10%;
+  height: 60px;
   width: 100%;
   font-weight: 700;
   color: $errorColor;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px;
+  margin-bottom: 5px;
 }
 
 .register_button {

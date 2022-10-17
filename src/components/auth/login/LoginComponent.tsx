@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink, useNavigate} from "react-router-dom";
 
-import {InputComponent} from "../input";
-import ErrorComponent from "../error-container/ErrorComponent";
-
 import classNames from 'classnames/bind';
 import styles from './LoginComponent.module.scss'
-import Button from "../Button/ButtonComponent";
+import {ErrorComponent, InputRe} from "../../index";
+import Button from "../../Button/ButtonComponent";
+import {FileUploaderComponent} from "../../fileUploader/FileUploaderComponent";
+
 
 const cn = classNames.bind(styles)
 
@@ -18,6 +18,9 @@ const LoginComponent = () => {
     const [error, setError] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    localStorage.setItem('accessToRegister',JSON.stringify(true));
+
 
     const submit:SubmitHandler<any> = async (data) => {
         // @ts-ignore
@@ -37,14 +40,22 @@ const LoginComponent = () => {
                     <div className={cn("title")}>Lounge</div>
                     <div className={cn("sub_title")}>Smoke and Relax</div>
                 </div>
+
                 <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
-                    <InputComponent IsRegister={false} error={errors.login} type={"login"} register={register}
-                                    name={'login'} placeHolder={'full name'} required={true}/>
-                    <InputComponent IsRegister={false} error={errors.password} type={"password"} register={register}
-                                    name={'password'} placeHolder={'password'} required={true}/>
-                    <div className={cn('error_container')}>{(error && !isDirty) &&
-                        <ErrorComponent title={"Wrong login or password"}/>}</div>
+
+                    <InputRe isValid={false} error={errors.login} type={"login"} register={register}
+                           name={'login'} placeHolder={'full name'} required={true}/>
+
+                    <InputRe isValid={false} error={errors.password} type={"password"} register={register}
+                           name={'password'} placeHolder={'password'} required={true}/>
+
+                    <div className={cn('error_container')}>
+                        {(error && !isDirty) &&
+                        <ErrorComponent title={"Wrong login or password"}/>}
+                    </div>
+
                     <button className={cn("login_button")} disabled={!isDirty || !isValid}><Button label={"Login"}/></button>
+
                 </form>
                 <div className={cn("link")}>
                     <NavLink to={'/forgotPassword'}>Forgot password?</NavLink>

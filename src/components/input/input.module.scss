@@ -1,4 +1,4 @@
-
+$label:#a0a5a8;
 $background:#f4f6fa;
 $firstShadow:rgba(255, 255, 255, 0.5);
 $secondShadow: rgba(0, 0, 0, 0.15);
@@ -6,29 +6,55 @@ $thirdShadow: rgba(255,255,255,0.1);
 $mainColor:#555;
 $linkColor:#aaa;
 $errorColor:#d55d5d;
+
 $secondColor:#5bbde0;
+$secondColorLighter:#99d0e3;
+
+$backgroundSwitch: #EBEDF0;
+$description:#a0a5a8;
+$registration:#505050;
+
+$linear-gradient:#dadde0;
 
 
-$label:#a0a5a8;
-
-
-
-.container{
+.container-extra-small{
   width: 380px;
   margin:20px;
   transition: ease-in-out, width .35s ease-in-out;
 }
 
-.inputField input {
-  border: none;
-  outline:none;
-  background: none;
-  font-size: 20px;
-  color: $mainColor;
-  padding:20px 20px 20px 5px;
-  width: 80%;
-  box-sizing: border-box;
+
+.container-small{
+  width: 400px;
+  margin:20px;
+  transition: ease-in-out, width .35s ease-in-out;
 }
+
+.container-medium{
+  width: 450px;
+  margin:20px;
+  transition: ease-in-out, width .35s ease-in-out;
+}
+
+.container-large{
+  width: 500px;
+  margin:20px;
+  transition: ease-in-out, width .35s ease-in-out;
+}
+
+.container-extra-small .inputField, .container-small .inputField {
+  height: 60px;
+}
+
+
+
+.container-medium .inputField,.container-large .inputField{
+  height: 65px ;
+}
+
+
+
+
 .inputField{
   border-radius: 40px;
   box-shadow: inset -2px -2px 8px $background,
@@ -38,52 +64,125 @@ $label:#a0a5a8;
   position:relative;
   display: flex;
   align-items: center;
+
 }
 
-.inputField input:focus ~ label,.inputField input:valid ~ label{
+.inputField input {
+  border: none;
+  outline:none;
+  background: none;
+  color: $mainColor;
+  padding:20px 20px 20px 5px;
+  width: 80%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+
+  &::placeholder {
+          color: $firstShadow;
+          transition: color 0.25s linear;
+          text-shadow: none;
+        }
+
+  &:focus:enabled, &:active:enabled {
+    &::placeholder {
+      color: $linkColor;
+    }
+
+  }
+}
+
+.container-extra-small .inputField input,.container-small .inputField input{
+  font-size: 18px;
+}
+
+.container-medium .inputField input,.container-large .inputField input{
+  font-size: 22px;
+}
+
+.container-extra-small input:focus ~ label,.container-extra-small input:valid ~ label, .container-small input:focus ~ label, .container-small input:valid ~ label{
   top:-22px;
+  left: 60px;
   font-size:16px;
-  color: $label;
-  letter-spacing: 1.5px;
+  color: #757575;
+  font-weight: 500;
+
+  letter-spacing: 1px;
+}
+
+.container-medium input:focus ~ label,.container-medium input:valid ~ label, .container-large input:focus ~ label, .container-large input:valid ~ label{
+  top:-26px;
+  left: 60px;
+  font-size:20px;
+  color: #757575;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
 .inputField label{
   position:absolute;
-  top:20px;
-  left:70px;
   font-family: 'Montserrat', sans-serif;
-  color: #757575;
-  font-size: 18px;
+  color: $label;
+  font-weight: 400;
   transition: all 0.5s ease-in-out;
   pointer-events: none;
-  letter-spacing: 1px;
+  text-shadow: none;
+
 }
 
-.inputField svg {
+
+.container-extra-small .inputField label,.container-small .inputField label{
+  font-size: 18px;
+  top:20px;
+  left:70px;
+  margin-bottom: 10px;
+}
+
+.container-medium .inputField label, .container-large .inputField label{
+  font-size: 20px;
+  top:20px;
+  left:70px;
+}
+
+.container-extra-small svg, .container-small svg {
   height: 30px;
-  margin-left: 25px;
+  margin-left: 20px;
   margin-right: 10px;
-  margin-top: 3px;
-
 }
 
-.eye{
+.container-medium svg, .container-large svg{
+  height: 36px;
+  margin-left: 20px;
+  margin-right: 45px;
+}
+
+.container-extra-small .eye, .container-small .eye{
   height: 25px;
   width: 25px;
   margin-right: 20px;
   color: #989898;
 }
 
-.eye svg{
-  margin-top: 1px;
+.container-medium .eye, .container-large .eye{
+  height: 30px;
+  width: 30px;
+  margin-right: 20px;
+  color: #989898;
+}
+
+
+.icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 
 .error_container{
   color: $errorColor;
-  height: 13px;
+  height: 14px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   display: flex;
   width: 100%;

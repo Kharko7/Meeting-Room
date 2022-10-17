@@ -1,26 +1,29 @@
 import React, {InputHTMLAttributes, useState} from 'react';
-import './input.module.scss'
+import {IconInputComponent} from "../index";
+import OpenEye from "../svg/eye/OpenEye";
+import ClosedEye from "../svg/eye/ClosedEye";
 
-import 'font-awesome/css/font-awesome.min.css';
 
 
 import {FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister} from "react-hook-form";
-import OpenEye from "../svg/eye/OpenEye";
-import ClosedEye from "../svg/eye/ClosedEye";
-import {IconInputComponent} from "../index";
-
 import classNames from 'classnames/bind';
 import styles from './input.module.scss'
 const cn = classNames.bind(styles)
 
-interface IInput extends InputHTMLAttributes<HTMLInputElement> {
-    register: UseFormRegister<FieldValues>;
+
+interface IInput{
+    placeHolder: string,
+    placeholderDisappear?:string,
+    type: string,
+
+    isValid: boolean,
     name: string;
     required: boolean,
-    placeHolder: string,
+
     error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined,
-    type: string,
-    IsRegister: boolean,
+    register: UseFormRegister<FieldValues>,
+
+    size?:"small"|"medium"|"large"|"extra-small"
 
 }
 
@@ -30,7 +33,8 @@ interface ICheckType {
     message: string;
 }
 
-const InputComponent = ({register, name, required, placeHolder, error, type, IsRegister}: IInput) => {
+const InputRe = ({type,placeHolder,name,required,isValid,error,register,placeholderDisappear,size}:IInput) => {
+
 
     const [eyeState,setEyeState] = useState(true);
 
@@ -38,34 +42,46 @@ const InputComponent = ({register, name, required, placeHolder, error, type, IsR
         type="text";
     }
 
+    console.log(error)
+
     const {reg, iconPath, message}: ICheckType = checkType(type,name);
 
+
     return (
-        <div className={cn('container')}>
+        <div className={cn(`container-${size?size:"small"}`)}>
             <div className={cn('inputField', error && 'inputFieldError')}>
-                <span className={cn("icon")}><IconInputComponent iconPath={iconPath}/></span>
-                <input type={`${type}`}
+                <span className={cn(`icon`)}>
+                    <IconInputComponent iconPath={iconPath}/>
+                </span>
+
+
+                    <input type={type}
                        {...register(`${name}`, {
                            required: required,
                            pattern: {
-                               value: IsRegister ? reg : new RegExp(/^[a-zA-ZА-яіІїЇґҐёЁєЄ0-9@$!%*#?&.,:;/|<> ]{1,40}$/),
-                               message: IsRegister ? message : ''
+                               value: isValid ? reg : new RegExp(/^[a-zA-ZА-яіІїЇґҐёЁєЄ0-9@$!%*#?&.,:;/|<> ]{1,40}$/),
+                               message: isValid ? message : ''
                            }
-                       })} autoComplete={"off"} required/>
+                       })}
+                       autoComplete={"off"}
+                           placeholder={placeholderDisappear}
+                           required/>
+
                 <label>{placeHolder}</label>
 
-                    {name.includes("password")&&
+
+                {name&&name.includes("password")&&
                     <span onClick={() => {
-                    eyeState ? setEyeState(false) : setEyeState(true);
-                }} className={cn("eye")}>{eyeState ? <OpenEye/> : <ClosedEye/>}</span>}
+                        eyeState ? setEyeState(false) : setEyeState(true);
+                    }} className={cn("eye")}>{eyeState ? <OpenEye/> : <ClosedEye/>}</span>}
 
             </div>
-            <span className={cn(IsRegister&&"error_container")}>{(error?.message && IsRegister)&&<span>{`${error.message}`}</span>}</span>
-        </div>
+            <span className={cn(isValid&&"error_container")}>{(error?.message && isValid)&&<span>{`${error.message}`}</span>}</span>
+            </div>
     );
 };
 
-export default InputComponent;
+export default InputRe;
 
 
 function checkType(type: string,name:string) {
@@ -76,7 +92,7 @@ function checkType(type: string,name:string) {
         message: ''
     };
 
-    if(type==="password"||type==="text"&&name.includes("password")){
+    if(type==="password"||type==="text"&&(name&&name.includes("password")||name.includes("pass"))){
         check.reg = new RegExp(/^(?=.*[a-zа-яіїґёєу])(?=.*[A-ZА-ЯІЇҐЁЄ])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/)
         check.iconPath = "M17.308,7.564h-1.993c0-2.929-2.385-5.314-5.314-5.314S4.686,4.635,4.686,7.564H2.693c-0.244,0-0.443,0.2-0.443,0.443v9.3c0,0.243,0.199,0.442,0.443,0.442h14.615c0.243,0,0.442-0.199,0.442-0.442v-9.3C17.75,7.764,17.551,7.564,17.308,7.564 M10,3.136c2.442,0,4.43,1.986,4.43,4.428H5.571C5.571,5.122,7.558,3.136,10,3.136 M16.865,16.864H3.136V8.45h13.729V16.864z M10,10.664c-0.854,0-1.55,0.696-1.55,1.551c0,0.699,0.467,1.292,1.107,1.485v0.95c0,0.243,0.2,0.442,0.443,0.442s0.443-0.199,0.443-0.442V13.7c0.64-0.193,1.106-0.786,1.106-1.485C11.55,11.36,10.854,10.664,10,10.664 M10,12.878c-0.366,0-0.664-0.298-0.664-0.663c0-0.366,0.298-0.665,0.664-0.665c0.365,0,0.664,0.299,0.664,0.665C10.664,12.58,10.365,12.878,10,12.878";
         check.message = `Enter at least 8 characters, including uppercase, lowercase letters and numbers`;
@@ -96,4 +112,3 @@ function checkType(type: string,name:string) {
 
     return check;
 }
-

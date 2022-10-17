@@ -4,7 +4,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 import classNames from 'classnames/bind';
-import styles from '../../register/RegisterPage.module.scss'
+import styles from './NavRegister.module.scss'
 const cn = classNames.bind(styles)
 
 const NavRegisterComponent = () => {

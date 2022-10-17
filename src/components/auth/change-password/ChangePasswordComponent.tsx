@@ -4,9 +4,9 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import classNames from 'classnames/bind';
 import styles from './ChangePassword.module.scss'
 import {useNavigate} from "react-router-dom";
-import {InputComponent} from "../input";
-import Button from "../Button/ButtonComponent";
-import ErrorComponent from "../error-container/ErrorComponent";
+import {ErrorComponent, InputRe} from '../..';
+import Button from "../../Button/ButtonComponent";
+
 
 const cn = classNames.bind(styles)
 
@@ -16,16 +16,17 @@ const ChangePasswordComponent = () => {
 
     const [error,setError] = useState<boolean>(false);
 
-    // @ts-ignore
-    const user = JSON.parse(localStorage.getItem('user'));
-    const login = user.name +" "+user.surname;
+    const user = localStorage.getItem("user");
+    const userParse = user && JSON.parse(user);
+    const login = userParse.name +" "+userParse.surname;
 
+    localStorage.setItem("accessPasswordChange",JSON.stringify(false));
 
     const submit:SubmitHandler<any> = async (data) => {
         console.log(data)
         if (data.password === data.passwordConfirm) {
-            user.password = data.password;
-            localStorage.setItem('user', JSON.stringify(user));
+            userParse.password = data.password;
+            localStorage.setItem('user', JSON.stringify(userParse));
             navigate('/login');
         }else{
             setError(true);
@@ -38,11 +39,11 @@ const ChangePasswordComponent = () => {
                 (submit)} className={cn("form_container")}>
                     <div className={cn("title")}>Password Change</div>
                     <div className={cn("login")}>{login}</div>
-                    <InputComponent IsRegister={true} error={errors.password} type={"password"} register={register}
-                                    name={'password'} placeHolder={'Create new password'} required={true}/>
-                    <InputComponent IsRegister={true} error={errors.passwordConfirm} type={"password"}
-                                    register={register}
-                                    name={'passwordConfirm'} placeHolder={'Confirm new password'} required={true}/>
+                    <InputRe isValid={true} error={errors.password} type={"password"} register={register}
+                           name={'password'} placeHolder={'Create new password'} required={true}/>
+                    <InputRe isValid={true} error={errors.passwordConfirm} type={"password"}
+                           register={register}
+                           name={'passwordConfirm'} placeHolder={'Confirm new password'} required={true}/>
                     <div className={cn("error_container")}>{(error&&!isDirty)&&<ErrorComponent title={"Passwords do not match"}/>}</div>
                     <button className={cn("change_button")} disabled={!isDirty || !isValid}><Button label={"Change Password"}/></button>
                 </form>

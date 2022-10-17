@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
-
 import {useNavigate} from "react-router-dom";
+
+
 
 import classNames from 'classnames/bind';
 import styles from './GetInvitation.module.scss'
-import {InputComponent} from "../input";
-import Button from "../Button/ButtonComponent";
-
+import {InputRe} from "../../index";
+import Button from "../../Button/ButtonComponent";
 const cn = classNames.bind(styles)
+
+
 
 
 const GetInvitationComponent = () => {
@@ -17,6 +19,7 @@ const GetInvitationComponent = () => {
     const [error,setError] = useState<boolean>(false);
 
     const navigate = useNavigate();
+    localStorage.setItem('accessToGetInvitation',JSON.stringify(false));
 
     const submit:SubmitHandler<any> = async (data) => {
         navigate('/login');
@@ -38,9 +41,9 @@ const GetInvitationComponent = () => {
                         <div className={cn("title")}>Enter your email to receive an invitation</div>
                     </span>
                         <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
-                            <InputComponent IsRegister={true} error={errors.verifyEmail} type={""}
-                                            register={register}
-                                            name={'verifyEmail'} placeHolder={"email"} required={true}/>
+                            <InputRe isValid={true} error={errors.verifyEmail} type={""}
+                                   register={register}
+                                   name={'verifyEmail'} placeHolder={"email"} required={true}/>
                             <button className={cn("checkCode_button")} disabled={!isDirty || !isValid}><Button label={"Send"} /></button>
                         </form>
                     </div>
