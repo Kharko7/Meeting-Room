@@ -1,11 +1,8 @@
-import {FieldError, FieldErrorsImpl, Merge, useForm} from 'react-hook-form';
-import {InputRe} from "../index";
+import {useForm} from 'react-hook-form';
 import {ComponentStory} from "@storybook/react";
-import BadgeRe from "../badge/BadgeRe";
 import {FileUploaderComponent} from "./FileUploaderComponent";
 import FaceIcon from "@mui/icons-material/Face";
 import React from "react";
-import {Badge} from "../badge/Badge.stories";
 
 
 export default {
