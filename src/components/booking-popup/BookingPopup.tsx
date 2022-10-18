@@ -7,12 +7,13 @@ import BookingFormAdd from '../booking-form-add/BookingFormAdd';
 interface BookingPopupProps {
   open: boolean;
   data: any;
+  errors: any;
   onClose: () => void;
   handleSubmit: (event: any) => void;
   handleChangeData: (key: string) => any;
 }
 
-const BookingPopup = ({ open, data, onClose, handleSubmit, handleChangeData }: BookingPopupProps) => {
+const BookingPopup = ({ open, data, errors, onClose, handleSubmit, handleChangeData }: BookingPopupProps) => {
 
   return (
     <Dialog
@@ -35,6 +36,7 @@ const BookingPopup = ({ open, data, onClose, handleSubmit, handleChangeData }: B
         </Box>
         <BookingFormAdd
           data={data}
+          errors={errors}
           handleSubmit={handleSubmit}
           handleChangeData={handleChangeData}
         />

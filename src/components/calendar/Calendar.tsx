@@ -37,6 +37,7 @@ const Calendar = () => {
 
   const {
     data,
+    errors,
     selectedDateInfo,
     handleChangeData,
     handleSubmit,
@@ -53,12 +54,6 @@ const Calendar = () => {
       } catch (e) {
       }
     },
-    // removeEvent: () => {
-    //   if (selectedEventInfo) {
-    //     selectedEventInfo.remove()
-    //   }
-    //   setOpenEdit(false)
-    // }
   })
 
   const handleDateSelect = (selectInfo: DateSelectArg) => {
@@ -124,6 +119,7 @@ const Calendar = () => {
       <BookingPopup
         open={openModal}
         data={data}
+        errors={errors}
         onClose={handleCloseModal}
         handleSubmit={handleSubmit}
         handleChangeData={handleChangeData}

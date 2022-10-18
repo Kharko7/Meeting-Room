@@ -8,18 +8,20 @@ import { Dayjs } from 'dayjs';
 import { SelectChangeEvent } from '@mui/material/Select';
 import DateAndTimePicker from '../date-time-picker/DateAndTimePicker';
 import SelectColor from '../selector/selector';
+import { EventInput } from '@fullcalendar/react'
 
 const cn = classNames.bind(styles);
 
 type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | Dayjs | null | SelectChangeEvent<string>
 
 interface BookingFormProps {
-  data: any;
+  data: EventInput;
+  errors: Record<string, string>;
   handleSubmit: (event: any) => void;
   handleChangeData: (key: string) => (event: Event) => void;
 }
 
-const BookingFormAdd = ({ data, handleSubmit, handleChangeData }: BookingFormProps) => {
+const BookingFormAdd = ({ data, errors, handleSubmit, handleChangeData }: BookingFormProps) => {
 
   return (
     <>
@@ -33,7 +35,7 @@ const BookingFormAdd = ({ data, handleSubmit, handleChangeData }: BookingFormPro
             type='text'
             autoFocus
             required
-            placeholder="Title"
+            placeholder="Text"
             fullWidth
             value={data.title}
             onChange={handleChangeData('title')}
@@ -44,11 +46,13 @@ const BookingFormAdd = ({ data, handleSubmit, handleChangeData }: BookingFormPro
         <Box sx={{ mb: '20px', display: 'flex' }}>
           <DateAndTimePicker
             date={data.start}
+            errorMsg={errors?.start}
             onChange={handleChangeData('start')}
             label="Start"
           />
           <DateAndTimePicker
             date={data.end}
+            errorMsg={errors?.end}
             onChange={handleChangeData('end')}
             label="End"
           />
@@ -56,6 +60,7 @@ const BookingFormAdd = ({ data, handleSubmit, handleChangeData }: BookingFormPro
         <SelectColor pickedColor={data.backgroundColor} handleChangeData={handleChangeData} />
         <Box sx={{ textAlign: 'right' }}>
           <Button
+            disabled={Boolean(Object.values(errors).join(''))}
             size='large' type='submit'
             variant='contained'
           >

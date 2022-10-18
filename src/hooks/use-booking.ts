@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { EventApi, DateSelectArg } from '@fullcalendar/react'
+import { DateSelectArg } from '@fullcalendar/react'
+import { EventInput } from '@fullcalendar/react'
 
-const initialValues = {
+const initialValues: EventInput = {
   id: '',
   title: '',
-  start: null,
-  end: null,
+  start: undefined,
+  end: undefined,
   allDay: false,
   backgroundColor: '',
   borderColor: ''
@@ -13,10 +14,12 @@ const initialValues = {
 
 //type Event =  ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | Dayjs | null | SelectChangeEvent<string>
 
-const useBooking = ({ onSubmit, removeEvent }: any) => {
-  const [data, setData] = useState<any>(initialValues)
+const useBooking = ({ onSubmit }: any) => {
+  const [data, setData] = useState<EventInput>(initialValues)
   const [selectedDateInfo, setSelectedDateInfo] = useState<DateSelectArg | null>(null)
-  const [selectedEventInfo, setSelectedEventInfo] = useState<EventApi | null>(null)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  console.log(errors)
 
   const setSelectedDate = (selectInfo: DateSelectArg) => {
     setSelectedDateInfo(selectInfo)
@@ -24,18 +27,6 @@ const useBooking = ({ onSubmit, removeEvent }: any) => {
       ...data,
       start: selectInfo.startStr,
       end: selectInfo.endStr,
-    })
-  }
-
-  const setSelectedEvent = (eventInfo: EventApi) => {
-    setSelectedEventInfo(eventInfo)
-    setData({
-      ...data,
-      title: eventInfo.title,
-      start: eventInfo.startStr,
-      end: eventInfo.endStr,
-      backgroundColor: eventInfo.backgroundColor,
-      borderColor: eventInfo.borderColor,
     })
   }
 
@@ -49,18 +40,30 @@ const useBooking = ({ onSubmit, removeEvent }: any) => {
         break;
       case 'start':
         if (event.isValid()) {
+          setErrors({ ...errors, [key]: '', })
           setData({
             ...data,
             [key]: event.toISOString(),
           });
+        } else {
+          setErrors({
+            ...errors,
+            [key]: 'Date not valid',
+          })
         }
         break;
       case 'end':
         if (event.isValid()) {
+          setErrors({ ...errors, [key]: '', })
           setData({
             ...data,
             [key]: event.toISOString(),
           });
+        } else {
+          setErrors({
+            ...errors,
+            [key]: 'date not valid',
+          })
         }
         break;
       case 'backgroundColor':
@@ -81,21 +84,13 @@ const useBooking = ({ onSubmit, removeEvent }: any) => {
     setData(initialValues)
   })
 
-  const handleRemoveEvent = (() => {
-    removeEvent()
-    setData(initialValues)
-  })
-
-
   return {
     data,
+    errors,
     selectedDateInfo,
-    selectedEventInfo,
     handleChangeData,
     handleSubmit,
     setSelectedDate,
-    setSelectedEvent,
-    handleRemoveEvent,
   }
 }
 

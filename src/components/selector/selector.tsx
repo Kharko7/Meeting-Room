@@ -8,7 +8,7 @@ import classNames from 'classnames/bind';
 const cn = classNames.bind(styles);
 
 interface SelectColorProps {
-  pickedColor: string;
+  pickedColor: string | undefined;
   handleChangeData: (key: string) => (event: SelectChangeEvent<string>) => void;
 }
 
