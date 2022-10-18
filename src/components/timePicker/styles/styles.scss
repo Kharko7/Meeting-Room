@@ -1,0 +1,88 @@
+.MuiOutlinedInput-notchedOutline {
+  border: 0px solid black !important;
+  border-radius: 100px !important;
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.MuiInputBase-root {
+  padding-right: 20px !important;
+}
+.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper {
+  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
+    -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1) !important;
+}
+.MuiClock-squareMask {
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+.MuiInputBase-input {
+  color: gray !important;
+}
+.MuiIconButton-root {
+  width: 35px;
+  height: 35px;
+
+  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
+    -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
+  &:active,
+  &:disabled {
+    background-color: #f4f6fa !important;
+    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+      inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+      inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  }
+
+}
+
+.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton,
+.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton {
+  color: #25cee0 !important;
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton,
+.MuiPaper-root,
+.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton {
+  background-color: #f4f6fa !important;
+}
+.MuiPickersArrowSwitcher-root {
+  right: 10px;
+}
+.MuiClock-clock {
+  background: transparent !important;
+}
+.MuiClockNumber-root[aria-selected="true"]{
+  color: #efefef !important;
+}
+.MuiClock-pin,
+.MuiClockPointer-root,
+.MuiClockPointer-thumb {
+  background-color: #25cee0 !important;
+
+  border-color: #25cee0 !important;
+}
+.MuiClockPointer-thumb {
+  border: 16px solid #25cee0 !important;
+}
+.MuiPickersArrowSwitcher-button {
+  width: 25px;
+  height: 25px;
+}
+.MuiIconButton-root[aria-label^="Choose time"] {
+  background-image: url(./Subtract.png);
+  background-size: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f4f6fa;
+}

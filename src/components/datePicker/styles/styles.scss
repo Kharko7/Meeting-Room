@@ -1,0 +1,36 @@
+.MuiOutlinedInput-notchedOutline {
+  border: 0px solid black !important;
+  border-radius: 100px !important;
+  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+.MuiInputBase-root {
+  padding-right: 20px !important;
+}
+.MuiInputBase-input {
+  color: gray !important;
+}
+.MuiIconButton-edgeEnd[aria-label^="Choose date"] {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./Subtract.png);
+  background-size: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f4f6fa;
+  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
+    -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+pointer-events: auto;
+  &:active {
+    background-color: #f4f6fa !important;
+    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+      inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+      inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+      inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  }
+}
+
