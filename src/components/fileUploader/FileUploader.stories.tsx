@@ -27,6 +27,12 @@ export default {
        },
        showFileName:{
            type:"boolean",
+       },
+       required:{
+           control:"toggle"
+       },
+       register:{
+           control:"select"
        }
    }
 

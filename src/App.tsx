@@ -8,33 +8,34 @@ import {ProtectedGetInvitationRoute, ProtectedPasswordChangeRoute, ProtectedRegi
 const App = () => {
     return (
     <div className="App">
+
+
+        <Routes>
+            <Route path={'/login'} element={<LoginPage/>}></Route>
+            <Route path={'/forgotPassword'} element={<ForgotPasswordPage/>}></Route>
+
+
+            <Route path={'/changePassword'} element={
+                <ProtectedPasswordChangeRoute redirect={'/'}>
+                    <ChangePasswordPage/>
+                </ProtectedPasswordChangeRoute>
+            }></Route>
+
+            <Route path={'/register'} element={
+                <ProtectedRegisterRoute redirect="/login">
+                    <RegisterPage/>
+                </ProtectedRegisterRoute>
+            }></Route>
+
+            <Route path={'/getInvitation'} element={
+                <ProtectedGetInvitationRoute redirect={'/'}>
+                    <VerifyEmailPage/>
+                </ProtectedGetInvitationRoute>
+            }></Route>
+        </Routes>
       </div>);
 };
 
 export default App;
-
-// <Routes>
-//     <Route path={'/login'} element={<LoginPage/>}></Route>
-//     <Route path={'/forgotPassword'} element={<ForgotPasswordPage/>}></Route>
-//
-//
-//     <Route path={'/changePassword'} element={
-//         <ProtectedPasswordChangeRoute redirect={'/'}>
-//             <ChangePasswordPage/>
-//         </ProtectedPasswordChangeRoute>
-//     }></Route>
-//
-//     <Route path={'/register'} element={
-//         <ProtectedRegisterRoute redirect="/login">
-//             <RegisterPage/>
-//         </ProtectedRegisterRoute>
-//     }></Route>
-//
-//     <Route path={'/getInvitation'} element={
-//         <ProtectedGetInvitationRoute redirect={'/'}>
-//             <VerifyEmailPage/>
-//         </ProtectedGetInvitationRoute>
-//     }></Route>
-// </Routes>
 
 
