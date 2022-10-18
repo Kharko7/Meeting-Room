@@ -1,0 +1,14 @@
+.datePickerBorder {
+  background-color: #f2f3f7;
+  margin-right: 10px;
+  display: inline-block !important;
+  border-radius: 4px;
+  box-shadow: -1px -3px 12px 0px rgb(255 255 255 / 45%), 2px 2px 6px 0px rgb(166 166 166);
+}
+.datePicker {
+  button {
+    padding: 13px 20px;
+    border-radius: 4px;
+    color: #25cee0;
+  }
+}
