@@ -35,21 +35,25 @@ const RegisterComponent = () => {
 
 
             if(data.avatar[0]){
-                if(data.avatar[0].type!=="image/jpeg"|| "image/png"||"image/gif"){
-                    setErrorFile(true)
-                    setErrorPassword(false);
-                }else {
+                if(data.avatar[0].type==="image/jpeg"){
+                    console.log(data.avatar[0].type)
                     data.avatar = data.avatar[0].name
                     localStorage.setItem('user', JSON.stringify(data));
                     navigate('/login');
+                }else {
+                    setErrorFile(true)
+                    setErrorPassword(false);
                 }
             }else {
                 localStorage.setItem('user', JSON.stringify(data));
                 navigate('/login');
             }
         }
-        else {
+        else if(data.password !== data.passwordConfirm&&!data.avatar[0]){
             setErrorPassword(true);
+        }else {
+            setErrorPassword(true);
+            setErrorFile(true);
         }
         reset();
     }

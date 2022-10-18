@@ -8,12 +8,10 @@ import {ProtectedGetInvitationRoute, ProtectedPasswordChangeRoute, ProtectedRegi
 const App = () => {
     return (
     <div className="App">
-
       </div>);
 };
 
 export default App;
-
 
 // <Routes>
 //     <Route path={'/login'} element={<LoginPage/>}></Route>
@@ -38,4 +36,5 @@ export default App;
 //         </ProtectedGetInvitationRoute>
 //     }></Route>
 // </Routes>
+
 
