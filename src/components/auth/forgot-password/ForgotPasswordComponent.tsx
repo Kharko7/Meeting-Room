@@ -16,7 +16,6 @@ const ForgotPasswordComponent = () => {
 
     const submit:SubmitHandler<any> = async (data) => {
         setEmail(data.email);
-        console.log(data)
         reset();
 
 

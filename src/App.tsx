@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom';
+import {Link, Route, Routes} from 'react-router-dom';
 import './app.scss';
 import {ChangePasswordPage, ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage} from "./pages";
 import {useForm} from "react-hook-form";
@@ -8,6 +8,18 @@ import {ProtectedGetInvitationRoute, ProtectedPasswordChangeRoute, ProtectedRegi
 const App = () => {
     return (
     <div className="App">
+
+
+        <div className={"routes"}>
+            <Link to={"/register"}>Register</Link>
+            <Link to={"/login"}>Login</Link>
+            <Link to={"/changePassword"}>Change Password</Link>
+            <Link to={"/getInvitation"}>Get Invitation</Link>
+            <Link to={"/calendar"}>Calendar</Link>
+            <Link to={"/rooms"}>Rooms</Link>
+        </div>
+
+
 
 
         <Routes>

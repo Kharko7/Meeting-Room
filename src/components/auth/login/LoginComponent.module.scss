@@ -9,6 +9,9 @@ $errorColor:#d55d5d;
 $circleColor:coral;
 $circleColor2:#ffaa8b;
 
+*{
+  box-sizing: border-box;
+}
 
 .login_container {
   width:430px;
@@ -104,7 +107,7 @@ $circleColor2:#ffaa8b;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   position: absolute;
-  top: -450px;
+  top: -330px;
   left: 0;
   right: 0;
   bottom: 0;

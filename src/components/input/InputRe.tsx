@@ -14,7 +14,7 @@ const cn = classNames.bind(styles)
 interface IInput{
     placeHolder: string,
     placeholderDisappear?:string,
-    type: string,
+    type: "text"|""|"password"|"login",
 
     isValid: boolean,
     name: string;
