@@ -8,7 +8,7 @@ const cn = classNames.bind(styles);
 interface CheckboxWithLabelProps {
   checked: boolean;
   label?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: () => void;
 };
 
 const CheckboxWithLabel = ({ checked, label, onChange }: CheckboxWithLabelProps) => {
@@ -16,7 +16,7 @@ const CheckboxWithLabel = ({ checked, label, onChange }: CheckboxWithLabelProps)
   return (
     <FormControlLabel
       label={label ? label : null}
-      sx={{ marginLeft: '0', alignItems: 'flex-start' }}
+      sx={{ marginLeft: '0' }}
       control={<Checkbox
         className={cn((checked) ? ['checkbox', 'active'] : 'checkbox')}
         checked={checked}
