@@ -3,7 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink, useNavigate} from "react-router-dom";
 
 
-import Button from "../../Button/ButtonComponent";
+import Button from "components/button";
 import {ErrorComponent, InputRe, SwitchToLoginComponent} from "../../index";
 import {FileUploaderComponent} from "../../fileUploader/FileUploaderComponent";
 
@@ -59,46 +59,77 @@ const RegisterComponent = () => {
     }
 
     return (
-            <div className={cn('main_container')}>
-                    <form onSubmit={handleSubmit(submit)} className={cn("container")}>
+      <div className={cn("main_container")}>
+        <form onSubmit={handleSubmit(submit)} className={cn("container")}>
+          <div className={cn("createAccount")}>Create Account</div>
+          {/*<NavRegisterComponent/>*/}
 
-                        <div className={cn("createAccount")}>
-                            Create Account
-                        </div>
-                        {/*<NavRegisterComponent/>*/}
+          <span className={cn("registration")}>Registration</span>
 
-                        <span className={cn("registration")}>
-                            Registration
-                        </span>
+          <div>
+            <FileUploaderComponent
+              size={"small"}
+              name={"avatar"}
+              required={false}
+              register={register}
+              icon={<FaceIcon />}
+            />
+          </div>
 
+          <InputRe
+            isValid={true}
+            error={errors.login}
+            type={"login"}
+            register={register}
+            name={"login"}
+            placeHolder={"Enter name and surname"}
+            required={true}
+            placeholderDisappear={"Howard Lovecraft"}
+          />
 
-                        <div><FileUploaderComponent size={"small"} name={"avatar"} required={false} register={register} icon={<FaceIcon/>}/></div>
+          <InputRe
+            isValid={true}
+            error={errors.password}
+            type={"password"}
+            register={register}
+            name={"password"}
+            placeHolder={"Create password"}
+            required={true}
+          />
 
-                        <InputRe isValid={true} error={errors.login} type={"login"} register={register}
-                               name={'login'} placeHolder={'Enter name and surname'} required={true} placeholderDisappear={"Howard Lovecraft"}/>
+          <InputRe
+            isValid={true}
+            error={errors.passwordConfirm}
+            type={"password"}
+            register={register}
+            name={"passwordConfirm"}
+            placeHolder={"Confirm password"}
+            required={true}
+          />
 
-                        <InputRe isValid={true} error={errors.password} type={"password"} register={register}
-                               name={'password'} placeHolder={'Create password'} required={true}/>
+          <div className={cn("wrongPassword")}>
+            {errorPassword && !isDirty && (
+              <ErrorComponent title={"Wrong password"} />
+            )}
+            {errorFile && !isDirty && (
+              <ErrorComponent title={"Wrong file type"} />
+            )}
+          </div>
 
-                        <InputRe isValid={true} error={errors.passwordConfirm} type={"password"} register={register}
-                               name={'passwordConfirm'} placeHolder={'Confirm password'} required={true}/>
+          <div className={cn("register_button_container")}>
+            <button className={cn("register_button")}>
+              <Button onclick={()=>{}}>Register</Button>
+            </button>
+          </div>
 
-                        <div className={cn("wrongPassword")}>
-                            {(errorPassword&&!isDirty)&&<ErrorComponent title={"Wrong password"}/>}
-                            {(errorFile&&!isDirty)&&<ErrorComponent title={"Wrong file type"}/>}
-                        </div>
-
-                        <div className={cn("register_button_container")}>
-                            <button className={cn("register_button")}><Button label={"Register"}/></button>
-                        </div>
-
-                        <NavLink to={"/getInvitation"} className={cn("dontHaveAnAccount")}>
-                            <div>Dont have an account?</div>
-                        </NavLink>
-
-                    </form>
-                <NavLink to={'/login'} className={cn("switch")}><SwitchToLoginComponent/></NavLink>
-            </div>
+          <NavLink to={"/getInvitation"} className={cn("dontHaveAnAccount")}>
+            <div>Dont have an account?</div>
+          </NavLink>
+        </form>
+        <NavLink to={"/login"} className={cn("switch")}>
+          <SwitchToLoginComponent />
+        </NavLink>
+      </div>
     );
 };
 

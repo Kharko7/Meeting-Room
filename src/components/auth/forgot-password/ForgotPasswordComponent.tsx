@@ -4,7 +4,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 
 import classNames from 'classnames/bind';
 import styles from './ForgotPassword.module.scss'
-import Button from "../../Button/ButtonComponent";
+import Button from "components/button";
 import {InputRe} from "../../index";
 
 const cn = classNames.bind(styles)
@@ -23,21 +23,33 @@ const ForgotPasswordComponent = () => {
 
     }
     return (
-                <div className={cn("forgotPassword_container")}>
-                   <span className={cn("spanAnimation")}>
-                        <div className={cn("title")}>Enter your user account verified email address and we will send you
-                            a password reset link
-                        </div>
-                    </span>
-                    <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
-                        <InputRe isValid={true} error={errors.email} type={""} // css styles don't work with this type
-                               register={register}
-                               name={'email'} placeHolder={'Email'} required={true} placeholderDisappear={"...@incora.inc"}/>
-                        <button className={cn("send_button")}><Button label={"Send"}/></button>
-                    </form>
-                    <div className={cn("resetMessage")}>{(email&&!isDirty)&&`Email was send on ${email}`}</div>
-                </div>
-    )
+      <div className={cn("forgotPassword_container")}>
+        <span className={cn("spanAnimation")}>
+          <div className={cn("title")}>
+            Enter your user account verified email address and we will send you
+            a password reset link
+          </div>
+        </span>
+        <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
+          <InputRe
+            isValid={true}
+            error={errors.email}
+            type={""} // css styles don't work with this type
+            register={register}
+            name={"email"}
+            placeHolder={"Email"}
+            required={true}
+            placeholderDisappear={"...@incora.inc"}
+          />
+          <button className={cn("send_button")}>
+            <Button onclick={()=>{}}>Send</Button>
+          </button>
+        </form>
+        <div className={cn("resetMessage")}>
+          {email && !isDirty && `Email was send on ${email}`}
+        </div>
+      </div>
+    );
 
 };
 

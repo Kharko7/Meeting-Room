@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './ChangePassword.module.scss'
 import {useNavigate} from "react-router-dom";
 import {ErrorComponent, InputRe} from '../..';
-import Button from "../../Button/ButtonComponent";
+import Button from "components/button";
 
 
 const cn = classNames.bind(styles)
@@ -34,20 +34,41 @@ const ChangePasswordComponent = () => {
         reset();
     }
     return (
-            <div className={cn("changePassword_container")}>
-                <form onSubmit={handleSubmit
-                (submit)} className={cn("form_container")}>
-                    <div className={cn("title")}>Password Change</div>
-                    <div className={cn("login")}>{login}</div>
-                    <InputRe isValid={true} error={errors.password} type={"password"} register={register}
-                           name={'password'} placeHolder={'Create new password'} required={true}/>
-                    <InputRe isValid={true} error={errors.passwordConfirm} type={"password"}
-                           register={register}
-                           name={'passwordConfirm'} placeHolder={'Confirm new password'} required={true}/>
-                    <div className={cn("error_container")}>{(error&&!isDirty)&&<ErrorComponent title={"Passwords do not match"}/>}</div>
-                    <button className={cn("change_button")} disabled={!isDirty || !isValid}><Button label={"Change Password"}/></button>
-                </form>
-            </div>
+      <div className={cn("changePassword_container")}>
+        <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
+          <div className={cn("title")}>Password Change</div>
+          <div className={cn("login")}>{login}</div>
+          <InputRe
+            isValid={true}
+            error={errors.password}
+            type={"password"}
+            register={register}
+            name={"password"}
+            placeHolder={"Create new password"}
+            required={true}
+          />
+          <InputRe
+            isValid={true}
+            error={errors.passwordConfirm}
+            type={"password"}
+            register={register}
+            name={"passwordConfirm"}
+            placeHolder={"Confirm new password"}
+            required={true}
+          />
+          <div className={cn("error_container")}>
+            {error && !isDirty && (
+              <ErrorComponent title={"Passwords do not match"} />
+            )}
+          </div>
+          <button
+            className={cn("change_button")}
+            disabled={!isDirty || !isValid}
+          >
+            <Button onclick={()=>{}}>Change Password</Button>
+          </button>
+        </form>
+      </div>
     );
 };
 
