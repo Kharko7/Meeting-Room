@@ -3,8 +3,8 @@ import styles from "./button.module.scss";
 import cn from "classnames";
 
 interface ButtonInterface {
-  children: string;
-  size: string;
+  children?: string;
+  size?: string;
   onclick:()=>void
 }
 
