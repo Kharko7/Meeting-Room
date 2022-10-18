@@ -114,7 +114,8 @@ padding-top: 5px;
   font-size: 48px;
 }
 
-.avatar_name{
+.file_name-small,.file_name-medium,.file_name-large{
+  font-family: 'Montserrat', sans-serif;
   padding: 6px;
   box-sizing: border-box;
   border-radius: 40px;
@@ -122,5 +123,17 @@ padding-top: 5px;
           -2px -2px 12px $firstShadow,
           2px 2px 8px $secondShadow,
           2px 2px 4px $thirdShadow;
-  font-size: 12px;
+  margin-top: 10px;
+}
+
+.file_name-small{
+  font-size: 14px;
+}
+
+.file_name-medium{
+  font-size: 16px;
+}
+
+.file_name-large{
+  font-size: 18px;
 }

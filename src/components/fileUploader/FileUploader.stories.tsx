@@ -24,6 +24,9 @@ export default {
            control: {
                type:"radio"
            }
+       },
+       showFileName:{
+           type:"boolean",
        }
    }
 
@@ -41,7 +44,8 @@ export  const FileUploader = Template.bind({});
 FileUploader.args = {
     size: "small",
     icon:<FaceIcon/>,
-    name:"file"
+    name:"file",
+    showFileName:false,
 };
 
 

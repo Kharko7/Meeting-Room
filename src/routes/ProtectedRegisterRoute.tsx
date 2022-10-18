@@ -7,7 +7,8 @@ interface LayoutProps {
 
 export const ProtectedRegisterRoute=({children,redirect}:LayoutProps)=> {
     const accessToRegister = localStorage.getItem("accessToRegister");
-    const access: boolean = accessToRegister && JSON.parse(accessToRegister);
+    // const access: boolean = accessToRegister && JSON.parse(accessToRegister);
+    const access = true;
     const location = useLocation();
     return access ? children : <Navigate to={redirect} state={{ from: location }} />;
 }

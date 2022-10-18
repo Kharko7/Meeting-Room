@@ -41,9 +41,6 @@ const InputRe = ({type,placeHolder,name,required,isValid,error,register,placehol
     if (!eyeState){
         type="text";
     }
-
-    console.log(error)
-
     const {reg, iconPath, message}: ICheckType = checkType(type,name);
 
 

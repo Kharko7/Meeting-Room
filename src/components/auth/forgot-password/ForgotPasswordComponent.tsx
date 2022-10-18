@@ -33,7 +33,7 @@ const ForgotPasswordComponent = () => {
                     <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
                         <InputRe isValid={true} error={errors.email} type={""} // css styles don't work with this type
                                register={register}
-                               name={'email'} placeHolder={'Email'} required={true}/>
+                               name={'email'} placeHolder={'Email'} required={true} placeholderDisappear={"...@incora.inc"}/>
                         <button className={cn("send_button")}><Button label={"Send"}/></button>
                     </form>
                     <div className={cn("resetMessage")}>{(email&&!isDirty)&&`Email was send on ${email}`}</div>

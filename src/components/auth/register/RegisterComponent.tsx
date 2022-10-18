@@ -19,18 +19,14 @@ const RegisterComponent = () => {
 
     const navigate = useNavigate();
 
-    const [error,setError] = useState<boolean>(false);
+    const [errorPassword,setErrorPassword] = useState<boolean>(false);
+    const [errorFile,setErrorFile] = useState<boolean>(false);
 
     // localStorage.setItem('accessToRegister',JSON.stringify(false));
     localStorage.setItem('accessToGetInvitation',JSON.stringify(true));
 
-    console.log(errors)
-
-
     const submit:SubmitHandler<any> = (data) => {
-
         if (data.password === data.passwordConfirm) {
-
             let username = data.login.split(" ") ;
             data.name = username[0];
             data.surname = username[1];
@@ -38,15 +34,22 @@ const RegisterComponent = () => {
             delete data.login;
 
 
-            if(data.avatar[0])data.avatar = data.avatar[0].name
-            console.log(data.avatar[0])
-
-
-
-            localStorage.setItem('user', JSON.stringify(data));
-            navigate('/login');
-        }else {
-            setError(true);
+            if(data.avatar[0]){
+                if(data.avatar[0].type!=="image/jpeg"|| "image/png"||"image/gif"){
+                    setErrorFile(true)
+                    setErrorPassword(false);
+                }else {
+                    data.avatar = data.avatar[0].name
+                    localStorage.setItem('user', JSON.stringify(data));
+                    navigate('/login');
+                }
+            }else {
+                localStorage.setItem('user', JSON.stringify(data));
+                navigate('/login');
+            }
+        }
+        else {
+            setErrorPassword(true);
         }
         reset();
     }
@@ -77,7 +80,8 @@ const RegisterComponent = () => {
                                name={'passwordConfirm'} placeHolder={'Confirm password'} required={true}/>
 
                         <div className={cn("wrongPassword")}>
-                            {(error&&!isDirty)&&<ErrorComponent title={"Wrong password"}/>}
+                            {(errorPassword&&!isDirty)&&<ErrorComponent title={"Wrong password"}/>}
+                            {(errorFile&&!isDirty)&&<ErrorComponent title={"Wrong file type"}/>}
                         </div>
 
                         <div className={cn("register_button_container")}>

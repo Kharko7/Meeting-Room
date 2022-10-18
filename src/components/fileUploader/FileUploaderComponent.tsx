@@ -1,4 +1,4 @@
-import React, {InputHTMLAttributes, useState} from 'react';
+import React, {InputHTMLAttributes, ReactNode, useState} from 'react';
 import {FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister} from "react-hook-form";
 import FaceIcon from '@mui/icons-material/Face';
 
@@ -12,33 +12,38 @@ interface FileUploaderProps{
     required: boolean,
     register: UseFormRegister<FieldValues>,
     icon?: JSX.Element,
-    size:"small"|"medium"|"large"
-
+    size:"small"|"medium"|"large",
+    showFileName?:boolean;
 }
-export function FileUploaderComponent({register,name,required,icon,size}:FileUploaderProps){
+export function FileUploaderComponent({register,name,required,icon,size,showFileName}:FileUploaderProps){
+    const [filename,setName] = useState("");
 
-    // const [filename,setName] = useState("");
-    //
-    // function handleChange(event:any) {
-    //    setName(`Selected avatar - ${event.target.files[0].name}`);
-    // }
-
+    function handleChange(event:any) {
+        setName(`Selected avatar - ${event.target.files[0]}`);
+    }
 
     return(
-            <div className={cn(`wrapper-${size}`)}>
-                <div className={cn(`file-upload-${size}`)}>
-                    <input type="file"{...register(`${name}`, {
-                        required: required
-                    })}
-                           // onChange={handleChange}
-                    />
-                    <div className={cn("icon")}>
-                        {icon}
-                    </div>
+        <div className={cn(`wrapper-${size?size:"small"}`)}>
+            <div className={cn(`file-upload-${size}`)}>
+                <input type="file"{...register(`${name}`, {
+                    required: required
+                })}
+                       onChange={handleChange}
+                />
+                <div className={cn("icon")}>
+                    {icon}
                 </div>
-                {/*<div className={cn("avatar_name")}>*/}
-                {/*    {filename?filename:"Select avatar"}*/}
-                {/*</div>*/}
             </div>
+            {showFileName&&
+                <div className={cn(`file_name-${size?size:"small"}`)}>
+                    {filename?filename:"Select avatar"}
+                </div>}
+        </div>
     )
 }
+
+
+// acceptedFormats: files =>
+//     ['image/jpeg', 'image/png', 'image/gif'].includes(
+//         files[0]?.type
+//     ) || 'Only PNG, JPEG e GIF',

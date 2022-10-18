@@ -43,7 +43,7 @@ const GetInvitationComponent = () => {
                         <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
                             <InputRe isValid={true} error={errors.verifyEmail} type={""}
                                    register={register}
-                                   name={'verifyEmail'} placeHolder={"email"} required={true}/>
+                                   name={'verifyEmail'} placeHolder={"email"} required={true} placeholderDisappear={"...@incora.inc"}/>
                             <button className={cn("checkCode_button")} disabled={!isDirty || !isValid}><Button label={"Send"} /></button>
                         </form>
                     </div>
