@@ -17,11 +17,12 @@ $linear-gradient:#dadde0;
 
 
 .main_container {
-  width: 1000px;
+  margin-top: 50px ;
+  max-width: 1000px;
   min-width: 1000px;
-  min-height: 85%;
+  min-height: 700px;
   height: 85%;
-  padding: 25px;
+  padding: 10px;
   box-shadow:
           -2px -2px 12px $firstShadow,
           2px 2px 8px $secondShadow,
@@ -37,9 +38,11 @@ $linear-gradient:#dadde0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  height: 100%;
-  padding: 25px;
+  min-width: 60%;
+  max-width: 60%;
+  max-height: 100%;
+  min-height: 100%;
+  padding: 15px;
   background-color: $background;
   transition: 3.25s;
   border-radius: 40px 0 0 40px;
@@ -54,7 +57,8 @@ $linear-gradient:#dadde0;
           2px 2px 8px $secondShadow,
           2px 2px 4px $thirdShadow;
   border-radius: 40px;
-  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
   text-align: center;
   margin-bottom: 5px;
 
@@ -71,10 +75,11 @@ $linear-gradient:#dadde0;
           2px 2px 8px $secondShadow,
           2px 2px 4px $thirdShadow;
   border-radius: 40px;
-  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   text-align: center;
 
-  margin-bottom: 25px;
+  margin-bottom: 5px;
   margin-top: 5px;
 
 }
@@ -89,20 +94,22 @@ $linear-gradient:#dadde0;
 
 
 .wrongPassword{
-  height: 60px;
+  min-height: 40px;
+  max-height: 40px;
   width: 100%;
   font-weight: 700;
   color: $errorColor;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .register_button {
   cursor: pointer;
-  width:60%;
-  height: 10%;
+  min-width:60%;
+  min-height: 10%;
   font-family: 'Montserrat', sans-serif;
   transition: 0.5s;
   background: $background;
@@ -117,9 +124,10 @@ $linear-gradient:#dadde0;
 }
 
 .dontHaveAnAccount{
-  height: 10%;
+  min-height: 10%;
+  max-height: 10%;
   color:$linkColor;
-  padding-top: 40px;
+  padding-top: 20px;
   font-weight: 700;
   font-size: 14px;
 }
