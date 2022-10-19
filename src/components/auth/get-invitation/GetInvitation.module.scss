@@ -31,7 +31,7 @@ $linear-gradient:#dadde0;
 
 
 .verify_container {
-  width:600px;
+  width:700px;
   height: 25%;
   border-radius: 40px;
   background: $background;
@@ -84,7 +84,7 @@ $linear-gradient:#dadde0;
 
   box-shadow: none;
 
-  width: 500px;
+  width: 600px;
   position: relative;
   top: -8px;
   left: 0;
@@ -115,6 +115,7 @@ $linear-gradient:#dadde0;
   background: $background;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
 }
 

@@ -52,7 +52,6 @@ $circleColor2:#ffaa8b;
 .title {
   text-align: center;
   font-size: 40px;
-  padding-top: 220px;
   letter-spacing: 0.5px;
   animation: color-animation 4s linear infinite;
   place-items: center;
@@ -69,12 +68,15 @@ $circleColor2:#ffaa8b;
 }
 .login_button {
   cursor: pointer;
-  width:60%;
+  width:80%;
   height: 60px;
   font-family: 'Montserrat', sans-serif;
   transition: 0.5s;
   margin-top: 15px;
   background: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .link {
@@ -106,11 +108,6 @@ $circleColor2:#ffaa8b;
   border-radius: 50%;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  position: absolute;
-  top: -330px;
-  left: 0;
-  right: 0;
-  bottom: 0;
 
   margin: auto;
 

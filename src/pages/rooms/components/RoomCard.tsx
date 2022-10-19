@@ -18,12 +18,16 @@ interface data {
   };
   capacity: string;
 }
-const RoomCard = ({ data, key }: MyroomsData) => {
+const RoomCard = ({ data,
+                    // key
+}: MyroomsData) => {
   const [open, setOpen] = useState(false);
-  console.log(data, key);
+  // console.log(data, key);
 
   return (
-    <div key={key}>
+    <div
+        // key={key}
+    >
       <button
         className={
           open

@@ -61,12 +61,11 @@ const ChangePasswordComponent = () => {
               <ErrorComponent title={"Passwords do not match"} />
             )}
           </div>
-          <button
+          <div
             className={cn("change_button")}
-            disabled={!isDirty || !isValid}
           >
-            <Button onclick={()=>{}}>Change Password</Button>
-          </button>
+            <Button onclick={()=>{}} size={"large"}>Change Password</Button>
+          </div>
         </form>
       </div>
     );

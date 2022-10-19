@@ -117,9 +117,9 @@ const RegisterComponent = () => {
           </div>
 
           <div className={cn("register_button_container")}>
-            <button className={cn("register_button")}>
-              <Button onclick={()=>{}}>Register</Button>
-            </button>
+            <div className={cn("register_button")}>
+              <Button onclick={()=>{}} size={"large"}>Register</Button>
+            </div>
           </div>
 
           <NavLink to={"/getInvitation"} className={cn("dontHaveAnAccount")}>

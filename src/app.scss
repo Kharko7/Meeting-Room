@@ -1,23 +1,4 @@
 
-$label:#a0a5a8;
-$background:#f4f6fa;
-$firstShadow:rgba(255, 255, 255, 0.5);
-$secondShadow: rgba(0, 0, 0, 0.15);
-$thirdShadow: rgba(255,255,255,0.1);
-$mainColor:#555;
-$linkColor:#aaa;
-$errorColor:#d55d5d;
-
-$secondColor:#5bbde0;
-$secondColorLighter:#99d0e3;
-
-$backgroundSwitch: #EBEDF0;
-$description:#a0a5a8;
-$registration:#505050;
-
-$linear-gradient:#dadde0;
-
-
 * {
    box-sizing: border-box;
 }
@@ -38,22 +19,4 @@ body {
    to {
       transform: rotate(360deg);
    }
-}
-
-.routes{
-   font-family: 'Montserrat', sans-serif;
-   box-shadow: inset -2px -2px 8px $background,
-   inset -2px -2px 12px $firstShadow,
-   inset  2px 2px 8px $secondShadow,
-   inset 2px 2px 4px $thirdShadow;
-   display: flex;
-   align-items: center;
-   justify-content:space-around;
-   width: 100%;
-   font-size: 30px;
-   padding: 5px;
-}
-
-.routes a {
-   color:$mainColor;
 }

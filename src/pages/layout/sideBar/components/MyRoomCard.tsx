@@ -17,9 +17,9 @@ const MyRoomCard = ({ mockedData }: Data) => {
   return (
     <>
       {mockedData.map((_, index) => (
-        <div className={styles.roomCardContainer}>
+        <div  className={styles.roomCardContainer} key={index}>
           <div className={styles.headerRoomCard}>
-            <span className={styles.labelRoomName}>
+            <span  className={styles.labelRoomName}>
               {mockedData[index].name}
             </span>
 
