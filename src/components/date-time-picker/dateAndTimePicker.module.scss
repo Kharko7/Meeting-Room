@@ -1,0 +1,72 @@
+// .datePickerBorder {
+//   margin-right: 10px;
+//   height: 80px;
+//   display: inline-block !important;
+// }
+// .datePicker {
+//   button {
+//     padding: 13px 20px;
+//     border-radius: 4px;
+//     color: #25cee0;
+//   }
+// }
+
+// :global(.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root) {
+//   box-shadow: -1px -3px 12px 0px rgb(255 255 255 / 45%), 2px 2px 6px 0px rgb(166 166 166);
+// }
+// :global(button.css-h2z9v1-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton),
+// :global(button.css-rjqbug-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton) {
+//   box-shadow: inset -2px -3px 0px 0px rgb(255 255 255 / 45%), inset 2px 1.5px 3px 0px rgb(191 191 191);
+//   background-color: transparent;
+//   color: #898989;
+//   &:hover {
+//     background-color: transparent;
+//   }
+// }
+// :global(button.css-zcgqxx-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton),
+// :global(button.css-1gp5qnb-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton) {
+//   box-shadow: -2px -2px 5px 0px rgb(255 255 255 / 45%), 2px 3px 2px 0px rgb(191 191 191),
+//     inset 0.5px 0.5px 5px -2px rgb(121 121 121);
+//   color: black;
+// }
+
+// :global(div.css-umzx0k-MuiClock-pin),
+// :global(div.css-rdq5h4-MuiClockPointer-root),
+// :global(div.css-d0vs79-MuiClockPointer-root) {
+//   background-color: #25cee0;
+// }
+// :global(div.css-12t0dn4-MuiClockPointer-thumb) {
+//   background-color: #ffffff;
+//   border-color: #25cee0;
+// }
+
+// :global(div.css-eg3pzz-MuiClockPointer-thumb) {
+//   background-color: #25cee0;
+//   border-color: #25cee0;
+// }
+// :global(div.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper) {
+//   background-color: #f2f3f7;
+//   box-shadow: -1px -3px 12px 0px rgb(255 255 255 / 45%), 4px 3px 8px 1px rgb(166 166 166);
+// }
+
+// :global(.css-1vo7p84-MuiPopper-root-MuiPickersPopper-root) {
+//   left: 25px !important;
+// }
+// :global(button.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root) {
+//   background-color: transparent;
+//   &:hover {
+//     box-shadow: inset -3px -3px 0px 0px rgb(255 255 255 / 45%), inset 3px 1.5px 3px 0px rgb(191 191 191);
+//     color: #898989;
+//     background-color: transparent;
+//   }
+// }
+// :global(button.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected),
+// :global(button.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected) {
+//   background-color: transparent !important;
+//   box-shadow: inset -3px -3px 0px 0px rgb(255 255 255 / 45%), inset 3px 1.5px 3px 0px rgb(191 191 191);
+//   color: #898989;
+// }
+// :global(button.css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected)) {
+//   background-color: #25cee0;
+//   border: none;
+// }

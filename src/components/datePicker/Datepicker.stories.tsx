@@ -18,12 +18,15 @@ const Template: ComponentStory<typeof DatePickerComponent> = (args) => (
       padding: "30px",
     }}
   >
-    <DatePickerComponent></DatePickerComponent>
+    <DatePickerComponent {...args}></DatePickerComponent>
   </div>
 );
 
 export const Default = Template.bind({});
 
 Default.args = {
-
+  date: undefined,
+  errorMsg: '',
+  onChange: () => { },
+  label: "End"
 };
