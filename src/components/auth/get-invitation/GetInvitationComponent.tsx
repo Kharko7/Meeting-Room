@@ -15,9 +15,7 @@ const cn = classNames.bind(styles)
 
 const GetInvitationComponent = () => {
     const {reset, register, handleSubmit, formState: {errors,isValid,isDirty}} = useForm({mode: 'all'});
-
-    const [error,setError] = useState<boolean>(false);
-
+    
     const navigate = useNavigate();
     localStorage.setItem('accessToGetInvitation',JSON.stringify(false));
 
@@ -56,12 +54,11 @@ const GetInvitationComponent = () => {
                 required={true}
                 placeholderDisappear={"...@incora.inc"}
               />
-              <button
+              <div
                 className={cn("checkCode_button")}
-                disabled={!isDirty || !isValid}
               >
                 <Button onclick={()=>{}}>Send</Button>
-              </button>
+              </div>
             </form>
           </div>
         </div>

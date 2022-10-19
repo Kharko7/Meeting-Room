@@ -41,9 +41,9 @@ const ForgotPasswordComponent = () => {
             required={true}
             placeholderDisappear={"...@incora.inc"}
           />
-          <button className={cn("send_button")}>
-            <Button onclick={()=>{}}>Send</Button>
-          </button>
+          <div className={cn("send_button")}>
+            <Button onclick={()=>{}} size={"large"}>Send</Button>
+          </div>
         </form>
         <div className={cn("resetMessage")}>
           {email && !isDirty && `Email was send on ${email}`}

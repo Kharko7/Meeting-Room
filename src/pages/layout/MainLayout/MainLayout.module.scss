@@ -1,0 +1,52 @@
+
+$label:#a0a5a8;
+$background:#f4f6fa;
+$firstShadow:rgba(255, 255, 255, 0.5);
+$secondShadow: rgba(0, 0, 0, 0.15);
+$thirdShadow: rgba(255,255,255,0.1);
+$mainColor:#555;
+$linkColor:#aaa;
+$errorColor:#d55d5d;
+
+$secondColor:#5bbde0;
+$secondColorLighter:#99d0e3;
+
+$backgroundSwitch: #EBEDF0;
+$description:#a0a5a8;
+$registration:#505050;
+
+$linear-gradient:#dadde0;
+
+.box{
+  display: flex;
+  justify-content: center;
+}
+
+.routes{
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  background: $background;
+  box-shadow:
+  inset -2px -2px 12px $firstShadow,
+  inset  2px 2px 8px $secondShadow,
+  inset 2px 2px 4px $thirdShadow;
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 5px 0 5px 0;
+  position: fixed;
+  top:0;
+
+  border-bottom: $secondShadow 2px solid ;
+}
+
+.routes a {
+  color:$mainColor;
+}
+
+.routes a[class='active']{
+  border-bottom: 3px $secondColor solid;
+    transition: color 500ms;
+}

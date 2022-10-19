@@ -106,6 +106,9 @@ $linear-gradient:#dadde0;
   font-family: 'Montserrat', sans-serif;
   transition: 0.5s;
   background: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 

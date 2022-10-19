@@ -10,20 +10,20 @@ const Rooms = () => {
   const arr = Array.from({ length: floorCount }, (_, i) => i + 1);
 
   return (
-    <div className={styles.roomsContainer}>
-      <div className={styles.mainContainer}>
-        <Header />
-        <div className={styles.roomsList}>
-          {arr.map((currentFloor) => {
-            return (
-              <Floor data={MockedData} currentFloor={currentFloor}></Floor>
-            );
-          })}
-        </div>
-        <NavButtons></NavButtons>
-      </div>
-      <SideBar userName="Roman Borovets"></SideBar>
-    </div>
+          <div className={styles.roomsContainer}>
+              <div className={styles.mainContainer}>
+                  <Header/>
+                  <div className={styles.roomsList}>
+                      {arr.map((currentFloor, index) => {
+                          return (
+                              <Floor key={index} data={MockedData} currentFloor={currentFloor}></Floor>
+                          );
+                      })}
+                  </div>
+                  <NavButtons></NavButtons>
+              </div>
+              <SideBar userName="Roman Borovets"></SideBar>
+          </div>
   );
 };
 
