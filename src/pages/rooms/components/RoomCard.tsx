@@ -59,7 +59,7 @@ const RoomCard = ({ data,
             {" "}
             <h1 className={styles.modalName}>{data.name}</h1>
             <div className={styles.modalInput}>
-              <DatePicker />
+              {/* <DatePicker /> */}
             </div>
             <div className={styles.modalInput}>
               <TimePickerComponent />

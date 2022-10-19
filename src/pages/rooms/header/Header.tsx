@@ -6,8 +6,8 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <SearchByName />
-      <DatePickerComponent />
-      <TimePickerComponent />
+      {/* <DatePickerComponent />
+      <TimePickerComponent /> */}
     </header>
   );
 };

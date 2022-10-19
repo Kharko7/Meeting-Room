@@ -6,9 +6,9 @@ import styles from './bookingFormAdd.module.scss'
 import TextField from '@mui/material/TextField';
 import { Dayjs } from 'dayjs';
 import { SelectChangeEvent } from '@mui/material/Select';
-import DateAndTimePicker from '../date-time-picker/DateAndTimePicker';
 import SelectColor from '../selector/selector';
 import { EventInput } from '@fullcalendar/react'
+import DatePicker from 'components/datePicker';
 
 const cn = classNames.bind(styles);
 
@@ -45,13 +45,13 @@ const BookingFormAdd = ({ data, errors, handleSubmit, handleChangeData, debounce
         <Box sx={{ mb: '20px' }} >
         </Box>
         <Box sx={{ mb: '20px', display: 'flex' }}>
-          <DateAndTimePicker
+          <DatePicker
             date={data.start}
             errorMsg={errors?.start}
             onChange={handleChangeData('start')}
             label="Start"
           />
-          <DateAndTimePicker
+          <DatePicker
             date={data.end}
             errorMsg={errors?.end}
             onChange={handleChangeData('end')}
