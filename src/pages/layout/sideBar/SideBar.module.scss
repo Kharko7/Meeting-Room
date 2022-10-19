@@ -3,12 +3,12 @@
   text-align: left;
 }
 .sideBar {
-  flex: 0 1 300px;
+  position: fixed;
   z-index: 3;
   width: 300px;
-  height: calc(100% - 30px);
-  margin-top: 10px;
-  margin-left: 20px;
+  height: calc(100% - 20px);
+  top: 10px;
+  right: 20px;
   padding: 20px 10px;
 
   background: #f4f6fa;

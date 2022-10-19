@@ -11,7 +11,9 @@ const AppContent: React.FunctionComponent = () => {
   return (
     <Box className={cx('content')}>
       <AppMain />
-      <SideBar  userName='Roman Borovets'/>
+      <Box sx={{flex: '0 1 340px'}}>
+        <SideBar userName='Roman Borovets' />
+      </Box>
     </Box>
   )
 }

@@ -22,7 +22,7 @@ const Rooms = () => {
                     </div>
                     <NavButtons></NavButtons>
                 </div>
-            <SideBar userName="Roman Borovets"></SideBar>
+            {/* <SideBar userName="Roman Borovets"></SideBar> */}
         </div>
     );
 };
