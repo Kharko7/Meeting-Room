@@ -11,7 +11,7 @@ const AppContent: React.FunctionComponent = () => {
   return (
     <Box className={cx('content')}>
       <AppMain />
-      <SideBar  userName='Roman Borovets'/>
+      {/*<SideBar  userName='Roman Borovets'/>*/}
     </Box>
   )
 }
