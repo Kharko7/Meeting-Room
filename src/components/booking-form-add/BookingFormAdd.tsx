@@ -19,9 +19,10 @@ interface BookingFormProps {
   errors: Record<string, string>;
   handleSubmit: (event: any) => void;
   handleChangeData: (key: string) => (event: Event) => void;
+  debouncechange: any;
 }
 
-const BookingFormAdd = ({ data, errors, handleSubmit, handleChangeData }: BookingFormProps) => {
+const BookingFormAdd = ({ data, errors, handleSubmit, handleChangeData, debouncechange }: BookingFormProps) => {
 
   return (
     <>

@@ -11,9 +11,10 @@ interface BookingPopupProps {
   onClose: () => void;
   handleSubmit: (event: any) => void;
   handleChangeData: (key: string) => any;
+  debouncechange: any
 }
 
-const BookingPopup = ({ open, data, errors, onClose, handleSubmit, handleChangeData }: BookingPopupProps) => {
+const BookingPopup = ({ open, data, errors, onClose, handleSubmit, handleChangeData, debouncechange }: BookingPopupProps) => {
 
   return (
     <Dialog
@@ -39,6 +40,7 @@ const BookingPopup = ({ open, data, errors, onClose, handleSubmit, handleChangeD
           errors={errors}
           handleSubmit={handleSubmit}
           handleChangeData={handleChangeData}
+          debouncechange={debouncechange}
         />
       </Box>
     </Dialog>

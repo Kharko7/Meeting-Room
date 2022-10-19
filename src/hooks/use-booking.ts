@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DateSelectArg } from '@fullcalendar/react'
 import { EventInput } from '@fullcalendar/react'
+import debounce from 'lodash.debounce'
 
 const initialValues: EventInput = {
   id: '',
@@ -18,8 +19,6 @@ const useBooking = ({ onSubmit }: any) => {
   const [data, setData] = useState<EventInput>(initialValues)
   const [selectedDateInfo, setSelectedDateInfo] = useState<DateSelectArg | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
-
-  console.log(errors)
 
   const setSelectedDate = (selectInfo: DateSelectArg) => {
     setSelectedDateInfo(selectInfo)
@@ -78,6 +77,8 @@ const useBooking = ({ onSubmit }: any) => {
     }
   }
 
+  const debouncechange = debounce(handleChangeData, 100)
+
   const handleSubmit = ((event: any) => {
     event.preventDefault()
     onSubmit()
@@ -88,6 +89,7 @@ const useBooking = ({ onSubmit }: any) => {
     data,
     errors,
     selectedDateInfo,
+    debouncechange,
     handleChangeData,
     handleSubmit,
     setSelectedDate,

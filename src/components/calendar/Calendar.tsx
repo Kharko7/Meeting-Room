@@ -8,9 +8,11 @@ import styles from './calendar.module.scss'
 import { INITIAL_EVENTS } from '../../configs/initial-events';
 import ukLocale from '@fullcalendar/core/locales/uk';
 import enLocale from '@fullcalendar/core/locales/en-gb';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useBooking from '../../hooks/use-booking';
 import BookingPopup from '../booking-popup/BookingPopup';
+import { setActiveClass } from '../../utils/set-active-class';
+import { Box } from '@mui/material';
 
 const cn = classNames.bind(styles);
 
@@ -18,18 +20,9 @@ const Calendar = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<string | null>(localStorage.getItem('language'));
 
-  setTimeout(() => {
-    const calendar = document.getElementById('calendar') as HTMLElement;
-    if (language === 'ua') {
-      const button = calendar.querySelector('.fc-buttonUa-button') as HTMLButtonElement;
-
-      button.classList.add('active')
-    } else {
-      const button = calendar.querySelector('.fc-buttonEn-button') as HTMLButtonElement;
-
-      button.classList.add('active')
-    }
-  }, 0)
+  useEffect(() => {
+    setActiveClass(language)
+  }, [language])
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -42,6 +35,7 @@ const Calendar = () => {
     handleChangeData,
     handleSubmit,
     setSelectedDate,
+    debouncechange,
   } = useBooking({
     onSubmit: () => {
       try {
@@ -52,6 +46,7 @@ const Calendar = () => {
         }
         setOpenModal(false)
       } catch (e) {
+        console.warn(e)
       }
     },
   })
@@ -62,7 +57,7 @@ const Calendar = () => {
   }
 
   return (
-    <div id='calendar' className={cn('demo-app-main')}  >
+    <Box sx={{flexGrow: '1', margin: '10px 7px'}} id='calendar'   >
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         customButtons={{
@@ -123,8 +118,9 @@ const Calendar = () => {
         onClose={handleCloseModal}
         handleSubmit={handleSubmit}
         handleChangeData={handleChangeData}
+        debouncechange={debouncechange}
       />
-    </div>
+    </Box>
   )
 }
 

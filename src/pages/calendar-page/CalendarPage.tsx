@@ -1,14 +1,12 @@
-import classNames from 'classnames/bind';
-import styles from './calendarPage.module.scss'
 import Calendar from '../../components/calendar/Calendar';
-
-const cn = classNames.bind(styles);
+import { Box } from '@mui/material';
 
 const CalendarPage = () => {
+
   return (
-    <div className={cn('wrapper')}>
+    <Box sx={{ display: 'flex', height: '100%' }} >
       <Calendar />
-    </div>
+    </Box>
   )
 }
 
