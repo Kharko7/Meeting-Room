@@ -7,11 +7,13 @@ import { ProtectedRegisterRoute } from './ProtectedRegisterRoute';
 import { ProtectedGetInvitationRoute } from './ProtectedGetInvitationRoute';
 import { ChangePasswordPage, ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage } from 'pages';
 import {MainLayout} from "../pages/layout/MainLayout";
+import NotFound from 'pages/not-found/NotFound';
 
 const AppRouter = () => {
 
   return (
     <Routes>
+      <Route path={"*"} element={<NotFound />} />
       <Route path={"/"} element={<MainLayout/>}>
       <Route path={'/login'} element={<LoginPage />}></Route>
       <Route path={'/forgotPassword'} element={<ForgotPasswordPage />}></Route>
