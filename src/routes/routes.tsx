@@ -12,6 +12,7 @@ const AppRouter = () => {
 
   return (
     <Routes>
+      <Route path={"*"} element={<NotFound />} />
       <Route path={"/"} element={<MainLayout/>}>
       <Route path={'/login'} element={<LoginPage />}></Route>
       <Route path={'/forgotPassword'} element={<ForgotPasswordPage />}></Route>

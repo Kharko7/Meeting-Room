@@ -6,6 +6,8 @@
 
 ## ⚡️ Quick start
 
+#### Node version `v14.18.1`
+
 1. Clone the repo:
 
 ```sh
@@ -23,28 +25,31 @@
 ```sh
  npm run start
 ```
-
-
-##### In case of problem
-```sh
- npm audit fix --force
-```
-
 4. To see the storybook:
 
 ```sh
  npm run storybook
 ```
+### ⭕️ In case of problem
+
+```sh
+ npm audit fix --force
+```
+
+##### if it ⬆️ doesn't work try this ⬇️
+
+```sh
+npm config set legacy-peer-deps true
+```
+
+
 
 ## 🤙🏼 Contact
-For questions write to 
- hanley77@ukr.net or
- eva.cherkashyna2108@gmail.com or
- lavideos1313@gmail.com 
 
-
-
-
+For questions write to
+hanley77@ukr.net or
+eva.cherkashyna2108@gmail.com or
+lavideos1313@gmail.com
 
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/
