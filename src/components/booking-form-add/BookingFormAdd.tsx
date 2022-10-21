@@ -1,28 +1,52 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import Button from '@mui/material/Button';
 import { Box } from '@mui/system';
 import classNames from 'classnames/bind';
 import styles from './bookingFormAdd.module.scss'
 import TextField from '@mui/material/TextField';
 import { Dayjs } from 'dayjs';
-import { SelectChangeEvent } from '@mui/material/Select';
-import SelectColor from '../selector/selector';
-import { EventInput } from '@fullcalendar/react'
-import DatePicker from 'components/datePicker';
+import { EventInput } from '@fullcalendar/react';
+import DateAndTimePicker from 'components/date-time-picker/DateAndTimePicker';
+import ColorSelector from '../color-selector/ColorSelector';
+import { useDispatch, useSelector } from "react-redux";
+import { setBackgroundColor, setEnd, setStart, setTitle, setBookingError } from 'redux/booking/booking.actions';
 
 const cn = classNames.bind(styles);
-
-type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | Dayjs | null | SelectChangeEvent<string>
-
 interface BookingFormProps {
-  data: EventInput;
-  errors: Record<string, string>;
-  handleSubmit: (event: any) => void;
-  handleChangeData: (key: string) => (event: Event) => void;
-  debouncechange: any;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const BookingFormAdd = ({ data, errors, handleSubmit, handleChangeData, debouncechange }: BookingFormProps) => {
+const BookingFormAdd = ({ handleSubmit }: BookingFormProps) => {
+
+  const dispatch = useDispatch();
+  const { title, start, end, backgroundColor, errors } = useSelector(({ Booking }: EventInput) => ({
+    title: Booking.title,
+    start: Booking.start,
+    end: Booking.end,
+    backgroundColor: Booking.backgroundColor,
+    errors: Booking.errors,
+  }));
+
+  const handleChangeStart = (event: Dayjs | null) => {
+    if (event?.isValid()) {
+      dispatch(setStart(event.toISOString()))
+      dispatch(setBookingError({ start: '', }))
+    } else {
+      dispatch(setBookingError({
+        start: 'Date not valid',
+      }))
+    }
+  }
+  const handleChangeEnd = (event: Dayjs | null) => {
+    if (event?.isValid()) {
+      dispatch(setEnd(event.toISOString()))
+      dispatch(setBookingError({ end: '', }))
+    } else {
+      dispatch(setBookingError({
+        end: 'Date not valid',
+      }))
+    }
+  }
 
   return (
     <>
@@ -31,34 +55,33 @@ const BookingFormAdd = ({ data, errors, handleSubmit, handleChangeData, debounce
         onSubmit={handleSubmit}
         className={cn('form')}
       >
-        <Box sx={{ mb: '20px' }}>
+        <Box sx={{ mb: '20px', height: '80px' }}>
           <TextField
             type='text'
             autoFocus
             required
             placeholder="Text"
             fullWidth
-            value={data.title}
-            onChange={handleChangeData('title')}
+            value={title}
+            onChange={event => dispatch(setTitle(event.target.value))}
           />
         </Box>
-        <Box sx={{ mb: '20px' }} >
-        </Box>
-        <Box sx={{ mb: '20px', display: 'flex' }}>
-          <DatePicker
-            date={data.start}
+        <Box sx={{ mb: '20px', height: '80px' }}>
+          <DateAndTimePicker
+            date={start}
             errorMsg={errors?.start}
-            onChange={handleChangeData('start')}
+            onChange={handleChangeStart}
             label="Start"
           />
-          <DatePicker
-            date={data.end}
-            errorMsg={errors?.end}
-            onChange={handleChangeData('end')}
-            label="End"
-          />
         </Box>
-        <SelectColor pickedColor={data.backgroundColor} handleChangeData={handleChangeData} />
+        <Box sx={{ mb: '20px', height: '80px' }}>
+          <DateAndTimePicker
+            date={end}
+            errorMsg={errors?.end}
+            onChange={handleChangeEnd}
+            label="End" />
+        </Box>
+        <ColorSelector pickedColor={backgroundColor} onChange={event => dispatch(setBackgroundColor(event.target.value))} />
         <Box sx={{ textAlign: 'right' }}>
           <Button
             disabled={Boolean(Object.values(errors).join(''))}
