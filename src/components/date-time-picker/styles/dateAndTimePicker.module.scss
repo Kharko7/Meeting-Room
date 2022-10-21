@@ -1,0 +1,30 @@
+
+:global(button.css-h2z9v1-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton),
+:global(button.css-rjqbug-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton) {
+  box-shadow: inset -2px -2px 5px rgb(255 255 255 / 80%), inset -2px -2px 5px rgb(255 255 255 / 63%),
+    inset 2px 2px 2px rgb(0 0 0 / 15%), inset 2px 2px 5px rgb(255 255 255 / 10%) !important;
+  color: #25cee0;
+  cursor: default;
+  &:hover {
+    background-color: transparent ;
+  }
+}
+:global(button.css-zcgqxx-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton),
+:global(button.css-1gp5qnb-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton) {
+  &:hover {
+    box-shadow: -2px -2px 5px rgb(255 255 255 / 80%), -2px -2px 5px rgb(255 255 255 / 63%), 2px 2px 2px rgb(0 0 0 / 15%),
+      inset 2px 2px 5px rgb(255 255 255 / 10%) !important;
+  }
+}
+
+:global(span.MuiClockNumber-root.Mui-selected.css-zddqwy-MuiClockNumber-root) {
+  background-color: transparent !important;
+  box-shadow: none;
+  color: white !important;
+}
+:global(.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root) {
+  background-image: url('../../../assets/icons/Calendar.png');
+  background-size: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+}

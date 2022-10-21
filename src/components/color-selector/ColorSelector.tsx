@@ -2,17 +2,17 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import styles from './selector.module.scss'
+import styles from './colorSelector.module.scss'
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
 interface SelectColorProps {
   pickedColor: string | undefined;
-  handleChangeData: (key: string) => (event: SelectChangeEvent<string>) => void;
+  onChange: (event: SelectChangeEvent<string>) => void;
 }
 
-const SelectColor = ({ pickedColor, handleChangeData }: SelectColorProps) => {
+const ColorSelector = ({ pickedColor, onChange }: SelectColorProps) => {
   const colors = ['#28bbea', 'DarkSeaGreen', 'SandyBrown', '#7986cb', 'Silver']
 
   const menuItems = colors.map(color => (
@@ -25,27 +25,28 @@ const SelectColor = ({ pickedColor, handleChangeData }: SelectColorProps) => {
       value={color}>
     </MenuItem>
   ))
+
   return (
     <FormControl sx={{
       "& .notranslate": {
         backgroundColor: pickedColor
       },
-      width: 90
+      width: 90,
+      height: 80,
     }}>
       <InputLabel id="checkbox-label">Color</InputLabel>
       <Select
         labelId="checkbox-label"
         id="demo-simple-select"
         value={pickedColor}
-        onChange={handleChangeData('backgroundColor')}
+        onChange={onChange}
         autoWidth
         label="Age"
       >
         {menuItems}
-
       </Select>
     </FormControl>
   );
 }
 
-export default SelectColor
+export default ColorSelector
