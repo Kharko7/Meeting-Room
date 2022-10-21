@@ -13,7 +13,7 @@ const NotFound = () => {
           <div className={cn(styles.facet, styles.right)}>4</div>
           <div className={cn(styles.facet, styles.left)}>0</div>
           <div className={cn(styles.facet, styles.top)}>Error</div>
-          <div className={cn(styles.facet, styles.bottom)}>0</div>
+          <div className={cn(styles.facet, styles.bottom)}></div>
         </div>
         <div className={styles.shadow}></div>
       </div>

@@ -19,11 +19,13 @@ $linear-gradient:#dadde0;
 
 .box{
   display: flex;
+
   justify-content: center;
 }
 
 .routes{
   width: 100%;
+    z-index: 3;
   font-family: 'Montserrat', sans-serif;
   background: $background;
   box-shadow:

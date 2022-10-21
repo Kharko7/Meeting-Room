@@ -12,7 +12,7 @@ export default {
     type: {
       type: "string",
       defaultalue: "edit",
-      options: ["edit", "delete", "settings", "home", "close"],
+      options: ["edit", "delete", "settings", "home", "close","agenda","rooms","map","calendar"],
       control: {
         type: "radio",
       },
