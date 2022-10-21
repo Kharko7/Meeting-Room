@@ -7,6 +7,7 @@ import { ProtectedRegisterRoute } from './ProtectedRegisterRoute';
 import { ProtectedGetInvitationRoute } from './ProtectedGetInvitationRoute';
 import { ChangePasswordPage, ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage } from 'pages';
 import MainLayout from 'pages/layout/MainLayout/MainLayout';
+import NotFound from 'pages/not-found/NotFound';
 
 const AppRouter = () => {
 
