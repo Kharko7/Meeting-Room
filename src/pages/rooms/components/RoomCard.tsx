@@ -19,22 +19,20 @@ interface data {
   };
   capacity: string;
 }
-const RoomCard = ({ data,
-                    // key
-}: MyroomsData) => {
+const RoomCard = ({
+  data,
+}: // key
+MyroomsData) => {
   const [open, setOpen] = useState(false);
+
   // console.log(data, key);
 
   return (
     <div
-        // key={key}
+    // key={key}
     >
-      <button
-        className={
-          open
-            ? cn(styles.roomCardContainer, styles.open)
-            : styles.roomCardContainer
-        }
+      <div
+        className={styles.roomCardContainer}
         onClick={() => setOpen((prev) => !prev)}
       >
         <div className={styles.headerRoomCard}>
@@ -53,17 +51,23 @@ const RoomCard = ({ data,
             <div className={styles.membersIco}></div>
           </span>
         </div>
-      </button>
+       
+      </div>
+
       {open && (
         <Modal closeModal={setOpen}>
           <form className={styles.modalContainer}>
             {" "}
             <h1 className={styles.modalName}>{data.name}</h1>
             <div className={styles.modalInput}>
-              <DatePicker date={undefined} label={""} errorMsg={""} onChange={()=>{} } />
+              <DatePicker
+                date={undefined}
+                label={""}
+                errorMsg={""}
+                onChange={() => {}}
+              />
             </div>
             <div className={styles.modalInput}>
-         
               <TimePickerComponent />
             </div>
             <input

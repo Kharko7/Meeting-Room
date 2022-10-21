@@ -5,18 +5,18 @@
   user-select: none;
 }
 
-
-
 .header {
   display: flex;
-  //position: fixed;
-  //top: 0px;
-  gap: 50px;
-  padding: 15px 25px;
+  position: fixed;
+  top: 41px;
   left: 0;
   z-index: 2;
-  background-color: #f2f3f7;
+  
+  gap: 50px;
+  padding: 15px 25px;
   width: calc(100vw - 310px);
+
+  background-color: var(--primary-color);
 }
 .mainContainer {
   width: calc(100vw - 340px);
@@ -27,6 +27,8 @@
   min-height: 50px;
   width: 100%;
   height: 100%;
+  
+  background-color: var(--primary-color);
 }
 .input {
   position: relative;
@@ -38,10 +40,7 @@
   align-items: center;
 
   border-radius: 100px;
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--inset-input-shadow);
 }
 .ico {
   width: 30px;
@@ -59,10 +58,11 @@
   padding: 0px;
 
   font-size: 16px;
+  color: var(--primary-text-color);
 
-  color: gray;
   background-color: transparent;
   border: none;
+
   &:focus,
   &:active {
     border: none;
@@ -76,52 +76,49 @@
 .roomsList {
   width: 100%;
   padding-left: 25px;
+  margin-top: 86px;
 }
 .pFloor {
-  color: #25cee0;
-  text-align: center;
+  margin-top: 0;
   margin-bottom: 30px;
+
+  color: var(--accent-text-color);
+  text-align: center;
   text-transform: uppercase;
   font-size: 20px;
+
   cursor: default;
 }
 .floor {
-  margin-bottom: 50px;
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
+  margin-bottom: 50px;
 }
 .roomCardContainer {
+  position: relative;
   display: flex;
   width: 180px;
   flex-direction: column;
+
   padding: 10px;
   height: 80px;
   justify-content: space-between;
-  color: #a8a8a8;
-  background-color: #f4f6fa;
+
+  color: var(--primary-text-color);
+
+  background-color: var(--primary-color);
   transition-property: all;
   transition-duration: 30ms;
-  // color: white;
   border-radius: 3px;
-  box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8),
-    -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
-    inset 4px 4px 10px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--outset-box-shadow);
   cursor: pointer;
+
   &:hover {
-    background: #f8faff;
+    background-color: var(--primary-hover-color);
     box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8),
       -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
       inset 4px 4px 10px rgb(0 0 0 / 2%);
-  }
-  &.open,
-  &:active,
-  &:focus {
-    background-color: #f4f6fa;
-    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.8),
-      inset -4px -4px 10px rgba(255, 255, 255, 0.625),
-      inset 4px 4px 4px rgba(0, 0, 0, 0.15),
-      inset 4px 4px 10px rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -131,10 +128,10 @@
   justify-content: space-between;
 }
 .labelRoomName {
-  color: rgb(152, 152, 152);
+  color: var(--primary-text-color);
   text-transform: uppercase;
   font-size: 14px;
-  // color: white;
+
   cursor: default;
 }
 
@@ -143,6 +140,7 @@
 }
 .roomInfo {
   display: flex;
+
   align-items: center;
   gap: 10px;
 }
@@ -173,14 +171,6 @@
   font-size: 12px;
 }
 
-//Common
-
-.pressedBtn {
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
-}
 .indicator {
   width: 10px;
   height: 10px;
@@ -188,11 +178,13 @@
   background-color: #ff6e6e;
 }
 .modalName {
-  color: #25cee0;
-  text-align: center;
   margin-bottom: 30px;
+
+  color: var(--accent-text-color);
+  text-align: center;
   text-transform: uppercase;
   font-size: 20px;
+
   cursor: default;
 }
 .modalContainer {
@@ -220,43 +212,55 @@
   gap: 10px;
 }
 .chooseDuration {
-   font-size: 16px;
-
-  color: gray;
-  border: none;
-  margin-bottom: 60px;
-  border-radius: 40px;
-  padding: 15px;
-  background-color: #f4f6fa;
-  width: 232px;
   height: 55px;
-  box-shadow: inset -2px -2px 4px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 4px rgba(255, 255, 255, 0.625),
-    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+  width: 232px;
+  margin-bottom: 60px;
+  padding: 15px;
+
+  color: var(--primary-text-color);
+  font-size: 16px;
+
+  border: none;
+  border-radius: 40px;
+  background-color: #f4f6fa;
+  box-shadow: var(--inset-input-shadow);
   &:active,
   &:focus {
     outline: none;
     border: none;
   }
-  &::placeholder{
-      color: rgb(189, 189, 189);
+  &::placeholder {
+    color: rgb(189, 189, 189);
   }
 }
 .link {
   width: 30px;
   height: 30px;
-  border-radius: 100%;
+
+  color: var(--primary-text-color);
   text-align: center;
   font-size: 15px;
-  color: gray;
+
+  border-radius: 100%;
   box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.8),
     -2px -2px 4px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
     inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+    background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: center;
   &.current {
     box-shadow: inset -2px -2px 4px rgba(255, 255, 255, 0.8),
       inset -2px -2px 4px rgba(255, 255, 255, 0.625),
       inset 2px 2px 2px rgba(0, 0, 0, 0.15),
       inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+  }
+  &.map {
+    background-image: url(../../components/icon-button/images/map.png);
+  }
+  &.rooms {
+    background-image: url(../../components/icon-button/images/rooms.png);
+  }
+  &.calendar {
+    background-image: url(../../components/icon-button/images/calendar.png);
   }
 }
