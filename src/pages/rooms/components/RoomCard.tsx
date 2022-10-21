@@ -5,6 +5,7 @@ import cn from "classnames";
 import TimePickerComponent from "components/timePicker/Timepicker";
 import DatePicker from "components/datePicker";
 import Button from "components/button/Button";
+import { Dayjs } from "dayjs";
 interface MyroomsData {
   data: data;
   key: number;
@@ -59,9 +60,10 @@ const RoomCard = ({ data,
             {" "}
             <h1 className={styles.modalName}>{data.name}</h1>
             <div className={styles.modalInput}>
-              {/* <DatePicker /> */}
+              <DatePicker date={undefined} label={""} errorMsg={""} onChange={()=>{} } />
             </div>
             <div className={styles.modalInput}>
+         
               <TimePickerComponent />
             </div>
             <input
