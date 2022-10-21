@@ -24,7 +24,7 @@ const RoomCard = ({
 }: // key
 MyroomsData) => {
   const [open, setOpen] = useState(false);
-
+  const [openInfo, setOpenInfo] = useState(false);
   // console.log(data, key);
 
   return (
@@ -50,8 +50,17 @@ MyroomsData) => {
             {data.capacity}
             <div className={styles.membersIco}></div>
           </span>
+          <span
+            className={styles.info}
+            onClick={(event) => {
+              setOpenInfo((prev) => !prev);
+              event.stopPropagation();
+            }}
+          >
+            info
+            <span data-info={openInfo} className={styles.infoBox}>Lorem, ipsum dolor.</span>
+          </span>
         </div>
-       
       </div>
 
       {open && (

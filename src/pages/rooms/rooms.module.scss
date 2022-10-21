@@ -3,6 +3,7 @@
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  font-family: var(--primary-font-family);
 }
 
 .header {
@@ -11,9 +12,9 @@
   top: 41px;
   left: 0;
   z-index: 2;
-  
+
   gap: 50px;
-  padding: 15px 25px;
+  padding: 15px 40px;
   width: calc(100vw - 310px);
 
   background-color: var(--primary-color);
@@ -27,7 +28,7 @@
   min-height: 50px;
   width: 100%;
   height: 100%;
-  
+
   background-color: var(--primary-color);
 }
 .input {
@@ -75,15 +76,15 @@
 
 .roomsList {
   width: 100%;
-  padding-left: 25px;
+  padding-left: 40px;
   margin-top: 86px;
 }
 .pFloor {
   margin-top: 0;
   margin-bottom: 30px;
+  margin-left: 30px;
+  color: var(--accent-color);
 
-  color: var(--accent-text-color);
-  text-align: center;
   text-transform: uppercase;
   font-size: 20px;
 
@@ -92,17 +93,17 @@
 .floor {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  justify-content: flex-start;
+  gap:40px;
   margin-bottom: 50px;
 }
 .roomCardContainer {
   position: relative;
   display: flex;
-  width: 180px;
+  width: 200px;
   flex-direction: column;
-
   padding: 10px;
-  height: 80px;
+  height: 90px;
   justify-content: space-between;
 
   color: var(--primary-text-color);
@@ -245,7 +246,7 @@
   box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.8),
     -2px -2px 4px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
     inset 2px 2px 4px rgba(255, 255, 255, 0.1);
-    background-size: 15px;
+  background-size: 15px;
   background-repeat: no-repeat;
   background-position: center;
   &.current {
@@ -263,4 +264,34 @@
   &.calendar {
     background-image: url(../../components/icon-button/images/calendar.png);
   }
+}
+
+.info {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.infoBox {
+  position: absolute;
+  top: 25px;
+  right: -10px;
+  z-index: 4;
+
+  width: 200px;
+  height: 90px;
+  padding: 10px;
+
+  background: linear-gradient(
+    177.24deg,
+    rgba(158, 158, 177, 0) -5.54%,
+    #f4f6fa 42.21%
+  );
+  box-shadow: -2px -2px 8px rgb(255 255 255),
+    -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
+}
+.infoBox[data-info="false"] {
+  transform: translateY(-60px);
+  z-index: -1;
 }
