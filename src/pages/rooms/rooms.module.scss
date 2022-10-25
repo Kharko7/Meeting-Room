@@ -9,19 +9,21 @@
 .header {
   display: flex;
   position: fixed;
-  top: 41px;
+  //top: 41px;
+  top: 0;
   left: 0;
   z-index: 2;
 
   gap: 50px;
   padding: 15px 50px;
-  width: calc(100vw - 310px);
+  //width: calc(100vw - 310px);
+  width: calc(100vw - 20%);
 
   background-color: var(--primary-color);
 }
 .mainContainer {
-  width: calc(100vw - 340px);
-  margin-top: 55px;
+  //width: calc(100vw - 340px);
+ // margin-top: 55px;
 }
 .roomsContainer {
   display: flex;

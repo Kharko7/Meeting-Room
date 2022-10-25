@@ -1,11 +1,10 @@
-import FullCalendar, { DateSelectArg } from '@fullcalendar/react'
+import FullCalendar, { DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
 import classNames from 'classnames/bind';
 import styles from './calendar.module.scss'
-import { INITIAL_EVENTS } from '../../configs/initial-events';
 import ukLocale from '@fullcalendar/core/locales/uk';
 import enLocale from '@fullcalendar/core/locales/en-gb';
 import React, { useEffect, useState } from 'react'
@@ -13,12 +12,14 @@ import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
 
 const cn = classNames.bind(styles);
-
 interface CalendarProps {
+  data: EventInput[];
   handleDateSelect: (selectInfo: DateSelectArg) => void;
+  handleEventSelect: (eventInfo: EventClickArg) => void;
+  handleEventChange: (arg: EventChangeArg) => void;
 }
 
-export default React.memo(function Calendar({ handleDateSelect }: CalendarProps) {
+export default React.memo(function Calendar({ data, handleDateSelect, handleEventSelect, handleEventChange }: CalendarProps) {
   const [language, setLanguage] = useState<string | null>(localStorage.getItem('language'));
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default React.memo(function Calendar({ handleDateSelect }: CalendarProps)
   }, [language]);
 
   return (
-    <Box sx={{ flexGrow: '1', margin: '10px 7px' }} id='calendar'   >
+    <Box sx={{ height: '100%' }} id='calendar'>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         customButtons={{
@@ -54,8 +55,7 @@ export default React.memo(function Calendar({ handleDateSelect }: CalendarProps)
               localStorage.setItem('language', 'ua');
             }
           }
-        }
-        }
+        }}
         headerToolbar={{
           left: 'prev next today',
           center: 'title',
@@ -75,10 +75,13 @@ export default React.memo(function Calendar({ handleDateSelect }: CalendarProps)
         eventOverlap={false}
         eventTimeFormat={{ hour: '2-digit', minute: '2-digit', meridiem: false }}
         allDaySlot={false}
+        defaultAllDay={false}
         editable={true}
         dayMaxEvents={true}
-        events={INITIAL_EVENTS}
+        events={data}
         select={handleDateSelect}
+        eventClick={handleEventSelect}
+        eventChange={handleEventChange}
       />
     </Box>
   );

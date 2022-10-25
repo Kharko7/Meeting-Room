@@ -1,4 +1,4 @@
-import { DateSelectArg } from "@fullcalendar/react";
+import { DateSelectArg, EventApi } from "@fullcalendar/react";
 
 export enum BookingTypes {
   SET_TITLE = 'SET_TITLE',
@@ -8,7 +8,8 @@ export enum BookingTypes {
   SET_BORDER_COLOR = 'SET_BORDER_COLOR',
   SET_SELECTED_DATE = 'SET_SELECTED_DATE',
   SET_BOOKING_ERROR = 'SET_BOOKING_ERROR',
-  SET_INITIAL_STATE = 'SET_INITIAL_STATE',
+  STATE_RESET = 'STATE_RESET',
+  EDIT_BOOKING = 'EDIT_BOOKING',
 }
 
 interface SetTitleAction {
@@ -35,8 +36,12 @@ interface SetBookingError {
   type: BookingTypes.SET_BOOKING_ERROR;
   payload: Record<string, string>;
 }
-interface SetInitialState {
-  type: BookingTypes.SET_INITIAL_STATE;
+interface EditBooking {
+  type: BookingTypes.EDIT_BOOKING;
+  payload: EventApi;
+}
+interface StateReset {
+  type: BookingTypes.STATE_RESET;
 }
 
 export type BookingAction =
@@ -46,4 +51,5 @@ export type BookingAction =
   SetBackgrounColorAction |
   SetSelectedDateAction |
   SetBookingError |
-  SetInitialState
+  StateReset | 
+  EditBooking

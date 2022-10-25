@@ -20,7 +20,7 @@ const Modal = ({ closeModal, children }: modal) => {
         <span className={styles.close}>
           <ActionButton
             type="close"
-            size="small"
+            size="medium"
             onclick={() => {
               closeModal(false);
               ToggleModal();
