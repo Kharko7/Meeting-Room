@@ -14,7 +14,7 @@
   z-index: 2;
 
   gap: 50px;
-  padding: 15px 40px;
+  padding: 15px 50px;
   width: calc(100vw - 310px);
 
   background-color: var(--primary-color);
@@ -75,8 +75,8 @@
 }
 
 .roomsList {
-  width: 100%;
-  padding-left: 40px;
+  width: calc(100% - 10px);
+  padding-left: 50px;
   margin-top: 86px;
 }
 .pFloor {
@@ -94,7 +94,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap:40px;
+  gap: 40px;
   margin-bottom: 50px;
 }
 .roomCardContainer {
@@ -199,17 +199,34 @@
   margin-bottom: 30px;
 }
 .navButton {
-  position: fixed;
-  top: 50%;
-  right: 310px;
-  z-index: 4;
+  // position: fixed;
+  // top: 50%;
+  // right: 320px;
+  // z-index: 4;
 
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // width: 40px;
+  // height: 100px;
+  // gap: 10px;
+
+  // bottom button
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 4;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
   align-items: center;
-  width: 40px;
-  height: 100px;
+  border-radius: 10px;
+  width: 300px;
+  margin-top: 10px;
+  height: 60px;
+  box-shadow: var(--outset-box-shadow);
+  /* background-color: red; */
   gap: 10px;
 }
 .chooseDuration {
@@ -234,19 +251,34 @@
     color: rgb(189, 189, 189);
   }
 }
-.link {
-  width: 30px;
-  height: 30px;
 
+//Nav buttons
+.link {
+  // width: 30px;
+  // height: 30px;
+
+  // color: var(--primary-text-color);
+  // text-align: center;
+  // font-size: 15px;
+
+  // border-radius: 100%;
+  // box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.8),
+  //   -2px -2px 4px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
+  //   inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+  // background-size: 15px;
+  // background-repeat: no-repeat;
+  // background-position: center;
+
+  width: 45px;
+  height: 45px;
   color: var(--primary-text-color);
   text-align: center;
   font-size: 15px;
-
-  border-radius: 100%;
-  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.8),
-    -2px -2px 4px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.1);
-  background-size: 15px;
+  border-radius: 10px;
+  box-shadow: -2px -2px 4px rgb(255 255 255 / 80%),
+    -2px -2px 4px rgb(255 255 255 / 63%), 2px 2px 2px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
+  background-size: 22px;
   background-repeat: no-repeat;
   background-position: center;
   &.current {
@@ -256,16 +288,51 @@
       inset 2px 2px 4px rgba(255, 255, 255, 0.1);
   }
   &.map {
-    background-image: url(../../components/icon-button/images/map.png);
+    background-image: url(../rooms/images/location.png);
+    &.current,
+    &:hover {
+      background-image: url(../rooms/images/locationCurrent.png);
+    }
   }
   &.rooms {
-    background-image: url(../../components/icon-button/images/rooms.png);
+    background-image: url(../rooms/images/home.png);
+    &.current {
+      background-image: url(../rooms/images/homeCurrent.png);
+    }
+    &:before {
+      position: absolute;
+      bottom: -1px;
+      right: 218px;
+      content: " ";
+      width: 45px;
+      background-color: #5bbde0;
+      height: 2px;
+      border-radius: 2px;
+      z-index: 5;
+    }
   }
   &.calendar {
-    background-image: url(../../components/icon-button/images/calendar.png);
+    background-image: url(../rooms/images/calendar.png);
+    &.current,
+    &:hover {
+      background-image: url(../rooms/images/calendarCurrent.png);
+    }
   }
 }
-
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
+  // backdrop-filter: blur(1px); страшно лагает
+  background-color: rgba(255, 255, 255, 0.376);
+}
+.infoChoose {
+  z-index: 33;
+}
+// Card-Info
 .info {
   position: absolute;
   bottom: 10px;
@@ -274,24 +341,31 @@
 
 .infoBox {
   position: absolute;
-  top: 25px;
-  right: -10px;
-  z-index: 4;
-
+  appearance: none;
+  top: 90px;
+  right: 0px;
+  overflow: hidden;
   width: 200px;
-  height: 90px;
-  padding: 10px;
+  height: 0px;
 
-  background: linear-gradient(
-    177.24deg,
-    rgba(158, 158, 177, 0) -5.54%,
-    #f4f6fa 42.21%
-  );
+  z-index: 5;
+background: linear-gradient(to bottom, transparent 2%, var(--primary-color) 7%);
+  transition: height .3s linear;
+  transition-delay: 200ms;
   box-shadow: -2px -2px 8px rgb(255 255 255),
     -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
     inset 2px 2px 4px rgb(255 255 255 / 10%);
+    border-radius: 0px 0px 15px 15px;
 }
-.infoBox[data-info="false"] {
-  transform: translateY(-60px);
-  z-index: -1;
+
+.infoBox[data-info="true"] {
+  // z-index: -1;
+  transition: height .5s linear;
+  height: 200px;
+}
+.text{
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 }

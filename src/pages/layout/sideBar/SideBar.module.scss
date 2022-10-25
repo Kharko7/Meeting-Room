@@ -9,7 +9,9 @@
   z-index: 3;
 
   width: 300px;
-  height: calc(100% - 60px);
+  // height: calc(100% - 60px);
+  
+  height: calc(100% - 130px);
   padding: 20px 10px;
 
   background-color: var(--primary-color);
