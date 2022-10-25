@@ -6,6 +6,14 @@ interface modal {
 }
 
 const Modal = ({ closeModal, children }: modal) => {
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${window.scrollY}px`;
+
+  const ToggleModal = () => {
+    const top = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+  };
   return (
     <div className={styles.modalBackground}>
       <div className={styles.modalContainer}>
@@ -13,7 +21,10 @@ const Modal = ({ closeModal, children }: modal) => {
           <ActionButton
             type="close"
             size="small"
-            onclick={() => closeModal(false)}
+            onclick={() => {
+              closeModal(false);
+              ToggleModal();
+            }}
           ></ActionButton>
         </span>
         {children}
