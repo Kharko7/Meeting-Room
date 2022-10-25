@@ -1,5 +1,5 @@
 import { BookingTypes } from "./booking.types";
-import { DateSelectArg, } from "@fullcalendar/react";
+import { DateSelectArg, EventApi, } from "@fullcalendar/react";
 
 export const setTitle = (payload: string) => ({
   type: BookingTypes.SET_TITLE,
@@ -25,6 +25,10 @@ export const setBookingError = (payload: Record<string, string>) => ({
   type: BookingTypes.SET_BOOKING_ERROR,
   payload
 });
-export const setInitialState = () => ({
-  type: BookingTypes.SET_INITIAL_STATE
+export const editBooking = (payload: EventApi) => ({
+  type: BookingTypes.EDIT_BOOKING,
+  payload
+});
+export const resetState = () => ({
+  type: BookingTypes.STATE_RESET
 });

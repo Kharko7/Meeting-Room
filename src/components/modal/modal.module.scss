@@ -17,7 +17,7 @@
 
   min-width: 400px;
   min-height: 500px;
-  padding: 15px;
+  padding: 40px 15px 15px 15px;
 
   background-color: var(--primary-color);
   border-radius: 20px;
@@ -25,6 +25,6 @@
 }
 .close {
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 15px;
 }

@@ -5,14 +5,16 @@ import cn from "classnames";
 interface ButtonInterface {
   children?: string;
   size?: string;
-  onclick:()=>void
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset" | undefined;
+  onclick: () => void
 }
 
-const Button = ({ children, size = "medium", onclick }: ButtonInterface) => {
+const Button = ({ children, size = "medium", disabled = false, type = 'button', onclick, }: ButtonInterface) => {
   const MainBtnCn = cn(styles.btn, styles[size]);
 
   return (
-    <button className={MainBtnCn} onClick={() => onclick()}>
+    <button className={MainBtnCn} disabled={disabled} type={type} onClick={() => onclick()}>
       <span className={styles.label}>{children}</span>
     </button>
   );

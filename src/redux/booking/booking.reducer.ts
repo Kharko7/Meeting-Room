@@ -6,7 +6,6 @@ const initialState: EventInput = {
   title: '',
   start: '',
   end: '',
-  allDay: false,
   backgroundColor: '',
   borderColor: '',
   errors: {},
@@ -46,7 +45,17 @@ const bookingReducer = (state = initialState, action: BookingAction): EventInput
         ...state,
         errors: { ...state.errors, ...action.payload },
       };
-    case BookingTypes.SET_INITIAL_STATE:
+    case BookingTypes.EDIT_BOOKING:
+      return {
+        ...state,
+        id: action.payload.id,
+        title: action.payload.title,
+        start: action.payload.startStr,
+        end: action.payload.endStr,
+        backgroundColor: action.payload.backgroundColor,
+        borderColor: action.payload.borderColor,
+      };
+    case BookingTypes.STATE_RESET:
       return initialState;
     default:
       return state;

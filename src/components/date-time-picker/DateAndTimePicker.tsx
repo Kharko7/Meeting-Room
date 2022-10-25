@@ -1,5 +1,5 @@
 import './styles/dateAndTimePicker.module.scss'
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -10,10 +10,11 @@ interface DateAndTimePickerProps {
   date: DateInput | undefined;
   label?: string;
   errorMsg?: string;
+  minDate?: Dayjs | undefined
   onChange: (event: Dayjs | null) => void;
 }
 
-const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '', errorMsg = '', onChange }) => {
+const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '', errorMsg = '', minDate, onChange }) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -24,10 +25,12 @@ const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '',
         value={date}
         label={label}
         onChange={onChange}
+        minDateTime={minDate && dayjs(minDate)}
         PopperProps={{ sx: popperSx }}
         renderInput={(params) => (
           <TextField
             {...params}
+            onKeyDown={(e) => e.preventDefault()}
             error={Boolean(errorMsg)}
             helperText={errorMsg ? errorMsg : ''}
           />)}
