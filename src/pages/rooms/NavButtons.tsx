@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './rooms.module.scss'
+import styles from './navButtons.module.scss'
 import cn from 'classnames';
 import IconButton from 'components/icon-button';
 const NavButtons = () =>{

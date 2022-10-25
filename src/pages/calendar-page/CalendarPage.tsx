@@ -1,16 +1,14 @@
 import { Box } from '@mui/material';
-import SideBar from "../layout/sideBar";
 import React, { useCallback, useState } from 'react'
 import classNames from 'classnames/bind';
 import styles from './calendarPage.module.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/react';
 import Modal from 'components/modal';
-import { editBooking, resetState, setBookingError, setSelectedDate } from 'redux/booking/booking.actions';
+import { editBooking, resetState, setSelectedDate } from 'redux/booking/booking.actions';
 import { INITIAL_EVENTS } from 'configs/initial-events';
 import Calendar from 'components/calendar/Calendar';
 import BookingForm from 'components/booking-form/BookingForm';
-import { Link } from 'react-router-dom';
 
 const cn = classNames.bind(styles)
 
@@ -66,8 +64,8 @@ const CalendarPage = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', height: '100%' }}>
-      <Box sx={{ margin: '10px 14px 14px 5px', flex: '1 1 auto' }}>
+    <Box sx={{ display: 'flex', height: '100vh' }}>
+      <Box sx={{ margin: '10px 14px 14px 7px', flexGrow: '1'}}>
         <Calendar
           data={events}
           handleDateSelect={memoizedDateSelect}
@@ -83,12 +81,6 @@ const CalendarPage = () => {
             edit={Boolean(data.id)}
           />
         </Modal>}
-      {/* <Box sx={{ flex: '0 1 20%' }}>
-        <Link to="/rooms" >
-ddddddddddd
-        </Link>
-        <SideBar userName={"Some Guy"} />
-      </Box> */}
     </Box>
   )
 }

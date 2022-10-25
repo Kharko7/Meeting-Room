@@ -13,7 +13,6 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path={"*"} element={<NotFound />} />
-      <Route path={"/"} element={<LoginPage />} />
       <Route path={'/login'} element={<LoginPage />}></Route>
       <Route path={'/forgotPassword'} element={<ForgotPasswordPage />}></Route>
       <Route path={'/changePassword'} element={
@@ -35,7 +34,6 @@ const AppRouter = () => {
       <Route path={"/*"} element={<AppMain />} >
         <Route path={"rooms"} element={<Rooms />} />
         <Route path={"calendar"} element={<CalendarPage />} />
-
       </Route>
 
     </Routes>
