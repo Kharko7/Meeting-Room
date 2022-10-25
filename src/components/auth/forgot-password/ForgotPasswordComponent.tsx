@@ -39,7 +39,7 @@ const ForgotPasswordComponent = () => {
             name={"email"}
             placeHolder={"Email"}
             required={true}
-            placeholderDisappear={"...@incora.inc"}
+            placeholderDisappear={"...@incorainc.com"}
           />
           <div className={cn("send_button")}>
             <Button onclick={()=>{}} size={"large"}>Send</Button>

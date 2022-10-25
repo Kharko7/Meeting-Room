@@ -16,7 +16,8 @@ $circleColor2:#ffaa8b;
 .login_container {
   width:430px;
   max-width: 430px;
-  min-height: 75%;
+  //min-height: 80%;
+  max-height: 85%;
   border-radius: 40px;
   box-shadow:
    -2px -2px 12px $firstShadow,
@@ -28,10 +29,15 @@ $circleColor2:#ffaa8b;
   justify-content: center;
   transition: 2s ease-in-out;
 
+  padding: 15px;
+  box-sizing: border-box;
+
 }
 
 .form_container{
   width: 100%;
+  max-height: 50%;
+  min-height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,12 +45,12 @@ $circleColor2:#ffaa8b;
 }
 
 .logo_container {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   min-width: 200px;
-  min-height: 310px;
+  min-height: 40%;
 
   max-width: 200px;
-  max-height: 310px;
+  max-height: 40%;
 
   display: flex;
   align-items: center;
@@ -86,7 +92,7 @@ $circleColor2:#ffaa8b;
 }
 
 .link {
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 5px;
   text-align: center;
   font-weight: 700;
@@ -95,7 +101,7 @@ $circleColor2:#ffaa8b;
 .link a {
   text-decoration: none;
   color:$linkColor;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 
@@ -104,7 +110,7 @@ $circleColor2:#ffaa8b;
   max-height: 20px;
   color: $errorColor;
   font-weight: 700;
-  margin: 15px;
+  margin-bottom: 10px;
 }
 
 

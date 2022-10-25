@@ -52,12 +52,13 @@ const GetInvitationComponent = () => {
                 name={"verifyEmail"}
                 placeHolder={"email"}
                 required={true}
-                placeholderDisappear={"...@incora.inc"}
+                placeholderDisappear={"...@incorainc.com"}
+                size={"extra-small"}
               />
               <div
                 className={cn("checkCode_button")}
               >
-                <Button onclick={()=>{}}>Send</Button>
+                <Button onclick={()=>{}} size={"large"}>Send</Button>
               </div>
             </form>
           </div>

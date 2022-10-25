@@ -31,8 +31,8 @@ $linear-gradient:#dadde0;
 
 
 .verify_container {
-  width:700px;
-  height: 25%;
+  width:600px;
+  max-height: 300px;
   border-radius: 40px;
   background: $background;
   box-shadow:
@@ -42,9 +42,9 @@ $linear-gradient:#dadde0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   position: absolute;
-  padding-bottom: 30px;
+ padding: 15px;
   box-sizing: border-box;
 }
 
@@ -53,7 +53,7 @@ $linear-gradient:#dadde0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .verify_box{
@@ -84,7 +84,7 @@ $linear-gradient:#dadde0;
 
   box-shadow: none;
 
-  width: 600px;
+  width: 500px;
   position: relative;
   top: -8px;
   left: 0;
@@ -111,7 +111,7 @@ $linear-gradient:#dadde0;
 
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  transition: 0.5s;
+  transition: 0.2s;
   background: $background;
   display: flex;
   align-items: center;
