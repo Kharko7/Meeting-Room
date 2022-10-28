@@ -1,22 +1,22 @@
-.MuiOutlinedInput-notchedOutline {
+:global(.MuiOutlinedInput-notchedOutline) {
   border: 0px solid black !important;
   border-radius: 100px !important;
   box-shadow: var(--inset-input-shadow) !important;
 }
 
-.MuiInputBase-root {
+:global(.MuiInputBase-root) {
   padding-right: 20px !important;
 }
-.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper {
+:global(.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper) {
   box-shadow: var(--outset-box-shadow) !important;
 }
-.MuiClock-squareMask {
+:global(.MuiClock-squareMask) {
   box-shadow: var(--inset-input-shadow);
 }
-.MuiInputBase-input {
+:global(.MuiInputBase-input) {
   color: var(--primary-text-color) !important;
 }
-.MuiIconButton-root {
+:global(.MuiIconButton-root) {
   width: 35px;
   height: 35px;
 
@@ -27,46 +27,48 @@
     background-color: var(--primary-color) !important;
     box-shadow: var(--inset-input-shadow);
   }
-
 }
 
-.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton,
-.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton {
-  color: var( --accent-text-color) !important;
-  box-shadow: var(  --inset-input-shadow);
+:global(.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton),
+:global(.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton) {
+  color: var(--accent-text-color) !important;
+  box-shadow: var(--inset-input-shadow);
 }
-.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton,
+:global(.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton),
 //.MuiPaper-root,
-.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton {
+:global(.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton) {
   background-color: var(--primary-color) !important;
 }
-.MuiPickersArrowSwitcher-root {
+:global(.MuiPickersArrowSwitcher-root) {
   right: 10px;
 }
-.MuiClock-clock {
+:global(.MuiClock-clock) {
   background: transparent !important;
 }
-.MuiClockNumber-root[aria-selected="true"]{
+:global(.MuiClockNumber-root[aria-selected="true"]) {
   color: #efefef !important;
 }
-.MuiClock-pin,
-.MuiClockPointer-root,
-.MuiClockPointer-thumb {
+:global(.MuiClock-pin),
+:global(.MuiClockPointer-root),
+:global(.MuiClockPointer-thumb) {
   background-color: var(--accent-text-color) !important;
 
   border-color: var(--accent-text-color) !important;
 }
-.MuiClockPointer-thumb {
+:global(.MuiClockPointer-thumb) {
   border: 16px solid var(--accent-text-color) !important;
 }
-.MuiPickersArrowSwitcher-button {
+:global(.MuiPickersArrowSwitcher-button) {
   width: 25px;
   height: 25px;
 }
-.MuiIconButton-root[aria-label^="Choose time"] {
+:global(.MuiIconButton-root[aria-label^="Choose time"]) {
   background-image: url(./Subtract.png);
   background-size: 15px;
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--primary-color);
+}
+:global(.css-1jm66jt-MuiClockPicker-root) {
+    background-color: var(--primary-color);
 }

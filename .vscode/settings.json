@@ -1,0 +1,6 @@
+{
+  "emmet.showAbbreviationSuggestions": false,
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.showExpandedAbbreviation": "never"
+}
