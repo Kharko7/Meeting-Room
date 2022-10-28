@@ -1,13 +1,6 @@
-.wrapper {
-  display: flex;
-  height: 100%;
-  //overflow: hidden;
-}
-
-.calendar_container{
+.calendar_container {
   height: 100vh;
   width: 100%;
-  //margin-top: 50px;
-overflow: auto;
+  overflow: auto;
   z-index: 100;
 }

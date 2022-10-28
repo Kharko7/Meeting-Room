@@ -1,63 +1,33 @@
-import FullCalendar, { DateSelectArg } from '@fullcalendar/react'
+import FullCalendar, { DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
 import classNames from 'classnames/bind';
 import styles from './calendar.module.scss'
-import { INITIAL_EVENTS } from '../../configs/initial-events';
 import ukLocale from '@fullcalendar/core/locales/uk';
 import enLocale from '@fullcalendar/core/locales/en-gb';
-import { useEffect, useState } from 'react'
-import useBooking from '../../hooks/use-booking';
-import BookingPopup from '../booking-popup/BookingPopup';
+import React, { useEffect, useState } from 'react'
 import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
 
 const cn = classNames.bind(styles);
+interface CalendarProps {
+  data: EventInput[];
+  handleDateSelect: (selectInfo: DateSelectArg) => void;
+  handleEventSelect: (eventInfo: EventClickArg) => void;
+  handleEventChange: (arg: EventChangeArg) => void;
+}
 
-const Calendar = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+export default React.memo(function Calendar({ data, handleDateSelect, handleEventSelect, handleEventChange }: CalendarProps) {
   const [language, setLanguage] = useState<string | null>(localStorage.getItem('language'));
 
   useEffect(() => {
-    setActiveClass(language)
-  }, [language])
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
-  const {
-    data,
-    errors,
-    selectedDateInfo,
-    handleChangeData,
-    handleSubmit,
-    setSelectedDate,
-    debouncechange,
-  } = useBooking({
-    onSubmit: () => {
-      try {
-        const calendarApi = selectedDateInfo?.view?.calendar;
-        if (calendarApi) {
-          calendarApi.addEvent(data)
-          calendarApi.unselect()
-        }
-        setOpenModal(false)
-      } catch (e) {
-        console.warn(e)
-      }
-    },
-  })
-
-  const handleDateSelect = (selectInfo: DateSelectArg) => {
-    setSelectedDate(selectInfo)
-    setOpenModal(true)
-  }
+    setActiveClass(language);
+  }, [language]);
 
   return (
-    <Box sx={{flexGrow: '1', margin: '10px 7px'}} id='calendar'   >
+    <Box sx={{ height: '100%' }} id='calendar'>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         customButtons={{
@@ -85,8 +55,7 @@ const Calendar = () => {
               localStorage.setItem('language', 'ua');
             }
           }
-        }
-        }
+        }}
         headerToolbar={{
           left: 'prev next today',
           center: 'title',
@@ -106,24 +75,16 @@ const Calendar = () => {
         eventOverlap={false}
         eventTimeFormat={{ hour: '2-digit', minute: '2-digit', meridiem: false }}
         allDaySlot={false}
+        defaultAllDay={false}
         editable={true}
         dayMaxEvents={true}
-        events={INITIAL_EVENTS}
+        events={data}
         select={handleDateSelect}
-      />
-      <BookingPopup
-        open={openModal}
-        data={data}
-        errors={errors}
-        onClose={handleCloseModal}
-        handleSubmit={handleSubmit}
-        handleChangeData={handleChangeData}
-        debouncechange={debouncechange}
+        eventClick={handleEventSelect}
+        eventChange={handleEventChange}
       />
     </Box>
-  )
-}
-
-export default Calendar
+  );
+});
 
 

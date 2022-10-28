@@ -1,10 +1,9 @@
-import AppContent from 'containers/app-content/AppContent';
-import { Box } from '@mui/material'
+import AppRouter from 'routes/routes';
 
 const App = () => {
     return (
-        < >
-            <AppContent />
+        <>
+            <AppRouter />
         </>
     );
 };

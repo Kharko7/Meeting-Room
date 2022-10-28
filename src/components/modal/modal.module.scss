@@ -2,12 +2,14 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 40;
+
   display: flex;
   width: 100vw;
   height: 100vh;
   align-items: center;
   justify-content: center;
-z-index: 40;
+  
   background-color: #f4f6faad;
 }
 .modalContainer {
@@ -15,16 +17,14 @@ z-index: 40;
 
   min-width: 400px;
   min-height: 500px;
-  padding: 15px;
+  padding: 40px 15px 15px 15px;
 
-  background-color: #f4f6fa;
+  background-color: var(--primary-color);
   border-radius: 20px;
-  box-shadow: -4px -4px 8px rgba(255, 255, 255, 1),
-    -4px -4px 12px rgba(255, 255, 255, 0.5), 4px 4px 8px rgba(0, 0, 0, 0.15),
-    inset 4px 4px 4px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--outset-box-shadow);
 }
-.close{
+.close {
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 15px;
 }

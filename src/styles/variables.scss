@@ -1,0 +1,32 @@
+:root {
+  /* font colors */
+  
+  --primary-text-color: #a0a5a8;
+  --accent-text-color: #25cee0;
+  --dark-text-color: #555;
+
+  /* components colors*/
+  --accent-color: #5bbde0;
+  --primary-color: #f4f6fa;
+  --primary-hover-color:#f8faff;
+
+  /* font  families */
+  --primary-font-family: "Montserrat", sans-serif;
+
+  /* shadows */
+
+  // box
+  --outset-box-shadow: -2px -2px 8px rgb(255 255 255),
+    -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
+    
+  --inset-box-shadow: inset -2px -2px 8px rgb(255 255 255),
+    inset -2px -2px 12px rgb(255 255 255 / 50%),
+    inset 2px 2px 8px rgb(0 0 0 / 15%), inset 2px 2px 4px rgb(255 255 255 / 10%);
+
+  // input
+  --inset-input-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}

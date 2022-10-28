@@ -1,60 +1,44 @@
 .MuiOutlinedInput-notchedOutline {
   border: 0px solid black !important;
   border-radius: 100px !important;
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--inset-input-shadow) !important;
 }
 
 .MuiInputBase-root {
   padding-right: 20px !important;
 }
 .css-1yllih9-MuiPaper-root-MuiPickersPopper-paper {
-  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
-    -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1) !important;
+  box-shadow: var(--outset-box-shadow) !important;
 }
 .MuiClock-squareMask {
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--inset-input-shadow);
 }
 .MuiInputBase-input {
-  color: gray !important;
+  color: var(--primary-text-color) !important;
 }
 .MuiIconButton-root {
   width: 35px;
   height: 35px;
 
-  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
-    -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--outset-box-shadow);
   pointer-events: auto;
   &:active,
   &:disabled {
-    background-color: #f4f6fa !important;
-    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-      inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-      inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-      inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+    background-color: var(--primary-color) !important;
+    box-shadow: var(--inset-input-shadow);
   }
 
 }
 
 .css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton,
 .css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton {
-  color: #25cee0 !important;
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  color: var( --accent-text-color) !important;
+  box-shadow: var(  --inset-input-shadow);
 }
 .css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton,
-.MuiPaper-root,
+//.MuiPaper-root,
 .css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton {
-  background-color: #f4f6fa !important;
+  background-color: var(--primary-color) !important;
 }
 .MuiPickersArrowSwitcher-root {
   right: 10px;
@@ -68,12 +52,12 @@
 .MuiClock-pin,
 .MuiClockPointer-root,
 .MuiClockPointer-thumb {
-  background-color: #25cee0 !important;
+  background-color: var(--accent-text-color) !important;
 
-  border-color: #25cee0 !important;
+  border-color: var(--accent-text-color) !important;
 }
 .MuiClockPointer-thumb {
-  border: 16px solid #25cee0 !important;
+  border: 16px solid var(--accent-text-color) !important;
 }
 .MuiPickersArrowSwitcher-button {
   width: 25px;
@@ -84,5 +68,5 @@
   background-size: 15px;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #f4f6fa;
+  background-color: var(--primary-color);
 }

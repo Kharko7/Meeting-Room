@@ -2,20 +2,24 @@ import styles from "./SideBar.module.scss";
 import MockedData from "./components/MockedData";
 import MyRooms from "./components/MyRooms";
 import ActionButton from "../../../components/icon-button/IconButton";
+import NavButtons from "pages/rooms/NavButtons";
 type SideBarProps = { userName: string };
 const SideBar = ({ userName }: SideBarProps) => {
   return (
-    <div className={styles.sideBar}>
-      <div className={styles.settContainer}>
-        <div className={styles.userImg}></div>
-        <span className={styles.label}>{userName}</span>
-        <ActionButton
-          type="settings"
-          size="medium"
-          onclick={() => {}}
-        ></ActionButton>
+    <div className={styles.position}>
+      <div className={styles.sideBar}>
+        <div className={styles.settContainer}>
+          <div className={styles.userImg}></div>
+          <span className={styles.label}>{userName}</span>
+          <ActionButton
+            type="settings"
+            size="medium"
+            onclick={() => { }}
+          ></ActionButton>
+        </div>
+        <MyRooms mockedData={MockedData}></MyRooms>
       </div>
-      <MyRooms mockedData={MockedData}></MyRooms>
+        <NavButtons />
     </div>
   );
 };

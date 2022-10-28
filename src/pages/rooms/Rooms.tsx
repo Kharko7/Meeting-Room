@@ -11,18 +11,19 @@ const Rooms = () => {
 
     return (
         <div className={styles.roomsContainer}>
-                <div className={styles.mainContainer}>
-                    <Header />
-                    <div className={styles.roomsList}>
-                        {arr.map((currentFloor, index) => {
-                            return (
-                                <Floor key={index} data={MockedData} currentFloor={currentFloor}></Floor>
-                            );
-                        })}
-                    </div>
-                    <NavButtons></NavButtons>
+            <div className={styles.mainContainer}>
+                <Header />
+                <div className={styles.roomsList}>
+                    {arr.map((currentFloor, index) => {
+                        return (
+                            <Floor key={index} data={MockedData} currentFloor={currentFloor}></Floor>
+                        );
+                    })}
                 </div>
-            <SideBar userName="Roman Borovets"></SideBar>
+
+                {/* <NavButtons></NavButtons> */}
+            </div>
+            {/* <SideBar userName="Roman Borovets"></SideBar> */}
         </div>
     );
 };

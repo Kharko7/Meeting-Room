@@ -11,7 +11,7 @@ interface CheckboxWithLabelProps {
   onChange: () => void;
 };
 
-const CheckboxWithLabel = ({ checked, label, onChange }: CheckboxWithLabelProps) => {
+const CheckboxWithLabel = ({ checked, label = '', onChange }: CheckboxWithLabelProps) => {
 
   return (
     <FormControlLabel
