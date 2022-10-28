@@ -6,7 +6,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Ico, popperSx } from "./styles/Styles";
 import { DateInput } from '@fullcalendar/react';
 import { Dayjs } from 'dayjs';
-import "./styles/styles.scss";
+import "./styles/styles.module.scss";
 
 interface DateAndTimePickerProps {
   date: DateInput | undefined;

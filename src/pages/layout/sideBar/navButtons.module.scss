@@ -44,34 +44,23 @@
       inset 2px 2px 4px rgba(255, 255, 255, 0.1);
   }
   &.map {
-    background-image: url(../rooms/images/location.png);
+    background-image: url(./images/location.png);
     &.current,
     &:hover {
-      background-image: url(../rooms/images/locationCurrent.png);
+      background-image: url(./images/locationCurrent.png);
     }
   }
   &.rooms {
-    background-image: url(../rooms/images/home.png);
-    &.current {
-      background-image: url(../rooms/images/homeCurrent.png);
-    }
-    &:before {
-      position: absolute;
-      bottom: -1px;
-      right: 218px;
-      content: " ";
-      width: 45px;
-      background-color: #5bbde0;
-      height: 2px;
-      border-radius: 2px;
-      z-index: 5;
+    background-image: url(./images/home.png);
+    &.current,    &:hover  {
+      background-image: url(./images/homeCurrent.png);
     }
   }
   &.calendar {
-    background-image: url(../rooms/images/calendar.png);
+    background-image: url(./images/calendar.png);
     &.current,
     &:hover {
-      background-image: url(../rooms/images/calendarCurrent.png);
+      background-image: url(./images/calendarCurrent.png);
     }
   }
 }

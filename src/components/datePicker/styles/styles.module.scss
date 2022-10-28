@@ -1,15 +1,15 @@
-.MuiOutlinedInput-notchedOutline {
+:global(.MuiOutlinedInput-notchedOutline) {
   border: 0px solid black !important;
   border-radius: 100px !important;
   box-shadow: var(--inset-input-shadow);
 }
-.MuiInputBase-root {
+:global(.MuiInputBase-root) {
   padding-right: 20px !important;
 }
-.MuiInputBase-input {
+:global(.MuiInputBase-input) {
   color: gray !important;
 }
-.MuiIconButton-edgeEnd[aria-label^="Choose date"] {
+:global(.MuiIconButton-edgeEnd[aria-label^="Choose date"]) {
   width: 35px;
   height: 35px;
 
