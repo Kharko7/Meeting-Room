@@ -70,16 +70,14 @@ const CalendarPage = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection:"column" }}>
-      <Box sx={{ display: "flex", height: "100vh", width: "100%" }}>
-        <Box sx={{ margin: "10px 14px 14px 7px", flexGrow: "1" }}>
-          <Calendar
-            data={events}
-            handleDateSelect={memoizedDateSelect}
-            handleEventSelect={memoizedEventSelect}
-            handleEventChange={memoizedEventChange}
-          />
-        </Box>
+    <Box sx={{ display: "flex", height: "100vh", width: "100%" }}>
+      <Box sx={{ margin: "10px 14px 14px 7px", flexGrow: "1" }}>
+        <Calendar
+          data={events}
+          handleDateSelect={memoizedDateSelect}
+          handleEventSelect={memoizedEventSelect}
+          handleEventChange={memoizedEventChange}
+        />
       </Box>
       {openModal && (
         <Modal closeModal={handleCloseModal}>
@@ -90,7 +88,7 @@ const CalendarPage = () => {
           />
         </Modal>
       )}
-    </div>
+    </Box>
   );
 };
 
