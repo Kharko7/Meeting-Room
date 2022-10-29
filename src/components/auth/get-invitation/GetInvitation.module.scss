@@ -1,73 +1,66 @@
-$background:#f4f6fa;
-$firstShadow:rgba(255, 255, 255, 0.5);
+$background: #f4f6fa;
+$firstShadow: rgba(255, 255, 255, 0.5);
 $secondShadow: rgba(0, 0, 0, 0.15);
-$thirdShadow: rgba(255,255,255,0.1);
-$mainColor:#555;
-$linkColor:#aaa;
-$errorColor:#d55d5d;
-$secondColor:#5bbde0;
-$lighterSecondColor:#b1dae7;
+$thirdShadow: rgba(255, 255, 255, 0.1);
+$mainColor: #555;
+$linkColor: #aaa;
+$errorColor: #d55d5d;
+$secondColor: #5bbde0;
+$lighterSecondColor: #b1dae7;
 
 
 $backgroundSwitch: #EBEDF0;
-$description:#a0a5a8;
-$registration:#505050;
+$description: #a0a5a8;
+$registration: #505050;
 
-$linear-gradient:#dadde0;
+$linear-gradient: #dadde0;
 
-.verifyEmail_container{
-  margin:0;
-  height: 100%;
+.div4scroll {
+  display: table-cell;
   width: 100%;
-  overflow: hidden;
+  overflow-y: scroll;
+  padding-top: 100px;
+}
+
+.verifyEmail_container {
+  margin: 0;
+  width: 100%;
+  //overflow: hidden;
   font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color:$mainColor;
+  color: $mainColor;
   background: $background;
+  box-sizing: border-box;
+
+  padding: 20px;
 }
 
 
 .verify_container {
-  width:700px;
-  height: 25%;
+  width: 700px;
   border-radius: 40px;
   background: $background;
-  box-shadow:
-          -2px -2px 12px $firstShadow,
-          2px 2px 8px $secondShadow,
-          2px 2px 4px $thirdShadow;
+  box-shadow: -2px -2px 12px $firstShadow,
+  2px 2px 8px $secondShadow,
+  2px 2px 4px $thirdShadow;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  position: absolute;
-  padding-bottom: 30px;
+  justify-content: center;
+  padding: 15px;
   box-sizing: border-box;
 }
 
-.form_container{
+.form_container {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-}
-
-.verify_box{
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gif_box{
-  height: 35%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .title {
@@ -95,23 +88,21 @@ $linear-gradient:#dadde0;
 .verify_container:hover .title {
   top: -50px;
   background: $backgroundSwitch;
-  box-shadow:
-          -2px -2px 12px $firstShadow,
-          2px 2px 8px $secondShadow,
-          2px 2px 4px $thirdShadow;
+  box-shadow: -2px -2px 12px $firstShadow,
+  2px 2px 8px $secondShadow,
+  2px 2px 4px $thirdShadow;
 }
-
 
 
 .checkCode_button {
 
-  min-width:16%;
+  min-width: 16%;
   height: 100%;
   border-radius: 30px;
 
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  transition: 0.5s;
+  transition: 0.2s;
   background: $background;
   display: flex;
   align-items: center;
@@ -125,84 +116,10 @@ $linear-gradient:#dadde0;
 
 .link a {
   text-decoration: none;
-  color:$linkColor;
+  color: $linkColor;
   font-size: 15px;
   font-weight: 700;
 }
-
-
-.newtons-cradle {
-  --uib-size: 150px;
-  --uib-speed: 1.2s;
-  --uib-color: #474554;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--uib-size);
-  height: var(--uib-size);
-}
-
-.newtons-cradle__dot {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 25%;
-  transform-origin: center top;
-}
-
-.newtons-cradle__dot::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 25%;
-  border-radius: 50%;
-  background-color: var(--uib-color);
-}
-
-.newtons-cradle__dot:first-child {
-  animation: swing var(--uib-speed) linear infinite;
-}
-
-.newtons-cradle__dot:last-child {
-  animation: swing2 var(--uib-speed) linear infinite;
-}
-
-@keyframes swing {
-  0% {
-    transform: rotate(0deg);
-    animation-timing-function: ease-out;
-  }
-
-  25% {
-    transform: rotate(70deg);
-    animation-timing-function: ease-in;
-  }
-
-  50% {
-    transform: rotate(0deg);
-    animation-timing-function: linear;
-  }
-}
-
-@keyframes swing2 {
-  0% {
-    transform: rotate(0deg);
-    animation-timing-function: linear;
-  }
-
-  50% {
-    transform: rotate(0deg);
-    animation-timing-function: ease-out;
-  }
-
-  75% {
-    transform: rotate(-70deg);
-    animation-timing-function: ease-in;
-  }
-}
-
 
 
 .verify_container .spanAnimation {
@@ -222,7 +139,7 @@ $linear-gradient:#dadde0;
   display: block;
   border-radius: 50px;
   background: $secondColor;
-  box-shadow:      -2px -2px 12px $firstShadow,
+  box-shadow: -2px -2px 12px $firstShadow,
   2px 2px 8px $secondShadow,
   2px 2px 4px $thirdShadow;
   width: 65px;
@@ -241,7 +158,7 @@ $linear-gradient:#dadde0;
 }
 
 
-.error_container{
+.error_container {
   height: 15%;
   width: 50%;
   color: $errorColor;
@@ -249,4 +166,24 @@ $linear-gradient:#dadde0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.box-of-buttons{
+  display: flex;
+  margin: 20px;
+}
+.box-of-buttons>div{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.box-of-input-and-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-of-input-and-btn button{
+  margin-bottom: 20px;
+
 }

@@ -47,7 +47,7 @@ padding-top: 5px;
     overflow:hidden;
     background-image: linear-gradient(to bottom, $background  50%, $secondColor 50%);
     background-size: 100% 200%;
-    transition: all 1s;
+    transition: all 0.3s;
     color: $secondColor;
 
     input[type='file']{
