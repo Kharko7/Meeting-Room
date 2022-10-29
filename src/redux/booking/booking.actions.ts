@@ -5,6 +5,10 @@ export const setTitle = (payload: string) => ({
   type: BookingTypes.SET_TITLE,
   payload
 });
+export const setDescription = (payload: string) => ({
+  type: BookingTypes.SET_DESCRIPTION,
+  payload
+});
 export const setStart = (payload: string | undefined) => ({
   type: BookingTypes.SET_START,
   payload

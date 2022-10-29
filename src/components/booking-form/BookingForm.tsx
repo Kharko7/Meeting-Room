@@ -5,18 +5,13 @@ import styles from './bookingForm.module.scss'
 import TextField from '@mui/material/TextField';
 import { Dayjs } from 'dayjs';
 import { EventInput } from '@fullcalendar/react';
-import DateAndTimePicker from '../../components/date-time-picker/DateAndTimePicker';
+import DateAndTimePicker from 'components/date-time-picker';
 import ColorSelector from '../color-selector/ColorSelector';
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setBackgroundColor,
-  setEnd,
-  setStart,
-  setTitle,
-  setBookingError,
-} from "../../redux/booking/booking.actions";
-import Button from "../../components/button";
-import ConfirmDialog from "../../components/confirm-dialog/ConfirmDialog";
+import { setBackgroundColor, setEnd, setStart, setTitle, setBookingError, setDescription } from 'redux/booking/booking.actions';
+import Button from 'components/button';
+import ConfirmDialog from 'components/confirm-dialog';
+import { Errors } from 'constants/errors';
 
 const cn = classNames.bind(styles);
 interface BookingFormProps {
@@ -29,8 +24,9 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false)
   const dispatch = useDispatch();
 
-  const { title, start, end, backgroundColor, errors } = useSelector(({ Booking }: EventInput) => ({
+  const { title, description, start, end, backgroundColor, errors } = useSelector(({ Booking }: EventInput) => ({
     title: Booking.title,
+    description: Booking.description,
     start: Booking.start,
     end: Booking.end,
     backgroundColor: Booking.backgroundColor,
@@ -54,7 +50,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
 
   const handleBlur = () => {
     if (title.length > 20) {
-      dispatch(setBookingError({ title: 'Title cannot be longer than 20 characters' }))
+      dispatch(setBookingError({ title: Errors.titleLength }))
     } else dispatch(setBookingError({ title: '' }))
   }
 
@@ -64,20 +60,29 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
         component='form'
         onSubmit={handleSubmit}
         className={cn('form')}
+        autoComplete='off'
       >
-        <Box sx={{ mb: '20px', height: '80px' }}>
+        <Box sx={{ mb: '20px', height: '75px' }}>
           <TextField
-            autoComplete='off'
-            type='text'
             error={Boolean(errors.title)}
             autoFocus
             required
-            placeholder="Text"
+            label="Title"
             fullWidth
             value={title}
             onBlur={handleBlur}
             onChange={event => dispatch(setTitle(event.target.value))}
             helperText={errors.title ? errors.title : ''}
+          />
+        </Box>
+        <Box sx={{ mb: '40px' }}>
+          <TextField
+            value={description}
+            onChange={event => dispatch(setDescription(event.target.value))}
+            label="Description"
+            fullWidth
+            multiline
+            maxRows={3}
           />
         </Box>
         <Box sx={{ mb: '20px', height: '80px' }}>

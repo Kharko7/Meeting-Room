@@ -2,12 +2,13 @@ import styles from "./SideBar.module.scss";
 import MockedData from "./components/MockedData";
 import MyRooms from "./components/MyRooms";
 import ActionButton from "../../../components/icon-button/IconButton";
-import NavButtons from "../../../pages/layout/sideBar/NavButtons";
-
-import { useState } from "react";
-
+import NavButtons from "pages/layout/sideBar/NavButtons";
+import { NavLink, useLocation } from "react-router-dom";
 type SideBarProps = { userName: string };
+
 const SideBar = ({ userName }: SideBarProps) => {
+
+  const location = useLocation()
 
   return (
     <div className={styles.position}>
@@ -15,11 +16,13 @@ const SideBar = ({ userName }: SideBarProps) => {
         <div className={styles.settContainer}>
           <div className={styles.userImg}></div>
           <span className={styles.label}>{userName}</span>
-          <ActionButton
-            type="settings"
-            size="large"
-            onclick={() => {}}
-          ></ActionButton>
+          <NavLink state={{ from: location }} to="/profile">
+            <ActionButton
+              type="settings"
+              size="medium"
+              onclick={() => { }}
+            ></ActionButton>
+          </NavLink>
         </div>
         <MyRooms mockedData={MockedData}></MyRooms>
 

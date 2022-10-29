@@ -6,8 +6,8 @@ export const INITIAL_EVENTS: EventInput[] = [
   {
     id: '1',
     title: 'All-day event',
-    start: todayStr,
-    end: todayStr + 'T10:00:00',
+    start: todayStr + 'T02:00',
+    end: todayStr + 'T10:00',
     backgroundColor: 'Silver',
     borderColor: 'Silver'
   },
@@ -45,9 +45,9 @@ export const INITIAL_EVENTS: EventInput[] = [
   },
   {
     id: '5',
-    title: 'event 1',
-    start:'2022-10-08T21:42:58',
+    title: 'event 15555',
+    start: '2022-10-08T21:42:58',
     backgroundColor: '#28bbea',
     borderColor: '#28bbea'
-  }
+  },
 ]

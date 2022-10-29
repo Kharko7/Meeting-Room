@@ -9,20 +9,21 @@ interface CheckboxWithLabelProps {
   checked: boolean;
   label?: string;
   onChange: () => void;
+  [rest: string]: any;
 };
 
-const CheckboxWithLabel = ({ checked, label = '', onChange }: CheckboxWithLabelProps) => {
+const CheckboxWithLabel = ({ checked, label = '', onChange, ...rest }: CheckboxWithLabelProps) => {
 
   return (
     <FormControlLabel
       label={label ? label : null}
-      sx={{ marginLeft: '0' }}
+      {...rest}
       control={<Checkbox
         className={cn((checked) ? ['checkbox', 'active'] : 'checkbox')}
         checked={checked}
         onChange={onChange}
-        icon={< CheckIcon sx={{ transition: 'all 0.3s ease', color: 'transparent' }} />}
-        checkedIcon={< CheckIcon fontSize='small' sx={{ transition: 'all 0.5s ease', color: '#1976d2', ml: '1px' }} />}
+        icon={< CheckIcon sx={{ transition: 'all 0.5s ease', color: 'transparent' }} />}
+        checkedIcon={< CheckIcon fontSize='medium' sx={{ transition: 'all 0.5s ease', color: 'var(--accent-color)', ml: '1px' }} />}
       />}
     />
   );

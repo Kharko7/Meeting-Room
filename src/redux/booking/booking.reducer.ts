@@ -1,9 +1,25 @@
 import { BookingTypes, BookingAction } from "./booking.types";
 import { EventInput } from '@fullcalendar/react'
 
-const initialState: EventInput = {
-  id: '',
+export interface InitialStateBookig {
+  //duration: any
+  //roomId: number;
+  bookingId?: number | null;
+  title: string,
+  description: string,
+  start: string | undefined,
+  end: string | undefined,
+  backgroundColor: string,
+  borderColor: string,
+  errors: Record<string, string>,
+}
+
+const initialState: InitialStateBookig = {
+  //duration: any
+  //roomId: number;
+  bookingId: null,
   title: '',
+  description: '',
   start: '',
   end: '',
   backgroundColor: '',
@@ -11,12 +27,28 @@ const initialState: EventInput = {
   errors: {},
 }
 
-const bookingReducer = (state = initialState, action: BookingAction): EventInput => {
+
+
+//                   /rooms?officeId=1234&days=7
+
+// room: {
+//   soonestBokings: [
+
+//   ]
+// }
+//        /bookings?roomId=123143&officeId=1234&startDate=2022:10:12&enddDate
+const bookingReducer = (state = initialState, action: BookingAction): InitialStateBookig => {
+  console.log(state)
   switch (action.type) {
     case BookingTypes.SET_TITLE:
       return {
         ...state,
         title: action.payload
+      };
+    case BookingTypes.SET_DESCRIPTION:
+      return {
+        ...state,
+        description: action.payload
       };
     case BookingTypes.SET_START:
       return {
@@ -48,8 +80,9 @@ const bookingReducer = (state = initialState, action: BookingAction): EventInput
     case BookingTypes.EDIT_BOOKING:
       return {
         ...state,
-        id: action.payload.id,
+        bookingId: action.payload.extendedProps.bookingId,
         title: action.payload.title,
+        description: action.payload.extendedProps.description,
         start: action.payload.startStr,
         end: action.payload.endStr,
         backgroundColor: action.payload.backgroundColor,

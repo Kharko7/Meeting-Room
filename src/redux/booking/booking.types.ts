@@ -2,6 +2,7 @@ import { DateSelectArg, EventApi } from "@fullcalendar/react";
 
 export enum BookingTypes {
   SET_TITLE = 'SET_TITLE',
+  SET_DESCRIPTION = 'SET_DESCRIPTION',
   SET_START = 'SET_START',
   SET_END = 'SET_END',
   SET_BACKGROUND_COLOR = 'SET_BACKGROUND_COLOR',
@@ -14,6 +15,10 @@ export enum BookingTypes {
 
 interface SetTitleAction {
   type: BookingTypes.SET_TITLE;
+  payload: string;
+}
+interface SetDescriptionAction {
+  type: BookingTypes.SET_DESCRIPTION;
   payload: string;
 }
 interface SetStartAction {
@@ -46,10 +51,11 @@ interface StateReset {
 
 export type BookingAction =
   SetTitleAction |
+  SetDescriptionAction |
   SetStartAction |
   SetEndAction |
   SetBackgrounColorAction |
   SetSelectedDateAction |
   SetBookingError |
-  StateReset | 
+  StateReset |
   EditBooking
