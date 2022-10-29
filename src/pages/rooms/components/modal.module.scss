@@ -1,0 +1,39 @@
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  text-align: left;
+  // align-items: center;
+}
+
+.modalName {
+  margin: 0;
+  margin-bottom: 30px;
+
+  color: var(--accent-text-color);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 20px;
+
+  cursor: default;
+}
+.modalTime {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.modalInput {
+  margin-bottom: 30px;
+}
+.modalLabel {
+  color: var(--accent-text-color);
+  text-transform: uppercase;
+  font-size: 13px;
+  margin: 0 0 10px 10px;
+  margin-left: 10px;
+}
+.modalButton {
+  align-self: center;
+  margin-bottom: 20px;
+}

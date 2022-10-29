@@ -27,16 +27,16 @@
   &.close {
     background-image: url(./images/close.png);
   }
-  &.agenda{
+  &.agenda {
     background-image: url(./images/agenda.png);
   }
-  &.rooms{
+  &.rooms {
     background-image: url(./images/rooms.png);
   }
-  &.map{
+  &.map {
     background-image: url(./images//map.png);
   }
-  &.calendar{
+  &.calendar {
     background-image: url(./images/calendar.png);
   }
 }
@@ -56,25 +56,24 @@
       inset 3px 3px 3px rgba(0, 0, 0, 0.15),
       inset 3px 3px 6px rgba(255, 255, 255, 0.1);
   }
-}
-
-.small {
-  width: 20px;
-  height: 20px;
-  background-size: 12px;
-}
-.medium {
-  width: 30px;
-  height: 30px;
-  background-size: 20px;
-  border-radius: 9px;
-}
-.large {
-  width: 60px;
-  height: 60px;
-  background-size: 35px;
-  border-radius: 13px;
-}
-.margin{
-  margin-left: 5px;
+  &.small {
+    width: 20px;
+    height: 20px;
+    background-size: 12px;
+  }
+  &.medium {
+    width: 30px;
+    height: 30px;
+    background-size: 20px;
+    border-radius: 9px;
+  }
+  &.large {
+    width: 40px;
+    height: 40px;
+    background-size: 25px;
+    border-radius: 13px;
+  }
+  &.margin {
+    margin-left: 5px;
+  }
 }

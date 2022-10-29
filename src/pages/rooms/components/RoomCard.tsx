@@ -1,9 +1,7 @@
-
 import { useState } from "react";
 import styles from "../rooms.module.scss";
 import cn from "classnames";
 import ModalRooms from "./ModalRooms";
-
 
 interface MyroomsData {
   data: data;
@@ -36,7 +34,7 @@ MyroomsData) => {
       const top = document.body.style.top;
       document.body.style.top = "";
       //@ts-ignore
-      window.scrollTo(0, parseInt(top||0) * -1);
+      window.scrollTo(0, parseInt(top || 0) * -1);
     }
   };
 
@@ -55,12 +53,10 @@ MyroomsData) => {
           <span className={styles.indicator}></span>
         </div>
         <div className={styles.roomInfo}>
-          {data.equipment.projector ? (
+          {data.equipment.projector && (
             <div className={styles.projectorIco}></div>
-          ) : (
-            <></>
           )}
-          {data.equipment.TV ? <div className={styles.tvIco}></div> : <></>}
+          {data.equipment.TV && <div className={styles.tvIco}></div>}
           <span className={styles.capacityLabel}>
             {data.capacity}
             <div className={styles.membersIco}></div>
@@ -72,9 +68,20 @@ MyroomsData) => {
               ToggleInfo();
               event.stopPropagation();
             }}
+          >  
+          <svg
+            className={styles.svg}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
           >
-            info
+    <path d="M13.25 7c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25zm10.75 5c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-2 0c0-5.514-4.486-10-10-10s-10 4.486-10 10 4.486 10 10 10 10-4.486 10-10zm-13-2v2h2v6h2v-8h-4z" />
+          </svg>
           </span>
+     
+        
+        
           <span data-info={openInfo} className={styles.infoBox}>
             <span className={styles.text}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
@@ -84,8 +91,8 @@ MyroomsData) => {
           </span>
         </div>
       </div>
-      {open && <ModalRooms closeModal={setOpen} data={data}></ModalRooms>}
-      <div className={openInfo ? styles.blur : styles.none}></div>
+      {open && <ModalRooms closeModal={setOpen} ></ModalRooms>}
+      <div className={cn(openInfo && styles.blur)}></div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ interface Data {
 const MyRooms = ({ mockedData }: Data) => {
   return (
     <div className={styles.myRoomsContainer}>
-      <p className={styles.labelMyRooms}>my rooms</p>
+      <p className={styles.labelMyRooms}>my bookings</p>
       <div className={styles.roomsCardsContainer}>
         <MyRoomCard mockedData={mockedData}></MyRoomCard>
       </div>

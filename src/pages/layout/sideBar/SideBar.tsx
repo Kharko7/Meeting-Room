@@ -13,7 +13,7 @@ const SideBar = ({ userName }: SideBarProps) => {
           <span className={styles.label}>{userName}</span>
           <ActionButton
             type="settings"
-            size="medium"
+            size="large"
             onclick={() => {}}
           ></ActionButton>
         </div>

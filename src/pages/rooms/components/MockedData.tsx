@@ -49,56 +49,7 @@ const MockedData = [
 
     capacity: "3-15",
   },
-  {
-    name: "room6",
-    floor: 1,
-    equipment: {
-      projector: false,
-      TV: false,
-    },
 
-    capacity: "3-12",
-  },
-  {
-    name: "room7",
-    floor: 1,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room8",
-    floor: 1,
-    equipment: {
-      projector: false,
-      TV: true,
-    },
-
-    capacity: "7-12",
-  },
-  {
-    name: "room9",
-    floor: 1,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "2-14",
-  },
-  {
-    name: "room10",
-    floor: 1,
-    equipment: {
-      projector: false,
-      TV: true,
-    },
-
-    capacity: "4-8",
-  },
   {
     name: "room11",
     floor: 1,
@@ -119,36 +70,7 @@ const MockedData = [
 
     capacity: "4-142",
   },
-  {
-    name: "room13",
-    floor: 2,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
 
-    capacity: "1-13",
-  },
-  {
-    name: "room14",
-    floor: 2,
-    equipment: {
-      projector: false,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room15",
-    floor: 2,
-    equipment: {
-      projector: true,
-      TV: false,
-    },
-
-    capacity: "4-12",
-  },
   {
     name: "room16",
     floor: 2,
@@ -389,106 +311,7 @@ const MockedData = [
 
     capacity: "4-12",
   },
-  {
-    name: "room40",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
 
-    capacity: "4-12",
-  },
-  {
-    name: "room41",
-    floor: 4,
-    equipment: {
-      projector: false,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room42",
-    floor: 4,
-    equipment: {
-      projector: false,
-      TV: false,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room43",
-    floor: 4,
-    equipment: {
-      projector: false,
-      TV: false,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room44",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room45",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room46",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room47",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room48",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
-  {
-    name: "room49",
-    floor: 4,
-    equipment: {
-      projector: true,
-      TV: true,
-    },
-
-    capacity: "4-12",
-  },
 ];
 
 export default MockedData;
