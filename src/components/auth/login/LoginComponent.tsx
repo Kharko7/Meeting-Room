@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink, useNavigate} from "react-router-dom";
 
@@ -6,7 +6,8 @@ import classNames from 'classnames/bind';
 import styles from './LoginComponent.module.scss'
 import {ErrorComponent, InputRe} from "../../index";
 import Button from "components/button";
-import {FileUploaderComponent} from "../../fileUploader/FileUploaderComponent";
+import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
+import {authActions} from "../../../redux&saga/slices/auth.slice";
 
 
 const cn = classNames.bind(styles)
@@ -15,26 +16,19 @@ const cn = classNames.bind(styles)
 const LoginComponent = () => {
     const {reset, register, handleSubmit, formState: {errors, isValid, isDirty}} = useForm({mode: 'all'});
 
-    const [error, setError] = useState<boolean>(false);
+    // const [error, setError] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
-    localStorage.setItem('accessToRegister', JSON.stringify(true));
+    const dispatch = useAppDispatch();
 
+    let {user, error} = useAppSelector(state => state.auth);
 
-    const submit: SubmitHandler<any> = async (data) => {
-        // @ts-ignore
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            const login = user.name + " " + user.surname;
-            (login === data.login && user.password === data.password)
-                ? navigate('/rooms') : setError(true);
-            reset();
-        } else {
-            setError(true)
-            reset()
-        }
+    const submit: SubmitHandler<any> = async (user) => {
+        await dispatch(authActions.login(user));
+        reset();
     }
+
     return (
         <div className={cn("login_container")}>
             <div className={cn("logo_container")}>
@@ -47,17 +41,16 @@ const LoginComponent = () => {
                 <div className={cn("title")}>Lounge</div>
                 <div className={cn("sub_title")}>Smoke and Relax</div>
             </div>
-
             <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
                 <InputRe
                     isValid={false}
-                    error={errors.login}
-                    type={"login"}
+                    error={errors.email}
+                    type={""}
                     register={register}
-                    name={"login"}
-                    placeHolder={"full name"}
+                    name={"email"}
+                    placeHolder={"email"}
                     required={true}
-                    placeholderDisappear={"Sponge Bob"}
+                    placeholderDisappear={"...@incorainc.com"}
                     size={"extra-small"}
                 />
 
@@ -73,20 +66,24 @@ const LoginComponent = () => {
                 />
 
                 <div className={cn("error_container")}>
-                    {error && !isDirty && (
-                        <ErrorComponent title={"Ooops...Wrong login or password"}/>
+                    {(
+                        error &&
+                        !isDirty) && (
+                        <ErrorComponent title={"Oops...Wrong login or password"}/>
                     )}
                 </div>
 
                 <div
                     className={cn("login_button")}
                 >
-                    <Button onclick={() => {
+                    <Button type={"submit"} onclick={() => {
                     }} size={"large"}>Login</Button>
                 </div>
             </form>
             <div className={cn("link")}>
-                <NavLink to={"/forgotPassword"}>Forgot password?</NavLink>
+                <NavLink to={"/forgotPassword"}>Forgot password? </NavLink>
+                or
+                <NavLink to={"/getInvitation"}> Dont have an account?</NavLink>
             </div>
         </div>
     );

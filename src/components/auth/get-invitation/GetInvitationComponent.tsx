@@ -1,68 +1,96 @@
-import React, {useState} from 'react';
-import {SubmitHandler, useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
-
-
+import React from 'react';
+import {Controller, SubmitHandler, useFieldArray, useForm} from "react-hook-form";
 
 import classNames from 'classnames/bind';
 import styles from './GetInvitation.module.scss'
 import {InputRe} from "../../index";
 import Button from "components/button";
+
+import * as yup from "yup";
 const cn = classNames.bind(styles)
 
 
-
-
 const GetInvitationComponent = () => {
-    const {reset, register, handleSubmit, formState: {errors,isValid,isDirty}} = useForm({mode: 'all'});
-    
-    const navigate = useNavigate();
-    localStorage.setItem('accessToGetInvitation',JSON.stringify(false));
 
-    const submit:SubmitHandler<any> = async (data) => {
-        navigate('/login');
+    const {reset, register, handleSubmit, control, formState: {errors},} = useForm(
+        {
+            mode: 'all', defaultValues: {
+                test: [{email: ""}]
+            },
+            });
+
+    const {
+        fields,
+        append,
+        remove,
+    } = useFieldArray({
+        control,
+        name: "test"
+    });
+
+    localStorage.setItem('accessToGetInvitation', JSON.stringify(false));
+
+    const submit: SubmitHandler<any> = async (data) => {
+        delete data.test
+        console.log(data)
+        console.log(errors)
         reset();
     }
+
+
     return (
-      <div className={cn("verifyEmail_container")}>
-        <div className={cn("gif_box")}>
-          <div className={cn("newtons-cradle")}>
-            <div className={cn("newtons-cradle__dot")}></div>
-            <div className={cn("newtons-cradle__dot")}></div>
-            <div className={cn("newtons-cradle__dot")}></div>
-            <div className={cn("newtons-cradle__dot")}></div>
-          </div>
-        </div>
-        <div className={cn("verify_box")}>
-          <div className={cn("verify_container")}>
+        <div className={cn("div4scroll")}>
+            <div className={cn("verifyEmail_container")}>
+                <div className={cn("verify_container")}>
             <span className={cn("spanAnimation")}>
               <div className={cn("title")}>
-                Enter your email to receive an invitation
+               Enter the email(s) that will receive the invitation
               </div>
             </span>
-            <form
-              onSubmit={handleSubmit(submit)}
-              className={cn("form_container")}
-            >
-              <InputRe
-                isValid={true}
-                error={errors.verifyEmail}
-                type={""}
-                register={register}
-                name={"verifyEmail"}
-                placeHolder={"email"}
-                required={true}
-                placeholderDisappear={"...@incora.inc"}
-              />
-              <div
-                className={cn("checkCode_button")}
-              >
-                <Button onclick={()=>{}}>Send</Button>
-              </div>
-            </form>
-          </div>
+                    <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
+                        <ul>
+                            {fields.map((item, index) => {
+                                return (
+                                    <li key={item.id} className={cn("box-of-input-and-btn")}>
+                                        <Controller control={control} name={`test.${index}.email`}
+                                                    render={() => <InputRe
+                                                        placeHolder={'email'}
+                                                        type={""}
+                                                        isValid={true}
+                                                        name={`${index}.email`}
+                                                        required={true}
+                                                        register={register}
+                                                        placeholderDisappear={"...@incorainc.com"}
+                                                        size={"extra-small"}
+                                                    />}/>
+                                        <Button size={"smallAndHigh"} onclick={() => remove(index)}>
+                                            Delete
+                                        </Button>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                        <div className={cn("box-of-buttons")}>
+                            <div>
+                                <Button onclick={() => append({email: ""})}
+                                        size={'smallAndHigh'}>Confirm</Button>
+                            </div>
+                            <div>
+                                <Button onclick={() =>
+                                    reset()} size={"smallAndHigh"}>Reset</Button>
+                            </div>
+                        </div>
+
+                        <div
+                            className={cn("checkCode_button")}
+                        >
+                            <Button type={"submit"} onclick={() => {
+                            }} size={"large"}>Send</Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     );
 
 };

@@ -6,12 +6,13 @@ import styles from './ChangePassword.module.scss'
 import { useNavigate } from "react-router-dom";
 import { ErrorComponent, InputRe } from '../..';
 import Button from "components/button";
+import {checkPasswordMatch} from "../../../utils/auth-foo";
 
 
 const cn = classNames.bind(styles)
 
 const ChangePasswordComponent = () => {
-  const { reset, register, handleSubmit, formState: { errors, isValid, isDirty } } = useForm({ mode: 'all' });
+  const { reset, register, handleSubmit, formState: { errors, isDirty } } = useForm({ mode: 'all' });
   const navigate = useNavigate();
 
   const [error, setError] = useState<boolean>(false);
@@ -19,17 +20,14 @@ const ChangePasswordComponent = () => {
   const user = localStorage.getItem("user");
 
   const userParse = user && JSON.parse(user);
-  let login
+  let login:string = "";
   if (user) {
     login = userParse.name + " " + userParse.surname;
   }
 
-  localStorage.setItem("accessPasswordChange", JSON.stringify(false));
 
   const submit: SubmitHandler<any> = async (data) => {
-    if (data.password === data.passwordConfirm) {
-      userParse.password = data.password;
-      localStorage.setItem('user', JSON.stringify(userParse));
+    if (checkPasswordMatch(data.password,data.passwordConfirm)) {
       navigate('/login');
     } else {
       setError(true);
@@ -67,7 +65,7 @@ const ChangePasswordComponent = () => {
         <div
           className={cn("change_button")}
         >
-          <Button onclick={() => { }} size={"large"}>Change Password</Button>
+          <Button type={"submit"} onclick={() => { }} size={"large"}>Change Password</Button>
         </div>
       </form>
     </div>

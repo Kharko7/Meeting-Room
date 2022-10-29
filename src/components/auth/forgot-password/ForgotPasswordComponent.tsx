@@ -42,7 +42,7 @@ const ForgotPasswordComponent = () => {
             placeholderDisappear={"...@incora.inc"}
           />
           <div className={cn("send_button")}>
-            <Button onclick={()=>{}} size={"large"}>Send</Button>
+            <Button type={"submit"} onclick={()=>{}} size={"large"}>Send</Button>
           </div>
         </form>
         <div className={cn("resetMessage")}>

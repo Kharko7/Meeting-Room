@@ -1,9 +1,5 @@
-import {ProtectedRegisterRoute} from "./ProtectedRegisterRoute";
-import {ProtectedGetInvitationRoute} from "./ProtectedGetInvitationRoute";
-import {ProtectedPasswordChangeRoute} from "./ProtectedPasswordChangeRoute";
+import {ProtectedRoute} from "./ProtectedRoute";
 
 export {
-    ProtectedRegisterRoute,
-    ProtectedGetInvitationRoute,
-    ProtectedPasswordChangeRoute
+    ProtectedRoute
 }

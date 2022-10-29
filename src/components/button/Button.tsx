@@ -4,7 +4,7 @@ import cn from "classnames";
 
 interface ButtonInterface {
   children?: string;
-  size?: string;
+  size?: "small"|"medium"|"large"|"smallAndHigh";
   disabled?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
   onclick: () => void
