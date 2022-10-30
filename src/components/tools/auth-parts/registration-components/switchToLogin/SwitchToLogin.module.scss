@@ -32,7 +32,7 @@ $linear-gradient:#dadde0;
 .title_switch_to_login {
   box-sizing: border-box;
   font-size: 40px;
-  transition: 1s ease-in-out;
+  transition: 0.4s ease-in-out;
 }
 
 .switchToLogin{
@@ -43,7 +43,7 @@ $linear-gradient:#dadde0;
   height: 100%;
   width: 100%;
   padding: 50px;
-  transition: all 1.25s;
+  transition: all 0.4s;
   background-color: $background;
   border-radius: 15px 30px 30px 15px;
   box-sizing: border-box;
@@ -58,8 +58,10 @@ $linear-gradient:#dadde0;
 }
 
 .switch_container{
-  height: 30%;
+  min-height: 30%;
+  max-height: 40%;
   padding: 15px;
+  width: 90%;
   box-sizing: border-box;
   transition: 2s;
 

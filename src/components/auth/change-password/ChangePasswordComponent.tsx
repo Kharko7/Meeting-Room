@@ -7,18 +7,23 @@ import { useNavigate } from "react-router-dom";
 import { ErrorComponent, InputRe } from '../..';
 import Button from "components/button";
 import {checkPasswordMatch} from "../../../utils/auth-foo";
+import {ChangePasswordSchema, RegisterSchema} from "../../../utils/yup.validation";
+import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 
 
 const cn = classNames.bind(styles)
 
 const ChangePasswordComponent = () => {
-  const { reset, register, handleSubmit, formState: { errors, isDirty } } = useForm({ mode: 'all' });
+  const { reset, register, handleSubmit, formState: { errors, isDirty } } = useForm({
+    mode: 'all',
+    resolver: yupResolver(ChangePasswordSchema)
+  });
   const navigate = useNavigate();
 
   const [error, setError] = useState<boolean>(false);
 
-  const user = localStorage.getItem("user");
 
+  const user = localStorage.getItem("user");
   const userParse = user && JSON.parse(user);
   let login:string = "";
   if (user) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink, useNavigate} from "react-router-dom";
 
@@ -8,21 +8,27 @@ import {ErrorComponent, InputRe} from "../../index";
 import Button from "components/button";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
+import {ResponsePopup} from "../../tools/simple/response-popup/ResponsePopup";
 
 
 const cn = classNames.bind(styles)
 
 
 const LoginComponent = () => {
-    const {reset, register, handleSubmit, formState: {errors, isValid, isDirty}} = useForm({mode: 'all'});
 
-    // const [error, setError] = useState<boolean>(false);
+    const {reset, register, handleSubmit, formState: {isDirty}} = useForm({mode: 'all'});
 
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
 
-    let {user, error} = useAppSelector(state => state.auth);
+    let {user, error, rejected, pending, success} = useAppSelector(state => state.auth);
+
+    // useEffect(() => {
+    //     pending && ResponsePopup.Pending().then();
+    //     success && ResponsePopup.Success().then()
+    //     error && ResponsePopup.ErrorPopup(error).then()
+    // }, [pending, success])
 
     const submit: SubmitHandler<any> = async (user) => {
         await dispatch(authActions.login(user));
@@ -44,7 +50,6 @@ const LoginComponent = () => {
             <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
                 <InputRe
                     isValid={false}
-                    error={errors.email}
                     type={""}
                     register={register}
                     name={"email"}
@@ -56,7 +61,6 @@ const LoginComponent = () => {
 
                 <InputRe
                     isValid={false}
-                    error={errors.password}
                     type={"password"}
                     register={register}
                     name={"password"}
@@ -67,7 +71,7 @@ const LoginComponent = () => {
 
                 <div className={cn("error_container")}>
                     {(
-                        error &&
+                        error.includes("400") &&
                         !isDirty) && (
                         <ErrorComponent title={"Oops...Wrong login or password"}/>
                     )}
@@ -82,8 +86,6 @@ const LoginComponent = () => {
             </form>
             <div className={cn("link")}>
                 <NavLink to={"/forgotPassword"}>Forgot password? </NavLink>
-                or
-                <NavLink to={"/getInvitation"}> Dont have an account?</NavLink>
             </div>
         </div>
     );

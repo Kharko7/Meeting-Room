@@ -5,19 +5,24 @@ import classNames from 'classnames/bind';
 import styles from './GetInvitation.module.scss'
 import {InputRe} from "../../index";
 import Button from "components/button";
+import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
+import {GetInvitationSchema} from "../../../utils/yup.validation";
 
-import * as yup from "yup";
+
 const cn = classNames.bind(styles)
+
 
 
 const GetInvitationComponent = () => {
 
-    const {reset, register, handleSubmit, control, formState: {errors},} = useForm(
+    const {reset, register, handleSubmit, control,formState:{errors}} = useForm(
         {
-            mode: 'all', defaultValues: {
-                test: [{email: ""}]
+            mode: 'all',
+            resolver: yupResolver(GetInvitationSchema),
+            defaultValues: {
+                questions: [{email: ""}]
             },
-            });
+        });
 
     const {
         fields,
@@ -25,18 +30,14 @@ const GetInvitationComponent = () => {
         remove,
     } = useFieldArray({
         control,
-        name: "test"
+        name: "questions"
     });
 
-    localStorage.setItem('accessToGetInvitation', JSON.stringify(false));
 
     const submit: SubmitHandler<any> = async (data) => {
-        delete data.test
         console.log(data)
-        console.log(errors)
         reset();
     }
-
 
     return (
         <div className={cn("div4scroll")}>
@@ -52,17 +53,22 @@ const GetInvitationComponent = () => {
                             {fields.map((item, index) => {
                                 return (
                                     <li key={item.id} className={cn("box-of-input-and-btn")}>
-                                        <Controller control={control} name={`test.${index}.email`}
-                                                    render={() => <InputRe
-                                                        placeHolder={'email'}
-                                                        type={""}
-                                                        isValid={true}
-                                                        name={`${index}.email`}
-                                                        required={true}
-                                                        register={register}
-                                                        placeholderDisappear={"...@incorainc.com"}
-                                                        size={"extra-small"}
-                                                    />}/>
+                                        <Controller control={control} name={`questions.${index}.email`}
+                                                    render={() =>
+                                                        <InputRe
+                                                            isValid={true}
+                                                            type={""}
+                                                            register={register}
+                                                            name={`questions[${index}].email`}
+                                                            placeHolder={"Email"}
+                                                            required={true}
+                                                            placeholderDisappear={"...@incorainc.com"}
+                                                            size={"small"}
+                                                            // @ts-ignore
+                                                            error={ errors.questions?.[index]?.email}
+                                                        />
+                                        }
+                                        />
                                         <Button size={"smallAndHigh"} onclick={() => remove(index)}>
                                             Delete
                                         </Button>
@@ -73,7 +79,7 @@ const GetInvitationComponent = () => {
                         <div className={cn("box-of-buttons")}>
                             <div>
                                 <Button onclick={() => append({email: ""})}
-                                        size={'smallAndHigh'}>Confirm</Button>
+                                        size={'smallAndHigh'}>Add</Button>
                             </div>
                             <div>
                                 <Button onclick={() =>

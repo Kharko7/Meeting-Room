@@ -5,71 +5,61 @@ import ClosedEye from "../svg/eye/ClosedEye";
 import * as yup from "yup";
 
 
-
 import {FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister} from "react-hook-form";
 import classNames from 'classnames/bind';
 import styles from './input.module.scss'
-import {checkType, ICheckType} from "../../utils/chech-input-type";
+import {checkType, ICheckType} from "../../utils/check-input-type";
+
 const cn = classNames.bind(styles)
 
 
-interface IInput{
+interface IInput {
     placeHolder: string,
-    placeholderDisappear?:string,
-    type: "text"|""|"password"|"login",
+    placeholderDisappear?: string,
+    type: "text" | "" | "password" | "login",
 
     isValid: boolean,
     name: string;
     required: boolean,
 
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined,
-    register: UseFormRegister<FieldValues>|any,
+    register: UseFormRegister<FieldValues> | any,
 
-    size?:"small"|"medium"|"large"|"extra-small"
-
+    size?: "small" | "medium" | "large" | "extra-small"
 }
 
-const InputRe = ({type,placeHolder,name,required,isValid,error,register,placeholderDisappear,size}:IInput) => {
+const InputRe = ({type, placeHolder, name, required, isValid, error, register, placeholderDisappear, size}: IInput) => {
 
-    const [eyeState,setEyeState] = useState(true);
+    const [eyeState, setEyeState] = useState(true);
 
-    if (!eyeState){
-        type="text";
+    if (!eyeState) {
+        type = "text";
     }
-    const {reg, iconPath, message}: ICheckType = checkType(type,name);
-
+    const {iconPath}: ICheckType = checkType(type, name);
 
     return (
-        <div className={cn(`container-${size?size:"small"}`)}>
+        <div className={cn(`container-${size ? size : "small"}`)}>
             <div className={cn('inputField', error && 'inputFieldError')}>
                 <span className={cn(`icon`)}>
                     <IconInputComponent iconPath={iconPath}/>
                 </span>
-
-
-                    <input type={type}
+                <input type={type}
                        {...register(`${name}`, {
                            required: required,
-                           pattern: {
-                               value: isValid ? reg : new RegExp(/^[a-zA-ZА-яіІїЇґҐёЁєЄ0-9@$!%*#?&.,:;/|<> ]{1,40}$/),
-                               message: isValid ? message : ''
-                           }
                        })}
                        autoComplete={"off"}
-                           placeholder={placeholderDisappear}
-                           required/>
-
+                       placeholder={placeholderDisappear}
+                       required/>
                 <label>{placeHolder}</label>
-
-
-                {name&&name.includes("password")&&
+                {name && name.includes("password") &&
                     <span onClick={() => {
                         eyeState ? setEyeState(false) : setEyeState(true);
                     }} className={cn("eye")}>{eyeState ? <OpenEye/> : <ClosedEye/>}</span>}
 
             </div>
-            <span className={cn(isValid&&"error_container")}>{(error?.message && isValid)&&<span>{`${error.message}`}</span>}</span>
-            </div>
+            <span className={cn(isValid && "error_container")}>{(error?.message && isValid) &&
+                <span>{`${error.message}`}</span>}</span>
+        </div>
     );
 };
 

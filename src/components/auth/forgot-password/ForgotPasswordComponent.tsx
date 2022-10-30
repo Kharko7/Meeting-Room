@@ -6,21 +6,22 @@ import classNames from 'classnames/bind';
 import styles from './ForgotPassword.module.scss'
 import Button from "components/button";
 import {InputRe} from "../../index";
+import {EmailSchema, RegisterSchema} from "../../../utils/yup.validation";
+import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 
 const cn = classNames.bind(styles)
 
 
 const ForgotPasswordComponent = () => {
-    const {reset, register, handleSubmit, formState: {errors,isDirty}} = useForm({mode: 'all'});
+    const {reset, register, handleSubmit, formState: {errors,isDirty}} = useForm({
+        mode: 'all',
+        resolver: yupResolver(EmailSchema)
+    });
     const [email,setEmail] = useState("");
 
     const submit:SubmitHandler<any> = async (data) => {
         setEmail(data.email);
         reset();
-
-
-        localStorage.setItem("accessPasswordChange",JSON.stringify(true));
-
     }
     return (
       <div className={cn("forgotPassword_container")}>
@@ -34,7 +35,7 @@ const ForgotPasswordComponent = () => {
           <InputRe
             isValid={true}
             error={errors.email}
-            type={""} // css styles don't work with this type
+            type={""} // css styles don't work with email type
             register={register}
             name={"email"}
             placeHolder={"Email"}
