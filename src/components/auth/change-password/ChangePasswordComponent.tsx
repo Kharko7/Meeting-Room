@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import styles from './ChangePassword.module.scss'
 import { useNavigate } from "react-router-dom";
 import { ErrorComponent, InputRe } from '../..';
-import Button from "components/button";
+import Button from "../../button";
 import {checkPasswordMatch} from "../../../utils/auth-foo";
 import {ChangePasswordSchema, RegisterSchema} from "../../../utils/yup.validation";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";

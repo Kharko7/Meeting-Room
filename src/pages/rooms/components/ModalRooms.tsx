@@ -1,9 +1,9 @@
 
- import Modal from "components/modal/Modal";
+ import Modal from "../../../components/modal";
  import styles from "../rooms.module.scss";
- import TimePickerComponent from "components/timePicker/Timepicker";
-import DatePicker from "components/datePicker";
-import Button from "components/button/Button";
+ import TimePickerComponent from "../../../components/timePicker";
+import DatePicker from "../../../components/datePicker";
+import Button from "../../../components/button";
 //@ts-ignore
  const ModalRooms = ({closeModal,data}) =>{
 return(

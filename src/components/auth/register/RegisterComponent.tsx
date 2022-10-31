@@ -3,7 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink, useNavigate} from "react-router-dom";
 
 
-import Button from "components/button";
+import Button from "../../button";
 import {ErrorComponent, InputRe, SwitchToLoginComponent} from "../../index";
 
 import classNames from 'classnames/bind';

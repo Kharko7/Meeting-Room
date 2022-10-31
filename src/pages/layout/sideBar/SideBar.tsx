@@ -2,7 +2,7 @@ import styles from "./SideBar.module.scss";
 import MockedData from "./components/MockedData";
 import MyRooms from "./components/MyRooms";
 import ActionButton from "../../../components/icon-button/IconButton";
-import NavButtons from "pages/layout/sideBar/NavButtons";
+import NavButtons from "../sideBar/NavButtons";
 type SideBarProps = { userName: string };
 const SideBar = ({ userName }: SideBarProps) => {
   return (

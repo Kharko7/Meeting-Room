@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
-import { snackBar } from 'constants/snackbar';
+import { snackBar } from '../constants/snackbar';
 
 type SnackBarContextProviderProps = {
   children: React.ReactNode

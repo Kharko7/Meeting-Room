@@ -1,4 +1,4 @@
-import Button from "components/button";
+import Button from "../../components/button";
 import { NavLink } from "react-router-dom";
 import cn from "classnames";
 import styles from "./notFound.module.scss";

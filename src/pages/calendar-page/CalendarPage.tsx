@@ -9,15 +9,15 @@ import {
   EventClickArg,
   EventInput,
 } from "@fullcalendar/react";
-import Modal from "components/modal";
+import Modal from "../../components/modal";
 import {
   editBooking,
   resetState,
   setSelectedDate,
-} from "redux/booking/booking.actions";
-import { INITIAL_EVENTS } from "configs/initial-events";
-import Calendar from "components/calendar/Calendar";
-import BookingForm from "components/booking-form/BookingForm";
+} from "../../redux/booking/booking.actions";
+import { INITIAL_EVENTS } from "../../configs/initial-events";
+import Calendar from "../../components/calendar/Calendar";
+import BookingForm from "../../components/booking-form/BookingForm";
 
 const cn = classNames.bind(styles);
 
