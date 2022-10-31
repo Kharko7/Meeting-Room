@@ -16,7 +16,8 @@ interface MyroomsData {
   };
   capacity: string;
   date: string;
-  time: string;
+  endTime: string;
+  startTime: string;
 }
 const MyRoomCard = ({ mockedData }: Data) => {
   const [openEdit, setOpenEdit] = useState(false);
@@ -46,7 +47,9 @@ const MyRoomCard = ({ mockedData }: Data) => {
           </div>
 
           <div className={styles.labelTime}>
-            {mockedData[index].date} {mockedData[index].time}
+            {mockedData[index].date}{"  "}{mockedData[index].startTime}
+            {" - "}
+             {mockedData[index].endTime}
           </div>
 
           <div className={styles.roomInfo}>

@@ -3,8 +3,12 @@ import MockedData from "./components/MockedData";
 import MyRooms from "./components/MyRooms";
 import ActionButton from "../../../components/icon-button/IconButton";
 import NavButtons from "../../../pages/layout/sideBar/NavButtons";
+
+import { useState } from "react";
+
 type SideBarProps = { userName: string };
 const SideBar = ({ userName }: SideBarProps) => {
+
   return (
     <div className={styles.position}>
       <div className={styles.sideBar}>
@@ -18,6 +22,7 @@ const SideBar = ({ userName }: SideBarProps) => {
           ></ActionButton>
         </div>
         <MyRooms mockedData={MockedData}></MyRooms>
+
       </div>
       <NavButtons />
     </div>

@@ -3,12 +3,12 @@ import cn from "classnames";
 import { useState, useEffect } from "react";
 import MockedData from "../components/MockedData";
 //@ts-ignore
-const RoomsSelector = ({ floor }) => {
-  const [room, setRoom] = useState(MockedData[0].name);
+const RoomsSelector = ({ floor, name = MockedData[0].name }) => {
+
+      console.log(floor, name);
+  const [room, setRoom] = useState(name);
   const [openRoom, setOpenRoom] = useState(false);
-  useEffect(() => {
-    setRoom("Choose room");
-  }, [floor]);
+
   return (
     <ul className={styles.dropdown}>
       <input

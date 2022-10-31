@@ -6,18 +6,22 @@ import Button from "../../../components/button/Button";
 import Selector from "../selector/Selector";
 import { style } from "@mui/system";
 interface modalRooms {
+  floor?:string;
+  name?:string;
   closeModal: (value: boolean) => void;
 }
 
 //@ts-ignore
-const ModalRooms = ({ closeModal }: modalRooms) => {
+const ModalRooms = ({ closeModal, floor="1", name }: modalRooms) => {
+
+  
   return (
     <Modal closeModal={closeModal}>
       <form className={styles.modalContainer}>
         <p className={styles.modalName}>Booking form</p>
         <div className={styles.modalInput}>
           <p className={styles.modalLabel}>Select room</p>
-          <Selector></Selector>
+          <Selector floor={floor} name={name}></Selector>
         </div>
 
         <div className={styles.modalInput}>
