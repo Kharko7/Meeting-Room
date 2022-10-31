@@ -1,0 +1,21 @@
+.modalDeleteButtons{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.modalh1{
+    margin: 0;
+  margin-bottom: 30px;
+
+  color: #ff6a6a;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 20px;
+
+  cursor: default;
+}
+.modalp{
+  color:var(--dark-text-color);
+}

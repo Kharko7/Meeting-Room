@@ -6,8 +6,9 @@ import MockedData from "../components/MockedData";
 const RoomsSelector = ({ floor }) => {
   const [room, setRoom] = useState(MockedData[0].name);
   const [openRoom, setOpenRoom] = useState(false);
-  useEffect((
-  ) => {setRoom('Choose room')}, [floor]);
+  useEffect(() => {
+    setRoom("Choose room");
+  }, [floor]);
   return (
     <ul className={styles.dropdown}>
       <input

@@ -2,7 +2,7 @@ import styles from "./SideBar.module.scss";
 import MockedData from "./components/MockedData";
 import MyRooms from "./components/MyRooms";
 import ActionButton from "../../../components/icon-button/IconButton";
-import NavButtons from "../sideBar/NavButtons";
+import NavButtons from "../../../pages/layout/sideBar/NavButtons";
 type SideBarProps = { userName: string };
 const SideBar = ({ userName }: SideBarProps) => {
   return (
@@ -13,7 +13,7 @@ const SideBar = ({ userName }: SideBarProps) => {
           <span className={styles.label}>{userName}</span>
           <ActionButton
             type="settings"
-            size="medium"
+            size="large"
             onclick={() => {}}
           ></ActionButton>
         </div>
