@@ -1,10 +1,9 @@
-import FullCalendar, { DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/react'
+import FullCalendar, { DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
-import classNames from 'classnames/bind';
-import styles from './calendar.module.scss'
+import './calendar.module.scss'
 import ukLocale from '@fullcalendar/core/locales/uk';
 import enLocale from '@fullcalendar/core/locales/en-gb';
 import React, { useEffect, useState } from 'react'
@@ -12,16 +11,13 @@ import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
 import { getFromLocalStorage, setToLocalStorage } from 'services/local-storage.service';
 
-const cn = classNames.bind(styles);
 interface CalendarProps {
   data: EventInput[];
   weekends: boolean;
   handleDateSelect: (selectInfo: DateSelectArg) => void;
   handleEventSelect: (eventInfo: EventClickArg) => void;
-  handleEventChange: (arg: EventChangeArg) => void;
 }
-
-export default React.memo(function Calendar({ data, weekends, handleDateSelect, handleEventSelect, handleEventChange }: CalendarProps) {
+export default React.memo(function Calendar({ data, weekends, handleDateSelect, handleEventSelect }: CalendarProps) {
   const [language, setLanguage] = useState<string>(getFromLocalStorage('language'));
 
   useEffect(() => {
@@ -78,14 +74,13 @@ export default React.memo(function Calendar({ data, weekends, handleDateSelect, 
         eventTimeFormat={{ hour: '2-digit', minute: '2-digit', meridiem: false }}
         allDaySlot={false}
         defaultAllDay={false}
-        editable={true}
+        editable={false}
         dayMaxEvents={true}
         snapDuration='00:15:00'
         events={data}
         weekends={weekends}
         select={handleDateSelect}
         eventClick={handleEventSelect}
-        eventChange={handleEventChange}
       />
     </Box>
   );

@@ -4,13 +4,12 @@ import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { DateInput } from '@fullcalendar/react';
 import { Ico, popperSx } from "./styles/style";
 interface DateAndTimePickerProps {
-  date: DateInput | undefined;
+  date: string;
   label?: string;
   errorMsg?: string;
-  minDate?: Dayjs | undefined
+  minDate?: string;
   onChange: (event: Dayjs | null) => void;
 }
 
@@ -24,10 +23,11 @@ const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '',
         inputFormat="DD/MM/YYYY hh:mm A"
         value={date}
         label={label}
+    
         onChange={onChange}
-        minDateTime={minDate && dayjs(minDate)}
+        minDateTime={minDate ? dayjs(minDate) : undefined}
         minutesStep={15}
-        PopperProps={{ sx: popperSx }}
+        PopperProps={{ sx: popperSx, placement: "top-start", }}
         renderInput={(params) => (
           <TextField
             {...params}

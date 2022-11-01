@@ -1,61 +1,73 @@
 import { Box } from "@mui/material";
 import React, { useCallback, useState } from "react";
-import classNames from "classnames/bind";
-import styles from "./calendarPage.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/react';
+import { DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/react';
 import Modal from 'components/modal';
-import { editBooking, resetState, setSelectedDate } from 'redux/booking/booking.actions';
 import { INITIAL_EVENTS } from 'configs/initial-events';
 import { getFromLocalStorage } from 'services/local-storage.service';
 import Calendar from 'components/calendar';
 import BookingForm from 'components/booking-form';
-
-const cn = classNames.bind(styles);
+import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { bookingActions } from "redux&saga/slices/booking.slice";
+import dayjs from "dayjs";
+import { Errors } from "constants/errors";
 
 const CalendarPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [events, setEvents] = useState<EventInput[]>(INITIAL_EVENTS);
-  const data = useSelector(({ Booking }: EventInput) => Booking);
   const weekends = getFromLocalStorage('weekends')
+  const dispatch = useAppDispatch();
 
-  const dispatch = useDispatch();
-
+  const bookingData = useAppSelector(state => state.booking);
+  const { extendedProps } = bookingData
   const handleCloseModal = () => {
     setOpenModal(false);
-    dispatch(resetState());
+    dispatch(bookingActions.resetState());
   };
 
   const memoizedDateSelect = useCallback(
     (selectInfo: DateSelectArg) => {
       selectInfo.view.calendar.unselect();
-      dispatch(setSelectedDate(selectInfo));
       setOpenModal(true);
+      const startDate = dayjs(selectInfo.start).format('YYYY-MM-DDTHH:mm')
+      const endDate = dayjs(selectInfo.end).format('YYYY-MM-DDTHH:mm')
+      dispatch(bookingActions.setSelectedDate({ start: startDate, end: endDate }));
     },
     [dispatch]
   );
-
   const memoizedEventSelect = useCallback(
     (eventInfo: EventClickArg) => {
-      dispatch(editBooking(eventInfo.event));
+      const event = eventInfo.event
+      const bookingEdit = {
+        title: event.title,
+        start: event.startStr,
+        end: event.endStr,
+        description: event.extendedProps.description,
+        daysOfWeek: event.extendedProps.daysOfWeek,
+        roomId: event.extendedProps.roomId,
+        floor: event.extendedProps.floor,
+      }
+      dispatch(bookingActions.editBooking(bookingEdit));
       setOpenModal(true);
     },
     [dispatch]
   );
-
-  const memoizedEventChange = useCallback((arg: EventChangeArg) => {
-    ////// To Do axios when you drag event past id, start , end////////
-  }, []);
 
   const handleRemoveEvent = () => {
     /// To Do axios Remove Event by ID /////////////////////
     handleCloseModal();
   };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!extendedProps.roomId) {
+      if (!extendedProps.floor) {
+        dispatch(bookingActions.setBookingError({ floor: Errors.floor }))
+      }
+      dispatch(bookingActions.setBookingError({ roomId: Errors.roomId }))
+      return
+    }
+
     //const existEvent = events.some(event => event.id === data.id)
-    setEvents(prev => [...prev, data])
+    setEvents(prev => [...prev, bookingData])
     // if (!existEvent) {
     //   //setEvents(prev => [...prev, data])
     //   ////To Do axios add//////////////////
@@ -71,17 +83,16 @@ const CalendarPage = () => {
         weekends={weekends}
         handleDateSelect={memoizedDateSelect}
         handleEventSelect={memoizedEventSelect}
-        handleEventChange={memoizedEventChange}
       />
       {openModal &&
         <Modal closeModal={handleCloseModal}>
           <BookingForm
             handleSubmit={handleSubmit}
             handleRemoveEvent={handleRemoveEvent}
-            edit={Boolean(data.id)}
+            edit={Boolean(bookingData.extendedProps.bookingId)}
           />
         </Modal>
-      )}
+      }
     </Box>
   );
 };

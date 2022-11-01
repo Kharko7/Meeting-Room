@@ -3,10 +3,11 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import authReducer from "./slices/auth.slice";
 import rootSaga from "./saga/root-saga";
-
+import bookingReducer from './slices/booking.slice';
 
 const rootReducer = combineReducers({
     auth: authReducer,
+    booking: bookingReducer,
 })
 
 const sagaMiddleware = createSagaMiddleware()
