@@ -21,10 +21,6 @@
 
   background-color: var(--primary-color);
 }
-.mainContainer {
-  //width: calc(100vw - 340px);
-  // margin-top: 55px;
-}
 .roomsContainer {
   display: flex;
   min-height: 50px;
@@ -98,6 +94,12 @@
   justify-content: flex-start;
   gap: 40px;
   margin-bottom: 50px;
+}
+.card {
+  position: relative;
+  &[data-info="true"] {
+    z-index: 33;
+  }
 }
 .roomCardContainer {
   position: relative;
@@ -180,26 +182,7 @@
   border-radius: 100%;
   background-color: #ff6e6e;
 }
-.modalName {
-  margin-bottom: 30px;
 
-  color: var(--accent-text-color);
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 20px;
-
-  cursor: default;
-}
-.modalContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.modalInput {
-  display: inline-block;
-  margin-bottom: 30px;
-}
 .navButton {
   // position: fixed;
   // top: 50%;
@@ -231,28 +214,6 @@
   /* background-color: red; */
   gap: 10px;
 }
-.chooseDuration {
-  height: 55px;
-  width: 232px;
-  margin-bottom: 60px;
-  padding: 15px;
-
-  color: var(--primary-text-color);
-  font-size: 16px;
-
-  border: none;
-  border-radius: 40px;
-  background-color: #f4f6fa;
-  box-shadow: var(--inset-input-shadow);
-  &:active,
-  &:focus {
-    outline: none;
-    border: none;
-  }
-  &::placeholder {
-    color: rgb(189, 189, 189);
-  }
-}
 
 //Nav buttons
 
@@ -274,8 +235,17 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+  width: 20px;
+  height: 20px;
 }
-
+.svg {
+  width: 20px;
+  height: 20px;
+  fill: #bcbcbc;
+  &:hover {
+    fill: var(--accent-color);
+  }
+}
 .infoBox {
   position: absolute;
   appearance: none;
@@ -300,13 +270,44 @@
 }
 
 .infoBox[data-info="true"] {
-  // z-index: -1;
+  z-index: 33;
   transition: height 0.2s linear;
   height: 200px;
 }
 .text {
-  display: block;
+  display: flex;
   width: 100%;
   height: 100%;
   padding: 10px;
+  flex-direction: column;
+  color: var(--primary-text-color);
+}
+
+.btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  display: flex;
+  width: 100px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+
+  color: var(--accent-color);
+  font-size: 15px;
+  text-transform: uppercase;
+
+  background-color: var(--primary-color);
+  border-radius: 30px;
+  box-shadow: var(--outset-box-shadow);
+
+  cursor: pointer;
+  &:hover {
+    background-color: var(--primary-hover-color);
+  }
+  &:active {
+    box-shadow: var(--inset-box-shadow);
+  }
 }

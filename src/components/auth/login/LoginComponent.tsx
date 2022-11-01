@@ -5,7 +5,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import classNames from 'classnames/bind';
 import styles from './LoginComponent.module.scss'
 import {ErrorComponent, InputRe} from "../../index";
-import Button from "components/button";
+import Button from "../../button";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
 import {ResponsePopup} from "../../tools/simple/response-popup/ResponsePopup";

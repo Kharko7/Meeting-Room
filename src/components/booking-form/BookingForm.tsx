@@ -5,12 +5,18 @@ import styles from './bookingForm.module.scss'
 import TextField from '@mui/material/TextField';
 import { Dayjs } from 'dayjs';
 import { EventInput } from '@fullcalendar/react';
-import DateAndTimePicker from 'components/date-time-picker/DateAndTimePicker';
+import DateAndTimePicker from '../../components/date-time-picker/DateAndTimePicker';
 import ColorSelector from '../color-selector/ColorSelector';
 import { useDispatch, useSelector } from "react-redux";
-import { setBackgroundColor, setEnd, setStart, setTitle, setBookingError } from 'redux/booking/booking.actions';
-import Button from 'components/button';
-import ConfirmDialog from 'components/confirm-dialog/ConfirmDialog';
+import {
+  setBackgroundColor,
+  setEnd,
+  setStart,
+  setTitle,
+  setBookingError,
+} from "../../redux/booking/booking.actions";
+import Button from "../../components/button";
+import ConfirmDialog from "../../components/confirm-dialog/ConfirmDialog";
 
 const cn = classNames.bind(styles);
 interface BookingFormProps {

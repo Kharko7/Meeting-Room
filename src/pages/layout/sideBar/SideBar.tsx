@@ -2,9 +2,13 @@ import styles from "./SideBar.module.scss";
 import MockedData from "./components/MockedData";
 import MyRooms from "./components/MyRooms";
 import ActionButton from "../../../components/icon-button/IconButton";
-import NavButtons from "pages/layout/sideBar/NavButtons";
+import NavButtons from "../../../pages/layout/sideBar/NavButtons";
+
+import { useState } from "react";
+
 type SideBarProps = { userName: string };
 const SideBar = ({ userName }: SideBarProps) => {
+
   return (
     <div className={styles.position}>
       <div className={styles.sideBar}>
@@ -13,11 +17,12 @@ const SideBar = ({ userName }: SideBarProps) => {
           <span className={styles.label}>{userName}</span>
           <ActionButton
             type="settings"
-            size="medium"
+            size="large"
             onclick={() => {}}
           ></ActionButton>
         </div>
         <MyRooms mockedData={MockedData}></MyRooms>
+
       </div>
       <NavButtons />
     </div>

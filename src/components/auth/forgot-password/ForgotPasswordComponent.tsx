@@ -4,7 +4,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 
 import classNames from 'classnames/bind';
 import styles from './ForgotPassword.module.scss'
-import Button from "components/button";
+import Button from "../../button";
 import {InputRe} from "../../index";
 import {EmailSchema, RegisterSchema} from "../../../utils/yup.validation";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";

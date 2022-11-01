@@ -1,9 +1,9 @@
 import {Route, Routes} from 'react-router-dom';
-import CalendarPage from 'pages/calendar-page/CalendarPage';
-import Rooms from 'pages/rooms';
-import {ChangePasswordPage, ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage} from 'pages';
-import NotFound from 'pages/not-found/NotFound';
-import AppMain from 'containers/app-main/AppMain';
+import CalendarPage from '../pages/calendar-page/CalendarPage';
+import Rooms from '../pages/rooms';
+import {ChangePasswordPage, ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage} from '../pages';
+import NotFound from '../pages/not-found/NotFound';
+import AppMain from '../containers/app-main/AppMain';
 
 const AppRouter = () => {
 

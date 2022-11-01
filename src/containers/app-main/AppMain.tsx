@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import SideBar from 'pages/layout/sideBar';
+import SideBar from '../../pages/layout/sideBar/SideBar';
 import { Outlet } from 'react-router-dom';
 
 const AppMain: React.FunctionComponent = () => {

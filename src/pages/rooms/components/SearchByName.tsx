@@ -4,7 +4,11 @@ const SearchByName = () => {
   return (
     <div className={styles.input}>
       <div className={styles.ico}></div>
-      <input placeholder="roomName" type="text" className={styles.inputComponent} />
+      <input
+        placeholder="roomName"
+        type="text"
+        className={styles.inputComponent}
+      />
     </div>
   );
 };

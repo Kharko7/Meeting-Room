@@ -1,35 +1,56 @@
-
- import Modal from "components/modal/Modal";
- import styles from "../rooms.module.scss";
- import TimePickerComponent from "components/timePicker/Timepicker";
-import DatePicker from "components/datePicker";
-import Button from "components/button/Button";
-//@ts-ignore
- const ModalRooms = ({closeModal,data}) =>{
-return(
-        <Modal closeModal={closeModal}>
-          <form className={styles.modalContainer}>
-            <h1 className={styles.modalName}>{data.name}</h1>
-            <div className={styles.modalInput}>
-              <DatePicker
-                date={undefined}
-                label={""}
-                errorMsg={""}
-                
-                onChange={() => {}}
-              />
-            </div>
-            <div className={styles.modalInput}>
-              <TimePickerComponent />
-            </div>
-            <input
-              placeholder="Choose duration"
-              className={styles.chooseDuration}
-            />
-            <Button size="large" onclick={() => {}}>
-              to book
-            </Button>
-          </form>
-        </Modal>)
+import Modal from "../../../components/modal/Modal";
+import styles from "./modal.module.scss";
+import TimePickerComponent from "../../../components/timePicker/Timepicker";
+import DatePicker from "../../../components/datePicker";
+import Button from "../../../components/button/Button";
+import Selector from "../selector/Selector";
+import { style } from "@mui/system";
+interface modalRooms {
+  floor?:string;
+  name?:string;
+  closeModal: (value: boolean) => void;
 }
+
+//@ts-ignore
+const ModalRooms = ({ closeModal, floor="1", name }: modalRooms) => {
+
+  
+  return (
+    <Modal closeModal={closeModal}>
+      <form className={styles.modalContainer}>
+        <p className={styles.modalName}>Booking form</p>
+        <div className={styles.modalInput}>
+          <p className={styles.modalLabel}>Select room</p>
+          <Selector floor={floor} name={name}></Selector>
+        </div>
+
+        <div className={styles.modalInput}>
+          <p className={styles.modalLabel}>Select date </p>
+          <DatePicker
+            date={undefined}
+            label={""}
+            errorMsg={""}
+            onChange={() => {}}
+          />
+        </div>
+        <div className={styles.modalTime}>
+          <div>
+            <p className={styles.modalLabel}>Select start time</p>
+            <TimePickerComponent />
+          </div>
+          <div>
+            <p className={styles.modalLabel}>Select end time</p>
+            <TimePickerComponent />
+          </div>
+        </div>
+        <div className={styles.modalButton}>
+          {" "}
+          <Button size="large" onclick={() => {}}>
+            to book
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  );
+};
 export default ModalRooms;

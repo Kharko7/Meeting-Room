@@ -1,5 +1,5 @@
 import {call, put, take, takeLatest,fork} from 'redux-saga/effects';
-import {authActions} from 'redux&saga/slices/auth.slice';
+import {authActions} from '../slices/auth.slice';
 import {UserService} from "../../services/user.service/user.service";
 import {ResponsePopup} from "../../components/tools/simple/response-popup/ResponsePopup";
 import {ServerResponse} from "http";

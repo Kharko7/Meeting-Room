@@ -3,7 +3,6 @@ import MockedData from "./components/MockedData";
 import Header from "./header/Header";
 import Floor from "./main/Floor";
 
-
 const Rooms = () => {
   const floorCount = 4;
   const arr = Array.from({ length: floorCount }, (_, i) => i + 1);
