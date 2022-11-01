@@ -1,33 +1,31 @@
-import FullCalendar, { DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/react'
+import FullCalendar, { DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
-import classNames from 'classnames/bind';
-import styles from './calendar.module.scss'
+import './calendar.module.scss'
 import ukLocale from '@fullcalendar/core/locales/uk';
 import enLocale from '@fullcalendar/core/locales/en-gb';
 import React, { useEffect, useState } from 'react'
 import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
+import { getFromLocalStorage, setToLocalStorage } from 'services/local-storage.service';
 
-const cn = classNames.bind(styles);
 interface CalendarProps {
   data: EventInput[];
+  weekends: boolean;
   handleDateSelect: (selectInfo: DateSelectArg) => void;
   handleEventSelect: (eventInfo: EventClickArg) => void;
-  handleEventChange: (arg: EventChangeArg) => void;
 }
-
-export default React.memo(function Calendar({ data, handleDateSelect, handleEventSelect, handleEventChange }: CalendarProps) {
-  const [language, setLanguage] = useState<string | null>(localStorage.getItem('language'));
+export default React.memo(function Calendar({ data, weekends, handleDateSelect, handleEventSelect }: CalendarProps) {
+  const [language, setLanguage] = useState<string>(getFromLocalStorage('language'));
 
   useEffect(() => {
     setActiveClass(language);
   }, [language]);
 
   return (
-    <Box sx={{ height: '100%' }} id='calendar'>
+    <Box sx={{ p: '10px 14px 14px 7px', flexGrow: '1' }} id='calendar'>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         customButtons={{
@@ -40,7 +38,7 @@ export default React.memo(function Calendar({ data, handleDateSelect, handleEven
               el.classList.add('active');
               siblingEl.classList.remove("active");
               setLanguage('en');
-              localStorage.setItem('language', 'en');
+              setToLocalStorage('language', 'en');
             }
           },
           buttonUa: {
@@ -52,7 +50,7 @@ export default React.memo(function Calendar({ data, handleDateSelect, handleEven
               el.classList.add('active');
               siblingEl.classList.remove("active");
               setLanguage('ua');
-              localStorage.setItem('language', 'ua');
+              setToLocalStorage('language', 'ua');
             }
           }
         }}
@@ -70,18 +68,19 @@ export default React.memo(function Calendar({ data, handleDateSelect, handleEven
         selectable={true}
         navLinks={true}
         eventDisplay='list-item'
-        eventBorderColor='Silver'
-        eventBackgroundColor='Silver'
+        eventBorderColor='var(--accent-color)'
+        eventBackgroundColor='var(--accent-color)'
         eventOverlap={false}
         eventTimeFormat={{ hour: '2-digit', minute: '2-digit', meridiem: false }}
         allDaySlot={false}
         defaultAllDay={false}
-        editable={true}
+        editable={false}
         dayMaxEvents={true}
+        snapDuration='00:15:00'
         events={data}
+        weekends={weekends}
         select={handleDateSelect}
         eventClick={handleEventSelect}
-        eventChange={handleEventChange}
       />
     </Box>
   );

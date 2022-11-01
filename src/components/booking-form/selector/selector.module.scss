@@ -1,0 +1,11 @@
+:global(div.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper) {
+  border-radius: 30px;
+  background-color: var(--primary-color);
+  & ul {
+    padding: 0;
+    & li {
+      justify-content: center;
+      color: #737373;
+    }
+  }
+}
