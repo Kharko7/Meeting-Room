@@ -13,9 +13,17 @@
 :global(.MuiClock-squareMask) {
   box-shadow: var(--inset-input-shadow);
 }
-:global(.MuiInputBase-input) {
-  color: var(--primary-text-color) !important;
+:global(div.MuiInputBase-multiline),
+:global(input.MuiInputBase-input) {
+  padding-left: 23px;
 }
+:global(label.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root) {
+  left: 10px
+}
+:global(p.MuiFormHelperText-contained) {
+  margin-left: 24px;
+}
+
 :global(.MuiIconButton-root) {
   width: 35px;
   height: 35px;
