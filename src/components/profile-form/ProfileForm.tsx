@@ -58,7 +58,7 @@ const ProfileForm = () => {
   const inputUserName = userName.map((name: FormName) => (
     <TextField
       key={name}
-      sx={{ mr: '10px', width: '280px' }}
+      sx={{ mr: '10px', width: '290px' }}
       defaultValue={user[name] || ''}
       label={name === 'firsName' ? 'First name' : 'Last name'}
       error={Boolean(errors[name])}

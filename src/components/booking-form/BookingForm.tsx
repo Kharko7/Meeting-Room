@@ -101,7 +101,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
       >
         <Grid container maxWidth={1000} spacing={3} >
           <Grid item xs={6}>
-            <Box sx={{ mb: '20px', height: '75px', minWidth: '280px' }}>
+            <Box sx={{ mb: '25px', height: '75px', minWidth: '280px' }}>
               <TextField
                 error={Boolean(extendedProps.errors.title)}
                 autoFocus
