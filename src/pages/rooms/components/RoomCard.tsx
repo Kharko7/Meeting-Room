@@ -3,9 +3,9 @@ import styles from "../rooms.module.scss";
 import cn from "classnames";
 import ModalRooms from "./ModalRooms";
 
+
 interface MyroomsData {
   data: data;
-  key: number;
 }
 interface data {
   name: string;
@@ -18,29 +18,15 @@ interface data {
 }
 const RoomCard = ({
   data,
-}: // key
+}: 
 MyroomsData) => {
   const [open, setOpen] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
 
-  const ToggleInfo = () => {
-    if (!openInfo) {
-      let scroll = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scroll}px`;
-      console.log(scroll);
-    } else {
-      document.body.style.position = "static";
-      const top = document.body.style.top;
-      document.body.style.top = "";
-      //@ts-ignore
-      window.scrollTo(0, parseInt(top || 0) * -1);
-    }
-  };
-
   return (
     <div className={styles.card} data-info={openInfo}>
       <div
+        data-testid="room-card"
         className={
           openInfo
             ? cn(styles.roomCardContainer, styles.infoChoose)
@@ -57,18 +43,23 @@ MyroomsData) => {
         </div>
         <div className={styles.roomInfo}>
           {data.equipment.projector && (
-            <div className={styles.projectorIco}></div>
+            <div
+              data-testid="icoProjector"
+              className={styles.projectorIco}
+            ></div>
           )}
-          {data.equipment.TV && <div className={styles.tvIco}></div>}
+          {data.equipment.TV && (
+            <div data-testid="icoTV" className={styles.tvIco}></div>
+          )}
           <span className={styles.capacityLabel}>
             {data.capacity}
             <div className={styles.membersIco}></div>
           </span>
           <span
+            data-testid="info-button"
             className={styles.info}
             onClick={(event) => {
               setOpenInfo((prev) => !prev);
-              ToggleInfo();
               event.stopPropagation();
             }}
           >
@@ -84,7 +75,9 @@ MyroomsData) => {
           </span>
         </div>
       </div>
+
       <span
+        data-testid="info-box"
         data-info={openInfo}
         className={styles.infoBox}
         onMouseEnter={(event) => {
@@ -94,12 +87,19 @@ MyroomsData) => {
         <span className={styles.text}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eligendi
           dolorum neque
-          <div className={styles.btn} onClick={() =>{ setOpen(true);setOpenInfo(false)}}>
+          <div
+            className={styles.btn}
+            onClick={() => {
+              setOpen(true);
+              setOpenInfo(false);
+            }}
+          >
             To book
           </div>
         </span>
       </span>
-      {open && <ModalRooms floor={data.floor.toString()} name={data.name.toString()} closeModal={setOpen}></ModalRooms>}
+
+      {open && <ModalRooms setOpenModal={setOpen}></ModalRooms>}
       <div className={cn(openInfo && styles.blur)}></div>
     </div>
   );

@@ -1,7 +1,6 @@
-import { useState } from "react";
 import styles from "../SideBar.module.scss";
 import MyRoomCard from "./MyRoomCard";
-import Pagination from "./Pagination";
+import InfiniteScroll from "react-infinite-scroll-component";
 interface MyroomsData {
   name: string;
   equipment: {
@@ -17,24 +16,21 @@ interface Data {
   mockedData: Array<MyroomsData>;
 }
 const MyRooms = ({ mockedData }: Data) => {
-  const [activePage, setActivePage] = useState(1);
-
-  const sliceData = mockedData.slice(
-    (activePage - 1) * 4,
-    4 + (activePage - 1) * 4
-  );
-  console.log(sliceData);
 
   return (
     <div className={styles.myRoomsContainer}>
       <p className={styles.labelMyRooms}>my bookings</p>
-      <div className={styles.roomsCardsContainer}>
-        <MyRoomCard mockedData={sliceData}></MyRoomCard>
-      </div>
-      <Pagination
-        activePage={activePage}
-        setActivePage={setActivePage}
-      ></Pagination>
+      {/* @ts-ignore  */}
+      <InfiniteScroll
+        height="50vh"
+        dataLength={mockedData.length}
+        next={()=>{}}
+        hasMore={true}
+      >
+        <div className={styles.roomsCardsContainer}>
+          <MyRoomCard mockedData={mockedData}></MyRoomCard>
+        </div>
+      </InfiniteScroll>
     </div>
   );
 };

@@ -29,9 +29,14 @@ const Button = ({
       className={MainBtnCn}
       disabled={disabled}
       type={type}
-      onClick={() => onclick()}
+      onClick={() => (!disabled ? onclick() : null)}
     >
-      <span className={cn(styles.label, styles[styleType])}>{children}</span>
+      <span
+        data-testid="span-1"
+        className={cn(styles.label, styles[styleType])}
+      >
+        {children}
+      </span>
     </button>
   );
 };

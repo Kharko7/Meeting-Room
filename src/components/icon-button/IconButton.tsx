@@ -20,7 +20,7 @@ const IconButton = ({
     mg ? styles.margin : styles.none
   );
 
-  return <button className={MainCn} onClick={() => onclick()}></button>;
+  return <button data-testid="iconButton" className={MainCn} onClick={() => onclick()}></button>;
 };
 
 export default IconButton;

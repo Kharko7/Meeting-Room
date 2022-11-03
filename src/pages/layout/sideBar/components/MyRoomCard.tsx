@@ -2,9 +2,21 @@ import { useState } from "react";
 import ActionButton from "../../../../components/icon-button/IconButton";
 import styles from "../SideBar.module.scss";
 import stylesModal from "./modal.module.scss";
-import ModalRooms from "../../../rooms/components/ModalRooms";
 import Modal from "../../../../components/modal/Modal";
 import Button from "../../../../components/button";
+import BookingForm from "components/booking-form";
+
+import { Box } from "@mui/material";
+import React from "react";
+import { EventInput } from "@fullcalendar/react";
+
+import { INITIAL_EVENTS } from "configs/initial-events";
+import { getFromLocalStorage } from "services/local-storage.service";
+
+import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { bookingActions } from "redux&saga/slices/booking.slice";
+
+import { Errors } from "constants/errors";
 interface Data {
   mockedData: Array<MyroomsData>;
 }
@@ -20,8 +32,31 @@ interface MyroomsData {
   startTime: string;
 }
 const MyRoomCard = ({ mockedData }: Data) => {
-  const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const weekends = getFromLocalStorage("weekends");
+  const dispatch = useAppDispatch();
+  const bookingData = useAppSelector((state) => state.booking);
+  const { extendedProps } = bookingData;
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    dispatch(bookingActions.resetState());
+  };
+
+  const handleRemoveEvent = () => {
+    /// To Do axios Remove Event by ID /////////////////////
+    handleCloseModal();
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!extendedProps.roomId) {
+      if (!extendedProps.floor) {
+        dispatch(bookingActions.setBookingError({ floor: Errors.floor }));
+      }
+      dispatch(bookingActions.setBookingError({ roomId: Errors.roomId }));
+      return;
+    }
+  };
   return (
     <>
       {mockedData.map((_, index) => (
@@ -35,7 +70,7 @@ const MyRoomCard = ({ mockedData }: Data) => {
               <ActionButton
                 size="small"
                 type="edit"
-                onclick={() => setOpenEdit(true)}
+                onclick={() => setOpenModal(true)}
               />
               <ActionButton
                 mg={true}
@@ -47,9 +82,11 @@ const MyRoomCard = ({ mockedData }: Data) => {
           </div>
 
           <div className={styles.labelTime}>
-            {mockedData[index].date}{"  "}{mockedData[index].startTime}
+            {mockedData[index].date}
+            {"  "}
+            {mockedData[index].startTime}
             {" - "}
-             {mockedData[index].endTime}
+            {mockedData[index].endTime}
           </div>
 
           <div className={styles.roomInfo}>
@@ -71,7 +108,15 @@ const MyRoomCard = ({ mockedData }: Data) => {
         </div>
       ))}
 
-      {openEdit && <ModalRooms closeModal={setOpenEdit}></ModalRooms>}
+      {openModal && (
+        <Modal closeModal={handleCloseModal}>
+          <BookingForm
+            handleSubmit={handleSubmit}
+            handleRemoveEvent={handleRemoveEvent}
+            edit={Boolean(bookingData.extendedProps.bookingId)}
+          />
+        </Modal>
+      )}
       {openDelete && (
         <Modal closeModal={setOpenDelete}>
           <form>
@@ -93,4 +138,5 @@ const MyRoomCard = ({ mockedData }: Data) => {
     </>
   );
 };
+
 export default MyRoomCard;

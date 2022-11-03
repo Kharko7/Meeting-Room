@@ -1,56 +1,49 @@
-import Modal from "../../../components/modal/Modal";
-import styles from "./modal.module.scss";
-import TimePickerComponent from "../../../components/timePicker/Timepicker";
-import DatePicker from "../../../components/datePicker";
-import Button from "../../../components/button/Button";
-import Selector from "../selector/Selector";
-import { style } from "@mui/system";
-interface modalRooms {
-  floor?:string;
-  name?:string;
-  closeModal: (value: boolean) => void;
-}
 
+import Modal from "components/modal/Modal";
+
+import BookingForm from "components/booking-form";
+
+
+import React from "react";
+
+import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { bookingActions } from "redux&saga/slices/booking.slice";
+
+import { Errors } from "constants/errors";
 //@ts-ignore
-const ModalRooms = ({ closeModal, floor="1", name }: modalRooms) => {
+const ModalRooms = ({ setOpenModal }) => {
 
-  
+  const dispatch = useAppDispatch();
+  const bookingData = useAppSelector((state) => state.booking);
+  const { extendedProps } = bookingData;
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    dispatch(bookingActions.resetState());
+  };
+
+  const handleRemoveEvent = () => {
+    /// To Do axios Remove Event by ID /////////////////////
+    handleCloseModal();
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!extendedProps.roomId) {
+      if (!extendedProps.floor) {
+        dispatch(bookingActions.setBookingError({ floor: Errors.floor }));
+      }
+      dispatch(bookingActions.setBookingError({ roomId: Errors.roomId }));
+      return;
+    }
+  };
   return (
-    <Modal closeModal={closeModal}>
-      <form className={styles.modalContainer}>
-        <p className={styles.modalName}>Booking form</p>
-        <div className={styles.modalInput}>
-          <p className={styles.modalLabel}>Select room</p>
-          <Selector floor={floor} name={name}></Selector>
-        </div>
-
-        <div className={styles.modalInput}>
-          <p className={styles.modalLabel}>Select date </p>
-          <DatePicker
-            date={undefined}
-            label={""}
-            errorMsg={""}
-            onChange={() => {}}
-          />
-        </div>
-        <div className={styles.modalTime}>
-          <div>
-            <p className={styles.modalLabel}>Select start time</p>
-            <TimePickerComponent />
-          </div>
-          <div>
-            <p className={styles.modalLabel}>Select end time</p>
-            <TimePickerComponent />
-          </div>
-        </div>
-        <div className={styles.modalButton}>
-          {" "}
-          <Button size="large" onclick={() => {}}>
-            to book
-          </Button>
-        </div>
-      </form>
+    <Modal data-testid="modal-1" closeModal={handleCloseModal}>
+      <BookingForm
+        handleSubmit={handleSubmit}
+        handleRemoveEvent={handleRemoveEvent}
+        edit={Boolean(bookingData.extendedProps.bookingId)}
+      />
     </Modal>
   );
 };
+
 export default ModalRooms;

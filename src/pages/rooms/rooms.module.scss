@@ -253,14 +253,14 @@
   overflow: hidden;
   width: 200px;
   height: 0px;
-
+  opacity: 0;
   z-index: 5;
   background: linear-gradient(
                   to bottom,
                   transparent 2%,
                   var(--primary-color) 7%
   );
-  transition: height 0.2s linear;
+  transition: all 0.2s linear;
   transition-delay: 200ms;
   box-shadow: var(--info-box-shadow);
   border-radius: 0px 0px 15px 15px;
@@ -270,6 +270,7 @@
   z-index: 33;
   transition: height 0.2s linear;
   height: 200px;
+  opacity: 1;
 }
 .text {
   display: flex;
