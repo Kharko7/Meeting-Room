@@ -23,8 +23,6 @@ const LoginComponent = () => {
 
     const {reset, register, handleSubmit, formState: {isDirty}} = useForm({mode: 'all'});
 
-    const navigate = useNavigate();
-
     const dispatch = useAppDispatch();
 
     const {errorCode,user,success} = useAppSelector(state => state.auth);
