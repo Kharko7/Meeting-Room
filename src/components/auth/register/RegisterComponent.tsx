@@ -3,7 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink, useNavigate} from "react-router-dom";
 
 
-import Button from "../../button";
+import Button from "components/button";
 import {ErrorComponent, InputRe, SwitchToLoginComponent} from "../../index";
 
 import classNames from 'classnames/bind';
@@ -36,14 +36,11 @@ const RegisterComponent = () => {
 
 
     useEffect(() => {
-        pending && ResponsePopup.Pending().then();
-        success && ResponsePopup.Success().then()
-        error && ResponsePopup.ErrorPopup(error).then()
         if (success) {
             authActions.success(false);
             navigate('/login')
         }
-    }, [pending, success, error])
+    }, [success])
 
     console.log(success)
 
@@ -62,19 +59,7 @@ const RegisterComponent = () => {
         <div className={cn("main_container")}>
             <form onSubmit={handleSubmit(submit)} className={cn("container")}>
                 <div className={cn("createAccount")}>Create Account</div>
-                {/*<NavRegisterComponent/>*/}
                 <span className={cn("registration")}>Registration</span>
-
-                {/*<div>*/}
-                {/*  <FileUploaderComponent*/}
-                {/*    size={"small"}*/}
-                {/*    name={"avatar"}*/}
-                {/*    required={false}*/}
-                {/*    register={register}*/}
-                {/*    icon={<FaceIcon />}*/}
-                {/*  />*/}
-                {/*</div>*/}
-
                 <InputRe
                     isValid={true}
                     error={errors.login}

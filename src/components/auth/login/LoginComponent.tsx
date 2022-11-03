@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 import classNames from 'classnames/bind';
 import styles from './LoginComponent.module.scss'
 import {ErrorComponent, InputRe} from "../../index";
-import Button from "../../button";
+import Button from "components/button";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
-import {ResponsePopup} from "../../tools/simple/response-popup/ResponsePopup";
 
 
 const cn = classNames.bind(styles)
@@ -18,21 +17,13 @@ const LoginComponent = () => {
 
     const {reset, register, handleSubmit, formState: {isDirty}} = useForm({mode: 'all'});
 
-    const navigate = useNavigate();
-
     const dispatch = useAppDispatch();
 
-    let {user, error, rejected, pending, success} = useAppSelector(state => state.auth);
-
-    // useEffect(() => {
-    //     pending && ResponsePopup.Pending().then();
-    //     success && ResponsePopup.Success().then()
-    //     error && ResponsePopup.ErrorPopup(error).then()
-    // }, [pending, success])
+    let {error} = useAppSelector(state => state.auth);
 
     const submit: SubmitHandler<any> = async (user) => {
         await dispatch(authActions.login(user));
-        reset();
+        await reset();
     }
 
     return (

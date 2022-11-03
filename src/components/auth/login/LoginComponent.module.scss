@@ -1,13 +1,13 @@
 
-$background:#f4f6fa;
-$firstShadow:rgba(255, 255, 255, 0.5);
-$secondShadow: rgba(0, 0, 0, 0.15);
-$thirdShadow: rgba(255,255,255,0.1);
-$mainColor:#555;
-$linkColor:#aaa;
-$errorColor:#d55d5d;
-$circleColor:coral;
-$circleColor2:#ffaa8b;
+$background:var(--base1);
+$firstShadow:var(--base2);
+$secondShadow: var(--base3);
+$thirdShadow: var(--base4);
+$mainColor:var(--mainColorFont);
+$linkColor:var(--link);
+$errorColor:var(--errorColor);
+$additionalColor: var(--additionalColor);
+$lighterSecondColor: var(--additionalLighterColor);
 
 *{
   box-sizing: border-box;
@@ -19,6 +19,7 @@ $circleColor2:#ffaa8b;
   //min-height: 80%;
   max-height: 85%;
   border-radius: 40px;
+  background: var(--base1);
   box-shadow:
    -2px -2px 12px $firstShadow,
     2px 2px 8px $secondShadow,
@@ -27,7 +28,7 @@ $circleColor2:#ffaa8b;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: 2s ease-in-out;
+  //transition: 2s ease-in-out;
 
   padding: 15px;
   box-sizing: border-box;
@@ -42,6 +43,7 @@ $circleColor2:#ffaa8b;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: $mainColor;
 }
 
 .logo_container {
@@ -56,21 +58,28 @@ $circleColor2:#ffaa8b;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
+
 }
 
 
 .title {
+  padding-top: 20px;
   text-align: center;
   font-size: 40px;
   letter-spacing: 0.5px;
   animation: color-animation 4s linear infinite;
   place-items: center;
+  color: var(--mainColorFont);
+  box-sizing: border-box;
 }
 .sub_title {
   text-align: center;
   font-size: 15px;
   padding-top: 7px;
   letter-spacing: 3px;
+  color: var(--mainColorFont);
+
 }
 
 .title,.sub_title{
@@ -83,9 +92,8 @@ $circleColor2:#ffaa8b;
   min-height: 60px;
   max-height: 60px;
   font-family: 'Montserrat', sans-serif;
-  transition: 0.5s;
   margin-top: 10px;
-  background: $background;
+  background: var(--base1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,7 +127,7 @@ $circleColor2:#ffaa8b;
   min-height: 200px;
   max-height: 200px;
   max-width: 200px;
-  background: #5bbde0;
+  background: $additionalColor;
   animation: corner 7s;
   border-radius: 50%;
   animation-iteration-count: infinite;
@@ -130,6 +138,7 @@ $circleColor2:#ffaa8b;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .logo img{

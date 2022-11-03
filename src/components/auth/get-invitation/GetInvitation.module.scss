@@ -1,24 +1,24 @@
-$background: #f4f6fa;
-$firstShadow: rgba(255, 255, 255, 0.5);
-$secondShadow: rgba(0, 0, 0, 0.15);
-$thirdShadow: rgba(255, 255, 255, 0.1);
-$mainColor: #555;
-$linkColor: #aaa;
-$errorColor: #d55d5d;
-$secondColor: #5bbde0;
-$lighterSecondColor: #b1dae7;
+$background:var(--base1);
+$firstShadow:var(--base2);
+$secondShadow: var(--base3);
+$thirdShadow: var(--base4);
+$mainColor:var(--mainColorFont);
+$linkColor:var(--link);
+$errorColor:var(--errorColor);
+$additionalColor: var(--additionalColor);
+$lighterSecondColor: var(--additionalLighterColor);
 
+$backgroundSwitch: var(--titleUpOnHover);
+$description:#a0a5a8;
+$registration:#505050;
 
-$backgroundSwitch: #EBEDF0;
-$description: #a0a5a8;
-$registration: #505050;
+$linear-gradient:#dadde0;
 
-$linear-gradient: #dadde0;
 
 .div4scroll {
   display: table-cell;
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-top: 100px;
 }
 
@@ -81,7 +81,7 @@ $linear-gradient: #dadde0;
   position: relative;
   top: -8px;
   left: 0;
-  transition: all 1s ease-in-out;
+  transition: all 1s ease;
 
 }
 
@@ -102,7 +102,6 @@ $linear-gradient: #dadde0;
 
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  transition: 0.2s;
   background: $background;
   display: flex;
   align-items: center;
@@ -126,7 +125,7 @@ $linear-gradient: #dadde0;
   position: relative;
   margin: auto;
   padding: 12px 18px;
-  transition: all 1s ease;
+  transition: all 1s ease-in-out;
   border: none;
   background: none;
 }
@@ -138,13 +137,13 @@ $linear-gradient: #dadde0;
   left: 0;
   display: block;
   border-radius: 50px;
-  background: $secondColor;
+  background: $additionalColor;
   box-shadow: -2px -2px 12px $firstShadow,
   2px 2px 8px $secondShadow,
   2px 2px 4px $thirdShadow;
   width: 65px;
   height: 65px;
-  transition: all 1s ease;
+  transition: all 1s ease-in-out;
 }
 
 .verify_container:hover .spanAnimation:before {
