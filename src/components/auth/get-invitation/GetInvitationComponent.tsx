@@ -4,7 +4,7 @@ import {Controller, SubmitHandler, useFieldArray, useForm} from "react-hook-form
 import classNames from 'classnames/bind';
 import styles from './GetInvitation.module.scss'
 import {InputRe} from "../../index";
-import Button from "../../button";
+import Button from "components/button";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {GetInvitationSchema} from "../../../utils/yup.validation";
 

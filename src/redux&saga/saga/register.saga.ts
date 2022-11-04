@@ -1,5 +1,5 @@
 import {call, fork, put, take} from 'redux-saga/effects';
-import {authActions} from '../slices/auth.slice';
+import {authActions} from 'redux&saga/slices/auth.slice';
 import {UserService} from "../../services/user.service/user.service";
 import {ResponsePopup} from "../../components/tools/simple/response-popup/ResponsePopup";
 import {LoginProps} from "../../interfaces/auth/AuthProps";
@@ -8,17 +8,13 @@ import {AxiosResponse} from "axios";
 
 function* handleRegister(action:any) {
     try {
-        // yield ResponsePopup.Pending()
-        yield put(authActions.pending(true))
+        yield ResponsePopup.Pending()
         const data:AxiosResponse = yield call(UserService.register,action.payload);
-        yield put(authActions.pending(false))
         console.log(data)
         yield put(authActions.success(true))
-        // yield ResponsePopup.Success()
+        yield ResponsePopup.Success()
     } catch (error: any) {
-        yield put(authActions.pending(false))
-        yield put(authActions.errorMsg(error.message))
-        // yield ResponsePopup.ErrorPopup(error)
+        yield ResponsePopup.ErrorPopup(error)
     }
 }
 

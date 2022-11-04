@@ -5,10 +5,12 @@ import classNames from 'classnames/bind';
 import styles from './ChangePassword.module.scss'
 import { useNavigate } from "react-router-dom";
 import { ErrorComponent, InputRe } from '../..';
-import Button from "../../button";
+import Button from "components/button";
 import {checkPasswordMatch} from "../../../utils/auth-foo";
 import {ChangePasswordSchema, RegisterSchema} from "../../../utils/yup.validation";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
+import IconInputComponent from "../../tools/simple/icon-input/IconInputComponent";
+import KeyIcon from '@mui/icons-material/Key';
 
 
 const cn = classNames.bind(styles)
@@ -43,7 +45,9 @@ const ChangePasswordComponent = () => {
     <div className={cn("changePassword_container")}>
       <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
         <div className={cn("title")}>Password Change</div>
-        <div className={cn("login")}>{login}</div>
+        <div className={cn("login")}>
+          <KeyIcon/>
+        </div>
         <InputRe
           isValid={true}
           error={errors.password}

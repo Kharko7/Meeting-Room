@@ -16,14 +16,14 @@ const cn = classNames.bind(styles)
 interface IInput {
     placeHolder: string,
     placeholderDisappear?: string,
-    type: "text" | "" | "password" | "login",
+    type: "text" | "" | "password" | "login"|string,
 
     isValid: boolean,
     name: string;
     required: boolean,
 
     error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined,
-    register: UseFormRegister<FieldValues> | any,
+    register?: UseFormRegister<FieldValues> | any,
 
     size?: "small" | "medium" | "large" | "extra-small"
 }
@@ -43,14 +43,19 @@ const InputRe = ({type, placeHolder, name, required, isValid, error, register, p
                 <span className={cn(`icon`)}>
                     <IconInputComponent iconPath={iconPath}/>
                 </span>
-                <input type={type}
-                       {...register(`${name}`, {
-                           required: required,
-                       })}
-                       autoComplete={"off"}
-                       placeholder={placeholderDisappear}
-                       required/>
-                <label>{placeHolder}</label>
+                 <input type={type}
+                                    {...register(`${name}`, {
+                                        required: required,
+                                    })}
+                                    autoComplete={"off"}
+                                    placeholder={placeholderDisappear}
+                                    required
+                                    id={`${name}-input`}
+                    />
+                    <label htmlFor={`${name}-input`}>{placeHolder}</label>
+
+
+                    <label htmlFor={`${name}-input`}>{placeHolder}</label>
                 {name && name.includes("password") &&
                     <span onClick={() => {
                         eyeState ? setEyeState(false) : setEyeState(true);
