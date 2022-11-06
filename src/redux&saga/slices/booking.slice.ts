@@ -7,7 +7,7 @@ interface ExtendedProps {
     floor: string | null;
     bookingId?: number;
     description: string,
-    invitedIds: string[],
+    invitedIds: number[],
     daysOfWeek: string[],
     errors: Record<string, string>,
 }
@@ -80,7 +80,19 @@ const bookingSlice = createSlice({
         },
     },
 });
-export const bookingActions = bookingSlice.actions;
+export const {
+    setRoomId,
+    editBooking,
+    resetState,
+    setBookingError,
+    setDaysOfWeek,
+    setDescription,
+    setEnd,
+    setFloor,
+    setSelectedDate,
+    setStart,
+    setTitle,
+} = bookingSlice.actions;
 
 const bookingReducer = bookingSlice.reducer;
 

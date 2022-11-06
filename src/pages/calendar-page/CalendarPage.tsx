@@ -7,7 +7,12 @@ import { getFromLocalStorage } from 'services/local-storage.service';
 import Calendar from 'components/calendar';
 import BookingForm from 'components/booking-form';
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
-import { bookingActions } from "redux&saga/slices/booking.slice";
+import {
+  editBooking,
+  resetState,
+  setBookingError,
+  setSelectedDate,
+} from "redux&saga/slices/booking.slice";
 import dayjs from "dayjs";
 import { Errors } from "constants/errors";
 
@@ -21,7 +26,7 @@ const CalendarPage = () => {
   const { extendedProps } = bookingData
   const handleCloseModal = () => {
     setOpenModal(false);
-    dispatch(bookingActions.resetState());
+    dispatch(resetState());
   };
 
   const memoizedDateSelect = useCallback(
@@ -30,7 +35,7 @@ const CalendarPage = () => {
       setOpenModal(true);
       const startDate = dayjs(selectInfo.start).format('YYYY-MM-DDTHH:mm')
       const endDate = dayjs(selectInfo.end).format('YYYY-MM-DDTHH:mm')
-      dispatch(bookingActions.setSelectedDate({ start: startDate, end: endDate }));
+      dispatch(setSelectedDate({ start: startDate, end: endDate }));
     },
     [dispatch]
   );
@@ -46,7 +51,7 @@ const CalendarPage = () => {
         roomId: event.extendedProps.roomId,
         floor: event.extendedProps.floor,
       }
-      dispatch(bookingActions.editBooking(bookingEdit));
+      dispatch(editBooking(bookingEdit));
       setOpenModal(true);
     },
     [dispatch]
@@ -60,9 +65,9 @@ const CalendarPage = () => {
     e.preventDefault()
     if (!extendedProps.roomId) {
       if (!extendedProps.floor) {
-        dispatch(bookingActions.setBookingError({ floor: Errors.floor }))
+        dispatch(setBookingError({ floor: Errors.floor }))
       }
-      dispatch(bookingActions.setBookingError({ roomId: Errors.roomId }))
+      dispatch(setBookingError({ roomId: Errors.roomId }))
       return
     }
 

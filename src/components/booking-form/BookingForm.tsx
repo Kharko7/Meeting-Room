@@ -5,9 +5,17 @@ import { Dayjs } from 'dayjs';
 import DateAndTimePicker from 'components/date-time-picker';
 import Button from 'components/button';
 import ConfirmDialog from 'components/confirm-dialog';
-import { Errors } from 'constants/errors';
 import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
-import { bookingActions } from 'redux&saga/slices/booking.slice';
+import {
+  setRoomId,
+  setBookingError,
+  setDaysOfWeek,
+  setDescription,
+  setEnd,
+  setFloor,
+  setStart,
+  setTitle,
+} from 'redux&saga/slices/booking.slice';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
 import InviteCoworkers from './invite-coworkers/InviteCoworkers';
@@ -17,6 +25,7 @@ import { rooms } from 'configs/rooms';
 import MenuItem from '@mui/material/MenuItem';
 import { daysOfWeek, floors } from 'constants/booking-form';
 import SelectorMultiple from './selector/SelectorMultiple';
+import { Errors } from 'constants/errors';
 
 interface BookingFormProps {
   edit: boolean
@@ -28,18 +37,17 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false)
   const dispatch = useAppDispatch();
 
-  const { title, extendedProps, start, end } = useAppSelector(state => state.booking);
+  const { title, extendedProps, start, end, } = useAppSelector(state => state.booking);
   const handleChangeStart = (event: Dayjs | null) => {
     if (event !== null) {
-      dispatch(bookingActions.setStart(event.format('YYYY-MM-DDTHH:mm')))
+      dispatch(setStart(event.format('YYYY-MM-DDTHH:mm')))
     }
   }
   const handleChangeEnd = (event: Dayjs | null) => {
     if (event !== null) {
-      dispatch(bookingActions.setEnd(event.format('YYYY-MM-DDTHH:mm')))
+      dispatch(setEnd(event.format('YYYY-MM-DDTHH:mm')))
     }
   }
-
   const onConfirm = () => {
     handleRemoveEvent()
     setOpenConfirmation(false)
@@ -49,27 +57,27 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
   }
 
   const handleBlur = () => {
-    if (title.trim().length > 20 || title.trim().length === 0) {
-      dispatch(bookingActions.setBookingError({ title: Errors.titleLength }))
-    } else dispatch(bookingActions.setBookingError({ title: '' }))
+    if (title?.trim().length > 20 || title?.trim().length === 0) {
+      dispatch(setBookingError({ title: Errors.titleLength }))
+    } else dispatch(setBookingError({ title: '' }))
   }
 
   const handleChangeRoom = (e: SelectChangeEvent<string>) => {
-    dispatch(bookingActions.setRoomId(Number(e.target.value)))
-    dispatch(bookingActions.setBookingError({ roomId: '' }))
+    dispatch(setRoomId(Number(e.target.value)))
+    dispatch(setBookingError({ roomId: '' }))
   }
   const handleChangeFloor = (e: SelectChangeEvent<string>) => {
-    dispatch(bookingActions.setFloor(e.target.value))
-    dispatch(bookingActions.setRoomId(null))
-    dispatch(bookingActions.setBookingError({ floor: '' }))
+    dispatch(setFloor(e.target.value))
+    dispatch(setRoomId(null))
+    dispatch(setBookingError({ floor: '' }))
   }
   const handleChangeWeek = (e: SelectChangeEvent<string[]>) => {
     const value = e.target.value
-    dispatch(bookingActions.setDaysOfWeek(typeof value === 'string' ? value.split(',') : value))
+    dispatch(setDaysOfWeek(typeof value === 'string' ? value.split(',') : value))
   }
 
   const roomsByFloor = rooms.filter((room) => {
-    return room.floor === Number(extendedProps.floor)
+    return room.floor === Number(extendedProps?.floor)
   })
   const menuItemsRoom = roomsByFloor.map(room => (
     <MenuItem
@@ -106,21 +114,23 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
                 error={Boolean(extendedProps.errors.title)}
                 autoFocus
                 label="Title"
+                data-testid='input-title'
                 fullWidth
                 value={title}
                 onBlur={handleBlur}
-                onChange={event => dispatch(bookingActions.setTitle(event.target.value))}
+                onChange={event => dispatch(setTitle(event.target.value))}
                 helperText={extendedProps.errors.title ? extendedProps.errors.title : ''}
               />
             </Box>
             <Box sx={{ mb: '40px' }}>
               <TextField
                 value={extendedProps.description}
-                onChange={event => dispatch(bookingActions.setDescription(event.target.value))}
+                onChange={event => dispatch(setDescription(event.target.value))}
                 label="Description"
                 fullWidth
                 multiline
                 maxRows={3}
+                data-testid='input-description'
               />
             </Box>
             <Box sx={{ mb: '20px', display: 'flex', gap: '15px', height: '80px' }}>
@@ -129,6 +139,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
                 value={extendedProps.floor || ''}
                 errorMsg={extendedProps.errors?.floor}
                 menuItems={menuItemsFloor}
+                dataTestId='selector-floor'
                 onChange={handleChangeFloor} />
               <Selector
                 label='Choose room'
@@ -136,6 +147,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
                 errorMsg={extendedProps.errors?.roomId}
                 disabled={!extendedProps.floor}
                 menuItems={menuItemsRoom}
+                dataTestId='selector-room'
                 onChange={handleChangeRoom} />
             </Box>
             <Box sx={{ mb: '40px', display: 'flex', gap: '15px' }}>
@@ -154,6 +166,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
             </Box>
             <SelectorMultiple
               value={extendedProps.daysOfWeek}
+              dataTestId='selector-multiple'
               label='Days of week'
               daysOfWeek={daysOfWeek}
               onChange={handleChangeWeek} />
@@ -163,9 +176,10 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
           </Grid>
           <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: '50px' }}>
-              {extendedProps.roomId &&
+              {edit &&
                 <Button
                   type='button'
+                  dataTestId='button-delete'
                   onclick={() => setOpenConfirmation(true)}
                 >
                   Delete
@@ -175,6 +189,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
                 disabled={Boolean(Object.values(extendedProps.errors).join(''))}
                 type='submit'
                 onclick={() => { }}
+                dataTestId='button-submit'
               >
                 Save
               </Button>

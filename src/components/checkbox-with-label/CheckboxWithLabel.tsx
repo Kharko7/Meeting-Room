@@ -16,7 +16,7 @@ const CheckboxWithLabel = ({ checked, label = '', onChange, ...rest }: CheckboxW
 
   return (
     <FormControlLabel
-      label={label ? label : null}
+      label={label}
       {...rest}
       control={<Checkbox
         className={cn((checked) ? ['checkbox', 'active'] : 'checkbox')}
