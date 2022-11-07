@@ -5,17 +5,10 @@ import stylesModal from "./modal.module.scss";
 import Modal from "../../../../components/modal/Modal";
 import Button from "../../../../components/button";
 import BookingForm from "components/booking-form";
-
-import { Box } from "@mui/material";
 import React from "react";
-import { EventInput } from "@fullcalendar/react";
-
-import { INITIAL_EVENTS } from "configs/initial-events";
 import { getFromLocalStorage } from "services/local-storage.service";
-
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
 import { bookingActions } from "redux&saga/slices/booking.slice";
-
 import { Errors } from "constants/errors";
 interface Data {
   mockedData: Array<MyroomsData>;

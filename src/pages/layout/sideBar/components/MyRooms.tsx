@@ -1,6 +1,7 @@
 import styles from "../SideBar.module.scss";
 import MyRoomCard from "./MyRoomCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import "components/timePicker/styles/styles.module.scss";
 interface MyroomsData {
   name: string;
   equipment: {
@@ -16,15 +17,14 @@ interface Data {
   mockedData: Array<MyroomsData>;
 }
 const MyRooms = ({ mockedData }: Data) => {
-
   return (
-    <div className={styles.myRoomsContainer}>
+    <div className={styles.myRoomsContainer} data-testid="my-rooms">
       <p className={styles.labelMyRooms}>my bookings</p>
       {/* @ts-ignore  */}
       <InfiniteScroll
         height="50vh"
         dataLength={mockedData.length}
-        next={()=>{}}
+        next={() => {}}
         hasMore={true}
       >
         <div className={styles.roomsCardsContainer}>

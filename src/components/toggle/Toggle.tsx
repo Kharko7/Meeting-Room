@@ -3,12 +3,12 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import classNames from 'classnames/bind';
 import styles from './toggle.module.scss'
 const cn = classNames.bind(styles)
-
+import { useState } from "react";
 
 
 interface toggle {
+  size?: "medium" | "small" | "large";
   onclick: () => void;
-  size?:string;
   type?:"themeToggle"|null
 }
 const Toggle = ({ onclick,size="medium",type=null}: toggle) => {

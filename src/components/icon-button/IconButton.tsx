@@ -10,7 +10,7 @@ interface btn {
 const IconButton = ({
   type = "edit",
   size = "medium",
-  onclick = ()=>{},
+  onclick = () => {},
   mg = false,
 }: btn) => {
   const MainCn = cn(
@@ -20,7 +20,13 @@ const IconButton = ({
     mg ? styles.margin : styles.none
   );
 
-  return <button data-testid="iconButton" className={MainCn} onClick={() => onclick()}></button>;
+  return (
+    <button
+      data-testid="iconButton"
+      className={MainCn}
+      onClick={() => onclick()}
+    ></button>
+  );
 };
 
 export default IconButton;

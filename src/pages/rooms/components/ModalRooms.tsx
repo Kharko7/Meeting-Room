@@ -1,6 +1,6 @@
 
 import Modal from "components/modal/Modal";
-
+import axios from "axios";
 import BookingForm from "components/booking-form";
 
 
