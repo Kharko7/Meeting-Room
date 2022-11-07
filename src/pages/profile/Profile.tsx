@@ -13,7 +13,7 @@ const Profile = () => {
   const from = location.state?.from?.pathname;
 
   return (
-    <Box sx={{ height: '100vh' }}>
+    <Box sx={{ height: '100%',paddingBottom:'40px' }}>
       <Box sx={{ display: 'flex', ml: '80px', pt: '40px' }}>
         <Box sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
           {from && <KeyboardBackspaceIcon fontSize='large' sx={{ color: 'var(--accent-text-color)' }} />}
@@ -26,9 +26,9 @@ const Profile = () => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', }}>
-        <ProfileForm />
-        <ChangePasswordComponent />
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center',  flexDirection:"column"}}>
+          <ProfileForm/>
+          <ChangePasswordComponent/>
       </Box>
     </Box>
   )

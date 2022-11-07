@@ -1,31 +1,31 @@
-$backgroundColor: #ECF0F3;
-$buttonBoxShadow: var(--outset-box-shadow);
+$backgroundColor: var(--calendar-bg);
 
-$buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -2px 12px rgba(255, 255, 255, 0.5),
-  inset 2px 2px 8px rgba(0, 0, 0, 0.15), inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+//$buttonBoxShadowActive: var(--buttonBoxShadowActive-box-shadow);
 :root {
   --fc-button-text-color: var(--accent-text-color);
-  --fc-button-bg-color: #f4f6fa;
-  --fc-button-hover-bg-color: #f4f6fa;
-  --fc-button-active-bg-color: #f4f6fa;
+  --fc-button-bg-color: var(--base1);
+  --fc-button-hover-bg-color: var(--base1);
+  --fc-button-active-bg-color: var(--base1);
 
-  --fc-event-bg-color: #3788d8;
-  --fc-event-text-color: rgb(0, 0, 0);
+  --fc-event-bg-color: var(--calendar-fc-event-bg-color);
+  --fc-event-text-color: var(--calendar-fc-event-text-color);
 
   --fc-event-resizer-thickness: 8px;
   --fc-event-resizer-dot-total-width: 8px;
   --fc-event-resizer-dot-border-width: 1px;
 
-  --fc-highlight-color: rgba(163, 163, 163, 0.28);
+  --fc-highlight-color: var(--calendar-fc-highlight-color);
   --fc-today-bg-color: transparent;
 
   --fc-daygrid-event-dot-width: 11px;
-  --fc-list-event-hover-bg-color: #09e4f837;
+  --fc-list-event-hover-bg-color: var(--calendar-fc-list-event-hover-bg-color);
+
 }
 
 /////////// HEADER 2 BUTTTONS PREVIOUS AND NEXT   //////////////////////////////
 :global(.fc) {
   font-family: var(--primary-font-family);
+  color: var(--label);
 }
 :global(.fc-prev-button.fc-button.fc-button-primary),
 :global(.fc-next-button.fc-button.fc-button-primary) {
@@ -33,7 +33,9 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
   border-radius: 10px;
   width: 40px;
   height: 35px;
-  box-shadow: $buttonBoxShadow;
+  color: var(--accent-color);
+  background: var(--base1);
+  box-shadow: var(--buttonBoxShadow-box-shadow);
 
   & span {
     position: relative;
@@ -45,7 +47,9 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
     width: 40px;
     height: 35px;
     color: var(--primary-text-color);
-    box-shadow: $buttonBoxShadowActive !important;
+    box-shadow: var(--buttonBoxShadowActive-box-shadow) !important;
+    background: var(--base1);
+
     & span {
       font-size: 1.75em;
     }
@@ -59,18 +63,25 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
   border: none;
   border-radius: 15px;
   padding: 6px 25px;
-  box-shadow: $buttonBoxShadow;
   font-size: 16px;
   font-weight: 500;
+  color: var(--accent-color);
+  background: var(--base1);
+  box-shadow: var(--buttonBoxShadow-box-shadow);
+
   @media (max-width: 1060px) {
     margin-left: 0 !important;
   }
   &:focus {
     color: var(--primary-text-color);
-    box-shadow: $buttonBoxShadowActive !important;
+    box-shadow: var(--buttonBoxShadowActive-box-shadow) !important;
+    background: var(--base4);
+
   }
   &:disabled {
     color: var(--primary-text-color);
+    //background: var(--base4);
+
   }
 }
 
@@ -84,11 +95,15 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
   border-radius: 15px;
   border: none;
   padding: 6px 25px;
-  box-shadow: $buttonBoxShadow !important;
+  color: var(--accent-color);
+  background: var(--base1);
+  box-shadow: var(--buttonBoxShadow-box-shadow) !important;
   margin-left: 0;
   margin-right: 12px;
   &:focus {
-    box-shadow: $buttonBoxShadowActive;
+    background: var(--base4);
+    color: var(--additionalLighterColor);
+    box-shadow: var(--buttonBoxShadowActive-box-shadow);
   }
 }
 :global(.fc-listWeek-button.fc-button.fc-button-primary) {
@@ -99,8 +114,9 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
 :global(.fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active),
 :global(.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active),
 :global(.fc-listWeek-button.fc-button.fc-button-primary.fc-button-active) {
-  box-shadow: $buttonBoxShadowActive !important;
-  color: var(--primary-text-color);
+  box-shadow: var(--inset-box-shadow) !important;
+  color: var(--primary-text-color)!important;
+  background: var(--base1);
   cursor: default;
 }
 
@@ -111,22 +127,25 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
   font-weight: 500;
   font-size: 15px;
   border-radius: 2px;
-  box-shadow: $buttonBoxShadow;
+  background: var(--base1);
+  color: var(--accent-color);
+  box-shadow: var(--buttonBoxShadow-box-shadow);
   &:focus {
     color: var(--primary-text-color);
-    box-shadow: inset -2px -2px 8px rgb(255 255 255), inset 1px 1px 7px rgb(0 0 0 / 15%) !important;
+    background: var(--base1);
+    box-shadow: var(--inset-box-shadow) !important;
   }
 }
 :global(.fc-buttonUa-button.fc-button.fc-button-primary.active),
 :global(.fc-buttonEn-button.fc-button.fc-button-primary.active) {
   color: var(--primary-text-color);
-  box-shadow: inset -2px -2px 8px rgb(255 255 255), inset 1px 1px 7px rgb(0 0 0 / 15%);
+  box-shadow: var(--HEADERLanguageBUTTTONS-box-shadow);
   cursor: default;
 }
 
 ///////////  SCREEN CALENDAR   //////////////////////////////
 :global(.fc.fc-media-screen.fc-direction-ltr.fc-theme-standard) {
-  box-shadow: -9px -9px 17px 0px #ffffff, 14px 14px 17px 0px #d1d9e6;
+  box-shadow:var(--SCREENCALENDAR-box-shadow);
   padding-top: 15px;
   background-color: $backgroundColor;
   border-radius: 10px;
@@ -147,7 +166,7 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
   margin-right: 11px;
   & a {
     border-radius: 8px;
-    box-shadow: 4px 4px 5px 0px #d1d9e6, -1px -1px 8px -1px rgb(255 255 255 / 88%);
+    box-shadow: var(--NUMBEROFDAYTOP-box-shadow);
     padding: 1px 7px !important;
     font-size: 18px;
     font-weight: 500;
@@ -165,7 +184,7 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
   padding: 3px;
 }
 :global(.fc-day-today .fc-daygrid-day-frame) {
-  box-shadow: 7px 7px 10px 3px #d1d9e6, -6px -6px 11px 2px #ffffff;
+  box-shadow: var(--BorderForTableInsideBodyMonth-box-shadow);
   background-color: var(--primary-color);
   position: relative;
   z-index: 1;
@@ -204,6 +223,12 @@ $buttonBoxShadowActive: inset -2px -2px 8px rgba(255, 255, 255, 1), inset -2px -
 :global(.fc-timeGridWeek-view td[role="presentation"]) {
   background-color: var( --primary-color);
 }
+
+:global(.fc-list-event):hover{
+  background: var(--calendar-fc-list-event-hover-bg-color);
+}
+
+
 :global(td .fc-timegrid-col){
   border: 1px solid --fc-border-color;
 }

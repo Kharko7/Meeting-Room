@@ -1,5 +1,12 @@
-$background:#f4f6fa;
-$mainColor:#555;
+$background:var(--base1);
+$firstShadow:var(--base2);
+$secondShadow: var(--base3);
+$thirdShadow: var(--base4);
+$mainColor:var(--mainColorFont);
+$linkColor:var(--link);
+$errorColor:var(--errorColor);
+$additionalColor: var(--additionalColor);
+$lighterSecondColor: var(--additionalLighterColor);
 
 .container_login_page {
   margin:0;
@@ -10,4 +17,38 @@ $mainColor:#555;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+.box_inset{
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: var(--base1);
+  box-shadow:var(--pages-decoration-box-shadow-inset);
+  display: flex;
+  position: absolute;
+
+  top:-15%;
+  left: -5%;
+}
+
+.box_outset{
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: var(--base1);
+  box-shadow:var(--pages-decoration-box-shadow-outset);
+  display: flex;
+  position: absolute;
+
+  bottom:-15%;
+  right:-5%;
 }

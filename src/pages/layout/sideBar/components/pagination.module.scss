@@ -21,20 +21,14 @@
   width: 30px;
   height: 30px;
   border-radius: 7px;
-  box-shadow:  -3px -3px 16px rgba(255, 255, 255, 0.8),
-       -3px -3px 6px rgba(255, 255, 255, 0.625),
-       3px 3px 3px rgba(0, 0, 0, 0.15),
-      inset 3px 3px 6px rgba(255, 255, 255, 0.1);;
+  box-shadow:  var( --pagination-box-shadow);
   color: var(--primary-text-color);
   &:hover {
     color: var(--accent-text-color);
   }
   &.current {
     color: var(--accent-color);
-    box-shadow: inset -3px -3px 16px rgba(255, 255, 255, 0.8),
-      inset -3px -3px 6px rgba(255, 255, 255, 0.625),
-      inset 3px 3px 3px rgba(0, 0, 0, 0.15),
-      inset 3px 3px 6px rgba(255, 255, 255, 0.1);
+    box-shadow: var(--pagination-inset-box-shadow)
   }
 }
 .svg,
@@ -47,10 +41,7 @@
   }
 }
 .btn:active {
-  box-shadow: inset -3px -3px 16px rgba(255, 255, 255, 0.8),
-      inset -3px -3px 6px rgba(255, 255, 255, 0.625),
-      inset 3px 3px 3px rgba(0, 0, 0, 0.15),
-      inset 3px 3px 6px rgba(255, 255, 255, 0.1);
+  box-shadow: var( --pagination-box-shadow);
 }
 .svgRotate {
   transform: rotate(180deg);

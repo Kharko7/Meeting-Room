@@ -4,6 +4,7 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
 .container {
   display: flex;
   width: 100%;
@@ -12,14 +13,11 @@
   align-items: center;
   justify-content: center;
 }
+
 .scene {
   perspective: 400px;
 }
-.oops {
-  font-size: 45px;
-  color: var(--accent-text-color);
-  text-shadow: -2px -2px 2px rgb(255 255 255), 2px 1px 2px rgb(0 0 0 / 32%);
-}
+
 .box {
   position: relative;
   width: 200px;
@@ -32,6 +30,7 @@
   animation-duration: 4s;
   animation-iteration-count: infinite;
 }
+
 .facet {
   position: absolute;
   width: 200px;
@@ -41,7 +40,7 @@
   line-height: 200px;
   text-align: center;
   color: transparent;
-  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+  text-shadow: var(--facet);
 
   -webkit-background-clip: text;
   -moz-background-clip: text;
@@ -52,28 +51,34 @@
     transform: rotateY(0deg) translateZ(100px);
     background-color: var(--accent-text-color);
   }
+
   &.back {
     transform: rotateY(90deg) translateZ(100px);
-    background-color: #21b4c4;
+    background-color: var(--shadowNotFoundPage4);
   }
+
   &.right {
     transform: rotateY(180deg) translateZ(100px);
-    background-color: #1bc1d4;
+    background-color: var(--shadowNotFoundPage5);
   }
+
   &.left {
     transform: rotateY(-90deg) translateZ(100px);
-    background-color: #12cbe0;
+    background-color: var(--shadowNotFoundPage6);
   }
+
   &.top {
     transform: rotateX(90deg) translateZ(100px);
-    background-color: #24c2d4;
+    background-color: var(--shadowNotFoundPage2);
     font-size: 65px;
   }
+
   &.bottom {
     transform: rotateX(-90deg) translateZ(100px);
-    background-color: #1bc1d4;
+    background-color: var(--shadowNotFoundPage5);
   }
 }
+
 @keyframes rotateAnimation {
   25% {
     transform: translateZ(-100px) rotateY(-90deg);
@@ -100,7 +105,7 @@
 
   opacity: 35%;
   border-radius: 50%;
-  background: linear-gradient(to bottom, #177d88, #24c2d4);
+  background: linear-gradient(to bottom, var(--shadowNotFoundPage1), var(--shadowNotFoundPage2));
   filter: blur(20px);
 
   transform-style: preserve-3d;
@@ -110,19 +115,118 @@
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
+
 @keyframes spansd {
   25% {
-    background: linear-gradient(90deg, #1a8e9b, #24c2d4);
+    background: linear-gradient(90deg, var(--shadowNotFoundPage3), var(--shadowNotFoundPage2));
   }
 
   100% {
-    background: linear-gradient(180deg, #1a8e9b, #24c2d4);
+    background: linear-gradient(180deg, var(--shadowNotFoundPage3), var(--shadowNotFoundPage2));
   }
 }
+
 .desk {
   display: flex;
   margin-top: 60px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+
+.oops {
+  font-size: 75px;
+  font-weight: 700;
+  text-shadow: var(--text-box-shadow);
+}
+
+.oops span {
+  display: inline-block;
+}
+
+.oops span:nth-of-type(2) {
+  animation-delay: .05s;
+}
+.oops span:nth-of-type(3) {
+  animation-delay: .1s;
+}
+.oops span:nth-of-type(4) {
+  animation-delay: .15s;
+}
+.oops span:nth-of-type(5) {
+  animation-delay: .2s;
+}
+.oops span:nth-of-type(6) {
+  animation-delay: .25s;
+}
+.oops span:nth-of-type(7) {
+  animation-delay: .3s;
+}
+.oops span:nth-of-type(8) {
+  animation-delay: .35s;
+}
+.oops span:nth-of-type(9) {
+  animation-delay: .4s;
+}
+.oops span:nth-of-type(10) {
+  animation-delay: .45s;
+}
+.oops span:nth-of-type(11) {
+  animation-delay: .5s;
+}
+.oops span:nth-of-type(12) {
+  animation-delay: .55s;
+}
+.oops span:nth-of-type(13) {
+  animation-delay: .6s;
+}
+.oops span:nth-of-type(14) {
+  animation-delay: .65s;
+}
+.oops span:nth-of-type(15) {
+  animation-delay: .7s;
+}
+.oops span:nth-of-type(16) {
+  animation-delay: .75s;
+}
+.oops span:nth-of-type(17) {
+  animation-delay: .8s;
+}
+.oops span:nth-of-type(18) {
+  animation-delay: .85s;
+}
+.oops span:nth-of-type(19) {
+  animation-delay: .9s;
+}
+.oops span:nth-of-type(20) {
+  animation-delay: .95s;
+}
+
+.animate span {
+  color: var(--accent-text-color);
+  opacity: 0;
+  transform: translate(-300px, 0) scale(0);
+  animation: sideSlide .5s forwards;
+  text-shadow: var(--text-box-shadow);
+}
+
+@keyframes sideSlide {
+  60% {
+    transform: translate(20px, 0) scale(1);
+  }
+
+  80% {
+    transform: translate(20px, 0) scale(1);
+  }
+
+  99% {
+    transform: translate(0) scale(1.2);
+    color: var(--base1);
+  }
+
+  100% {
+    transform: translate(0) scale(1);
+    opacity: 1;
+  }
 }

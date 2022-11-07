@@ -1,5 +1,5 @@
 :global(.MuiOutlinedInput-notchedOutline) {
-  border: 0px solid black !important;
+  border: 0px solid var(--PickerGlobalColor) !important;
   border-radius: 100px !important;
   box-shadow: var(--inset-input-shadow) !important;
 }
@@ -54,7 +54,7 @@
   background: transparent !important;
 }
 :global(.MuiClockNumber-root[aria-selected="true"]) {
-  color: #efefef !important;
+  color: var(--timePickerGlobalColor) !important;
 }
 :global(.MuiClock-pin),
 :global(.MuiClockPointer-root),

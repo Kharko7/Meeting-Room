@@ -22,6 +22,7 @@ $linear-gradient:#dadde0;
   height: 700px;
   padding: 10px;
   box-sizing: border-box;
+  background: var(--base1);
   box-shadow:
           -2px -2px 12px $firstShadow,
           2px 2px 8px $secondShadow,
@@ -30,6 +31,9 @@ $linear-gradient:#dadde0;
   display: flex;
   align-items: center;
   color: $mainColor;
+
+  z-index: 1;
+
 
 }
 

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { SubmitHandler, useForm } from "react-hook-form";
+import React, {useState} from 'react';
+import {SubmitHandler, useForm} from "react-hook-form";
+
+
+import {useNavigate} from "react-router-dom";
+import {ErrorComponent, InputRe} from '../..';
+import Button from "components/button";
+import {checkPasswordMatch} from "../../../utils/auth-foo";
+import {ChangePasswordSchema} from "../../../utils/yup.validation";
+import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
+import KeyIcon from '@mui/icons-material/Key';
 
 import classNames from 'classnames/bind';
 import styles from './ChangePassword.module.scss'
-import { useNavigate } from "react-router-dom";
-import { ErrorComponent, InputRe } from '../..';
-import Button from "components/button";
-import {checkPasswordMatch} from "../../../utils/auth-foo";
-import {ChangePasswordSchema, RegisterSchema} from "../../../utils/yup.validation";
-import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
-import IconInputComponent from "../../tools/simple/icon-input/IconInputComponent";
-import KeyIcon from '@mui/icons-material/Key';
-
 
 const cn = classNames.bind(styles)
 

@@ -41,33 +41,27 @@ describe('Get Forgot Password tests', () => {
                 value: "user4@incorainc.com"
             }
         });
-
         const Send = screen.getByText('Send');
         userEvent.click(Send);
         await expect(screen.getByLabelText('Email')).toBeInTheDocument();
         await expect(email).toBeDefined();
     });
-
     it('should be on the document', async () => {
         const {getByLabelText} = setup();
         expect(getByLabelText('Email')).toBeInTheDocument()
     });
-
     it('should render component with no errors', async () => {
         const forgotPassword = setup();
         await expect(forgotPassword).toBeTruthy();
     });
-
     it('should have attribute', async () => {
         const {getByLabelText} = setup();
         await expect(getByLabelText('Email')).toHaveAttribute('type', '');
     });
-
     it('button are in the document', async () => {
         const {getByText} = setup();
         await expect(getByText('Send')).toBeInTheDocument();
     });
-
     it('error in email', async () => {
         const {getByLabelText, container} = setup();
         await act(async () => {
@@ -75,7 +69,5 @@ describe('Get Forgot Password tests', () => {
             fireEvent.change(passwordInput, {target: {value: "123"}})
         })
         expect(container.innerHTML).toMatch("Only domain @incorainc.com is accepted")
-
     });
-
 })

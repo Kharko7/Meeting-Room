@@ -10,6 +10,7 @@ import NavRegisterComponent from "./tools/auth-parts/registration-components/nav
 import SwitchToLoginComponent from "./tools/auth-parts/registration-components/switchToLogin/SwitchToLoginComponent";
 import ErrorComponent from "./tools/simple/error-container/ErrorComponent";
 import IconInputComponent from "./tools/simple/icon-input/IconInputComponent";
+import PseudoAvatar from "./pseudo-avatar/PseudoAvatar";
 
 
 export {
@@ -22,5 +23,6 @@ export {
     InputRe,
     OpenEye,
     ClosedEye,
-    ErrorComponent
+    ErrorComponent,
+    PseudoAvatar
 }
