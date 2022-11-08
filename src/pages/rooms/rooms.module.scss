@@ -68,7 +68,7 @@
     outline: none;
   }
   &::placeholder {
-    color: rgb(192, 192, 192);
+    color: var(--placeholder-input-color);
   }
 }
 
@@ -116,14 +116,13 @@
   transition-property: all;
   transition-duration: 30ms;
   border-radius: 3px;
-  box-shadow: var(--outset-box-shadow);
+  box-shadow: var(--room-box-shadow);
+  //box-shadow: var(--outset-box-shadow);
   cursor: pointer;
 
   &:hover {
     background-color: var(--primary-hover-color);
-    box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8),
-      -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
-      inset 4px 4px 10px rgb(0 0 0 / 2%);
+    box-shadow: var(--user-img)
   }
 }
 
@@ -180,7 +179,7 @@
   width: 10px;
   height: 10px;
   border-radius: 100%;
-  background-color: #ff6e6e;
+  background-color: var(--indicator);
 }
 
 .navButton {
@@ -225,7 +224,7 @@
   height: 100vh;
   z-index: 30;
   // backdrop-filter: blur(1px); страшно лагает
-  background-color: rgba(255, 255, 255, 0.376);
+  background-color: var(--blur);
 }
 .infoChoose {
   z-index: 33;
@@ -241,7 +240,7 @@
 .svg {
   width: 20px;
   height: 20px;
-  fill: #bcbcbc;
+  fill: var( --fill-svg-rooms);
   &:hover {
     fill: var(--accent-color);
   }
@@ -257,15 +256,13 @@
 
   z-index: 5;
   background: linear-gradient(
-    to bottom,
-    transparent 2%,
-    var(--primary-color) 7%
+                  to bottom,
+                  transparent 2%,
+                  var(--primary-color) 7%
   );
   transition: height 0.2s linear;
   transition-delay: 200ms;
-  box-shadow: -2px -2px 8px rgb(255 255 255),
-    -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
-    inset 2px 2px 4px rgb(255 255 255 / 10%);
+  box-shadow: var(--info-box-shadow);
   border-radius: 0px 0px 15px 15px;
 }
 

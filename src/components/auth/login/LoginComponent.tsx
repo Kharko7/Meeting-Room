@@ -2,6 +2,8 @@ import React from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {NavLink} from "react-router-dom";
 
+import 'animate.css';
+
 import classNames from 'classnames/bind';
 import styles from './LoginComponent.module.scss'
 import {ErrorComponent, InputRe} from "../../index";
@@ -19,24 +21,27 @@ const LoginComponent = () => {
 
     const dispatch = useAppDispatch();
 
-    let {error} = useAppSelector(state => state.auth);
+    let {errorCode} = useAppSelector(state => state.auth);
 
     const submit: SubmitHandler<any> = async (user) => {
         await dispatch(authActions.login(user));
         await reset();
     }
 
+
     return (
-        <div className={cn("login_container")}>
+        <div className={cn("login_container","animate__bounceIn animate__zoomIn")}>
             <div className={cn("logo_container")}>
                 <div className={cn("logo")}>
-                    <img
-                        src="https://i.pinimg.com/originals/c9/af/8e/c9af8efe164f75b2d3aaebf5534892b0.png"
-                        alt="logo"
-                    />
+                    {/*<img*/}
+                    {/*    src="https://i.pinimg.com/originals/c9/af/8e/c9af8efe164f75b2d3aaebf5534892b0.png"*/}
+                    {/*    alt="logo"*/}
+                    {/*    className={cn('img')}*/}
+                    {/*/>*/}
+                    <span className={cn('incora')}>INCORA</span>
                 </div>
-                <div className={cn("title")}>Lounge</div>
-                <div className={cn("sub_title")}>Smoke and Relax</div>
+                {/*<div className={cn("title")}>Booking</div>*/}
+                {/*<div className={cn("sub_title")}>Manage your time</div>*/}
             </div>
             <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
                 <InputRe
@@ -44,7 +49,7 @@ const LoginComponent = () => {
                     type={""}
                     register={register}
                     name={"email"}
-                    placeHolder={"email"}
+                    placeHolder={"Email"}
                     required={true}
                     placeholderDisappear={"...@incorainc.com"}
                     size={"extra-small"}
@@ -55,14 +60,14 @@ const LoginComponent = () => {
                     type={"password"}
                     register={register}
                     name={"password"}
-                    placeHolder={"password"}
+                    placeHolder={"Password"}
                     required={true}
                     size={"extra-small"}
                 />
 
                 <div className={cn("error_container")}>
                     {(
-                        error.includes("400") &&
+                        errorCode === 400 &&
                         !isDirty) && (
                         <ErrorComponent title={"Oops...Wrong login or password"}/>
                     )}

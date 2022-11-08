@@ -17,7 +17,9 @@ function* handleLogin(action:any) {
         authService.setTokens(data.token)
         yield ResponsePopup.Success()
     } catch (error: any) {
-        yield ResponsePopup.ErrorPopup(error)
+        yield put(authActions.errorMsg(error.response.status))
+        yield ResponsePopup.ErrorPopup(error);
+
     }
 }
 

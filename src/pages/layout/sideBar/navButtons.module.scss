@@ -31,17 +31,12 @@
   text-align: center;
   font-size: 15px;
   border-radius: 10px;
-  box-shadow: -2px -2px 4px rgb(255 255 255 / 80%),
-    -2px -2px 4px rgb(255 255 255 / 63%), 2px 2px 2px rgb(0 0 0 / 15%),
-    inset 2px 2px 4px rgb(255 255 255 / 10%);
+  box-shadow: var( --link-NavBtn-box-shadow);
   background-size: 22px;
   background-repeat: no-repeat;
   background-position: center;
   &.current {
-    box-shadow: inset -2px -2px 4px rgba(255, 255, 255, 0.8),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.625),
-      inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-      inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+    box-shadow:var(--inset-box-shadow)
   }
   &.map {
     background-image: url(./images/location.png);

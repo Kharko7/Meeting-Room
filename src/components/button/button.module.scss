@@ -13,14 +13,12 @@
 
   border: none;
   border-radius: 40px;
-  box-shadow: var(--outset-box-shadow);
-  background: var(--primary-color);
+  box-shadow:var( --outset-box-shadow);
+  background: var(--base1);
   cursor: pointer;
   &:hover {
-    background: var(--primary-hover-color);
-    box-shadow: -2px -2px 8px rgb(255 255 255),
-      -2px -2px 12px rgb(255 255 255 / 60%), 2px 2px 8px rgb(0 0 0 / 15%),
-      inset 5px 5px 14px rgb(0 0 0 / 2%);
+    background: var( --primary-hover-button-color);
+    box-shadow: var( --outset-box-shadow)
   }
   &:active,
   &:focus-visible {
@@ -64,7 +62,7 @@
   button:focus-visible & {
     display: inline-block;
     transform: scale(0.98);
-    color: #cfcfd4;
+    color: var(--active-color);
   }
   &.warning {
     color: orange;
@@ -73,5 +71,6 @@
     color: #ff6a6a;
   }
 }
+
 
 //sizes

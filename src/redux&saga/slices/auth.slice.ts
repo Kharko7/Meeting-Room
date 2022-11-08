@@ -8,14 +8,14 @@ export interface AuthState {
     success?: boolean;
     rejected?: boolean;
     user: LoginProps|undefined|null;
-    error: string;
+    errorCode: number|undefined;
     registerUser:RegistrationProps|undefined
 }
 
 const initialState: AuthState = {
     registerUser: undefined,
     user: undefined,
-    error: '',
+    errorCode: undefined,
     pending:false,
     success:false,
     rejected:false
@@ -27,14 +27,12 @@ const authSlice = createSlice({
     reducers: {
         login(state, action: PayloadAction<LoginProps>) {
             state.user = action.payload;
-            state.error = "";
         },
         register(state, action: PayloadAction<RegistrationProps>) {
             state.registerUser = action.payload;
-            state.error = "";
         },
         errorMsg(state, action: any) {
-            state.error = action.payload;
+            state.errorCode = action.payload;
             state.success = false;
         },
         pending(state, action: any) {
@@ -43,7 +41,6 @@ const authSlice = createSlice({
         },
         success(state, action: any) {
             state.success = action.payload;
-            state.error = "";
         },
     },
 });

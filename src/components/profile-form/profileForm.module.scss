@@ -3,12 +3,25 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  box-shadow: -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%), 2px 2px 4px rgb(255 255 255 / 10%);
+  box-shadow: -2px -2px 12px var(--base2), 2px 2px 8px var(--base3), 2px 2px 4px var(--base2);
   border-radius: 40px;
   margin: 40px;
-  background-color: #f4f6fa;
+  background-color: var(--base1);
 }
 .form {
   padding-bottom: 20px;
   border-bottom: 3px var(--accent-text-color) solid;
+}
+
+.profile{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.toggle{
+  width: 112px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }

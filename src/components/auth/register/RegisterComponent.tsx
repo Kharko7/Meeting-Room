@@ -17,6 +17,9 @@ import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {RegisterSchema} from "../../../utils/yup.validation";
 
+import 'animate.css';
+
+
 
 const cn = classNames.bind(styles)
 
@@ -29,11 +32,9 @@ const RegisterComponent = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    let {error, pending, success} = useAppSelector(state => state.auth);
-
+    let {errorCode, pending, success} = useAppSelector(state => state.auth);
 
     const [errorPassword, setErrorPassword] = useState<boolean>(false);
-
 
     useEffect(() => {
         if (success) {
@@ -41,8 +42,6 @@ const RegisterComponent = () => {
             navigate('/login')
         }
     }, [success])
-
-    console.log(success)
 
     const submit: SubmitHandler<any> = async (data) => {
         if (checkPasswordMatch(data.password, data.passwordConfirm)) {
@@ -55,8 +54,9 @@ const RegisterComponent = () => {
         }
         reset();
     }
+
     return (
-        <div className={cn("main_container")}>
+        <div className={cn("main_container","animate__bounceIn animate__fadeIn")}>
             <form onSubmit={handleSubmit(submit)} className={cn("container")}>
                 <div className={cn("createAccount")}>Create Account</div>
                 <span className={cn("registration")}>Registration</span>
@@ -70,7 +70,6 @@ const RegisterComponent = () => {
                     required={true}
                     placeholderDisappear={"Howard Lovecraft"}
                 />
-
                 <InputRe
                     isValid={true}
                     error={errors.password}
@@ -80,7 +79,6 @@ const RegisterComponent = () => {
                     placeHolder={"Create password"}
                     required={true}
                 />
-
                 <InputRe
                     isValid={true}
                     error={errors.passwordConfirm}
@@ -90,21 +88,17 @@ const RegisterComponent = () => {
                     placeHolder={"Confirm password"}
                     required={true}
                 />
-
                 <div className={cn("wrongPassword")}>
                     {errorPassword && !isDirty && (
                         <ErrorComponent title={"Oops...Password do not match"}/>
                     )}
                 </div>
-
                 <div className={cn("register_button_container")}>
                     <div className={cn("register_button")}>
                         <Button type={"submit"} onclick={() => {
                         }} size={"large"}>Register</Button>
                     </div>
                 </div>
-
-
             </form>
             <NavLink to={"/login"} className={cn("switch")}>
                 <SwitchToLoginComponent/>

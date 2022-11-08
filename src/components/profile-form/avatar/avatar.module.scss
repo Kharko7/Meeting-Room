@@ -11,8 +11,8 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  box-shadow: -10px -10px 20px 0px #ffffff, 10px 10px 16px 2px #cbcbcb;
-  border: 5px #e7fffd solid;
+  box-shadow: var(--outset-box-shadow);
+  border: 5px var( --border-avatar-settings) solid;
 }
 .lableContainer {
   width: 150px;

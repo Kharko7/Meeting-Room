@@ -24,7 +24,7 @@ const ForgotPasswordComponent = () => {
         reset();
     }
     return (
-      <div className={cn("forgotPassword_container")}>
+      <div className={cn("forgotPassword_container","animate__bounceIn animate__pulse")}>
         <span className={cn("spanAnimation")}>
           <div className={cn("title")}>
             Enter your user account verified email address and we will send you

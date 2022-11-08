@@ -15,6 +15,8 @@ const Toast = Swal.mixin({
     hideClass: {
         popup: 'animate__animated animate__fadeOut'
     },
+    background:'var(--base1)',
+    color:'var(--mainColorFont)'
 })
 
 export const ResponsePopup = {

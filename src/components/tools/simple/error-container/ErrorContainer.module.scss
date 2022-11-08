@@ -1,21 +1,8 @@
-$background:#f4f6fa;
-$firstShadow:rgba(255, 255, 255, 0.5);
-$secondShadow: rgba(0, 0, 0, 0.15);
-$thirdShadow: rgba(255,255,255,0.1);
-$mainColor:#555;
-$linkColor:#aaa;
-$errorColor:#d55d5d;
-$circleColor:coral;
-$circleColor2:#ffaa8b;
-
 .error_container{
   padding: 2px;
   border-radius: 20px;
   box-sizing: border-box;
-  box-shadow:
-          -2px -2px 12px $firstShadow,
-          2px 2px 8px $secondShadow,
-          2px 2px 4px $thirdShadow;
+  box-shadow:var(--outset-box-shadow);
   display: flex;
 }
 
