@@ -11,20 +11,16 @@ let mockedSelector: any;
 const errorMsg = 'Title should contain from 1 to 20 characters'
 const mockStateWithErr = {
   booking: {
-    extendedProps: {
-      errors: { title: errorMsg },
-      daysOfWeek: [],
-    },
+    errors: { title: errorMsg },
+    daysOfWeek: [],
   }
 }
 const mockState = {
   booking: {
     title: '',
-    extendedProps: {
-      floor: '1',
-      errors: {},
-      daysOfWeek: [],
-    },
+    floor: '1',
+    errors: {},
+    daysOfWeek: [],
   }
 }
 

@@ -1,4 +1,4 @@
-import FullCalendar, { DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/react'
+import FullCalendar, { DateSelectArg, DatesSetArg, EventClickArg } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -10,14 +10,18 @@ import React, { useEffect, useState } from 'react'
 import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
 import { getFromLocalStorage, setToLocalStorage } from 'services/local-storage.service';
+import { BookingEvent } from 'interfaces/booking/Booking';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface CalendarProps {
-  data: EventInput[];
+  data: BookingEvent[];
   weekends: boolean;
+  loading: boolean;
   handleDateSelect: (selectInfo: DateSelectArg) => void;
   handleEventSelect: (eventInfo: EventClickArg) => void;
+  handleGetDate: (dateInfo: DatesSetArg) => void;
 }
-export default React.memo(function Calendar({ data, weekends, handleDateSelect, handleEventSelect }: CalendarProps) {
+export default React.memo(function Calendar({ data, weekends, loading, handleDateSelect, handleEventSelect, handleGetDate }: CalendarProps) {
   const [language, setLanguage] = useState<string>(getFromLocalStorage('language'));
 
   useEffect(() => {
@@ -25,7 +29,14 @@ export default React.memo(function Calendar({ data, weekends, handleDateSelect, 
   }, [language]);
 
   return (
-    <Box sx={{ p: '10px 14px 14px 7px', flexGrow: '1' }} id='calendar'>
+    <Box
+      id='calendar'
+      sx={{
+        p: '10px 14px 14px 7px',
+        flexGrow: '1',
+        position: 'relative',
+        '& .fc-view-harness': { opacity: loading ? '0.2' : '1' }
+      }}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         customButtons={{
@@ -79,9 +90,24 @@ export default React.memo(function Calendar({ data, weekends, handleDateSelect, 
         snapDuration='00:15:00'
         events={data}
         weekends={weekends}
+        selectOverlap={false}
         select={handleDateSelect}
         eventClick={handleEventSelect}
+        datesSet={handleGetDate}
       />
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: '10%', left: '0%',
+        fontSize: '40px',
+        zIndex: loading ? '1000' : '-1000',
+        width: '100%',
+        height: 'calc(100% - 10%)',
+      }}>
+        <CircularProgress size={100} />
+      </Box>
     </Box>
   );
 });

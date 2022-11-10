@@ -1,6 +1,7 @@
 export const setActiveClass = (language: string | null) => {
-    setTimeout(() => {
-      const calendar = document.getElementById('calendar') as HTMLElement;
+  setTimeout(() => {
+    const calendar = document.getElementById('calendar') as HTMLElement;
+    if (calendar) {
       if (language === 'ua') {
         const button = calendar.querySelector('.fc-buttonUa-button') as HTMLButtonElement;
 
@@ -10,5 +11,6 @@ export const setActiveClass = (language: string | null) => {
 
         button.classList.add('active')
       }
-    }, 0)
-  }
+    }
+  }, 0)
+}

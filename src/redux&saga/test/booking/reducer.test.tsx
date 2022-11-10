@@ -30,31 +30,31 @@ describe('reducer booking test', () => {
 
   test('should set roomId to bookiing reducer', () => {
     expect(bookingReducer(initialState, setRoomId(roomId))).toEqual(
-      { ...initialState, extendedProps: { ...initialState.extendedProps, roomId: roomId } }
+      { ...initialState, roomId: roomId }
     )
   })
 
   test('should set floor to bookiing reducer', () => {
     expect(bookingReducer(initialState, setFloor('2'))).toEqual(
-      { ...initialState, extendedProps: { ...initialState.extendedProps, floor: '2' } }
+      { ...initialState, floor: '2' }
     )
   })
 
   test('should set description to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDescription(text))).toEqual(
-      { ...initialState, extendedProps: { ...initialState.extendedProps, description: text } }
+      { ...initialState, description: text }
     )
   })
 
   test('should set daysOfWeek to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDaysOfWeek(daysOfWeek))).toEqual(
-      { ...initialState, extendedProps: { ...initialState.extendedProps, daysOfWeek: daysOfWeek } }
+      { ...initialState, daysOfWeek: daysOfWeek }
     )
   })
 
   test('should set errors to bookiing reducer', () => {
     expect(bookingReducer(initialState, setBookingError(error))).toEqual(
-      { ...initialState, extendedProps: { ...initialState.extendedProps, errors: error } }
+      { ...initialState, errors: error }
     )
   })
 
@@ -87,23 +87,28 @@ describe('reducer booking test', () => {
   })
 
   test('should reset State', () => {
-    expect(bookingReducer(state, resetState())).toEqual(initialState)
+    expect(bookingReducer(state, resetState())).toEqual({
+      ...state,
+      title: initialState.title,
+      start: initialState.start,
+      end: initialState.end,
+      description: initialState.description,
+      daysOfWeek: initialState.daysOfWeek,
+      invitedIds: initialState.invitedIds,
+      errors: initialState.errors,
+    })
   })
 
   test('should edit Booking', () => {
     expect(bookingReducer(state, editBooking(bookingEdit))).toEqual(
       {
-        ...initialState,
+        ...state,
         title: bookingEdit.title,
         start: bookingEdit.start,
         end: bookingEdit.end,
-        extendedProps: {
-          ...initialState.extendedProps,
-          roomId: bookingEdit.roomId,
-          description: bookingEdit.description,
-          daysOfWeek: bookingEdit.daysOfWeek,
-          floor: bookingEdit.floor,
-        }
+        roomId: bookingEdit.roomId,
+        description: bookingEdit.description,
+        bookingId: bookingEdit.bookingId,
       }
     )
   })

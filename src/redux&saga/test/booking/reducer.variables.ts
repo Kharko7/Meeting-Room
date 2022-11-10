@@ -2,28 +2,28 @@ export const initialState = {
   title: '',
   start: '',
   end: '',
-  extendedProps: {
-    floor: null,
-    roomId: null,
-    description: '',
-    invitedIds: [],
-    errors: {},
-    daysOfWeek: [],
-  }
+  loading: false,
+  floor: null,
+  roomId: null,
+  description: '',
+  invitedIds: [],
+  errors: {},
+  daysOfWeek: [],
+  bookings: [],
 };
 
 export const state = {
   title: 'Event',
   start: "2022-11-19T00:00",
   end: "2022-11-19T00:00",
-  extendedProps: {
-    floor: '2',
-    roomId: 14,
-    description: 'This is my event',
-    invitedIds: [],
-    errors: {},
-    daysOfWeek: ['1', '2', '4'],
-  }
+  loading: false,
+  floor: '2',
+  roomId: 14,
+  description: 'This is my event',
+  invitedIds: [],
+  errors: {},
+  daysOfWeek: ['1', '2', '4'],
+  bookings: [],
 };
 
 export const bookingEdit = {
@@ -31,9 +31,8 @@ export const bookingEdit = {
   start: "2022-11-19T00:00",
   end: "2022-11-19T00:00",
   description: 'Very good booking',
-  daysOfWeek: [],
-  roomId: 3,
-  floor: '1',
+  roomId: 4,
+  bookingId: 22,
 }
 
 export const roomId = 123456;

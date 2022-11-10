@@ -1,4 +1,4 @@
-export enum snackBar {
+export enum snackbarVariants {
   error = 'error',
   info = 'info',
   success = 'success',
