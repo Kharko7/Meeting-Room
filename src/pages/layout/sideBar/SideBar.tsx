@@ -29,7 +29,6 @@ const SideBar = ({ userName }: SideBarProps) => {
           </NavLink>
         </div>
         <MyRooms mockedData={MockedData}></MyRooms>
-
       </div>
       <NavButtons />
     </div>

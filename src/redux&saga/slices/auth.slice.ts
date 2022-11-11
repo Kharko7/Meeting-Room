@@ -1,24 +1,35 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import {LoginProps, RegistrationProps} from "../../interfaces/auth/AuthProps";
+import {LoginProps, RegistrationProps, UserProps} from "../../interfaces/auth/AuthProps";
 
 export interface AuthState {
     pending?: boolean;
     success?: boolean;
     rejected?: boolean;
-    user: LoginProps|undefined|null;
+    login: LoginProps|undefined|null;
     errorCode: number|undefined;
-    registerUser:RegistrationProps|undefined
+    register:RegistrationProps|undefined,
+    forgotPasswordEmail:string|undefined,
+    changePassword:string|undefined,
+    invitations:string[]|undefined,
+
+    user:UserProps|undefined
 }
 
 const initialState: AuthState = {
-    registerUser: undefined,
-    user: undefined,
+    register: undefined,
+    login: undefined,
+    user:undefined,
+
+    forgotPasswordEmail:undefined,
+    changePassword:undefined,
+    invitations:undefined,
+
     errorCode: undefined,
     pending:false,
     success:false,
-    rejected:false
+    rejected:false,
 };
 
 const authSlice = createSlice({
@@ -26,10 +37,15 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login(state, action: PayloadAction<LoginProps>) {
-            state.user = action.payload;
+            state.login = action.payload;
+            state.errorCode = undefined;
         },
         register(state, action: PayloadAction<RegistrationProps>) {
-            state.registerUser = action.payload;
+            state.register = action.payload;
+            state.errorCode = undefined;
+        },
+        setUser(state,action:PayloadAction<UserProps>){
+            state.user = action.payload;
         },
         errorMsg(state, action: any) {
             state.errorCode = action.payload;
@@ -42,6 +58,16 @@ const authSlice = createSlice({
         success(state, action: any) {
             state.success = action.payload;
         },
+        forgotPasswordSendEmail(state,action:any){
+            state.forgotPasswordEmail = action.payload;
+        },
+        changePassword(state,action:any){
+            state.changePassword = action.payload;
+        },
+        getInvitation(state,action:any){
+            state.invitations = action.payload;
+        },
+
     },
 });
 

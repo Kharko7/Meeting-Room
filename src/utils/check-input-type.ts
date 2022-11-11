@@ -1,5 +1,3 @@
-import * as yup from "yup";
-
 interface ICheckType {
     iconPath: string;
 }

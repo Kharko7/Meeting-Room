@@ -23,22 +23,27 @@ $lighterSecondColor: var(--additionalLighterColor);
   z-index: 1;
 }
 
-.box_inset{
-  width: 500px;
-  height: 500px;
-
+.box_inset,.box_inset_2{
+  width: 600px;
+  height: 600px;
   border-radius: 50%;
-
   background: var(--base1);
-  box-shadow:var(--pages-decoration-box-shadow-inset);
-  display: flex;
   position: absolute;
+  box-shadow:var(--pages-decoration-box-shadow-inset);
+}
 
+.box_inset{
   top:-15%;
   left: -5%;
 }
 
-.box_outset{
+.box_inset_2{
+  bottom:-15%;
+  right: -5%;
+}
+
+
+.box_outset,.box_outset_2{
   width: 500px;
   height: 500px;
 
@@ -46,9 +51,15 @@ $lighterSecondColor: var(--additionalLighterColor);
 
   background: var(--base1);
   box-shadow:var(--pages-decoration-box-shadow-outset);
-  display: flex;
   position: absolute;
+}
 
-  bottom:-15%;
+.box_outset{
+  top:-15%;
   right:-5%;
+}
+
+.box_outset_2{
+  bottom:-15%;
+  left:-5%;
 }

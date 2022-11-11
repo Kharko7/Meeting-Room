@@ -8,6 +8,8 @@ import Button from "components/button";
 import {InputRe} from "../../index";
 import {EmailSchema, RegisterSchema} from "../../../utils/yup.validation";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
+import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
+import {authActions} from "../../../redux&saga/slices/auth.slice";
 
 const cn = classNames.bind(styles)
 
@@ -17,10 +19,13 @@ const ForgotPasswordComponent = () => {
         mode: 'all',
         resolver: yupResolver(EmailSchema)
     });
-    const [email,setEmail] = useState("");
+
+    const dispatch = useAppDispatch();
+
+    let {forgotPasswordEmail} = useAppSelector(state => state.auth);
 
     const submit:SubmitHandler<any> = async (data) => {
-        setEmail(data.email);
+        dispatch(authActions.forgotPasswordSendEmail(data.email))
         reset();
     }
     return (
@@ -47,7 +52,7 @@ const ForgotPasswordComponent = () => {
           </div>
         </form>
         <div className={cn("resetMessage")}>
-          {email && !isDirty && `Email was send on ${email}`}
+          {forgotPasswordEmail && !isDirty && `Email was send on ${forgotPasswordEmail}`}
         </div>
       </div>
     );

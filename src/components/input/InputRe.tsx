@@ -1,9 +1,7 @@
-import React, {InputHTMLAttributes, useState} from 'react';
+import React, {useState} from 'react';
 import {IconInputComponent} from "../index";
 import OpenEye from "../svg/eye/OpenEye";
 import ClosedEye from "../svg/eye/ClosedEye";
-import * as yup from "yup";
-
 
 import {FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister} from "react-hook-form";
 import classNames from 'classnames/bind';
@@ -16,7 +14,7 @@ const cn = classNames.bind(styles)
 interface IInput {
     placeHolder: string,
     placeholderDisappear?: string,
-    type: "text" | "" | "password" | "login"|string,
+    type: "text" | "" | "password" | "login" | string,
 
     isValid: boolean,
     name: string;
@@ -28,44 +26,43 @@ interface IInput {
     size?: "small" | "medium" | "large" | "extra-small"
 }
 
-const InputRe = ({type, placeHolder, name, required, isValid, error, register, placeholderDisappear, size}: IInput) => {
+const InputRe =
+    ({type, placeHolder, name, required, isValid, error, register, placeholderDisappear, size}
+         : IInput) => {
 
-    const [eyeState, setEyeState] = useState(true);
+        const [eyeState, setEyeState] = useState(true);
 
-    if (!eyeState) {
-        type = "text";
-    }
-    const {iconPath}: ICheckType = checkType(type, name);
+        if (!eyeState) {
+            type = "text";
+        }
+        const {iconPath}: ICheckType = checkType(type, name);
 
-    return (
-        <div className={cn(`container-${size ? size : "small"}`)}>
-            <div className={cn('inputField', error && 'inputFieldError')}>
+        return (
+            <div className={cn(`container-${size ? size : "small"}`)}>
+                <div className={cn('inputField', error && 'inputFieldError')}>
                 <span className={cn(`icon`)}>
                     <IconInputComponent iconPath={iconPath}/>
                 </span>
-                 <input type={type}
-                                    {...register(`${name}`, {
-                                        required: required,
-                                    })}
-                                    autoComplete={"off"}
-                                    placeholder={placeholderDisappear}
-                                    required
-                                    id={`${name}-input`}
+                    <input type={type}
+                           {...register(`${name}`, {
+                               required: required,
+                           })}
+                           autoComplete={"off"}
+                           placeholder={placeholderDisappear}
+                           required
+                           id={`${name}-input`}
                     />
                     <label htmlFor={`${name}-input`}>{placeHolder}</label>
+                    {name && name.includes("password") &&
+                        <span onClick={() => {
+                            eyeState ? setEyeState(false) : setEyeState(true);
+                        }} className={cn("eye")}>{eyeState ? <OpenEye/> : <ClosedEye/>}</span>}
 
-
-                    <label htmlFor={`${name}-input`}>{placeHolder}</label>
-                {name && name.includes("password") &&
-                    <span onClick={() => {
-                        eyeState ? setEyeState(false) : setEyeState(true);
-                    }} className={cn("eye")}>{eyeState ? <OpenEye/> : <ClosedEye/>}</span>}
-
+                </div>
+                <span className={cn(isValid && "error_container")}>{(error?.message && isValid) &&
+                    <span>{`${error.message}`}</span>}</span>
             </div>
-            <span className={cn(isValid && "error_container")}>{(error?.message && isValid) &&
-                <span>{`${error.message}`}</span>}</span>
-        </div>
-    );
-};
+        );
+    };
 
 export default InputRe;

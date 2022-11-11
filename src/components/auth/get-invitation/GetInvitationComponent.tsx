@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Controller, SubmitHandler, useFieldArray, useForm} from "react-hook-form";
 
 import classNames from 'classnames/bind';
@@ -7,11 +7,10 @@ import {InputRe} from "../../index";
 import Button from "components/button";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {GetInvitationSchema} from "../../../utils/yup.validation";
-
+import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
+import {authActions} from "../../../redux&saga/slices/auth.slice";
 
 const cn = classNames.bind(styles)
-
-
 
 const GetInvitationComponent = () => {
 
@@ -33,9 +32,14 @@ const GetInvitationComponent = () => {
         name: "questions"
     });
 
+    const dispatch = useAppDispatch();
+
+    // let {invitations} = useAppSelector(state => state.auth);
+    //
+    // // useEffect(()=>{},[invitations])
 
     const submit: SubmitHandler<any> = async (data) => {
-        console.log(data)
+        dispatch(authActions.getInvitation(data.questions))
         reset();
     }
 
@@ -64,7 +68,6 @@ const GetInvitationComponent = () => {
                                                             required={true}
                                                             placeholderDisappear={"...@incorainc.com"}
                                                             size={"small"}
-                                                            // @ts-ignore
                                                             error={ errors.questions?.[index]?.email}
                                                         />
                                         }

@@ -1,17 +1,8 @@
-import {Navigate, useLocation} from "react-router-dom";
+import {useAuth} from "hooks";
+import {Navigate, Outlet} from "react-router-dom";
 
-interface LayoutProps {
-    children: JSX.Element;
-}
 
-const useAuth = () => {
-    const user = localStorage.getItem('access')
-    const access: boolean | null = user && JSON.parse(user);
-    return access;
-}
-
-export const ProtectedRoute = ({children}: LayoutProps) => {
+export const ProtectedRoute = () => {
     const access = useAuth();
-    const location = useLocation();
-    return access ? children : <Navigate to={'/'} state={{from: location}}/>;
+    return access ? <Outlet /> : <Navigate to={'/not-found'} state={{ replace: true }}/>;
 }

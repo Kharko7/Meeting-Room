@@ -35,12 +35,12 @@ describe('Login tests', () => {
     it('should be defined', async () => {
         const render_ = setup();
         const {getByLabelText} = render_
-        const emailInput = fireEvent.input(getByLabelText("email"), {
+        const emailInput = fireEvent.input(getByLabelText("Email"), {
             target: {
                 value: "user4@incorainc.com"
             }
         });
-        const passwordInput = fireEvent.input(getByLabelText("password"), {
+        const passwordInput = fireEvent.input(getByLabelText("Password"), {
             target: {
                 value: "1234"
             }
@@ -53,8 +53,8 @@ describe('Login tests', () => {
 
     it('should be on the document', async () => {
         const {getByLabelText} = setup();
-        await expect(getByLabelText('email')).toBeInTheDocument();
-        await expect(getByLabelText('password')).toBeInTheDocument();
+        await expect(getByLabelText('Email')).toBeInTheDocument();
+        await expect(getByLabelText('Password')).toBeInTheDocument();
     });
 
     it('should render the component with no errors', async () => {
@@ -64,7 +64,7 @@ describe('Login tests', () => {
 
     it('should have attribute', async () => {
         const {getByLabelText} = setup();
-        await expect(getByLabelText('email')).toHaveAttribute('type', '');
-        await expect(getByLabelText('password')).toHaveAttribute('type', 'password');
+        await expect(getByLabelText('Email')).toHaveAttribute('type', '');
+        await expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
     });
 })

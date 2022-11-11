@@ -4,8 +4,6 @@ interface RegistrationProps {
     password: string;
 }
 interface LoginProps {
-    // firstName: string;
-    // lastName: string;
     email:string;
     password: string;
 }
@@ -24,11 +22,15 @@ interface UserWithToken{
     access_token: string
 }
 
-interface User{
+interface UserProps{
     firstName: string;
     lastName: string;
     email:string;
-    password:string
+    password:string;
+    role:'user'|'admin',
+    iat:number,
+    exp:number,
+    id:number
 }
 
 interface ErrorMessageObject {
@@ -43,6 +45,6 @@ export type {
     ChangePasswordProps,
     ForgotPasswordProps,
     UserWithToken
-    ,User,
+    ,UserProps,
     ErrorMessageObject
 };

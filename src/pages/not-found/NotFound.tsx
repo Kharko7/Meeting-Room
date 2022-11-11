@@ -5,6 +5,7 @@ import 'animate.css';
 
 import classNames from 'classnames/bind';
 import styles from './notFound.module.scss'
+import {getFromLocalStorage} from "../../services/local-storage.service";
 const cn = classNames.bind(styles)
 
 const NotFound = () => {
@@ -47,11 +48,11 @@ const NotFound = () => {
         <span>d</span>
         <span>!</span>
         </p>
-        <NavLink to={"/"}
+        <NavLink to={getFromLocalStorage('access')?'/rooms':'/auth/login'}
                  className={cn('animate__animated animate__fadeIn')}
         >
           <Button onclick={() => {}} size="large">
-            Go Back Home
+            Go Back
           </Button>
         </NavLink>
       </div>

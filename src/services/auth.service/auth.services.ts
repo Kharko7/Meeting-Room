@@ -1,5 +1,6 @@
 import {axiosService} from "../axios.service/axios.service";
 import {urls} from "../../constants/urls/urls";
+import {getFromLocalStorage, removeFromLocalStorage, setToLocalStorage} from "../local-storage.service";
 
 const _access = 'access';
 const _refresh = 'refresh';
@@ -9,15 +10,13 @@ export const authService = {
     refresh:(refresh:string)=>axiosService.post(`${urls.login}/refresh`,{refresh}),
 
     setTokens:(access:string)=>{
-        localStorage.setItem(_access,access);
-        // localStorage.setItem(_refresh,refresh);
+        setToLocalStorage(_access,access)
     },
 
     deleteTokens:()=>{
-        localStorage.removeItem(_access);
-        localStorage.removeItem(_refresh);
+        removeFromLocalStorage(_access);
     },
 
-    getAccessToken:()=>localStorage.getItem(_access),
-    getRefreshToken:()=>localStorage.getItem(_refresh)
+    getAccessToken:()=>getFromLocalStorage(_access),
+    getRefreshToken:()=>getFromLocalStorage(_refresh)
 };
