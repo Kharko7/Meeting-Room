@@ -3,7 +3,6 @@ import { ChangePasswordComponent } from 'components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Typography from '@mui/material/Typography'
-import { checkPath } from 'utils/check-previous-path';
 import ProfileForm from 'components/profile-form';
 
 const Profile = () => {
@@ -11,6 +10,16 @@ const Profile = () => {
   const location = useLocation()
   const goBack = () => navigate(-1)
   const from = location.state?.from?.pathname;
+
+  const checkPath = (from: string) => {
+    if (from === '/calendar') {
+      return 'to calendar'
+    }
+    if (from === '/rooms') {
+      return 'to rooms'
+    }
+    return ''
+  }
 
   return (
     <Box sx={{ height: '100%',paddingBottom:'40px' }}>

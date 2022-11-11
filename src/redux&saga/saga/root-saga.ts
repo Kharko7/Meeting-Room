@@ -4,7 +4,8 @@ import {registerSaga} from "./register.saga";
 import {forgotPasswordSaga} from "./forgotPassword.saga";
 import {changePasswordSaga} from "./changePassword.saga";
 import {GetInvitationSaga} from "./getInvitation.saga";
+import BookingSagas from './booking.saga';
+
 
 export default function* rootSaga() {
-    yield all([loginSaga(),registerSaga(),forgotPasswordSaga(),changePasswordSaga(),GetInvitationSaga()]);
-}
+    yield all([loginSaga(),registerSaga(),forgotPasswordSaga(),changePasswordSaga(),GetInvitationSaga(),BookingSagas()]);

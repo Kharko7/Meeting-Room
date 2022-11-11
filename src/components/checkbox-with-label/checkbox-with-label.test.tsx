@@ -1,11 +1,10 @@
-import React from 'react';
 import CheckboxWithLabel from './CheckboxWithLabel';
 import { render, screen, fireEvent } from '@testing-library/react'
 
 const onChange = jest.fn();
 
 describe('Checkbox tests', () => {
-  it('Checkbox should  be defined', () => {
+  it('Checkbox test', () => {
     render(
       <CheckboxWithLabel
         label='hello world'
@@ -14,6 +13,10 @@ describe('Checkbox tests', () => {
       />
     );
     const firstTitle = screen.getByText(/hello world/i)
+
+    fireEvent.click(firstTitle)
+
     expect(firstTitle).toBeDefined();
+    expect(onChange).toBeCalled();
   });
 });
