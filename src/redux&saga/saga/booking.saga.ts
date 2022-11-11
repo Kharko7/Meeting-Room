@@ -9,7 +9,7 @@ import { AddOneBooking, AddRcurringBooking } from 'interfaces/booking/Booking';
 
 dayjs.extend(utc)
 
-function* getAllBookings(action: PayloadAction<Record<string, string>>) {
+export function* getAllBookings(action: PayloadAction<Record<string, string>>) {
     const { startDate, endDate } = action.payload
     try {
         const response: AxiosResponse = yield call(() => axiosService.get(`bookings?roomId=1&startDate=${startDate}&endDate=${endDate}`))

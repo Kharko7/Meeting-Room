@@ -98,7 +98,7 @@ describe('Booking tests with error', () => {
     expect(selectorButton).toHaveAttribute('aria-disabled', 'true');
   })
 
-  it("when click on selector floor should popup listbox and call dispatch", async () => {
+  it("when click on selector floor should popup listbox and call dispatch", () => {
     setup()
 
     const selectFloor = screen.getByTestId('selector-floor');
@@ -179,7 +179,7 @@ describe('Booking tests with error', () => {
     expect(handleSubmit).toBeCalled()
   });
 
-  it("should remove event", async () => {
+  it("should remove event", () => {
     mockedSelector.mockReturnValue(mockState.booking)
     render(
       <BookingForm

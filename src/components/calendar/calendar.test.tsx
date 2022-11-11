@@ -58,22 +58,39 @@ describe('Booking tests with error', () => {
 
     const buttonUA = screen.getByText('UA')
     const buttonEN = screen.getByText('EN')
+
     fireEvent.click(buttonUA);
+
     const buttonlabel = screen.getByText('Сьогодні')
 
     expect(mockGetDate).toBeCalled()
-    expect(buttonUA).toBeInTheDocument()
     expect(buttonEN).toBeInTheDocument()
     expect(buttonlabel).toBeInTheDocument()
   });
-
 
   it('should render event in calendar', () => {
     setup()
 
     const event = screen.getByText('event 1')
     fireEvent.click(event);
+
     expect(mockEventSelect).toBeCalled()
     expect(event).toBeInTheDocument()
+  });
+
+  it('should render loading', () => {
+    render(
+      <Calendar
+        data={mockData}
+        weekends={true}
+        loading={true}
+        handleDateSelect={mockDateSelect}
+        handleEventSelect={mockEventSelect}
+        handleGetDate={mockGetDate}
+      />
+    )
+    const loading = screen.getByRole('progressbar')
+
+    expect(loading).toBeInTheDocument()
   });
 })

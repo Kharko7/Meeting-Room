@@ -24,59 +24,59 @@ import {
 } from './reducer.variables'
 
 describe('reducer booking test', () => {
-  test('should return the initial state', () => {
+  it('should return the initial state', () => {
     expect(bookingReducer(undefined, { type: undefined })).toEqual(initialState)
   })
 
-  test('should set roomId to bookiing reducer', () => {
+  it('should set roomId to bookiing reducer', () => {
     expect(bookingReducer(initialState, setRoomId(roomId))).toEqual(
       { ...initialState, roomId: roomId }
     )
   })
 
-  test('should set floor to bookiing reducer', () => {
+  it('should set floor to bookiing reducer', () => {
     expect(bookingReducer(initialState, setFloor('2'))).toEqual(
       { ...initialState, floor: '2' }
     )
   })
 
-  test('should set description to bookiing reducer', () => {
+  it('should set description to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDescription(text))).toEqual(
       { ...initialState, description: text }
     )
   })
 
-  test('should set daysOfWeek to bookiing reducer', () => {
+  it('should set daysOfWeek to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDaysOfWeek(daysOfWeek))).toEqual(
       { ...initialState, daysOfWeek: daysOfWeek }
     )
   })
 
-  test('should set errors to bookiing reducer', () => {
+  it('should set errors to bookiing reducer', () => {
     expect(bookingReducer(initialState, setBookingError(error))).toEqual(
       { ...initialState, errors: error }
     )
   })
 
-  test('should set title to bookiing reducer', () => {
+  it('should set title to bookiing reducer', () => {
     expect(bookingReducer(initialState, setTitle(text))).toEqual(
       { ...initialState, title: text }
     )
   })
 
-  test('should set start to bookiing reducer', () => {
+  it('should set start to bookiing reducer', () => {
     expect(bookingReducer(initialState, setStart(dateStart))).toEqual(
       { ...initialState, start: dateStart }
     )
   })
 
-  test('should set end to bookiing reducer', () => {
+  it('should set end to bookiing reducer', () => {
     expect(bookingReducer(initialState, setEnd(dateEnd))).toEqual(
       { ...initialState, end: dateEnd }
     )
   })
 
-  test('should set selected date to bookiing reducer', () => {
+  it('should set selected date to bookiing reducer', () => {
     expect(bookingReducer(initialState, setSelectedDate({ start: dateStart, end: dateEnd, }))).toEqual(
       {
         ...initialState,
@@ -86,7 +86,7 @@ describe('reducer booking test', () => {
     )
   })
 
-  test('should reset State', () => {
+  it('should reset State', () => {
     expect(bookingReducer(state, resetState())).toEqual({
       ...state,
       title: initialState.title,
@@ -99,7 +99,7 @@ describe('reducer booking test', () => {
     })
   })
 
-  test('should edit Booking', () => {
+  it('should edit Booking', () => {
     expect(bookingReducer(state, editBooking(bookingEdit))).toEqual(
       {
         ...state,

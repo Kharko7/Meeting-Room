@@ -141,6 +141,7 @@ const ProfileForm = () => {
             </Box>
             <Box sx={{textAlign: 'end'}}>
                 <Button
+                    dataTestId='button-log-out'
                     onclick={handleLogOut}
                 >
                     Log out

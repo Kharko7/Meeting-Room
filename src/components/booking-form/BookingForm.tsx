@@ -158,7 +158,7 @@ const BookingForm = ({ edit, handleSubmit, handleRemoveEvent }: BookingFormProps
                 helperText={errors.title ? errors.title : ''}
               />
             </Box>
-            <Box sx={{ mb: '25px', height: '120px' }}>
+            <Box sx={{ mb: '25px', height: '120px', '& .MuiOutlinedInput-notchedOutline': { borderRadius: '5%/50% ' } }}>
               <TextField
                 value={description}
                 onChange={event => dispatch(setDescription(event.target.value))}
