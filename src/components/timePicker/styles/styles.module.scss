@@ -1,7 +1,7 @@
-:global(.MuiOutlinedInput-notchedOutline) {
+:global(fieldset.MuiOutlinedInput-notchedOutline) {
   border: 0px solid var(--PickerGlobalColor) !important;
-  border-radius: 100px !important;
-  box-shadow: var(--inset-input-shadow) !important;
+  border-radius: 100px;
+  box-shadow: var(--inset-input-shadow);
 }
 
 :global(.MuiInputBase-root) {

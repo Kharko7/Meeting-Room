@@ -1,13 +1,13 @@
 import { createContext, useState } from 'react';
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
-import { snackBar } from '../constants/snackbar';
+import { snackbarVariants } from '../constants/snackbar';
 
 type SnackBarContextProviderProps = {
   children: React.ReactNode
 };
 interface optionsParameter {
-  severity: snackBar;
+  severity: snackbarVariants;
   message: string;
 }
 type SnackBarContextProps = {
@@ -18,7 +18,7 @@ export const SnackBarContext = createContext<SnackBarContextProps>({ setAlert():
 
 export const SnackBarContextProvider = ({ children }: SnackBarContextProviderProps) => {
   const [show, setShow] = useState<boolean>(false)
-  const [snackBarState, setSnackBarState] = useState<optionsParameter>({ severity: snackBar.error, message: '' })
+  const [snackBarState, setSnackBarState] = useState<optionsParameter>({ severity: snackbarVariants.error, message: '' })
 
   const setAlert = ((options: optionsParameter) => {
     setShow(true)
@@ -33,7 +33,7 @@ export const SnackBarContextProvider = ({ children }: SnackBarContextProviderPro
       {children}
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        autoHideDuration={4000}
+        autoHideDuration={3000}
         onClose={handleClose}
         open={show}
       >

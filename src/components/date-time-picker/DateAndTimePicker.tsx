@@ -11,9 +11,10 @@ interface DateAndTimePickerProps {
   errorMsg?: string;
   minDate?: string;
   onChange: (event: Dayjs | null) => void;
+  onAccept: (value: Dayjs | null) => void
 }
 
-const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '', errorMsg = '', minDate, onChange }) => {
+const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '', errorMsg = '', minDate, onChange, onAccept }) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -23,7 +24,7 @@ const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ date, label = '',
         inputFormat="DD/MM/YYYY hh:mm A"
         value={date}
         label={label}
-    
+        onAccept={onAccept}
         onChange={onChange}
         minDateTime={minDate ? dayjs(minDate) : undefined}
         minutesStep={15}

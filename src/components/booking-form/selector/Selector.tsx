@@ -10,18 +10,21 @@ interface SelectorProps {
   disabled?: boolean;
   label: string;
   menuItems: React.ReactNode;
+  dataTestId: string;
   onChange: (event: SelectChangeEvent<string>) => void;
 }
 
-const Selector = ({ value, label, menuItems, disabled = false, errorMsg = '', onChange }: SelectorProps) => {
+const Selector = ({ value, label, menuItems, disabled = false, errorMsg = '', dataTestId, onChange }: SelectorProps) => {
 
   return (
     <FormControl
+
       error={Boolean(errorMsg)}
       disabled={disabled}
       fullWidth>
       <InputLabel >{label}</InputLabel>
       <Select
+        data-testid={dataTestId}
         value={value}
         MenuProps={{ disableAutoFocusItem: true }}
         onChange={onChange}

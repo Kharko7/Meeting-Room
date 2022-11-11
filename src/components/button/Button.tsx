@@ -8,6 +8,7 @@ interface ButtonInterface {
   disabled?: boolean;
   styleType?: "success" | "warning" | "error" | undefined;
   type?: "button" | "submit" | "reset" | undefined;
+  dataTestId?: string
   onclick: () => void;
 }
 
@@ -16,6 +17,7 @@ const Button = ({
   size = "medium",
   disabled = false,
   type = "button",
+  dataTestId = '',
   onclick,
   styleType = "success",
 }: ButtonInterface) => {
@@ -23,6 +25,7 @@ const Button = ({
 
   return (
     <button
+      data-testid={dataTestId}
       className={MainBtnCn}
       disabled={disabled}
       type={type}

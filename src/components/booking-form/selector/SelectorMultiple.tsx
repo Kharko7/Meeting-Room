@@ -9,10 +9,11 @@ interface SelectorMultipleProps {
   disabled?: boolean;
   label: string;
   daysOfWeek: Record<string, number>;
+  dataTestId: string;
   onChange: (event: SelectChangeEvent<string[]>) => void;
 }
 
-const SelectorMultiple = ({ value, label, daysOfWeek, onChange }: SelectorMultipleProps) => {
+const SelectorMultiple = ({ dataTestId, value, label, daysOfWeek, onChange }: SelectorMultipleProps) => {
 
   const menuItems = Object.keys(daysOfWeek).map(week => (
     <MenuItem
@@ -27,6 +28,7 @@ const SelectorMultiple = ({ value, label, daysOfWeek, onChange }: SelectorMultip
       fullWidth>
       <InputLabel >{label}</InputLabel>
       <Select
+        data-testid={dataTestId}
         multiple
         value={value}
         MenuProps={{ disableAutoFocusItem: true }}

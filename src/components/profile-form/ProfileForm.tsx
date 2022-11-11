@@ -1,11 +1,11 @@
 import TextField from '@mui/material/TextField';
 import {Box} from '@mui/material';
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss'
 import Avatar from './avatar/Avatar';
 import Button from 'components/button';
-import {SubmitHandler, useForm, Controller, useController} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CheckboxWithLabel from 'components/checkbox-with-label';
 import {getFromLocalStorage, removeFromLocalStorage, setToLocalStorage} from 'services/local-storage.service';
 import {Errors} from 'constants/errors';
@@ -141,6 +141,7 @@ const ProfileForm = () => {
             </Box>
             <Box sx={{textAlign: 'end'}}>
                 <Button
+                    dataTestId='button-log-out'
                     onclick={handleLogOut}
                 >
                     Log out
