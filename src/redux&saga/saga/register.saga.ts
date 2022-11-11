@@ -5,16 +5,13 @@ import {ResponsePopup} from "../../components/tools/simple/response-popup/Respon
 import {LoginProps} from "../../interfaces/auth/AuthProps";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
+import {fnErrorSaga, fnRegisterSaga} from "./fn/fn.saga";
 
-function* handleRegister(action:any) {
+function* handleRegister(action: any) {
     try {
-        yield ResponsePopup.Pending()
-        const data:AxiosResponse = yield call(UserService.register,action.payload);
-        console.log(data)
-        yield put(authActions.success(true))
-        yield ResponsePopup.Success()
+        yield fnRegisterSaga(action);
     } catch (error: any) {
-        yield ResponsePopup.ErrorPopup(error)
+        yield fnErrorSaga(error);
     }
 }
 

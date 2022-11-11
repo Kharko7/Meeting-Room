@@ -19,7 +19,7 @@ const cn = classNames.bind(styles);
 interface FormValues {
     firsName: string;
     lastName: string;
-};
+}
 
 type FormName = 'firsName' | 'lastName'
 const userName: FormName[] = ['firsName', 'lastName']
@@ -44,10 +44,11 @@ const ProfileForm = () => {
     const handleSelectedImg = (file: File) => {
         setSelectedImage(file)
     }
-    const handleLogOut = () => {
-        removeFromLocalStorage('token')
+    const handleLogOut =async () => {
+        removeFromLocalStorage('access')
+        removeFromLocalStorage('user')
         /// dispatch(userLogout())
-        navigate('/login', {replace: true})
+        navigate('/auth/login', {replace: true})
     }
 
     const {
@@ -58,13 +59,18 @@ const ProfileForm = () => {
     } = useForm<FormValues>({mode: 'onBlur'});
 
     const submit = (data: any) => {
-        console.log(data)
+        // console.log(data)
         reset()
     }
 
-    const themeLS = localStorage.getItem('theme');
-    // @ts-ignore
-    let theme = JSON.parse(themeLS);
+    const themeLS = getFromLocalStorage('theme');
+    let theme = themeLS?JSON.parse(themeLS):undefined;
+
+
+    const userJSON = getFromLocalStorage('user'); // data from response
+    let user_data = userJSON?JSON.parse(userJSON):undefined;
+
+    console.log(user_data)
 
 
     const inputUserName = userName.map((name: FormName) => (
@@ -94,7 +100,7 @@ const ProfileForm = () => {
             <div className={cn('profile')}><Box sx={{color: 'var(--accent-text-color)'}} component="h1"> Profile </Box>
                 <div className={cn('toggle')}><Toggle type={"themeToggle"} onclick={() => {
                     theme = !theme;
-                    localStorage.setItem('theme', JSON.stringify(theme));
+                    setToLocalStorage('theme',JSON.stringify(theme));
                     theme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
                 }} size={"large"}/>
 

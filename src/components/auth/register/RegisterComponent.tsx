@@ -11,14 +11,10 @@ import styles from './RegisterPage.module.scss'
 import {checkPasswordMatch, registerClear} from "../../../utils/auth-foo";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
-import {ResponsePopup} from "../../tools/simple/response-popup/ResponsePopup";
-
-import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {RegisterSchema} from "../../../utils/yup.validation";
 
 import 'animate.css';
-
 
 
 const cn = classNames.bind(styles)
@@ -32,14 +28,14 @@ const RegisterComponent = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    let {errorCode, pending, success} = useAppSelector(state => state.auth);
+    let {success} = useAppSelector(state => state.auth);
 
     const [errorPassword, setErrorPassword] = useState<boolean>(false);
 
     useEffect(() => {
         if (success) {
-            authActions.success(false);
-            navigate('/login')
+            dispatch(authActions.success(false))
+            navigate('/auth/login')
         }
     }, [success])
 
@@ -100,7 +96,7 @@ const RegisterComponent = () => {
                     </div>
                 </div>
             </form>
-            <NavLink to={"/login"} className={cn("switch")}>
+            <NavLink to={"/auth/login"} className={cn("switch")}>
                 <SwitchToLoginComponent/>
             </NavLink>
 

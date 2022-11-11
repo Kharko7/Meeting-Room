@@ -12,6 +12,8 @@ import KeyIcon from '@mui/icons-material/Key';
 
 import classNames from 'classnames/bind';
 import styles from './ChangePassword.module.scss'
+import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
+import {authActions} from "../../../redux&saga/slices/auth.slice";
 
 const cn = classNames.bind(styles)
 
@@ -20,27 +22,28 @@ const ChangePasswordComponent = () => {
     mode: 'all',
     resolver: yupResolver(ChangePasswordSchema)
   });
+
+  const dispatch = useAppDispatch();
+
+  let {changePassword} = useAppSelector(state => state.auth);
+
   const navigate = useNavigate();
 
   const [error, setError] = useState<boolean>(false);
 
-
-  const user = localStorage.getItem("user");
-  const userParse = user && JSON.parse(user);
-  let login:string = "";
-  if (user) {
-    login = userParse.name + " " + userParse.surname;
-  }
+  console.log(changePassword);
 
 
   const submit: SubmitHandler<any> = async (data) => {
     if (checkPasswordMatch(data.password,data.passwordConfirm)) {
-      navigate('/login');
+      // navigate('/login');
+      dispatch(authActions.changePassword(data.password));
     } else {
       setError(true);
     }
     reset();
   }
+
   return (
     <div className={cn("changePassword_container")}>
       <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>

@@ -7,7 +7,7 @@ const urls = {
     // register:'/signup',
     register:'/users',
     forgotPassword: '/forgotPassword',
-    getInvitation: '/getInvitation',
+    getInvitation: 'admin/user',
     changePassword:'/changePassword'
 };
 

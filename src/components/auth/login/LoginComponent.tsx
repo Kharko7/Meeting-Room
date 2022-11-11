@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink, useLocation, useNavigate} from "react-router-dom";
 
 import 'animate.css';
 
@@ -10,6 +10,10 @@ import {ErrorComponent, InputRe} from "../../index";
 import Button from "components/button";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
+import {createBrowserHistory} from "history";
+import {getFromLocalStorage} from "../../../services/local-storage.service";
+// import browserHistory from 'react-router'
+
 
 
 const cn = classNames.bind(styles)
@@ -19,25 +23,39 @@ const LoginComponent = () => {
 
     const {reset, register, handleSubmit, formState: {isDirty}} = useForm({mode: 'all'});
 
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
 
-    let {errorCode} = useAppSelector(state => state.auth);
+    const {errorCode,user,success} = useAppSelector(state => state.auth);
+
+    console.log(success);
+
+    const browserHistory = createBrowserHistory()
+
+
+
+
+        useEffect(()=>{
+        success&&navigate('/rooms',{ replace: true })
+        dispatch(authActions.success(false));
+        // window.history.replaceState(null, '', "");
+    },[success])
 
     const submit: SubmitHandler<any> = async (user) => {
         await dispatch(authActions.login(user));
         await reset();
     }
 
+    // if (getFromLocalStorage('access')) {
+    //     window.location.replace('/rooms');
+    // }
+
 
     return (
         <div className={cn("login_container","animate__bounceIn animate__zoomIn")}>
             <div className={cn("logo_container")}>
                 <div className={cn("logo")}>
-                    {/*<img*/}
-                    {/*    src="https://i.pinimg.com/originals/c9/af/8e/c9af8efe164f75b2d3aaebf5534892b0.png"*/}
-                    {/*    alt="logo"*/}
-                    {/*    className={cn('img')}*/}
-                    {/*/>*/}
                     <span className={cn('incora')}>INCORA</span>
                 </div>
                 {/*<div className={cn("title")}>Booking</div>*/}
@@ -81,7 +99,7 @@ const LoginComponent = () => {
                 </div>
             </form>
             <div className={cn("link")}>
-                <NavLink to={"/forgotPassword"}>Forgot password? </NavLink>
+                <NavLink to={"/auth/forgotPassword"}><span>Forgot password?</span></NavLink>
             </div>
         </div>
     );
