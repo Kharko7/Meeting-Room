@@ -35,7 +35,7 @@ const LoginComponent = () => {
 
 
         useEffect(()=>{
-        success&&navigate('/rooms',{ replace: true })
+        success && Navigate({ to: "/rooms", replace: true });
         dispatch(authActions.success(false));
         // window.history.replaceState(null, '', "");
     },[success])

@@ -2,8 +2,8 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import classNames from 'classnames/bind';
 import styles from './toggle.module.scss'
-const cn = classNames.bind(styles)
 import { useState } from "react";
+const cn = classNames.bind(styles)
 
 
 interface toggle {

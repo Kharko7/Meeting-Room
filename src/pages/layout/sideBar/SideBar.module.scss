@@ -9,9 +9,9 @@
 // :global(.infinite-scroll-component__outerdiv) {
 //   margin-top: 30px;
 // }
-.scroll{
-    margin-top: 30px;
-      height: 60vh !important;
+.scroll {
+  margin-top: 30px;
+  height: 60vh !important;
 }
 .position {
   position: fixed;
@@ -57,7 +57,7 @@
   justify-content: center;
 }
 
-.firstLetters{
+.firstLetters {
   font-size: 24px;
   padding-left: 3px;
 }
@@ -74,7 +74,7 @@
   margin-top: 20px;
 
   padding-top: 20px;
-height:400px;
+  height: 400px;
   border-top: 1px solid var(--myRoomContainer-borderTop);
 }
 .labelMyRooms {
