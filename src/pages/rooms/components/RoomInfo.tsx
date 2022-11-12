@@ -11,9 +11,7 @@ const RoomInfo = ({ openInfo, setOpenInfo, setOpen }) => {
     (state) => state.rooms.roomSoonestBookingsDays
   );
   const length = roomInfo.length;
-  // console.log(roomInfo);
   const roomSoonestBookingsDays = length != 0 ? roomInfo[0].bookings : [];
-  const arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, , 1, 1, 1];
   return (
     <span
       data-testid="info-box"
@@ -82,30 +80,3 @@ const RoomInfo = ({ openInfo, setOpenInfo, setOpen }) => {
   );
 };
 export default RoomInfo;
-// bookingId
-// :
-// 117
-// creatorId_FK
-// :
-// 144
-// description
-// :
-// "Recurring meeting 01"
-// endDateTime
-// :
-// "2022-11-18T19:00:00.000Z"
-// isRecurring
-// :
-// true
-// roomId
-// :
-// {roomId: 3, name: 'black room', floor: 2, capacity: 4, office_FK: 1}
-// room_FK
-// :
-// 3
-// startDateTime
-// :
-// "2022-11-18T16:00:00.000Z"
-// title
-// :
-// "Recurring meeting 01"
