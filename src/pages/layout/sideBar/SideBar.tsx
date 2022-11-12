@@ -1,16 +1,19 @@
 import styles from "./SideBar.module.scss";
-import MockedData from "./components/MockedData";
-import MyRooms from "./components/MyRooms";
+import { useEffect } from "react";
+
+import OwnBookingsContainer from "./components/OwnBookingsContainer";
 import ActionButton from "../../../components/icon-button/IconButton";
 import NavButtons from "pages/layout/sideBar/NavButtons";
 import { NavLink, useLocation } from "react-router-dom";
 import {FirstLetters} from "../../../utils/get-first-letters-by-login";
 import {PseudoAvatar} from "../../../components";
+import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { ownBookingsActions } from "redux&saga/slices/ownBookings.slice";
 type SideBarProps = { userName: string };
 
 const SideBar = ({ userName }: SideBarProps) => {
-
-  const location = useLocation()
+  const bookings = useAppSelector((state) => state.ownBookings);
+  const location = useLocation();
 
   return (
     <div className={styles.position}>
@@ -24,11 +27,11 @@ const SideBar = ({ userName }: SideBarProps) => {
             <ActionButton
               type="settings"
               size="medium"
-              onclick={() => { }}
+              onclick={() => {}}
             ></ActionButton>
           </NavLink>
         </div>
-        <MyRooms mockedData={MockedData}></MyRooms>
+        <OwnBookingsContainer />
       </div>
       <NavButtons />
     </div>

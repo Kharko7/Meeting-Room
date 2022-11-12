@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ActionButton from "../../../../components/icon-button/IconButton";
+import ActionButton from "../../../../../components/icon-button/IconButton";
 import styles from "../SideBar.module.scss";
 import stylesModal from "./modal.module.scss";
 import Modal from "../../../../components/modal/Modal";
@@ -18,6 +18,17 @@ interface MyroomsData {
   endTime: string;
   startTime: string;
 }
+interface bookings {
+  bookingId: number;
+  title: string;
+  description: string;
+  startDateTime: string;
+  endDateTime: string;
+  isRecurring: boolean;
+  creatorId_FK: number;
+  room_FK: number;
+}
+
 const MyRoomCard = ({ mockedData }: Data) => {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);

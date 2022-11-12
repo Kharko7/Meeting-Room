@@ -1,0 +1,56 @@
+.container {
+  position: relative;
+  display: flex;
+  height: 40px;
+  width: auto;
+  &.small {
+    height: 20px;
+  }
+  &.medium {
+    height: 30px;
+  }
+  &.large {
+    height: 40px;
+  }
+}
+.r {
+  border-radius: 40px;
+  box-shadow: var(--inset-box-shadow);
+  animation: animate 2.5s linear infinite;
+  &.small {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+  }
+  &.medium {
+    width: 20px;
+    height: 20px;
+    margin: 0 7px;
+  }
+  &.large {
+    width: 30px;
+    height: 30px;
+    margin: 0 7px;
+  }
+}
+.r1 {
+  animation-delay: 0.25s;
+}
+.r2 {
+  animation-delay: 0.5s;
+}
+.r3 {
+  animation-delay: 0.75s;
+}
+.r4 {
+  animation-delay: 1s;
+}
+.r5 {
+  animation-delay: 1.25s;
+}
+
+@keyframes animate {
+  0% {
+    box-shadow: var(--outset-box-shadow);
+  }
+}
