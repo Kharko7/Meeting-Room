@@ -13,12 +13,12 @@ interface rooms {
 }
 export interface InitialStateRooms {
   rooms: Array<rooms> | [];
-  roomSoonestBookingsDays:any;
+  roomSoonestBookingsDays: any;
 }
 
 const initialState: InitialStateRooms = {
   rooms: [],
-  roomSoonestBookingsDays:[]
+  roomSoonestBookingsDays: [],
 };
 
 const roomsSlice = createSlice({
@@ -30,9 +30,9 @@ const roomsSlice = createSlice({
       // console.log(action.payload);
       state.rooms = action.payload;
     },
-    getSoonestBookingsDays() {},
+    getSoonestBookingsDays(state, action) {},
     setSoonestBookingsDays(state, action) {
-
+      state.roomSoonestBookingsDays = action.payload;
     },
 
     resetState() {

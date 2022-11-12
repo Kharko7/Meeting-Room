@@ -7,8 +7,10 @@ export const RoomsService = {
   getRooms: async () => {
     return await axiosService.get("rooms");
   },
-  getSoonestBookingsDays: async (a:number) => {
-    return await axiosService.get(`rooms/info/?roomId=${a}&soonestBookingsDays=20`);
+  getSoonestBookingsDays: async (roomId: number) => {
+    return await axiosService.get(
+      `rooms/info/?roomId=${roomId}&soonestBookingsDays=20`
+    );
   },
 };
 

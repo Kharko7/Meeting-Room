@@ -3,7 +3,8 @@ import styles from "../rooms.module.scss";
 import cn from "classnames";
 import ModalRooms from "./ModalRooms";
 import RoomInfo from "./RoomInfo";
-
+import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
+import {roomsActions} from 'redux&saga/slices/rooms.slice'
 interface MyroomsData {
   data: rooms;
 }
@@ -34,8 +35,19 @@ interface rooms {
 }
 const RoomCard = ({ data }: MyroomsData) => {
   const [open, setOpen] = useState(false);
+    const roomInfo =  useAppSelector(
+      (state) => state.rooms.roomSoonestBookingsDays
+    );
+    const length = roomInfo.length;
   const [openInfo, setOpenInfo] = useState(false);
-
+  const a = 2;
+  const dispatch = useAppDispatch();
+  const showSoonestBookings = (roomId: number) => {
+    dispatch(roomsActions.getSoonestBookingsDays(roomId));
+  };
+  const setSoonestBookings = () => {
+    dispatch(roomsActions.setSoonestBookingsDays([]));
+  };
   return (
     <div className={styles.card} key={data.roomId} data-info={openInfo}>
       <div
@@ -94,6 +106,8 @@ const RoomCard = ({ data }: MyroomsData) => {
             data-testid="info-button"
             className={styles.info}
             onClick={(event) => {
+             openInfo && length > 0 && setTimeout(()=>setSoonestBookings(),1000) ;
+              !openInfo && showSoonestBookings(data.roomId);
               setOpenInfo((prev) => !prev);
               event.stopPropagation();
             }}
@@ -115,7 +129,8 @@ const RoomCard = ({ data }: MyroomsData) => {
         setOpenInfo={setOpenInfo}
         openInfo={openInfo}
         setOpen={setOpen}
-      ></RoomInfo>
+      />
+
       {open && <ModalRooms setOpenModal={setOpen}></ModalRooms>}
       <div className={cn(openInfo && styles.blur)}></div>
     </div>
