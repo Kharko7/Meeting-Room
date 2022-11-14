@@ -14,14 +14,14 @@ function* handleLogin(action:any) {
 }
 
 function* watchLoginFlow() {
-    while (true) {
-        const action: PayloadAction<LoginProps> = yield take(
-            authActions.login.type
-        );
-        yield fork(handleLogin, action);
-    }
+  while (true) {
+    const action: PayloadAction<LoginProps> = yield take(
+      authActions.login.type
+    );
+    yield fork(handleLogin, action);
+  }
 }
 
 export function* loginSaga() {
-    yield fork(watchLoginFlow);
+  yield fork(watchLoginFlow);
 }

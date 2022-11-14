@@ -2,6 +2,17 @@
 * {
   text-align: left;
 }
+
+// :global(.infinite-scroll-component) {
+//   height: 60vh ;
+// }
+// :global(.infinite-scroll-component__outerdiv) {
+//   margin-top: 30px;
+// }
+.scroll {
+  margin-top: 30px;
+  height: 60vh !important;
+}
 .position {
   position: fixed;
   right: 0;
@@ -46,7 +57,7 @@
   justify-content: center;
 }
 
-.firstLetters{
+.firstLetters {
   font-size: 24px;
   padding-left: 3px;
 }
@@ -61,8 +72,9 @@
 
 .myRoomsContainer {
   margin-top: 20px;
-  padding-top: 20px;
 
+  padding-top: 20px;
+  height: 400px;
   border-top: 1px solid var(--myRoomContainer-borderTop);
 }
 .labelMyRooms {
@@ -76,25 +88,34 @@
 }
 .roomsCardsContainer {
   display: flex;
+  margin-top: 8px;
+  margin-bottom: 10px;
   flex-direction: column;
   gap: 25px;
-  padding: 15px;
+  padding: 0 15px 0 15px;
 }
 
 //My Room Card
 
 .roomCardContainer {
   display: flex;
-  height: 90px;
+  height: 110px;
+
   padding: 10px;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
 
   color: var(--primary-text-color);
 
   border-radius: 10px;
   box-shadow: var(--outset-box-shadow);
-  cursor: default;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8),
+      -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
+      inset 4px 4px 10px rgb(0 0 0 / 2%);
+  }
 }
 .headerRoomCard {
   display: flex;
@@ -103,13 +124,31 @@
 .labelRoomName {
   color: var(--accent-color);
   text-transform: uppercase;
-  font-size: 14px;
-
+  font-size: 12px;
+  line-height: 23px;
+  margin-bottom: 0;
   cursor: default;
 }
-
+.description {
+  color: var(--accent-color);
+  font-size: 12px;
+  // text-transform: uppercase;
+}
+.labelDescription {
+  color: var(--primary-text-color);
+  margin-top: 2px;
+  font-size: 12px;
+  height: 45px;
+}
+.time {
+  color: var(--primary-text-color);
+}
 .labelTime {
   font-size: 12px;
+}
+.labelTimeHeading {
+  font-size: 12px;
+  color: var(--accent-color);
 }
 .roomInfo {
   display: flex;
@@ -142,4 +181,3 @@
 
   font-size: 12px;
 }
-

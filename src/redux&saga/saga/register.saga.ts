@@ -16,14 +16,14 @@ function* handleRegister(action: any) {
 }
 
 function* watchRegisterFlow() {
-    while (true) {
-        const action: PayloadAction<LoginProps> = yield take(
-            authActions.register.type
-        );
-        yield fork(handleRegister, action);
-    }
+  while (true) {
+    const action: PayloadAction<LoginProps> = yield take(
+      authActions.register.type
+    );
+    yield fork(handleRegister, action);
+  }
 }
 
 export function* registerSaga() {
-    yield fork(watchRegisterFlow);
+  yield fork(watchRegisterFlow);
 }

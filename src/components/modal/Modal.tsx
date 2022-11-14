@@ -1,5 +1,5 @@
 import styles from "./modal.module.scss";
-import ActionButton from "../icon-button/IconButton";
+import IconButton from "../icon-button/IconButton";
 interface modal {
   closeModal: (value: boolean) => void;
   children?: React.ReactNode;
@@ -7,16 +7,17 @@ interface modal {
 
 const Modal = ({ closeModal, children }: modal) => {
   return (
-    <div className={styles.modalBackground}>
+    <div className={styles.modalBackground} data-testid="modal">
       <div className={styles.modalContainer}>
         <span className={styles.close}>
-          <ActionButton
+          <IconButton
+
             type="close"
             size="medium"
             onclick={() => {
               closeModal(false);
             }}
-          ></ActionButton>
+          ></IconButton>
         </span>
         {children}
       </div>

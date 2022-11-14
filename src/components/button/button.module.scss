@@ -16,6 +16,7 @@
   box-shadow:var( --outset-box-shadow);
   background: var(--base1);
   cursor: pointer;
+
   &:hover {
     background: var( --primary-hover-button-color);
     box-shadow: var( --outset-box-shadow)
@@ -43,6 +44,19 @@
 
     font-size: 18px;
   }
+
+}
+
+.smallAndHigh{
+  width: 120px;
+  height: 50px;
+  font-size: 12px;
+}
+
+.smallAndHigh{
+  width: 120px;
+  height: 50px;
+  font-size: 12px;
 }
 
 .smallAndHigh{
@@ -69,6 +83,17 @@
   }
   &.error {
     color: #ff6a6a;
+  }
+  button:disabled & {
+    color: #cfcfd4;
+  }
+  button:disabled:hover & {
+    color: #cfcfd4;
+  }
+  button:disabled:active &,
+  button:disabled:focus-visible & {
+    display: inline-block;
+    transform: scale(1);
   }
 }
 

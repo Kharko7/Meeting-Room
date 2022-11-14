@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./selector.module.scss";
 import FloorSelector from "./FloorSelector";
 import RoomsSelector from "./RoomsSelector";
+import CapacitySelector from "./CapacitySelector";
 interface selector {
   floor?: string;
   name?: string;
@@ -14,11 +15,10 @@ const Selector = ({ floor = "1", name }: selector) => {
   const arr = Array.from({ length: floorCount }, (_, i) => i + 1);
   const [currentFloor, setFloor] = useState(floor);
 
-
   return (
     <div className={styles.container}>
       <FloorSelector arr={arr} floor={currentFloor} setFloor={setFloor} />
-      <RoomsSelector floor={currentFloor} name={name} />
+      <CapacitySelector></CapacitySelector>
     </div>
   );
 };
