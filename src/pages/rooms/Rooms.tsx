@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 import Loader from "pages/layout/loader/Loader";
 const Rooms = () => {
-  const floorCount = 3;
-  const arr = Array.from({ length: floorCount }, (_, i) => i + 1);
+  // const floorCount = 3;
+  const floors = useAppSelector((state) => state.rooms.floors);
   const { rooms } = useAppSelector((state) => state.rooms);
+  const filter = useAppSelector((state) => state.rooms.filter);
+  const dataFloor = useAppSelector((state) => state.rooms.roomsByFloor[Number(filter) - 1])
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(roomsActions.getRooms());
@@ -18,16 +20,18 @@ const Rooms = () => {
       <div className={styles.mainContainer}>
         <Header />
         <div className={styles.roomsList}>
-          { rooms.length > 0  ? (
-            arr.map((currentFloor, index) => {
-              return (
-                <Floors
-                  key={index}
-                  data={rooms}
-                  currentFloor={currentFloor}
-                ></Floors>
-              );
+          {rooms.length > 0 && filter == "all" ? (
+            floors.map((currentFloor, index) => {
+              return <Floors key={index} currentFloor={currentFloor}></Floors>;
             })
+          ) : filter !== "all" ? (
+            dataFloor.length > 0 ? (
+              <Floors currentFloor={Number(filter)}></Floors>
+            ) : (
+              <p className={styles.noFloor}>
+                There are no meeting rooms on this floor
+              </p>
+            )
           ) : (
             <div className={styles.loader}>
               <Loader size="large" />

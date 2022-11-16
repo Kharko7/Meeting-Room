@@ -20,7 +20,7 @@ import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { BookingEvent } from "interfaces/booking/Booking";
 //@ts-ignore
-const ModalRooms = ({ setOpenModal }) => {
+const ModalOwnRooms = ({ setOpenModal }) => {
   const weekends = getFromLocalStorage("weekends");
   const { setAlert } = useContext(SnackBarContext);
   const dispatch = useAppDispatch();
@@ -113,4 +113,4 @@ const ModalRooms = ({ setOpenModal }) => {
   );
 };
 
-export default ModalRooms;
+export default ModalOwnRooms;

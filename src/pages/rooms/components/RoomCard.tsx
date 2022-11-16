@@ -4,7 +4,12 @@ import cn from "classnames";
 import ModalRooms from "./ModalRooms";
 import RoomInfo from "./RoomInfo";
 import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
-import {roomsActions} from 'redux&saga/slices/rooms.slice'
+import { roomsActions } from "redux&saga/slices/rooms.slice";
+import {
+  setRoomId,
+  setFloor,
+
+} from "redux&saga/slices/booking.slice";
 interface MyroomsData {
   data: rooms;
 }
@@ -35,13 +40,21 @@ interface rooms {
 }
 const RoomCard = ({ data }: MyroomsData) => {
   const [open, setOpen] = useState(false);
-    const roomInfo =  useAppSelector(
-      (state) => state.rooms.roomSoonestBookingsDays
-    );
-    const length = roomInfo.length;
+  const dispatch = useAppDispatch();
+
+  const handleBookingRoom = () => {
+    dispatch(setRoomId(data.roomId));
+    dispatch(setFloor(data.floor.toString()));
+  };
+  const roomInfo = useAppSelector(
+    (state) => state.rooms.roomSoonestBookingsDays
+  );
+  const roomFloor = useAppSelector((state) => state.rooms.roomsByFloor);
+  console.log(roomFloor);
+  const length = roomInfo.length;
   const [openInfo, setOpenInfo] = useState(false);
   const a = 2;
-  const dispatch = useAppDispatch();
+
   const showSoonestBookings = (roomId: number) => {
     dispatch(roomsActions.getSoonestBookingsDays(roomId));
   };
@@ -60,6 +73,7 @@ const RoomCard = ({ data }: MyroomsData) => {
         onClick={() => {
           setOpen(true);
           setOpenInfo(false);
+          handleBookingRoom();
         }}
       >
         <div className={styles.headerRoomCard}>
@@ -106,7 +120,9 @@ const RoomCard = ({ data }: MyroomsData) => {
             data-testid="info-button"
             className={styles.info}
             onClick={(event) => {
-             openInfo && length > 0 && setTimeout(()=>setSoonestBookings(),1000) ;
+              openInfo &&
+                length > 0 &&
+                setTimeout(() => setSoonestBookings(), 1000);
               !openInfo && showSoonestBookings(data.roomId);
               setOpenInfo((prev) => !prev);
               event.stopPropagation();
