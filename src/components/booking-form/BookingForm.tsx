@@ -281,33 +281,12 @@ const BookingForm = ({
           </Grid>
         </Grid>
       </Box>
-      {/* <ConfirmDialog
+      <ConfirmDialog
         open={openConfirmation}
         message="Do you want to delete event"
         onConfirm={onConfirm}
         onDismiss={onDismiss}
-      /> */}
-      {openConfirmation && (
-        <Modal closeBtn={false}>
-          <p
-            style={{
-              margin: "0px 0px 25px",
-              fontSize: "19px",
-              textAlign: "center",
-              color: "#555",
-            }}
-          >
-            Do you want to delete event?
-          </p>
-          <div style={{ display: "flex", gap: "10px" }}>
-            {" "}
-            <Button styleType="error" onclick={() => onConfirm()}>
-              Yes
-            </Button>
-            <Button onclick={() => onDismiss()}>No</Button>
-          </div>
-        </Modal>
-      )}
+      />
     </>
   );
 };
