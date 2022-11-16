@@ -23,7 +23,7 @@ const initialState: InitialStateBookig = {
     start: '',
     end: '',
     roomId: null,
-    floor: null,
+    floor: '1',
     invitedIds: [],
     daysOfWeek: [],
     bookings: [],

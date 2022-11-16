@@ -3,7 +3,7 @@ export const initialState = {
   start: '',
   end: '',
   loading: false,
-  floor: null,
+  floor:'1',
   roomId: null,
   description: '',
   invitedIds: [],
