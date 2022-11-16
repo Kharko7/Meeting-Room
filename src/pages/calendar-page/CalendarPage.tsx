@@ -137,7 +137,6 @@ const CalendarPage = () => {
     ////To Do axios edit//////////////////
     handleCloseModal();
   };
-
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
       <Calendar

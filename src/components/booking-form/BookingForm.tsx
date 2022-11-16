@@ -57,7 +57,7 @@ const BookingForm = ({
     daysOfWeek,
     bookings,
   } = useAppSelector((state) => state.booking);
-
+  const { roomsByFloor, floors } = useAppSelector((state) => state.rooms);
   const onConfirm = () => {
     handleRemoveEvent();
     setOpenConfirmation(false);
@@ -123,8 +123,8 @@ const BookingForm = ({
     );
   };
 
-  const roomsByFloor = useAppSelector((state) => state.rooms.roomsByFloor);
-  const floors = useAppSelector((state) => state.rooms.floors);
+
+
   const menuItemsRoom =
     roomsByFloor[Number(floor) - 1].length > 0 ? (
       roomsByFloor[Number(floor) - 1].map((room) => {
@@ -134,11 +134,7 @@ const BookingForm = ({
           </MenuItem>
         );
       })
-    ) : (
-      <MenuItem key={"no"} value={1}>
-        There are no offices on this floor
-      </MenuItem>
-    );
+    ) : null;
   const menuItemsFloor = floors.map((floor) => {
     return (
       roomsByFloor[Number(floor) - 1].length > 0 && (

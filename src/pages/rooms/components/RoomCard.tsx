@@ -41,7 +41,6 @@ interface rooms {
 const RoomCard = ({ data }: MyroomsData) => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
-
   const handleBookingRoom = () => {
     dispatch(setRoomId(data.roomId));
     dispatch(setFloor(data.floor.toString()));
@@ -50,7 +49,6 @@ const RoomCard = ({ data }: MyroomsData) => {
     (state) => state.rooms.roomSoonestBookingsDays
   );
   const roomFloor = useAppSelector((state) => state.rooms.roomsByFloor);
-  console.log(roomFloor);
   const length = roomInfo.length;
   const [openInfo, setOpenInfo] = useState(false);
   const a = 2;

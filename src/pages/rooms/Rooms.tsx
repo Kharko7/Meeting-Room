@@ -6,10 +6,7 @@ import { useEffect } from "react";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 import Loader from "pages/layout/loader/Loader";
 const Rooms = () => {
-  // const floorCount = 3;
-  const floors = useAppSelector((state) => state.rooms.floors);
-  const { rooms } = useAppSelector((state) => state.rooms);
-  const filter = useAppSelector((state) => state.rooms.filter);
+  const { rooms, floors, filter } = useAppSelector((state) => state.rooms);
   const dataFloor = useAppSelector((state) => state.rooms.roomsByFloor[Number(filter) - 1])
   const dispatch = useAppDispatch();
   useEffect(() => {
