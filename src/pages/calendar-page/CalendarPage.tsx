@@ -94,7 +94,9 @@ const CalendarPage = () => {
   );
 
   const handleRemoveEvent = () => {
-    /// To Do axios Remove Event by ID /////////////////////
+    // if (bookingId) {
+    //   dispatch(deleteBookingById(bookingId))
+    // }
     handleCloseModal();
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

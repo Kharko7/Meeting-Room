@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+import { Box } from '@material-ui/core';
 
 const userss = ['Yaroslav Kharko', 'fsdxca ssds', 'oleg erdo', 'andse lidds', 'nikita oluua', 'roma sasdk', 'fjwoiew ldfas', 'sadfj owerw', 'aaaa aaa', 'daaad daa', 'aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa']
 
@@ -52,16 +53,18 @@ const InviteCoworkers = () => {
         onChange={(e) => setInputValue(e.target.value)}
       />
       <MenuList
-        sx={{ width: '430px', height: '188px', overflow: 'hidden' }}>
+        sx={{ height: '225px', overflow: 'hidden', zIndex: '1' }}>
         {listUsers}
       </MenuList>
-      {invitedUsers.length > 0 && (
-        <MenuList
-          sx={{ width: '430px', borderTop: '3px solid var(--accent-text-color)', overflow: 'auto', maxHeight: '188px', }}
-        >
-          {listInvitedUsers}
-        </MenuList>
-      )}
+      {
+        invitedUsers.length > 0 && (
+          <MenuList
+            sx={{ borderTop: '3px solid var(--accent-text-color)', overflow: 'auto', maxHeight: '220px', zIndex: '1' }}
+          >
+            {listInvitedUsers}
+          </MenuList>
+        )
+      }
     </>
   );
 }

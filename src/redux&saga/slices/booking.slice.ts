@@ -35,6 +35,9 @@ const bookingSlice = createSlice({
     name: 'booking',
     initialState,
     reducers: {
+        // deleteBookingById(state, action: PayloadAction<number>) {
+        //     state.loading = true;
+        // },
         getAllBookings(state, action: PayloadAction<Record<string, string>>) {
             state.loading = true;
         },
@@ -121,6 +124,7 @@ export const {
     addOneBooking,
     addRecurringBooking,
     addOneBookingSuccess,
+    //deleteBookingById,
 } = bookingSlice.actions;
 
 const bookingReducer = bookingSlice.reducer;

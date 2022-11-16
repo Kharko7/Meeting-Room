@@ -17,7 +17,7 @@ const Toggle = ({ onclick,size="medium",type=null}: toggle) => {
 
 
     return (
-    <div className={MainCn} onClick={onclick}>
+    <div className={MainCn} data-testid={'toggle'} onClick={onclick}>
       <input type="checkbox"/>
       {type&&
         <>
