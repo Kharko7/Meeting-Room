@@ -6,23 +6,36 @@ import { useEffect } from "react";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 import Loader from "pages/layout/loader/Loader";
 const Rooms = () => {
-  const { rooms, floors, filter } = useAppSelector((state) => state.rooms);
-  const dataFloor = useAppSelector((state) => state.rooms.roomsByFloor[Number(filter) - 1])
+  const { roomsByFloor, floors, filter, rooms } = useAppSelector(
+    (state) => state.rooms
+  );
   const dispatch = useAppDispatch();
+  console.log(rooms);
+  // setInterval(() => {
+  //   console.log('60 second left')
+  //   rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
+  // }, 60000);
   useEffect(() => {
-    dispatch(roomsActions.getRooms());
+   rooms.length == 0 && dispatch(roomsActions.getRooms());
+
+    // rooms.length == 0 && dispatch(roomsActions.getRoomsStatus());
   }, []);
+  useEffect(() => {
+    console.log(rooms, "useEffect");
+    rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
+  }, [rooms]);
+
   return (
     <div className={styles.roomsContainer}>
       <div className={styles.mainContainer}>
         <Header />
         <div className={styles.roomsList}>
-          {rooms.length > 0 && filter == "all" ? (
+          {Object.keys(roomsByFloor).length > 0 && filter == "all" ? (
             floors.map((currentFloor, index) => {
               return <Floors key={index} currentFloor={currentFloor}></Floors>;
             })
           ) : filter !== "all" ? (
-            dataFloor.length > 0 ? (
+            Object.keys(roomsByFloor).length > 0 ? (
               <Floors currentFloor={Number(filter)}></Floors>
             ) : (
               <p className={styles.noFloor}>

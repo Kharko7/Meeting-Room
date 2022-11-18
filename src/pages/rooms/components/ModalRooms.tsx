@@ -101,12 +101,15 @@ const ModalRooms = ({ setOpenModal }) => {
   return (
     <Modal data-testid="modal-1" closeModal={handleCloseModal}>
       {loading ? (
-        <Loader size="medium"></Loader>
+        <div style={{ paddingTop: "20px" }}>
+          <Loader size="medium"></Loader>
+        </div>
       ) : (
         <BookingForm
+          linkToCalendar={true}
           handleSubmit={handleSubmit}
           handleRemoveEvent={handleRemoveEvent}
-          edit={Boolean(bookingId)}
+          edit={false}
         />
       )}
     </Modal>

@@ -38,10 +38,7 @@
   &.calendar {
     background-image: url(./images/calendar.png);
   }
-}
-
-.button {
-  &:active,
+    &:active,
   &:focus-visible {
     box-shadow: var(--iconBtn-shadow-inset)
   }
@@ -69,4 +66,8 @@
   &.margin {
     margin-left: 5px;
   }
+  &:hover{
+    background-color: var(--primary-hover-color);
+  }
 }
+

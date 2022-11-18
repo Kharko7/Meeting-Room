@@ -90,6 +90,7 @@ const bookingSlice = createSlice({
             state.roomId = action.payload.roomId;
             state.description = action.payload.description;
             state.bookingId = action.payload.bookingId;
+           
         },
         resetState(state) {
             state.title = initialState.title;

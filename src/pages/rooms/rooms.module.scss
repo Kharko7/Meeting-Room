@@ -5,10 +5,10 @@
   user-select: none;
   font-family: var(--primary-font-family);
 }
-.noFloor{
-  color:var(--primary-text-color);
-  width:500px;
-  font-size:18px;
+.noFloor {
+  color: var(--primary-text-color);
+  width: 500px;
+  font-size: 18px;
 }
 .filters {
   border-radius: 5px;
@@ -20,7 +20,20 @@
   }
 }
 .filters.active {
-    box-shadow: var(--inset-box-shadow);
+  box-shadow: var(--inset-input-shadow);
+}
+.indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: var(--primary-text-color);
+}
+.indicatorCont {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .header {
   display: flex;
@@ -89,7 +102,8 @@
 }
 
 .roomsList {
-  width: calc(100% - 10px);
+  width: calc(100%);
+  padding-right: 10px;
   padding-left: 50px;
   margin-top: 86px;
 }
@@ -203,11 +217,17 @@
   font-size: 12px;
 }
 
-.indicator {
+.indicator,
+.indicatorTrue {
   width: 10px;
   height: 10px;
   border-radius: 100%;
+}
+.indicator {
   background-color: var(--indicator);
+}
+.indicatorTrue {
+  background-color: var(--accent-text-color);
 }
 
 .navButton {
