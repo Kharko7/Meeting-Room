@@ -31,7 +31,7 @@ const Floors = ({ currentFloor }: floor) => {
     (state) => state.rooms.roomsByFloor[currentFloor-1]
   );
   //@ts-ignore
-console.log(dataFloor,"data flooorrrr");
+
   const length = dataFloor.length;
   const filter = useAppSelector((state) => state.rooms.filter);
   return (

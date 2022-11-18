@@ -10,7 +10,6 @@ const Rooms = () => {
     (state) => state.rooms
   );
   const dispatch = useAppDispatch();
-  console.log(rooms);
   // setInterval(() => {
   //   console.log('60 second left')
   //   rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
@@ -21,7 +20,6 @@ const Rooms = () => {
     // rooms.length == 0 && dispatch(roomsActions.getRoomsStatus());
   }, []);
   useEffect(() => {
-    console.log(rooms, "useEffect");
     rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
   }, [rooms]);
 

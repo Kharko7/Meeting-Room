@@ -8,7 +8,6 @@ import { RoomsService } from "services/room.service/rooms.service";
 import { useAppSelector } from "hooks/toolkitHooks";
 function* workerFloors(data: any) {
   try {
-    console.log(data, "dataWorkerFloors");
     const floors = data[0].office.floors;
     const arrFloors = Array.from({ length: floors }, (_, i) => i + 1);
     yield put(roomsActions.setCountOfFloors(arrFloors));
@@ -33,7 +32,6 @@ function* workerStatus(arr: any) {
     const dataRoomsStatus2: AxiosResponse = yield call(
       RoomsService.getRoomsStatus2
     );
-    console.log(arr.payload, "payload");
     const date = arr.payload.reduce((p: any, c: any) => {
       const name = c.roomId;
       //@ts-ignore
@@ -54,7 +52,6 @@ function* workerStatus(arr: any) {
         if (trues) date[room.roomId] = true;
       });
     });
-    console.log(date, "statuses saga");
      yield put(roomsActions.setRoomsStatus(date));
   } catch (error) {
     console.log(error);
@@ -68,14 +65,11 @@ export function* watchRoomsStatus() {
 }
 function* workerRooms() {
   try {
-    console.log("start");
     const dataRooms: AxiosResponse = yield call(RoomsService.getRooms);
-    console.log(dataRooms.data);
     const floors = Object.keys(dataRooms.data).length;
     const arrFloors = Array.from({ length: floors }, (_, i) => i + 1);
 
     const arr = Object.values(dataRooms.data).reduce((array: any, c: any) => {
-      console.log(array, c, "array c");
       array = [...array, ...c];
       return array;
     });
@@ -98,10 +92,9 @@ function* workerSoonestBookingsDays(a: any) {
       RoomsService.getSoonestBookingsDays,
       a.payload
     );
-    console.log(data.data);
     yield put(roomsActions.setSoonestBookingsDays(data.data));
   } catch (error) {
-    console.log(error, "eroorrr");
+    console.log(error);
   }
 }
 function* watchSoonestBookingsDays() {

@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import MockedData from "../components/MockedData";
 //@ts-ignore
 const RoomsSelector = ({ floor, name = MockedData[0].name }) => {
-
-      console.log(floor, name);
   const [room, setRoom] = useState(name);
   const [openRoom, setOpenRoom] = useState(false);
 

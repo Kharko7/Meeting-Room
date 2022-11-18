@@ -72,7 +72,7 @@ const RoomCard = ({ data }: MyroomsData) => {
         <div className={styles.headerRoomCard}>
           <span className={styles.labelRoomName}>{data.name}</span>
           <span
-            className={cn(status ? styles.indicatorTrue : styles.indicator)}
+            className={cn(status ? styles.indicator : styles.indicatorTrue)}
           ></span>
         </div>
         <div className={styles.roomInfo}>

@@ -37,7 +37,6 @@ const ModalRooms = ({ setOpenModal }) => {
     errors,
     loading,
   } = useAppSelector((state) => state.booking);
-  console.log(title, description, loading);
   useEffect(() => {
     if (errors.errorMsg) {
       setAlert({
