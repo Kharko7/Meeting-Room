@@ -1,72 +1,95 @@
-import { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import { Box } from '@material-ui/core';
+import Autocomplete from '@mui/material/Autocomplete';
+import CircularProgress from '@mui/material/CircularProgress';
+import { axiosService } from 'services/axios.service/axios.service';
+import { useAppDispatch } from 'hooks/toolkitHooks';
+import { setInvite } from 'redux&saga/slices/booking.slice';
+import { SnackBarContext } from 'context/snackbar-context';
+import { snackbarVariants } from 'constants/snackbar';
 
-const userss = ['Yaroslav Kharko', 'fsdxca ssds', 'oleg erdo', 'andse lidds', 'nikita oluua', 'roma sasdk', 'fjwoiew ldfas', 'sadfj owerw', 'aaaa aaa', 'daaad daa', 'aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa']
+interface User {
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  userId: number;
+  
+};
 
 const InviteCoworkers = () => {
-  const [inputValue, setInputValue] = useState<string>('')
-  const [invitedUsers, setInvitedUsers] = useState<string[]>([])
 
-  const removeUser = (user: string) => {
-    const users = invitedUsers.filter(userName => userName !== user)
-    setInvitedUsers(users)
-  }
+  const [open, setOpen] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+  const dispatch = useAppDispatch();
+  const loading = open && users.length === 0;
+  const { setAlert } = useContext(SnackBarContext)
 
-  const getUsers = userss.filter((user) => {
-    if (inputValue.trim()) {
-      return user.toLocaleLowerCase().includes(inputValue.trim().toLocaleLowerCase()) && !invitedUsers.includes(user)
-    }
-    return false
-  })
+  useEffect(() => {
+    if (!loading) {
+      return
+    };
 
-  const listUsers = getUsers.map((item, index) => (
-    <MenuItem
-      key={index} onClick={() => setInvitedUsers(prev => [...prev, item])} >
-      {item}
-    </MenuItem>
-  ))
-  const listInvitedUsers = invitedUsers.map((user, index) => (
-    <MenuItem
-      sx={{ cursor: 'default', '&:hover': { backgroundColor: 'transparent' }, justifyContent: 'space-between' }}
-      disableRipple
-      key={index}>
-      {user}
-      <IconButton
-        sx={{ ml: '20px' }}
-        onClick={() => removeUser(user)} >
-        <DeleteIcon />
-      </IconButton>
-    </MenuItem >
-  ))
+    axiosService.get('users')
+      .then((response) => {
+        setUsers(response.data)
+      }).catch((error) => {
+        setOpen(false)
+        setAlert({
+          severity: snackbarVariants.error,
+          message: error.message
+        })
+      })
+  }, [loading, setAlert]);
 
   return (
-    <>
-      <TextField
-        label="Invite coworkers"
-        fullWidth
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <MenuList
-        sx={{ height: '225px', overflow: 'hidden', zIndex: '1' }}>
-        {listUsers}
-      </MenuList>
-      {
-        invitedUsers.length > 0 && (
-          <MenuList
-            sx={{ borderTop: '3px solid var(--accent-text-color)', overflow: 'auto', maxHeight: '220px', zIndex: '1' }}
-          >
-            {listInvitedUsers}
-          </MenuList>
-        )
-      }
-    </>
+    <Autocomplete
+      data-testid='invite-coworkers'
+      fullWidth
+      multiple
+      disableClearable
+      disableCloseOnSelect
+      open={open}
+      onOpen={() => {
+        setOpen(true);
+      }}
+      onClose={() => {
+        setOpen(false);
+      }}
+      getOptionLabel={(option) => option.firstName + ' ' + option.lastName}
+      options={users}
+      loading={loading}
+      onChange={(_, value) => dispatch(setInvite(value.map(users => users.userId)))}
+      renderInput={(params) => (
+        <TextField
+          sx={{
+            height: '102px',
+            flexDirection: 'row',
+            "& .MuiOutlinedInput-notchedOutline": { boxShadow: 'none', border: 'none' },
+            "& .MuiAutocomplete-popupIndicator": { display: 'none' },
+            "& div.MuiAutocomplete-inputRoot": {
+              pr: '10px',
+              overflow: 'auto',
+              boxShadow: 'var(--inset-input-shadow)',
+              border: '0px solid var(--PickerGlobalColor)',
+              borderRadius: "25px"
+            },
+          }}
+          {...params}
+          label="Invite coworkers"
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <React.Fragment>
+                {loading ? <CircularProgress sx={{ position: 'absolute', right: '45px', top: 'calc(50% - 14px)' }} color="inherit" size={30} /> : null}
+                {params.InputProps.endAdornment}
+              </React.Fragment>
+            ),
+          }}
+        />
+      )}
+    />
   );
-}
+};
 
-export default InviteCoworkers
+export default InviteCoworkers;

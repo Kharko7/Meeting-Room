@@ -1,20 +1,23 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { AddOneBooking, AddRcurringBooking, BookingEvent } from 'interfaces/booking/Booking';
+import { OneBooking, RcurringBooking, BookingEvent, DeleteBookingInterface } from 'interfaces/booking/Booking';
 export interface InitialStateBookig {
     title: string;
     start: string;
     end: string;
     loading: boolean;
     roomId: number | null;
-    floor: string | null;
-    bookingId?: number;
+    floor: string;
+    bookingId: number | null;
     description: string;
-    invitedIds: number[];
+    invitedId: number[];
     daysOfWeek: string[];
     errors: Record<string, string>;
     bookings: BookingEvent[];
+    isRecurring: boolean;
+    recurringId: number | null;
+
 }
 
 const initialState: InitialStateBookig = {
@@ -23,36 +26,45 @@ const initialState: InitialStateBookig = {
     start: '',
     end: '',
     roomId: null,
-    floor: '1',
-    invitedIds: [],
+    bookingId: null,
+    floor: '',
+    invitedId: [],
     daysOfWeek: [],
     bookings: [],
     errors: {},
     loading: false,
+    isRecurring: false,
+    recurringId: null,
 };
 
 const bookingSlice = createSlice({
     name: 'booking',
     initialState,
     reducers: {
-        // deleteBookingById(state, action: PayloadAction<number>) {
-        //     state.loading = true;
-        // },
-        getAllBookings(state, action: PayloadAction<Record<string, string>>) {
+        deleteBookingById(state, action: PayloadAction<DeleteBookingInterface>) {
+            state.loading = true;
+        },
+        editOneBooking(state, action: PayloadAction<any>) {
+            state.loading = true;
+        },
+        editRecurringBooking(state, action: PayloadAction<any>) {
+            state.loading = true;
+        },
+        getAllBookings(state, action: PayloadAction<Record<string, string | number>>) {
             state.loading = true;
         },
         getAllBookingsSuccess(state, action: PayloadAction<BookingEvent[]>) {
             state.loading = false;
             state.bookings = action.payload;
         },
-        addOneBooking(state, action: PayloadAction<AddOneBooking>) {
+        addOneBooking(state, action: PayloadAction<OneBooking>) {
             state.loading = true;
         },
         addOneBookingSuccess(state, action: PayloadAction<BookingEvent[]>) {
             state.loading = false;
             state.bookings = [...state.bookings, ...action.payload];
         },
-        addRecurringBooking(state, action: PayloadAction<AddRcurringBooking>) {
+        addRecurringBooking(state, action: PayloadAction<RcurringBooking>) {
             state.loading = true;
         },
         setRoomId(state, action: PayloadAction<number | null>) {
@@ -76,6 +88,9 @@ const bookingSlice = createSlice({
         setEnd(state, action: PayloadAction<string>) {
             state.end = action.payload;
         },
+        setInvite(state, action: PayloadAction<number[]>) {
+            state.invitedId = action.payload;
+        },
         setSelectedDate(state, action: PayloadAction<Record<string, string>>) {
             state.start = action.payload.start;
             state.end = action.payload.end;
@@ -91,9 +106,11 @@ const bookingSlice = createSlice({
             state.start = action.payload.start;
             state.end = action.payload.end;
             state.roomId = action.payload.roomId;
+            state.floor = action.payload.floor;
             state.description = action.payload.description;
             state.bookingId = action.payload.bookingId;
-           
+            state.isRecurring = action.payload.isRecurring;
+            state.recurringId = action.payload.recurringId;
         },
         resetState(state) {
             state.title = initialState.title;
@@ -101,7 +118,9 @@ const bookingSlice = createSlice({
             state.end = initialState.end;
             state.description = initialState.description;
             state.daysOfWeek = initialState.daysOfWeek;
-            state.invitedIds = initialState.invitedIds;
+            state.invitedId = initialState.invitedId;
+            state.bookingId = initialState.bookingId
+            state.recurringId = initialState.recurringId;
             state.errors = initialState.errors;
         },
     },
@@ -110,6 +129,8 @@ export const {
     setRoomId,
     editBooking,
     resetState,
+    editOneBooking,
+    editRecurringBooking,
     setBookingError,
     setDaysOfWeek,
     setDescription,
@@ -119,12 +140,13 @@ export const {
     setStart,
     setTitle,
     setLoading,
+    setInvite,
     getAllBookings,
     getAllBookingsSuccess,
     addOneBooking,
     addRecurringBooking,
     addOneBookingSuccess,
-    //deleteBookingById,
+    deleteBookingById,
 } = bookingSlice.actions;
 
 const bookingReducer = bookingSlice.reducer;

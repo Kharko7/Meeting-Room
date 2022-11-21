@@ -18,7 +18,6 @@ const Selector = ({ value, label, menuItems, disabled = false, errorMsg = '', da
 
   return (
     <FormControl
-
       error={Boolean(errorMsg)}
       disabled={disabled}
       fullWidth>

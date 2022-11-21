@@ -18,7 +18,7 @@ const mockStateWithErr = {
 const mockState = {
   booking: {
     title: '',
-    floor: '1',
+    floor: '2',
     errors: {},
     daysOfWeek: [],
   }
@@ -164,9 +164,17 @@ describe('Booking tests with error', () => {
 
     fireEvent.mouseDown(selectorButton);
     const listitems = within(screen.getByRole('listbox')).getAllByRole('option');
-    fireEvent.click(listitems[2]);
+    fireEvent.click(listitems[1]);
 
     expect(mockDispatch).toBeCalled()
+  })
+
+  it('should render Autocomplete invite coworkers', () => {
+    setup()
+
+    const selectorRoom = screen.getByTestId('invite-coworkers')
+
+    expect(selectorRoom).toBeTruthy()
   })
 
   it("should submit event", () => {

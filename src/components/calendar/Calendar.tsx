@@ -15,13 +15,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 interface CalendarProps {
   data: BookingEvent[];
+  calendarRef: React.MutableRefObject<FullCalendar | null>;
   weekends: boolean;
   loading: boolean;
   handleDateSelect: (selectInfo: DateSelectArg) => void;
   handleEventSelect: (eventInfo: EventClickArg) => void;
   handleGetDate: (dateInfo: DatesSetArg) => void;
 }
-export default React.memo(function Calendar({ data, weekends, loading, handleDateSelect, handleEventSelect, handleGetDate }: CalendarProps) {
+export default React.memo(function Calendar({ data, calendarRef, weekends, loading, handleDateSelect, handleEventSelect, handleGetDate }: CalendarProps) {
   const [language, setLanguage] = useState<string>(getFromLocalStorage('language'));
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export default React.memo(function Calendar({ data, weekends, loading, handleDat
     <Box
       id='calendar'
       sx={{
-        p: '10px 14px 14px 7px',
+        height: 'calc(100% - 81px)',
         flexGrow: '1',
         position: 'relative',
         '& .fc-view-harness': { opacity: loading ? '0.2' : '1' }
@@ -94,6 +95,8 @@ export default React.memo(function Calendar({ data, weekends, loading, handleDat
         select={handleDateSelect}
         eventClick={handleEventSelect}
         datesSet={handleGetDate}
+        ref={calendarRef}
+        weekNumbers={true}
       />
       <Box sx={{
         display: 'flex',

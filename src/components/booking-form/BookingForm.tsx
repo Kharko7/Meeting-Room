@@ -19,21 +19,20 @@ import {
   setStart,
   setTitle,
 } from "redux&saga/slices/booking.slice";
-import Modal from "components/modal/Modal";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import InviteCoworkers from "./invite-coworkers/InviteCoworkers";
 import Selector from "./selector/Selector";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { rooms } from "configs/rooms";
 import MenuItem from "@mui/material/MenuItem";
-import { daysOfTheWeek, floors } from "constants/booking-form";
+import { daysOfTheWeek } from "constants/booking-form";
 import SelectorMultiple from "./selector/SelectorMultiple";
 import { Errors } from "constants/errors";
 import {
   checkMatchEndDate,
   checkMatchStartDate,
 } from "utils/check-crossed-date";
+import SelectorFloorAndRoom from "./selector/SelectorFloorAndRoom";
 
 interface BookingFormProps {
   edit: boolean;
@@ -105,19 +104,19 @@ const BookingForm = ({
   const handleCloseStart = (value: Dayjs | null) => {
     if (value !== null) {
       const startDate = value.format("YYYY-MM-DDTHH:mm");
-      const checkDateForMatch = checkMatchStartDate(bookings, startDate, end);
-      checkDateForMatch
-        ? dispatch(setBookingError({ start: Errors.matchDate }))
-        : dispatch(setBookingError({ start: "" }));
+      // const checkDateForMatch = checkMatchStartDate(bookings, startDate, end);
+      // checkDateForMatch
+      //   ? dispatch(setBookingError({ start: Errors.matchDate }))
+      //   : dispatch(setBookingError({ start: "" }));
     }
   };
   const handleCloseEnd = (value: Dayjs | null) => {
     if (value !== null) {
       const endDate = value.format("YYYY-MM-DDTHH:mm");
-      const checkDateForMatch = checkMatchEndDate(bookings, start, endDate);
-      checkDateForMatch
-        ? dispatch(setBookingError({ end: Errors.matchDate }))
-        : dispatch(setBookingError({ end: "" }));
+      // const checkDateForMatch = checkMatchEndDate(bookings, start, endDate);
+      // checkDateForMatch
+      //   ? dispatch(setBookingError({ end: Errors.matchDate }))
+      //   : dispatch(setBookingError({ end: "" }));
     }
   };
 
@@ -127,6 +126,24 @@ const BookingForm = ({
       setDaysOfWeek(typeof value === "string" ? value.split(",") : value)
     );
   };
+
+  // const roomsByFloor = rooms.filter((room) => {
+  //   return room.floor === floor
+  // })
+  // const menuItemsRoom = roomsByFloor.map(room => (
+  //   <MenuItem
+  //     key={room.roomId}
+  //     value={room.roomId}>
+  //     {room.name}
+  //   </MenuItem>
+  // ))
+  // const menuItemsFloor = floors.map(floor => (
+  //   <MenuItem
+  //     key={floor}
+  //     value={floor}>
+  //     {floor}
+  //   </MenuItem>
+  // ))
 
   const menuItemsRoom =
     roomsByFloor[Number(floor) - 1].length > 0
@@ -186,7 +203,7 @@ const BookingForm = ({
                 mb: "25px",
                 height: "120px",
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderRadius: "5%/50% ",
+                  borderRadius: "25px",
                 },
               }}
             >
@@ -206,28 +223,7 @@ const BookingForm = ({
               />
             </Box>
             <Box
-              sx={{ mb: "20px", display: "flex", gap: "15px", height: "80px" }}
-            >
-              <Selector
-                label="Choose floor"
-                value={floor || ""}
-                errorMsg={errors.floor}
-                menuItems={menuItemsFloor}
-                dataTestId="selector-floor"
-                onChange={handleChangeFloor}
-              />
-              <Selector
-                label="Choose room"
-                value={roomId?.toString() || ""}
-                errorMsg={errors.roomId}
-                disabled={!floor}
-                menuItems={menuItemsRoom}
-                dataTestId="selector-room"
-                onChange={handleChangeRoom}
-              />
-            </Box>
-            <Box
-              sx={{ mb: "20px", display: "flex", gap: "15px", height: "80px" }}
+              sx={{ display: "flex", gap: "15px", height: "80px" }}
             >
               <DateAndTimePicker
                 date={start}
@@ -245,16 +241,65 @@ const BookingForm = ({
                 label="End"
               />
             </Box>
-            <SelectorMultiple
-              value={daysOfWeek}
-              dataTestId="selector-multiple"
-              label="Days of week"
-              daysOfWeek={daysOfTheWeek}
-              onChange={handleChangeWeek}
-            />
+
           </Grid>
           <Grid item xs={6}>
-            <InviteCoworkers />
+            <Box sx={{
+              mb: "21px",
+              display: "flex",
+              gap: "15px",
+              height: "80px",
+            }}>
+              <SelectorMultiple
+                value={daysOfWeek}
+                dataTestId="selector-multiple"
+                label="Days of week"
+                daysOfWeek={daysOfTheWeek}
+                onChange={handleChangeWeek}
+              />
+            </Box>
+            <Box sx={{ mb: "25px", height: "120px", }}>
+              <InviteCoworkers />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "15px",
+                height: "80px",
+              }}
+            >
+              <SelectorFloorAndRoom
+                valueFloor={floor}
+                valueRoom={roomId?.toString() || ""}
+                onChangeFloor={handleChangeFloor}
+                onChangeRoom={handleChangeRoom}
+              />
+            </Box>
+            {/* <Box
+              sx={{
+                display: "flex",
+                gap: "15px",
+                height: "80px",
+              }}
+            >  
+              <Selector
+                label="Choose floor"
+                value={floor || ""}
+                errorMsg={errors.floor}
+                menuItems={menuItemsFloor}
+                dataTestId="selector-floor"
+                onChange={handleChangeFloor}
+              />
+              <Selector
+                label="Choose room"
+                value={roomId?.toString() || ""}
+                errorMsg={errors.roomId}
+                disabled={!floor}
+                menuItems={menuItemsRoom}
+                dataTestId="selector-room"
+                onChange={handleChangeRoom}
+              /> 
+            </Box> */}
           </Grid>
           <Grid item xs={12}>
             <Box
@@ -272,7 +317,7 @@ const BookingForm = ({
               <Button
                 disabled={Boolean(Object.values(errors).join(""))}
                 type="submit"
-                onclick={() => {}}
+                onclick={() => { }}
                 dataTestId="button-submit"
               >
                 Save
