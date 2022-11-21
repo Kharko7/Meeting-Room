@@ -23,24 +23,30 @@ const Header = () => {
       >
         All
       </div>
-      {floors.map((floor) => {
+      {floors.map((floor, index) => {
         return (
-            <div
-              className={cn(
-                styles.filters,
-                filter == `${floor.toString()}` && styles.active
-              )}
-              onClick={() => handle(floor)}
-            >
-              {floor} Floor
-            </div>
-          
+          <div
+            key={index}
+            className={cn(
+              styles.filters,
+              filter == `${floor.toString()}` && styles.active
+            )}
+            onClick={() => handle(floor)}
+          >
+            {floor} Floor
+          </div>
         );
       })}
-      {/* <SearchByName />
-      <Selector/> */}
-      {/* <DatePickerComponent />
-      <TimePickerComponent /> */}
+      <div className={styles.indicators}>
+        <div className={styles.indicatorCont}>
+          Free
+          <div className={styles.indicatorTrue}></div>
+        </div>
+        <div className={styles.indicatorCont}>
+          Busy
+          <div className={styles.indicator}></div>
+        </div>
+      </div>
     </header>
   );
 };

@@ -1,7 +1,5 @@
-import { urls } from "../../constants/urls/urls";
 import { axiosService } from "../axios.service/axios.service";
-import { RegistrationProps } from "../../interfaces/auth/AuthProps";
-import axios from "axios";
+
 
 export const RoomsService = {
   getRooms: async () => {
@@ -12,5 +10,18 @@ export const RoomsService = {
       `rooms/info/?roomId=${roomId}&soonestBookingsDays=20`
     );
   },
+  getRoomsStatus1: async () => {
+    
+    return await axiosService.get(
+      `rooms/info/?officeId=1&soonestBookingsDays=1`
+    );
+  },
+  getRoomsStatus2: async () => {
+
+    return await axiosService.get(
+      `rooms/info/?officeId=2&soonestBookingsDays=1`
+    );
+  },
 };
+
 

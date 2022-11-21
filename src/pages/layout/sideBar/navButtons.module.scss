@@ -36,7 +36,7 @@
   background-repeat: no-repeat;
   background-position: center;
   &.current {
-    box-shadow:var(--inset-box-shadow)
+    box-shadow:var(--inset-input-shadow)
   }
   &.map {
     background-image: url(./images/location.png);

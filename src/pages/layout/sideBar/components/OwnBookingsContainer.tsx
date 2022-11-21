@@ -24,11 +24,15 @@ export interface InitialStateBookig {
 const OwnBookingsContainer = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const totalCount = useAppSelector((state) => state.ownBookings.totalCount);
-  const limit = useAppSelector((state) => state.ownBookings.limit);
+  const { totalCount, limit, bookings } = useAppSelector(
+    (state) => state.ownBookings
+  );
   const pages = Math.ceil(totalCount / limit);
+
+
+
+
   const dispatch = useAppDispatch();
-  console.log(totalCount, limit);
   const handleNext = () => {
     if (page + 1 <= pages) {
       setPage((prev) => prev + 1);
@@ -54,14 +58,16 @@ const OwnBookingsContainer = () => {
         className={styles.scroll}
         scrollThreshold="100%"
         loader={
-          <div style={{display:"flex",justifyContent:"center" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <Loader size="small"></Loader>
           </div>
         }
       >
         <div className={styles.roomsCardsContainer}>
           {/* <MyRoomCard mockedData={mockedData}></MyRoomCard> */}
-          <OwnBookings></OwnBookings>
+          {bookings.map((booking, index) => {
+            return <OwnBookings key={index} booking={booking} index={index}></OwnBookings>;
+          })}
         </div>
       </InfiniteScroll>
     </div>

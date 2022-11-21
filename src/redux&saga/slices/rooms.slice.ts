@@ -14,17 +14,19 @@ interface rooms {
 export interface InitialStateRooms {
   filter: null | string;
   floors: Array<number>;
-  rooms: Array<rooms> | [];
   roomSoonestBookingsDays: any;
   roomsByFloor: Array<Array<rooms>>;
+  statuses: object;
+  rooms:Array<rooms>;
 }
 
 const initialState: InitialStateRooms = {
   filter: "all",
   floors: [],
-  rooms: [],
+  rooms:[],
   roomSoonestBookingsDays: [],
   roomsByFloor: [],
+  statuses: {},
 };
 
 const roomsSlice = createSlice({
@@ -32,12 +34,11 @@ const roomsSlice = createSlice({
   initialState,
   reducers: {
     getRooms() {},
-    setFilters(state,action){
-      state.filter = action.payload;
-    },
-    setRooms(state, action) {
-      // console.log(action.payload);
+    setRooms(state, action){
       state.rooms = action.payload;
+    },
+    setFilters(state, action) {
+      state.filter = action.payload;
     },
     getSoonestBookingsDays(state, action) {},
     setSoonestBookingsDays(state, action) {
@@ -48,6 +49,11 @@ const roomsSlice = createSlice({
     },
     setRoomsByFloor(state, action) {
       state.roomsByFloor = action.payload;
+    },
+    getRoomsStatus(state,{payload}){},
+    setRoomsStatus(state, { payload }) {
+      //@ts-ignore
+      state.statuses = payload;
     },
     resetState() {
       return { ...initialState };

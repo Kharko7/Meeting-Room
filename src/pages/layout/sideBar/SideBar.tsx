@@ -12,10 +12,7 @@ import { ownBookingsActions } from "redux&saga/slices/ownBookings.slice";
 type SideBarProps = { userName: string };
 
 const SideBar = ({ userName }: SideBarProps) => {
-  const bookings = useAppSelector((state) => state.ownBookings);
   const location = useLocation();
-
-console.log(bookings);
   return (
     <div className={styles.position}>
       <div className={styles.sideBar}>

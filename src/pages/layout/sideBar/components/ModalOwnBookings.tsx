@@ -5,6 +5,7 @@ import React, { useEffect, useContext } from "react";
 import Loader from "pages/layout/loader/Loader";
 import { getFromLocalStorage } from "services/local-storage.service";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+
 import {
   addOneBooking,
   addRecurringBooking,
@@ -20,7 +21,7 @@ import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { BookingEvent } from "interfaces/booking/Booking";
 //@ts-ignore
-const ModalOwnRooms = ({ setOpenModal }) => {
+const ModalOwnRooms = ({ setOpenModal, booking }) => {
   const weekends = getFromLocalStorage("weekends");
   const { setAlert } = useContext(SnackBarContext);
   const dispatch = useAppDispatch();
@@ -37,7 +38,6 @@ const ModalOwnRooms = ({ setOpenModal }) => {
     errors,
     loading,
   } = useAppSelector((state) => state.booking);
-  console.log(title, description, loading);
   useEffect(() => {
     if (errors.errorMsg) {
       setAlert({
@@ -101,12 +101,14 @@ const ModalOwnRooms = ({ setOpenModal }) => {
   return (
     <Modal data-testid="modal-1" closeModal={handleCloseModal}>
       {loading ? (
-        <Loader size="medium"></Loader>
+        <div style={{ paddingTop: "20px" }}>
+          <Loader size="medium"></Loader>
+        </div>
       ) : (
         <BookingForm
           handleSubmit={handleSubmit}
           handleRemoveEvent={handleRemoveEvent}
-          edit={Boolean(bookingId)}
+          edit={true}
         />
       )}
     </Modal>

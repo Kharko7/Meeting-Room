@@ -28,12 +28,14 @@ interface rooms {
 
 const Floors = ({ currentFloor }: floor) => {
   const dataFloor = useAppSelector(
-    (state) => state.rooms.roomsByFloor[currentFloor - 1]
+    (state) => state.rooms.roomsByFloor[currentFloor-1]
   );
+  //@ts-ignore
+
   const length = dataFloor.length;
   const filter = useAppSelector((state) => state.rooms.filter);
   return (
-    <>
+    <div key={length}>
       {dataFloor.length > 0 && (
         <>
           {filter == "all" && (
@@ -50,7 +52,7 @@ const Floors = ({ currentFloor }: floor) => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
