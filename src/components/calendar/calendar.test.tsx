@@ -7,6 +7,7 @@ import * as localStorage from 'services/local-storage.service';
 const mockDateSelect = jest.fn()
 const mockEventSelect = jest.fn()
 const mockGetDate = jest.fn()
+const mockUseRef = { current: null }
 let mockedStorage: any;
 const today = new Date()
 
@@ -18,12 +19,14 @@ const mockData: BookingEvent[] = [{
     bookingId: 1,
     roomId: 2,
     description: 'First commit',
+    isRecurring: false,
+    recurringId: null,
   },
 },
 ]
-
 const setup = () => render(
   <Calendar
+    calendarRef={mockUseRef}
     data={mockData}
     weekends={true}
     loading={false}
@@ -81,6 +84,7 @@ describe('Booking tests with error', () => {
   it('should render loading', () => {
     render(
       <Calendar
+        calendarRef={mockUseRef}
         data={mockData}
         weekends={true}
         loading={true}

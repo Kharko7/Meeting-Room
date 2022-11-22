@@ -10,6 +10,12 @@ import bookingReducer, {
   setSelectedDate,
   setStart,
   setTitle,
+  setLoading,
+  getAllBookings,
+  getAllBookingsSuccess,
+  addOneBooking,
+  addRecurringBooking,
+  addBookingSuccess,
 } from 'redux&saga/slices/booking.slice'
 import {
   initialState,
@@ -21,6 +27,10 @@ import {
   dateEnd,
   state,
   bookingEdit,
+  bookingsSuccsess,
+  actionGetAllBookings,
+  actionAddOneBooking,
+  actionAddRecurringBooking,
 } from './reducer.variables'
 
 describe('reducer booking test', () => {
@@ -28,25 +38,65 @@ describe('reducer booking test', () => {
     expect(bookingReducer(undefined, { type: undefined })).toEqual(initialState)
   })
 
-  it('should set roomId to bookiing reducer', () => {
+  it('should call action getAllBookings and set Loading true to bookiing reducer', () => {
+    expect(bookingReducer(initialState, getAllBookings(actionGetAllBookings))).toEqual(
+      { ...initialState, loading: true }
+    )
+  })
+
+  it('should call action addOneBooking and set Loading true to bookiing reducer', () => {
+    expect(bookingReducer(initialState, addOneBooking(actionAddOneBooking))).toEqual(
+      { ...initialState, loading: true }
+    )
+  })
+  it('should call action addRecurringBooking and set Loading true to bookiing reducer', () => {
+    expect(bookingReducer(initialState, addRecurringBooking(actionAddRecurringBooking))).toEqual(
+      { ...initialState, loading: true }
+    )
+  })
+
+  // it('should set all Bookings to bookiing reducer', () => {
+  //   expect(bookingReducer(initialState, getAllBookingsSuccess(bookingsSuccsess))).toEqual(
+  //     { ...initialState, bookings: bookingsSuccsess, loading: false }
+  //   )
+  // })
+
+  // it('should set one Bookings to bookiing reducer', () => {
+  //   expect(bookingReducer(initialState, addBookingSuccess(bookingsSuccsess))).toEqual(
+  //     {
+  //       ...initialState,
+  //       bookings: [...initialState.bookings, ...bookingsSuccsess],
+  //       loading: false
+  //     }
+  //   )
+  // })
+
+  it('should set RoomId to bookiing reducer', () => {
     expect(bookingReducer(initialState, setRoomId(roomId))).toEqual(
       { ...initialState, roomId: roomId }
     )
   })
 
-  it('should set floor to bookiing reducer', () => {
+  it('should set Loading bookiing reducer', () => {
+    const loading = true
+    expect(bookingReducer(initialState, setLoading(loading))).toEqual(
+      { ...initialState, loading: loading }
+    )
+  })
+
+  it('should set Floor to bookiing reducer', () => {
     expect(bookingReducer(initialState, setFloor('2'))).toEqual(
       { ...initialState, floor: '2' }
     )
   })
 
-  it('should set description to bookiing reducer', () => {
+  it('should set Description to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDescription(text))).toEqual(
       { ...initialState, description: text }
     )
   })
 
-  it('should set daysOfWeek to bookiing reducer', () => {
+  it('should set DaysOfWeek to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDaysOfWeek(daysOfWeek))).toEqual(
       { ...initialState, daysOfWeek: daysOfWeek }
     )
@@ -58,13 +108,13 @@ describe('reducer booking test', () => {
     )
   })
 
-  it('should set title to bookiing reducer', () => {
+  it('should set Title to bookiing reducer', () => {
     expect(bookingReducer(initialState, setTitle(text))).toEqual(
       { ...initialState, title: text }
     )
   })
 
-  it('should set start to bookiing reducer', () => {
+  it('should set Start to bookiing reducer', () => {
     expect(bookingReducer(initialState, setStart(dateStart))).toEqual(
       { ...initialState, start: dateStart }
     )
@@ -94,7 +144,7 @@ describe('reducer booking test', () => {
       end: initialState.end,
       description: initialState.description,
       daysOfWeek: initialState.daysOfWeek,
-      invitedIds: initialState.invitedIds,
+      invitedId: initialState.invitedId,
       errors: initialState.errors,
     })
   })
@@ -107,6 +157,7 @@ describe('reducer booking test', () => {
         start: bookingEdit.start,
         end: bookingEdit.end,
         roomId: bookingEdit.roomId,
+        floor: bookingEdit.floor,
         description: bookingEdit.description,
         bookingId: bookingEdit.bookingId,
       }

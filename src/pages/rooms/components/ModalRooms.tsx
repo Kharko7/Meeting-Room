@@ -34,6 +34,7 @@ const ModalRooms = ({ setOpenModal }) => {
     bookingId,
     bookings,
     daysOfWeek,
+    invitedId,
     errors,
     loading,
   } = useAppSelector((state) => state.booking);
@@ -71,6 +72,7 @@ const ModalRooms = ({ setOpenModal }) => {
       roomId: 1,
       startDateTime: start,
       endDateTime: end,
+      invitations: invitedId,
     };
     const eventRecurring = {
       title: title,
@@ -81,6 +83,7 @@ const ModalRooms = ({ setOpenModal }) => {
       endDate: dayjs(end).format("YYYY-MM-DD"),
       endTime: dayjs(end).format("HH:mm"),
       daysOfWeek: daysOfWeek,
+      invitations: invitedId,
     };
 
     const existEvent = bookings.some(

@@ -7,5 +7,3 @@ export const daysOfTheWeek: Record<string, number> = {
   Friday: 5,
   Saturday: 6,
 }
-
-export const floors = ['1', '2', '3']

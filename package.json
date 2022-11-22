@@ -99,6 +99,11 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
+  },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-essentials": "^6.4.22",

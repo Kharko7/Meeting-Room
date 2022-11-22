@@ -20,11 +20,24 @@
   box-shadow: none;
   color: var(--dateAndTimePicker-selected-global) !important;
 }
+:global(span.css-8je8zh-MuiTouchRipple-root) {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+}
 :global(.css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root) {
   background-image: url("../../../assets/icons/Calendar.png");
   background-size: 15px;
   background-position: center;
   background-repeat: no-repeat;
+  margin-right: -12px !important;
+  border-radius: 50% !important;
 }
 :global(label.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root) {
   font-size: 20px;
