@@ -82,13 +82,13 @@
     color: orange;
   }
   &.error {
-    color: #ff6a6a;
+    color: var(--errorColor);
   }
   button:disabled & {
-    color: #cfcfd4;
+    color: var(--base3);
   }
   button:disabled:hover & {
-    color: #cfcfd4;
+    color: var(--base3);
   }
   button:disabled:active &,
   button:disabled:focus-visible & {

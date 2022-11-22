@@ -15,6 +15,29 @@ $registration:var(--registration);
 $linear-gradient:#dadde0;
 
 
+.main_container{
+  display: flex;
+  align-items: center;
+}
+
+.container,.register_button_container,.wrongPassword,.register_button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main_container,.createAccount,.registration{
+  box-shadow:
+          -2px -2px 12px $firstShadow,
+          2px 2px 8px $secondShadow,
+          2px 2px 4px $thirdShadow;
+  border-radius: 40px;
+}
+
+.createAccount,.registration{
+  text-align: center;
+}
+
 .main_container {
   max-width: 1000px;
   min-width: 1000px;
@@ -23,24 +46,13 @@ $linear-gradient:#dadde0;
   padding: 10px;
   box-sizing: border-box;
   background: var(--base1);
-  box-shadow:
-          -2px -2px 12px $firstShadow,
-          2px 2px 8px $secondShadow,
-          2px 2px 4px $thirdShadow;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
+
   color: $mainColor;
 
   z-index: 1;
-
-
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-width: 60%;
   max-width: 60%;
   max-height: 90%;
@@ -53,13 +65,7 @@ $linear-gradient:#dadde0;
 .createAccount{
   font-size: 34px;
   letter-spacing: 3px;
-  box-shadow:
-          -2px -2px 12px $firstShadow,
-          2px 2px 8px $secondShadow,
-          2px 2px 4px $thirdShadow;
-  border-radius: 40px;
   width: 80%;
-  text-align: center;
   margin-bottom: 5px;
 
 }
@@ -70,15 +76,8 @@ $linear-gradient:#dadde0;
   box-sizing: border-box;
   padding: 5px;
   color: $registration;
-  box-shadow:
-          -2px -2px 12px $firstShadow,
-          2px 2px 8px $secondShadow,
-          2px 2px 4px $thirdShadow;
-  border-radius: 40px;
   min-width: 200px;
   max-width: 200px;
-  text-align: center;
-
   margin-bottom: 25px;
   margin-top: 5px;
 
@@ -87,9 +86,6 @@ $linear-gradient:#dadde0;
 .register_button_container{
   max-height: 15%;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 
@@ -98,9 +94,6 @@ $linear-gradient:#dadde0;
   width: 100%;
   font-weight: 700;
   color: $errorColor;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-bottom: 15px;
   box-sizing: border-box;
 }
@@ -111,10 +104,6 @@ $linear-gradient:#dadde0;
   max-height: 10%;
   font-family: 'Montserrat', sans-serif;
   background: $background;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
 }
 
 .register_button_container{
@@ -160,56 +149,3 @@ $linear-gradient:#dadde0;
     5px 100%;
   }
 }
-
-//
-//.icons_form{
-//  display: flex;
-//  flex-direction: row;
-//  height: 70px;
-//  align-items: center;
-//}
-//
-//.btn{
-//  height: 35px;
-//  width: 35px;
-//  border-radius: 50%;
-//  background: $background;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  -webkit-tap-highlight-color: rgba(0,0,0,0);
-//  box-shadow:
-//          -7px -7px 20px 0px #fff9,
-//          -4px -4px 5px 0px #fff9,
-//          7px 7px 20px 0px #0002,
-//          4px 4px 5px 0px #0001,
-//          inset 0px 0px 0px 0px #fff9,
-//          inset 0px 0px 0px 0px #0001,
-//          inset 0px 0px 0px 0px #fff9,        inset 0px 0px 0px 0px #0001;
-//  transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
-//  font-size: 16px;
-//  margin: 10px;
-//}
-//
-//.btn:active{
-//  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
-//  -4px -4px 6px 0 rgba(116, 125, 136, .2),
-//  inset -4px -4px 6px 0 rgba(255,255,255,.5),
-//  inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
-//}
-//
-//
-//.btn:hover {
-//  opacity: 0.7;
-//  transition: .15s;
-//  cursor: pointer;
-//}
-//
-//.btn svg{
-//  display: block;
-//  width: 80%;
-//  height: 80%;
-//}
-
-
-

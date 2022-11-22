@@ -5,16 +5,17 @@ import {ResponsePopup} from "../../components/tools/simple/response-popup/Respon
 import {PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
 import {authService} from "../../services/auth.service/auth.services";
+import {fnErrorSaga, pending, success} from "./fn/fn.saga";
 
-function* handleChangePassword(action:any) {
+function* handleChangePassword(action:PayloadAction<any>) {
     try {
-        console.log("work")
-        yield ResponsePopup.Pending()
-        yield put(authActions.changePassword(action.payload))
-        yield ResponsePopup.Success()
+        yield pending();
+        console.log('change')
+        const data: AxiosResponse = yield call(UserService.changePassword, action.payload);
+        yield success();
     } catch (error: any) {
-        yield put(authActions.errorMsg(error.response.status))
-        yield ResponsePopup.ErrorPopup(error);
+        console.log(error)
+        yield fnErrorSaga(error);
     }
 }
 

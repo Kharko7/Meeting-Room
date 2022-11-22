@@ -8,6 +8,7 @@
   /* components colors*/
   --accent-color: #5bbde0;
   --primary-color: #f4f6fa;
+  --primary-color-opacity: rgba(244, 246, 250, 0.5);
   --primary-hover-color:#f8faff;
   --primary-hover-button-color: #f8faff;
 
@@ -295,9 +296,13 @@
   --pages-decoration-box-shadow-outset: 5px 5px 25px #d9dbdf,
   -5px -5px 25px #ffffff;
 
+//429
+  --advise-color: #f0f1f5;
 
 
-
+  //clouds
+  --cloud-mail-box-shadow: -8px -8px 15px var(--base4),
+  8px 8px 25px var(--base3);
 
 
 
@@ -306,6 +311,7 @@
   [data-theme="dark"] {
 
     --primary-color:#3f4e5a;
+    --primary-color-opacity: rgba(63, 78, 90, 0.5);
     --primary-text-color:#a0a5a8;
     --dark-text-color: #919191;
 
@@ -437,8 +443,8 @@
 
     //rooms
 
-    --hover-shadox-container:-4px -4px 10px rgb(68, 81, 93),
-    -4px -4px 10px rgba(61, 75, 86, 0.62), 4px 4px 4px rgba(52, 64, 73, 0.15),
+    --hover-shadox-container:-3px -3px 2px rgb(68, 81, 93),
+    -3px -3px 2px rgba(61, 75, 86, 0.62), 3px 3px 2px rgba(52, 64, 73, 0.15),
     inset 4px 4px 10px rgba(52, 64, 73, 0.02);
 
     --indicator: #ffd569;
@@ -587,9 +593,12 @@
     inset 2px 2px 8px var(--base3),
     inset 2px 2px 4px var(--base4);;
 
+//429
+    --advise-color: #454f57;
 
 
-
+    --cloud-mail-box-shadow: -1px -1px 5px #323e47,
+    1px 1px 5px #495967;
 
 
   }

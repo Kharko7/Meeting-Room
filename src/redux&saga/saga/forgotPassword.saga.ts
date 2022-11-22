@@ -1,22 +1,18 @@
-import {call, put, take, takeLatest,fork} from 'redux-saga/effects';
+import {call, fork, take} from 'redux-saga/effects';
 import {authActions} from 'redux&saga/slices/auth.slice';
 import {UserService} from "../../services/user.service/user.service";
-import {ResponsePopup} from "../../components/tools/simple/response-popup/ResponsePopup";
-import {ServerResponse} from "http";
-import {LoginProps} from "../../interfaces/auth/AuthProps";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
-import {authService} from "../../services/auth.service/auth.services";
+import {fnErrorSaga, pending, success} from "./fn/fn.saga";
+import {ForgotPasswordProps} from "../../interfaces/auth/AuthProps";
 
-function* handleForgotPassword(action:any) {
+function* handleForgotPassword(action:PayloadAction<ForgotPasswordProps>) {
     try {
-        console.log("work")
-        yield ResponsePopup.Pending();
-        yield put(authActions.forgotPasswordSendEmail(action.payload))
-        yield ResponsePopup.Success();
+        yield pending();
+        const data: AxiosResponse = yield call(UserService.forgotPassword, action.payload);
+        yield success();
     } catch (error: any) {
-        yield put(authActions.errorMsg(error.response.status))
-        yield ResponsePopup.ErrorPopup(error);
+        yield fnErrorSaga(error);
     }
 }
 

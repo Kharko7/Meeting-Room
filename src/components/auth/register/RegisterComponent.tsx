@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 
 
 import Button from "components/button";
@@ -15,6 +15,8 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {RegisterSchema} from "../../../utils/yup.validation";
 
 import 'animate.css';
+import {ResponsePopup} from "../../tools/simple/response-popup/ResponsePopup";
+import {regex} from "../../../constants/valid/regex";
 
 
 const cn = classNames.bind(styles)
@@ -26,29 +28,44 @@ const RegisterComponent = () => {
         resolver: yupResolver(RegisterSchema)
     });
 
+    const params = useParams();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     let {success} = useAppSelector(state => state.auth);
 
     const [errorPassword, setErrorPassword] = useState<boolean>(false);
 
+    // const email = params.email;
+
+    // console.log(email)
+
     useEffect(() => {
         if (success) {
             dispatch(authActions.success(false))
             navigate('/auth/login')
         }
-    }, [success])
+
+        if(!regex.incoraEmail.test(params.email?params.email:'none')&&!success){
+            ResponsePopup.ErrorPopup('404\nWrong registration link').then()
+            navigate('/auth/login');
+        }
+
+    }, [success,params.email]);
+
+
+
 
     const submit: SubmitHandler<any> = async (data) => {
-        if (checkPasswordMatch(data.password, data.passwordConfirm)) {
-            data.email = "user78eef@incorainc.com";
-            data = registerClear(data);
-            await dispatch(authActions.register(data));
-            console.log(data);
-        } else {
-            setErrorPassword(true);
-        }
-        reset();
+            if (checkPasswordMatch(data.password, data.passwordConfirm)) {
+                data.email = params.email;
+                console.log(data)
+                data = registerClear(data);
+                await dispatch(authActions.register(data));
+            } else {
+                setErrorPassword(true);
+            }
+            reset();
+
     }
 
     return (
@@ -56,6 +73,7 @@ const RegisterComponent = () => {
             <form onSubmit={handleSubmit(submit)} className={cn("container")}>
                 <div className={cn("createAccount")}>Create Account</div>
                 <span className={cn("registration")}>Registration</span>
+
                 <InputRe
                     isValid={true}
                     error={errors.login}

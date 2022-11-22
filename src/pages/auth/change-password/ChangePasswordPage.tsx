@@ -7,7 +7,7 @@ const cn = classNames.bind(styles)
 
 
 const ChangePasswordPage = () => {
-    return (<div className={cn("container_changePassword_page")}><ChangePasswordComponent/></div>);
+    return (<div data-testid={'page'} className={cn("container_changePassword_page")}><ChangePasswordComponent/></div>);
 };
 
 export default ChangePasswordPage;

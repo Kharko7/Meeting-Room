@@ -3,12 +3,17 @@ import {LoginComponent} from "../../../components";
 
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss'
+import LoadingComponent from "../../../components/tools/simple/loading/LoadingComponent";
+import ErrorToManyRequest from "../../../components/tools/simple/error-429/ErrorToManyRequest";
 
 const cn = classNames.bind(styles)
 
 const LoginPage = () => {
+
     return (
-        <div className={cn("container_login_page")}>
+        <div data-testid={'login'} className={cn("container_login_page")}>
+            <LoadingComponent/>
+            <ErrorToManyRequest/>
             <div className={cn('box_inset')}></div>
             <div className={cn('box_outset')}></div>
             <LoginComponent/>

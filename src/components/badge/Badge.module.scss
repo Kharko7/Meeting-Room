@@ -25,13 +25,13 @@ $linear-gradient: #dadde0;
   padding: 6px;
   border-radius: 30px;
   font-family: 'Montserrat', sans-serif;
-  color: $mainColor;
+  color: var(--mainColorFont);
   position: relative;
 }
 
 
 .red>span,.violet>span,.mint>span,.lightBlue>span,.orange>span,.turquoise>span,.cerulean>span,.blue>span{
-  color: $background ;
+  color: var(--base1) ;
 }
 
 

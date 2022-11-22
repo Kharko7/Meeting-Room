@@ -24,8 +24,11 @@ $lighterSecondColor: var(--additionalLighterColor);
 }
 
 .box_inset,.box_inset_2{
-  width: 600px;
-  height: 600px;
+  //max-width: 650px;
+  //max-height: 650px;
+  min-width: 650px;
+  min-height: 650px;
+
   border-radius: 50%;
   background: var(--base1);
   position: absolute;
@@ -52,6 +55,10 @@ $lighterSecondColor: var(--additionalLighterColor);
   background: var(--base1);
   box-shadow:var(--pages-decoration-box-shadow-outset);
   position: absolute;
+}
+
+.box_outset_2{
+  z-index: -1;
 }
 
 .box_outset{

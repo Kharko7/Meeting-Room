@@ -38,7 +38,7 @@ const InputRe =
         const {iconPath}: ICheckType = checkType(type, name);
 
         return (
-            <div className={cn(`container-${size ? size : "small"}`)}>
+            <div className={cn(`container-${size ? size : "small"}`)} data-testid={'container'}>
                 <div className={cn('inputField', error && 'inputFieldError')}>
                 <span className={cn(`icon`)}>
                     <IconInputComponent iconPath={iconPath}/>
@@ -47,14 +47,14 @@ const InputRe =
                            {...register(`${name}`, {
                                required: required,
                            })}
-                           autoComplete={"off"}
+                           // autoComplete={"off"}
                            placeholder={placeholderDisappear}
                            required
                            id={`${name}-input`}
                     />
                     <label htmlFor={`${name}-input`}>{placeHolder}</label>
-                    {name && name.includes("password") &&
-                        <span onClick={() => {
+                    {name && (name.includes("password")||name.includes('Password')) &&
+                        <span data-testid={'eye'} onClick={() => {
                             eyeState ? setEyeState(false) : setEyeState(true);
                         }} className={cn("eye")}>{eyeState ? <OpenEye/> : <ClosedEye/>}</span>}
 

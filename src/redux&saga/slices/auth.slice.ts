@@ -1,7 +1,8 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import {LoginProps, RegistrationProps, UserProps} from "../../interfaces/auth/AuthProps";
+import {LoginProps, PasswordChange, RegistrationProps, UserProps} from "../../interfaces/auth/AuthProps";
+
 
 export interface AuthState {
     pending?: boolean;
@@ -10,11 +11,13 @@ export interface AuthState {
     login: LoginProps|undefined|null;
     errorCode: number|undefined;
     register:RegistrationProps|undefined,
-    forgotPasswordEmail:string|undefined,
-    changePassword:string|undefined,
+    forgotPasswordStr:string|undefined,
+    changePassword:PasswordChange|undefined,
     invitations:string[]|undefined,
 
-    user:UserProps|undefined
+    user:UserProps|undefined,
+
+    strResponse:string|undefined
 }
 
 const initialState: AuthState = {
@@ -22,7 +25,7 @@ const initialState: AuthState = {
     login: undefined,
     user:undefined,
 
-    forgotPasswordEmail:undefined,
+    forgotPasswordStr:undefined,
     changePassword:undefined,
     invitations:undefined,
 
@@ -30,6 +33,8 @@ const initialState: AuthState = {
     pending:false,
     success:false,
     rejected:false,
+
+    strResponse:undefined
 };
 
 const authSlice = createSlice({
@@ -47,19 +52,19 @@ const authSlice = createSlice({
         setUser(state,action:PayloadAction<UserProps>){
             state.user = action.payload;
         },
-        errorMsg(state, action: any) {
+        errorMsg(state, action: PayloadAction<number|undefined>) {
             state.errorCode = action.payload;
             state.success = false;
         },
-        pending(state, action: any) {
+        pending(state, action: PayloadAction<boolean|undefined>) {
             state.success = false;
             state.pending = action.payload;
         },
-        success(state, action: any) {
+        success(state, action: PayloadAction<boolean|undefined>) {
             state.success = action.payload;
         },
-        forgotPasswordSendEmail(state,action:any){
-            state.forgotPasswordEmail = action.payload;
+        forgotPasswordSendEmail(state,action:PayloadAction<string|undefined>){
+            state.forgotPasswordStr = action.payload;
         },
         changePassword(state,action:any){
             state.changePassword = action.payload;
@@ -67,7 +72,9 @@ const authSlice = createSlice({
         getInvitation(state,action:any){
             state.invitations = action.payload;
         },
-
+        setResponseForgotPassword(state, action:any){
+            state.strResponse = action.payload;
+        }
     },
 });
 

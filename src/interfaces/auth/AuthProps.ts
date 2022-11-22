@@ -2,6 +2,7 @@ interface RegistrationProps {
     firstName: string;
     lastName: string;
     password: string;
+    email:string
 }
 interface LoginProps {
     email:string;
@@ -12,9 +13,10 @@ interface ForgotPasswordProps{
     email:string
 }
 
-interface ChangePasswordProps{
-    id:number|string;
-    password:string
+interface PasswordChange{
+    password:string;
+    newPassword:string;
+    email:string;
 }
 
 interface UserWithToken{
@@ -22,12 +24,17 @@ interface UserWithToken{
     access_token: string
 }
 
+export enum role{
+    'user',
+    'admin'
+}
+
 interface UserProps{
     firstName: string;
     lastName: string;
     email:string;
     password:string;
-    role:'user'|'admin',
+    role:role|string,
     iat:number,
     exp:number,
     id:number
@@ -42,7 +49,7 @@ interface ErrorMessageObject {
 export type {
     RegistrationProps,
     LoginProps,
-    ChangePasswordProps,
+    PasswordChange,
     ForgotPasswordProps,
     UserWithToken
     ,UserProps,

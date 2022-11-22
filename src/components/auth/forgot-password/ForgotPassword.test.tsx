@@ -5,6 +5,7 @@ import '@testing-library/jest-dom'
 import "@testing-library/jest-dom/extend-expect"
 import userEvent from "@testing-library/user-event";
 import {act} from "react-dom/test-utils";
+import {useAppDispatch} from "../../../hooks/toolkitHooks";
 
 
 const mockDispatch = jest.fn()
@@ -15,7 +16,6 @@ const mockState = {
             email: '',
             password: ''
         },
-        error: ''
     }
 }
 
@@ -41,8 +41,12 @@ describe('Get Forgot Password tests', () => {
                 value: "user4@incorainc.com"
             }
         });
-        const Send = screen.getByText('Send');
-        userEvent.click(Send);
+
+        await act(async () => {
+            const Send = await screen.getByText('Send');
+            await userEvent.click(Send);
+        })
+
         await expect(screen.getByLabelText('Email')).toBeInTheDocument();
         await expect(email).toBeDefined();
     });
@@ -68,6 +72,41 @@ describe('Get Forgot Password tests', () => {
             const passwordInput = getByLabelText("Email")
             fireEvent.change(passwordInput, {target: {value: "123"}})
         })
-        expect(container.innerHTML).toMatch("Only domain @incorainc.com is accepted")
+        expect(container.innerHTML).toMatch("Email")
+    });
+    it('dispatch must be called after click on button', async () => {
+        const {getByLabelText, container} = setup();
+
+        fireEvent.input(getByLabelText("Email"), {
+            target: {
+                value: "user4@incorainc.com"
+            }
+        });
+
+        const Send = await screen.getByText('Send');
+
+        await act(async () => {
+            await userEvent.click(Send);
+        })
+
+        await expect(useAppDispatch()).toBeCalled();
+        // await expect(useAppDispatch()).toHaveBeenCalledTimes(0)
+    });
+    it('dispatch must be called after click on button just one time', async () => {
+        const {getByLabelText, container} = setup();
+
+        fireEvent.input(getByLabelText("Email"), {
+            target: {
+                value: "user4@incorainc.com"
+            }
+        });
+
+        const Send = await screen.getByText('Send');
+
+        await act(async () => {
+            await userEvent.click(Send);
+        })
+
+        await expect(useAppDispatch()).toHaveBeenCalledTimes(1)
     });
 })

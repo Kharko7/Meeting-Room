@@ -1,18 +1,15 @@
-import React, { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
+import React, {useEffect} from "react";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {NavLink, useNavigate} from "react-router-dom";
 
 import "animate.css";
 
 import classNames from "classnames/bind";
 import styles from "./LoginComponent.module.scss";
-import { ErrorComponent, InputRe } from "../../index";
+import {ErrorComponent, InputRe} from "../../index";
 import Button from "components/button";
-import { useAppDispatch, useAppSelector } from "../../../hooks/toolkitHooks";
-import { authActions } from "../../../redux&saga/slices/auth.slice";
-import { createBrowserHistory } from "history";
-import { getFromLocalStorage } from "../../../services/local-storage.service";
-// import browserHistory from 'react-router'
+import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
+import {authActions} from "../../../redux&saga/slices/auth.slice";
 
 const cn = classNames.bind(styles);
 
@@ -28,16 +25,11 @@ const LoginComponent = () => {
 
   const dispatch = useAppDispatch();
 
-  const { errorCode, user, success } = useAppSelector((state) => state.auth);
-
-  console.log(success);
-
-  const browserHistory = createBrowserHistory();
+  const { errorCode, success } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     success && navigate("/rooms", { replace: true });
     dispatch(authActions.success(false));
-    // window.history.replaceState(null, '', "");
   }, [success]);
 
   const submit: SubmitHandler<any> = async (user) => {
@@ -45,18 +37,12 @@ const LoginComponent = () => {
     await reset();
   };
 
-  // if (getFromLocalStorage('access')) {
-  //     window.location.replace('/rooms');
-  // }
-
   return (
     <div className={cn("login_container", "animate__bounceIn animate__zoomIn")}>
       <div className={cn("logo_container")}>
         <div className={cn("logo")}>
           <span className={cn("incora")}>INCORA</span>
         </div>
-        {/*<div className={cn("title")}>Booking</div>*/}
-        {/*<div className={cn("sub_title")}>Manage your time</div>*/}
       </div>
       <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
         <InputRe
@@ -81,7 +67,7 @@ const LoginComponent = () => {
         />
 
         <div className={cn("error_container")}>
-          {errorCode === 400 && !isDirty && (
+          {(errorCode === 400||errorCode===401) && !isDirty && (
             <ErrorComponent title={"Oops...Wrong login or password"} />
           )}
         </div>

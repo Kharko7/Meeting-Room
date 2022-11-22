@@ -5,32 +5,35 @@ import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss'
 import Avatar from './avatar/Avatar';
 import Button from 'components/button';
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 import CheckboxWithLabel from 'components/checkbox-with-label';
-import {getFromLocalStorage, removeFromLocalStorage, setToLocalStorage} from 'services/local-storage.service';
+import {
+    getFromLocalStorage, getUserData,
+    removeFromLocalStorage,
+    setToLocalStorage
+} from 'services/local-storage.service';
 import {Errors} from 'constants/errors';
 import Typography from '@mui/material/Typography'
 import {useNavigate} from 'react-router-dom';
 import Toggle from "../toggle/Toggle";
+import {useAppSelector} from "../../hooks/toolkitHooks";
 
 
 const cn = classNames.bind(styles);
 
 interface FormValues {
-    firsName: string;
+    firstName: string;
     lastName: string;
 }
 
-type FormName = 'firsName' | 'lastName'
-const userName: FormName[] = ['firsName', 'lastName']
+type FormName = 'firstName' | 'lastName'
+const userName: FormName[] = ['firstName', 'lastName']
 
-const user = {firsName: 'Yaroslav', lastName: 'Kharko'}
 
 const ProfileForm = () => {
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-
     const navigate = useNavigate()
 
     const handleWeekendsToggle = () => {
@@ -47,6 +50,7 @@ const ProfileForm = () => {
     const handleLogOut =async () => {
         removeFromLocalStorage('access')
         removeFromLocalStorage('user')
+        removeFromLocalStorage('role')
         /// dispatch(userLogout())
         navigate('/auth/login', {replace: true})
     }
@@ -66,19 +70,16 @@ const ProfileForm = () => {
     const themeLS = getFromLocalStorage('theme');
     let theme = themeLS?JSON.parse(themeLS):undefined;
 
+    const {firstName,lastName,role,email} = getUserData();
 
-    const userJSON = getFromLocalStorage('user'); // data from response
-    let user_data = userJSON?JSON.parse(userJSON):undefined;
-
-    console.log(user_data)
-
+    const user = {firstName: firstName, lastName: lastName}
 
     const inputUserName = userName.map((name: FormName) => (
         <TextField
             key={name}
             sx={{mr: '10px', width: '290px'}}
             defaultValue={user[name] || ''}
-            label={name === 'firsName' ? 'First name' : 'Last name'}
+            label={name === 'firstName' ? 'First name' : 'Last name'}
             error={Boolean(errors[name])}
             helperText={errors[name] ? errors[name]?.message : ''}
             {...register(name, {
@@ -97,13 +98,12 @@ const ProfileForm = () => {
 
     return (
         <Box className={cn('ProfileContainer')}>
-            <div className={cn('profile')}><Box sx={{color: 'var(--accent-text-color)'}} component="h1"> Profile </Box>
+            <div className={cn('profile')}><Box sx={{color: 'var(--accent-text-color)'}} component="h1"> Profile</Box>
                 <div className={cn('toggle')}><Toggle type={"themeToggle"} onclick={() => {
                     theme = !theme;
                     setToLocalStorage('theme',JSON.stringify(theme));
                     theme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
                 }} size={"large"}/>
-
                 </div>
             </div>
             <Box sx={{position: 'relative', textAlign: 'center', mb: '40px',}}>
@@ -115,7 +115,7 @@ const ProfileForm = () => {
                 <Typography
                     variant='h5'
                     sx={{mt: '20px', textAlign: 'center', color: 'var(--accent-text-color)'}}
-                > user@incorainc.com
+                > {email}
                 </Typography>
             </Box>
             <Box

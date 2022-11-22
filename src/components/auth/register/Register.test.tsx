@@ -3,7 +3,7 @@ import {LoginComponent, RegisterComponent} from "../../index";
 import {BrowserRouter} from "react-router-dom";
 import '@testing-library/jest-dom'
 import * as redux from "react-redux";
-import {useAppDispatch} from "../../../hooks/toolkitHooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect"
 import {act} from "react-dom/test-utils";
@@ -62,9 +62,10 @@ describe('Register tests', () => {
             }
         });
 
-        const registerButton = screen.getByText('Register');
-
-        userEvent.click(registerButton);
+        await act(async () => {
+            const registerButton = await screen.getByText('Register');
+            await userEvent.click(registerButton);
+        })
 
         await expect(login).toBeDefined();
         await expect(password).toBeDefined();
@@ -116,30 +117,147 @@ describe('Register tests', () => {
 
     });
 
+    it('login must be required', async () => {
+        const {getByLabelText} = setup();
+        await expect(getByLabelText('Enter name and surname')).toBeRequired()
+    });
 
-    // it('should password match', async () => {
-    //     const register = setup();
-    //
-    //     let {getByLabelText} = register;
-    //
-    //     // const password = fireEvent.input(getByLabelText("Create password"), {
-    //     //     target: {
-    //     //         value: "12344E#@1h"
-    //     //     }
-    //     // });
-    //     const password = fireEvent.input(getByLabelText("Create password"), {
-    //         target: {
-    //             value: "12344E#@1h"
-    //         }
-    //     });
-    //
-    //     const passwordConfirm = fireEvent.input(getByLabelText("Confirm password"), {
-    //         target: {
-    //             value: "12344E#@1h"
-    //         }
-    //     });
-    //
-    //      expect(password.valueOf()).toEqual('12344E#@1h')
-    // })
+    it('create password must be required', async () => {
+        const {getByLabelText} = setup();
+        await expect(getByLabelText('Create password')).toBeRequired()
+    });
+
+    it('password confirm must be required', async () => {
+        const {getByLabelText} = setup();
+        await expect(getByLabelText('Confirm password')).toBeRequired()
+    });
+
+    it('success must be undefined', async () => {
+        const {success} = useAppSelector(state =>state.auth);
+        await expect(success).toBe(undefined);
+    });
+
+    it('dispatch must be called after click on button', async () => {
+        const {getByLabelText, container} = setup();
+
+        fireEvent.input(getByLabelText("Enter name and surname"), {
+            target: {
+                value: "Bilbo Beggins"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Create password"), {
+            target: {
+                value: "123ertE#4"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Confirm password"), {
+            target: {
+                value: "123ertE#4"
+            }
+        });
+
+        const Register = await screen.getByText('Register');
+
+        await act(async () => {
+            await userEvent.click(Register);
+        })
+
+        await expect(useAppDispatch()).toBeCalled()
+
+    });
+
+    it('dispatch must be called just one time', async () => {
+        const {getByLabelText, container} = setup();
+
+        fireEvent.input(getByLabelText("Enter name and surname"), {
+            target: {
+                value: "Bilbo Beggins"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Create password"), {
+            target: {
+                value: "123ertE#4"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Confirm password"), {
+            target: {
+                value: "123ertE#4"
+            }
+        });
+
+        const Register = await screen.getByText('Register');
+
+        await act(async () => {
+            await userEvent.click(Register);
+        })
+
+        await expect(useAppDispatch()).toHaveBeenCalledTimes(1)
+
+    });
+
+    it('dispatch must NOT be called after click on button', async () => {
+        const {getByLabelText, container} = setup();
+
+        fireEvent.input(getByLabelText("Enter name and surname"), {
+            target: {
+                value: "Bilbo Beggins"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Create password"), {
+            target: {
+                value: "123ertE#4"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Confirm password"), {
+            target: {
+                value: "123ertE#4s"
+            }
+        });
+
+        const Register = await screen.getByText('Register');
+
+        await act(async () => {
+            await userEvent.click(Register);
+        })
+
+        await expect(useAppDispatch()).toHaveBeenCalledTimes(0)
+    });
+
+    it('error is visible after not match passwords', async () => {
+        const {getByLabelText, getByText} = setup();
+
+        fireEvent.input(getByLabelText("Enter name and surname"), {
+            target: {
+                value: "Bilbo Beggins"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Create password"), {
+            target: {
+                value: "123ertE#4"
+            }
+        });
+
+        fireEvent.input(getByLabelText("Confirm password"), {
+            target: {
+                value: "123ertE#4s"
+            }
+        });
+
+        const Register = await screen.getByText('Register');
+
+        await act(async () => {
+            await userEvent.click(Register);
+        })
+
+        await expect(getByText('Oops...Password do not match')).toBeInTheDocument()
+    });
+
 
 })

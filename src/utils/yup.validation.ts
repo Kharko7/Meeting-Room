@@ -1,44 +1,50 @@
+import { regex } from "constants/valid/regex";
 import * as yup from "yup";
+import {validErrorsMsg} from "../constants/valid/valid.errors.msg";
 
 export const RegisterSchema = yup.object().shape({
     login: yup.string()
         .required("")
-        .matches(new RegExp(/^[a-zA-ZА-яіІїЇґҐёЁє`'-]{2,}\s[a-zA-ZА-яіІїЇґҐёЁє`'-]{2,}$/),
-            "Enter your name and surname"),
+        .matches(regex.twoWordsBySpace,
+            validErrorsMsg.loginErrorMsg),
     password: yup.string()
         .required("")
-        .matches(new RegExp(/^(?=.*[a-zа-яіїґёєу])(?=.*[A-ZА-ЯІЇҐЁЄ])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/),
-            "Enter at least 8 characters, including lowercase, uppercase, numbers and special symbols"),
+        .matches(regex.strongPassword,
+            validErrorsMsg.passwordErrorMsg),
     passwordConfirm: yup.string()
         .required("")
-        // .oneOf([yup.ref('password'), null], 'Passwords must match')
-        .matches(new RegExp(/^(?=.*[a-zа-яіїґёєу])(?=.*[A-ZА-ЯІЇҐЁЄ])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/),
-            "Enter at least 8 characters, including lowercase, uppercase, numbers and special symbols")
+        .matches(regex.strongPassword,
+            validErrorsMsg.passwordErrorMsg)
 
 });
 
 export const ChangePasswordSchema = yup.object().shape({
-    password: yup.string()
+    newPassword: yup.string()
         .required("")
-        .matches(new RegExp(/^(?=.*[a-zа-яіїґёєу])(?=.*[A-ZА-ЯІЇҐЁЄ])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/),
-            "Enter at least 8 characters, including lowercase, uppercase, numbers and special symbols"),
+        .matches(regex.strongPassword,
+            validErrorsMsg.passwordErrorMsg)
+    ,
     passwordConfirm: yup.string()
         .required("")
-        // .oneOf([yup.ref('password'), null], 'Passwords must match')
-        .matches(new RegExp(/^(?=.*[a-zа-яіїґёєу])(?=.*[A-ZА-ЯІЇҐЁЄ])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/),
-            "Enter at least 8 characters, including lowercase, uppercase, numbers and special symbols")
+        .matches(regex.strongPassword,
+           validErrorsMsg.passwordErrorMsg)
+    ,
+    password: yup.string()
+        .required(""),
 
 });
 
 export const EmailSchema = yup.object().shape({
     email: yup.string()
         .required("")
-        .matches(new RegExp(/^[A-Za-z0-9_!#$%&'*+/=?`{|}~^.-]+@incorainc.com+$/, "gm"),"Only domain @incorainc.com is accepted")
+        .matches(regex.incoraEmail
+            ,validErrorsMsg.emailErrorMsg)
 });
 
 export const GetInvitationSchema = yup.object({
     questions: yup.lazy(() => yup.array().of(yup.object({
         email: yup.string().required("")
-            .matches(new RegExp(/^[A-Za-z0-9_!#$%&'*+/=?`{|}~^.-]+@incorainc.com+$/, "gm"),"Only domain @incorainc.com is accepted")
+            .matches(regex.incoraEmail,
+                validErrorsMsg.emailErrorMsg)
     })))
 })

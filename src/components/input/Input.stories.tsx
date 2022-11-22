@@ -1,7 +1,6 @@
 import {useForm} from 'react-hook-form';
 import {InputRe} from "../index";
 import {ComponentStory} from "@storybook/react";
-import {object} from "prop-types";
 
 
 export default {
