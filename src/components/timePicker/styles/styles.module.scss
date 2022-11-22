@@ -4,8 +4,8 @@
   box-shadow: var(--inset-input-shadow);
 }
 
-:global(.MuiInputBase-root) {
-  padding-right: 20px !important;
+:global(div.MuiInputBase-root) {
+  padding-right: 20px;
 }
 :global(.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper) {
   box-shadow: var(--outset-box-shadow) !important;

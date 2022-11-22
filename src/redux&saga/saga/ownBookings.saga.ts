@@ -17,7 +17,6 @@ function* workerOwnBookings(a: any) {
 }
 function* workerTotalCounts(a: any) {
   try {
-    // console.log(a, "AAAAAAAAAAAAAAAAA");
     const data: AxiosResponse = yield call(
       OwnBookingsService.getOwnBookings,
       a.payload

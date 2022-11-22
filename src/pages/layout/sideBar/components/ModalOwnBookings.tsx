@@ -5,6 +5,7 @@ import React, { useEffect, useContext } from "react";
 import Loader from "pages/layout/loader/Loader";
 import { getFromLocalStorage } from "services/local-storage.service";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+
 import {
   addOneBooking,
   addRecurringBooking,
@@ -20,7 +21,7 @@ import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { BookingEvent } from "interfaces/booking/Booking";
 //@ts-ignore
-const ModalRooms = ({ setOpenModal }) => {
+const ModalOwnRooms = ({ setOpenModal, booking }) => {
   const weekends = getFromLocalStorage("weekends");
   const { setAlert } = useContext(SnackBarContext);
   const dispatch = useAppDispatch();
@@ -108,14 +109,13 @@ const ModalRooms = ({ setOpenModal }) => {
         </div>
       ) : (
         <BookingForm
-          linkToCalendar={true}
           handleSubmit={handleSubmit}
           handleRemoveEvent={handleRemoveEvent}
-          edit={false}
+          edit={true}
         />
       )}
     </Modal>
   );
 };
 
-export default ModalRooms;
+export default ModalOwnRooms;

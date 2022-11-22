@@ -17,13 +17,12 @@ import {colors, colorsFn} from "../../../utils/colors.arr";
 type SideBarProps = { userName: string };
 
 const SideBar = ({ userName }: SideBarProps) => {
-  const bookings = useAppSelector((state) => state.ownBookings);
   const location = useLocation();
   let {isShowing, toggle} = useModal();
   const {firstName,lastName,role} = getUserData();
 
   useEffect(()=>{},[colorsFn])
-
+  
   return (
     <div className={styles.position}>
       {role==="admin"&&

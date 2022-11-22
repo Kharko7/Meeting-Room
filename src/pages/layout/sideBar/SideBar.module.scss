@@ -3,17 +3,6 @@
   text-align: left;
 }
 
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  background-color: var(--base3);
-}
-
-
 .tools {
   color: var(--label);
   cursor: pointer;
@@ -134,7 +123,7 @@
   box-shadow: var(--outset-box-shadow);
   cursor: pointer;
 
-  &:hover {
+   &:hover {
     background-color: var(--primary-color);
     //box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8),
     //  -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),

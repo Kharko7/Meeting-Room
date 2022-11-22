@@ -3,7 +3,7 @@ interface devices {
   deviceId: number;
   name: string;
 }
-interface rooms {
+export interface Rooms {
   roomId: number;
   name: string;
   floor: number;
@@ -12,13 +12,21 @@ interface rooms {
   devices: Array<devices>;
 }
 export interface InitialStateRooms {
-  rooms: Array<rooms> | [];
+  filter: null | string;
+  floors: Array<number>;
   roomSoonestBookingsDays: any;
+  roomsByFloor: Array<Array<Rooms>>;
+  statuses: object;
+  rooms:Array<Rooms>;
 }
 
 const initialState: InitialStateRooms = {
-  rooms: [],
+  filter: "all",
+  floors: [],
+  rooms:[],
   roomSoonestBookingsDays: [],
+  roomsByFloor: [],
+  statuses: {},
 };
 
 const roomsSlice = createSlice({
@@ -26,15 +34,27 @@ const roomsSlice = createSlice({
   initialState,
   reducers: {
     getRooms() {},
-    setRooms(state, action) {
-      // console.log(action.payload);
+    setRooms(state, action){
       state.rooms = action.payload;
+    },
+    setFilters(state, action) {
+      state.filter = action.payload;
     },
     getSoonestBookingsDays(state, action) {},
     setSoonestBookingsDays(state, action) {
       state.roomSoonestBookingsDays = action.payload;
     },
-
+    setCountOfFloors(state, action) {
+      state.floors = action.payload;
+    },
+    setRoomsByFloor(state, action) {
+      state.roomsByFloor = action.payload;
+    },
+    getRoomsStatus(state,{payload}){},
+    setRoomsStatus(state, { payload }) {
+      //@ts-ignore
+      state.statuses = payload;
+    },
     resetState() {
       return { ...initialState };
     },

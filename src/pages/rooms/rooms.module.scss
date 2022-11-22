@@ -5,7 +5,36 @@
   user-select: none;
   font-family: var(--primary-font-family);
 }
-
+.noFloor {
+  color: var(--primary-text-color);
+  width: 500px;
+  font-size: 18px;
+}
+.filters {
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: var(--outset-box-shadow);
+  color: var(--primary-text-color);
+  &:hover {
+    color: var(--accent-color);
+  }
+}
+.filters.active {
+  box-shadow: var(--inset-input-shadow);
+}
+.indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: var(--primary-text-color);
+}
+.indicatorCont {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
 .header {
   display: flex;
   position: fixed;
@@ -73,7 +102,8 @@
 }
 
 .roomsList {
-  width: calc(100% - 10px);
+  width: calc(100%);
+  padding-right: 10px;
   padding-left: 50px;
   margin-top: 86px;
 }
@@ -122,7 +152,7 @@
 
   &:hover {
     background-color: var(--primary-hover-color);
-    box-shadow: var(--user-img)
+    box-shadow: var(--user-img);
   }
 }
 
@@ -187,11 +217,17 @@
   font-size: 12px;
 }
 
-.indicator {
+.indicator,
+.indicatorTrue {
   width: 10px;
   height: 10px;
   border-radius: 100%;
+}
+.indicator {
   background-color: var(--indicator);
+}
+.indicatorTrue {
+  background-color: var(--accent-text-color);
 }
 
 .navButton {
@@ -252,7 +288,7 @@
 .svg {
   width: 20px;
   height: 20px;
-  fill: var( --fill-svg-rooms);
+  fill: var(--fill-svg-rooms);
   &:hover {
     fill: var(--accent-color);
   }
@@ -301,9 +337,9 @@
   opacity: 0;
   z-index: 5;
   background: linear-gradient(
-                  to bottom,
-                  transparent 2%,
-                  var(--primary-color) 7%
+    to bottom,
+    transparent 2%,
+    var(--primary-color) 7%
   );
   transition: all 0.2s linear;
   transition-delay: 200ms;

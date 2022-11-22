@@ -23,8 +23,8 @@
   }
   &:active,
   &:focus-visible {
-    background: var(--primary-hover-color);
-    box-shadow: var(--inset-box-shadow);
+    background: var(--base1);
+    box-shadow: var(--inset-input-shadow);
   }
   &.small {
     width: 150px;

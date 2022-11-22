@@ -14,9 +14,13 @@ jest.mock('react-router', () => ({
 
 jest.mock('services/local-storage.service', () => ({
   setToLocalStorage: () => mockSetLocalStorage,
-  getFromLocalStorage: () => false,
   removeFromLocalStorage: () => mockRemoveLocalStorage,
-}))
+  getFromLocalStorage: (key: string) => {
+    if (key === 'weekends') {
+      return false
+    } else return 'false'
+  },
+}));
 
 const setup = () => render(<ProfileForm />)
 
@@ -43,5 +47,12 @@ describe('Profile form tests', () => {
 
     expect(button).toBeInTheDocument()
     expect(mockNavigate).toBeCalled()
+  });
+
+  it('should render Toggle', async () => {
+    setup()
+    const toggle = screen.getByTestId('toggle')
+
+    expect(toggle).toBeTruthy()
   });
 })

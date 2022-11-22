@@ -4,7 +4,8 @@ import cn from "classnames";
 import ModalRooms from "./ModalRooms";
 import RoomInfo from "./RoomInfo";
 import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
-import {roomsActions} from 'redux&saga/slices/rooms.slice'
+import { roomsActions } from "redux&saga/slices/rooms.slice";
+import { setRoomId, setFloor } from "redux&saga/slices/booking.slice";
 interface MyroomsData {
   data: rooms;
 }
@@ -34,14 +35,19 @@ interface rooms {
   devices: Array<devices>;
 }
 const RoomCard = ({ data }: MyroomsData) => {
-  const [open, setOpen] = useState(false);
-    const roomInfo =  useAppSelector(
-      (state) => state.rooms.roomSoonestBookingsDays
-    );
-    const length = roomInfo.length;
   const [openInfo, setOpenInfo] = useState(false);
-  const a = 2;
+  const [open, setOpen] = useState(false);
+  const { roomSoonestBookingsDays, statuses } = useAppSelector(
+    (state) => state.rooms
+  );
+  //@ts-ignore
+  const status = statuses[data.roomId];
+  const length = roomSoonestBookingsDays.length;
   const dispatch = useAppDispatch();
+  const handleBookingRoom = () => {
+    dispatch(setRoomId(data.roomId));
+    dispatch(setFloor(data.floor.toString()));
+  };
   const showSoonestBookings = (roomId: number) => {
     dispatch(roomsActions.getSoonestBookingsDays(roomId));
   };
@@ -60,18 +66,22 @@ const RoomCard = ({ data }: MyroomsData) => {
         onClick={() => {
           setOpen(true);
           setOpenInfo(false);
+          handleBookingRoom();
         }}
       >
         <div className={styles.headerRoomCard}>
           <span className={styles.labelRoomName}>{data.name}</span>
-          <span className={styles.indicator}></span>
+          <span
+            className={cn(status ? styles.indicator : styles.indicatorTrue)}
+          ></span>
         </div>
         <div className={styles.roomInfo}>
-          {data.devices.map((device) => {
+          {data.devices.map((device, index) => {
             switch (device.deviceId) {
               case 1:
                 return (
                   <div
+                    key={index}
                     data-testid="icoScreen"
                     className={styles.screenIco}
                   ></div>
@@ -79,6 +89,7 @@ const RoomCard = ({ data }: MyroomsData) => {
               case 2:
                 return (
                   <div
+                    key={index}
                     data-testid="icoConditioner"
                     className={styles.conditionerIco}
                   ></div>
@@ -86,13 +97,18 @@ const RoomCard = ({ data }: MyroomsData) => {
               case 3:
                 return (
                   <div
+                    key={index}
                     data-testid="icoProjector"
                     className={styles.projectorIco}
                   ></div>
                 );
               case 4:
                 return (
-                  <div data-testid="icoBoard" className={styles.boardIco}></div>
+                  <div
+                    key={index}
+                    data-testid="icoBoard"
+                    className={styles.boardIco}
+                  ></div>
                 );
             }
           })}
@@ -106,7 +122,9 @@ const RoomCard = ({ data }: MyroomsData) => {
             data-testid="info-button"
             className={styles.info}
             onClick={(event) => {
-             openInfo && length > 0 && setTimeout(()=>setSoonestBookings(),1000) ;
+              openInfo &&
+                length > 0 &&
+                setTimeout(() => setSoonestBookings(), 1000);
               !openInfo && showSoonestBookings(data.roomId);
               setOpenInfo((prev) => !prev);
               event.stopPropagation();

@@ -67,10 +67,7 @@ select:-webkit-autofill:focus {
 
 .inputField {
   border-radius: 40px;
-  box-shadow: inset -2px -2px 8px $background,
-  inset -2px -2px 12px $firstShadow,
-  inset 2px 2px 8px $secondShadow,
-  inset 2px 2px 4px $thirdShadow;
+  box-shadow: var(--inset-input-shadow);
   position: relative;
   display: flex;
   align-items: center;

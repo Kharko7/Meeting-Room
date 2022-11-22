@@ -5,84 +5,54 @@ import stylesModal from "./modal.module.scss";
 import Modal from "../../../../components/modal/Modal";
 import Button from "../../../../components/button";
 import BookingForm from "components/booking-form";
-import React from "react";
+import React, { useEffect } from "react";
 import { getFromLocalStorage } from "services/local-storage.service";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
 // import { bookingActions } from "redux&saga/slices/booking.slice";
-import { Errors } from "constants/errors";
-import Loader from 'pages/layout/loader/Loader'
-const OwnBookings = () => {
+
+import ModalOwnRooms from "./ModalOwnBookings";
+import Loader from "pages/layout/loader/Loader";
+//@ts-ignore
+const OwnBookings = ({ booking, index }) => {
   const [openDelete, setOpenDelete] = useState(false);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  //
-  const dispatch = useAppDispatch();
-  const ownBookingsData = useAppSelector((state) => state.ownBookings.bookings);
-  const bookingData = useAppSelector((state) => state.booking);
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
 
-  // const { extendedProps } = bookingData;
-  // const handleCloseModal = () => {
-  //   setOpenModal(false);
-  //   dispatch(bookingActions.resetState());
-  // };
-
-  // const handleRemoveEvent = () => {
-  //   /// To Do axios Remove Event by ID /////////////////////
-  //   handleCloseModal();
-  // };
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   if (!extendedProps.roomId) {
-  //     if (!extendedProps.floor) {
-  //       dispatch(bookingActions.setBookingError({ floor: Errors.floor }));
-  //     }
-  //     dispatch(bookingActions.setBookingError({ roomId: Errors.roomId }));
-  //     return;
-  //   }
-  // };
   return (
     <>
-   
+      <div className={styles.roomCardContainer} key={index}>
+        <div className={styles.headerRoomCard}>
+          <span className={styles.labelRoomName}>{booking.title}</span>
 
-        {ownBookingsData.map((_, index: number) => (
-          <div className={styles.roomCardContainer} key={index}>
-            <div className={styles.headerRoomCard}>
-              <span className={styles.labelRoomName}>
-                {ownBookingsData[index].title}
-              </span>
-
-              <span>
-                <ActionButton
-                  size="small"
-                  type="edit"
-                  onclick={() => setOpenModal(true)}
-                />
-                <ActionButton
-                  mg={true}
-                  size="small"
-                  type="delete"
-                  onclick={() => setOpenDelete(true)}
-                />
-              </span>
-            </div>
-            {ownBookingsData[index].description !== "" && (
-              <span className={styles.labelDescription}>
-                {ownBookingsData[index].description}
-              </span>
-            )}
-            <div className={styles.labelTime}>
-              <span className={styles.labelTimeHeading}>
-                Start:
-                {"  "}
-                <span className={styles.time}>
-                  {ownBookingsData[index].startDateTime.slice(11, 16)}
-                  {"  "}
-                  {ownBookingsData[index].startDateTime.slice(0, 10)}
-                  {/* {ownBookingsData[index].endDateTime.slice(11, 16)} */}
-                </span>
-              </span>
-            </div>
-          </div>
-        ))}
+          <span>
+            <ActionButton
+              size="small"
+              type="edit"
+              onclick={() => setOpenEdit(true)}
+            />
+            <ActionButton
+              mg={true}
+              size="small"
+              type="delete"
+              onclick={() => setOpenDelete(true)}
+            />
+          </span>
+        </div>
+        {booking.description !== "" && (
+          <span className={styles.labelDescription}>{booking.description}</span>
+        )}
+        <div className={styles.labelTime}>
+          <span className={styles.labelTimeHeading}>
+            Start:
+            {"  "}
+            <span className={styles.time}>
+              {booking.startDateTime.slice(11, 16)}
+              {"  "}
+              {booking.startDateTime.slice(0, 10)}
+              {/* {booking.endDateTime.slice(11, 16)} */}
+            </span>
+          </span>
+        </div>
+      </div>
 
       {/* {openModal && (
         <Modal closeModal={handleCloseModal}>
@@ -93,6 +63,9 @@ const OwnBookings = () => {
           />
         </Modal>
       )} */}
+      {openEdit && (
+        <ModalOwnRooms booking={booking} setOpenModal={setOpenEdit} />
+      )}
       {openDelete && (
         <Modal closeModal={setOpenDelete}>
           <form>

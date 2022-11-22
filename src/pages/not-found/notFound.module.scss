@@ -204,11 +204,16 @@
 }
 
 .animate span {
-  color: var(--accent-text-color);
   opacity: 0;
   transform: translate(-300px, 0) scale(0);
   animation: sideSlide .5s forwards;
   text-shadow: var(--text-box-shadow);
+    background-color: var(--accent-text-color);
+    color: transparent;
+    text-shadow: var(--facet);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
 }
 
 @keyframes sideSlide {

@@ -6,28 +6,40 @@ import { useEffect } from "react";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 import Loader from "pages/layout/loader/Loader";
 const Rooms = () => {
-  const floorCount = 3;
-  const arr = Array.from({ length: floorCount }, (_, i) => i + 1);
-  const { rooms } = useAppSelector((state) => state.rooms);
+  const { roomsByFloor, floors, filter, rooms } = useAppSelector(
+    (state) => state.rooms
+  );
   const dispatch = useAppDispatch();
+  // setInterval(() => {
+  //   console.log('60 second left')
+  //   rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
+  // }, 60000);
   useEffect(() => {
-    dispatch(roomsActions.getRooms());
+   rooms.length == 0 && dispatch(roomsActions.getRooms());
+
+    // rooms.length == 0 && dispatch(roomsActions.getRoomsStatus());
   }, []);
+  useEffect(() => {
+    rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
+  }, [rooms]);
+
   return (
     <div className={styles.roomsContainer}>
       <div className={styles.mainContainer}>
         <Header />
         <div className={styles.roomsList}>
-          { rooms.length > 0  ? (
-            arr.map((currentFloor, index) => {
-              return (
-                <Floors
-                  key={index}
-                  data={rooms}
-                  currentFloor={currentFloor}
-                ></Floors>
-              );
+          {Object.keys(roomsByFloor).length > 0 && filter == "all" ? (
+            floors.map((currentFloor, index) => {
+              return <Floors key={index} currentFloor={currentFloor}></Floors>;
             })
+          ) : filter !== "all" ? (
+            Object.keys(roomsByFloor).length > 0 ? (
+              <Floors currentFloor={Number(filter)}></Floors>
+            ) : (
+              <p className={styles.noFloor}>
+                There are no meeting rooms on this floor
+              </p>
+            )
           ) : (
             <div className={styles.loader}>
               <Loader size="large" />
