@@ -4,12 +4,17 @@ import {ResponsePopup} from "../../components/tools/simple/response-popup/Respon
 import {PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
 import {UserService} from "../../services/user.service/user.service";
-import {fnErrorSaga, fnGetInvitationSaga} from "./fn/fn.saga";
+import {fnErrorSaga, pending, success} from "./fn/fn.saga";
 
-function* handleGetInvitation(action:any) {
+function* handleGetInvitation(action:PayloadAction<any>) {
     try {
-       yield fnGetInvitationSaga(action);
+        yield pending();
+        console.log(action.payload)
+        const {data}: AxiosResponse = yield call(UserService.getInvitation, action.payload);
+        yield success();
+        yield put(authActions.success(false));
     } catch (error: any) {
+        console.log(error)
        yield fnErrorSaga(error);
     }
 }

@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import {ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage} from 'pages';
+import {ChangePasswordPage, ForgotPasswordPage, LoginPage, RegisterPage, VerifyEmailPage} from 'pages';
 import NotFound from 'pages/not-found/NotFound';
 import { ProtectedRoute } from './ProtectedRoute';
 import AppMain from "../containers/app-main/AppMain";
@@ -15,11 +15,11 @@ const AppRouter = () => {
             <Route path={"*"} element={<NotFound/>}/>
             <Route path={'/auth'} element={<AuthRoute/>}>
                 <Route path={'login'} element={<LoginPage/>}></Route>
-                <Route path={'register'} element={<RegisterPage/>}></Route>
+                <Route path={'signup/:email'} element={<RegisterPage/>}></Route>
                 <Route path={'forgotPassword'} element={<ForgotPasswordPage/>}></Route>
             </Route>
             <Route path='' element={<ProtectedRoute />}>
-                <Route path={"/*"} element={<AppMain />} >
+                <Route path={"/"} element={<AppMain />} >
                   <Route path={"rooms"} element={<Rooms />} />
                   <Route path={"calendar"} element={<CalendarPage />} />
                 </Route>

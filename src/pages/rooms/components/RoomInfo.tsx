@@ -1,10 +1,10 @@
 import styles from "../rooms.module.scss";
 import cn from "classnames";
 import { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "pages/layout/loader/Loader";
 import "../rooms.module.scss";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import InfiniteScroll from "react-infinite-scroll-component";
 //@ts-ignore
 const RoomInfo = ({ openInfo, setOpenInfo, setOpen }) => {
   const roomInfo = useAppSelector(

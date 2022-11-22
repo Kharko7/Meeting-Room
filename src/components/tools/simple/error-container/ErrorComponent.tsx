@@ -13,7 +13,7 @@ interface ErrorProp{
 const ErrorComponent = ({title}:ErrorProp) => {
 
     return (
-        <div className={cn("error_container")}>
+        <div className={cn("error_container")} data-testid={'error'}>
             <ErrorOutlineIcon/>
             <span>{title}</span>
         </div>

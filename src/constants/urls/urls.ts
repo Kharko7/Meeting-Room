@@ -4,11 +4,12 @@ const baseURL = 'https://cors-anywhere.herokuapp.com/https://coursep.herokuapp.c
 
 const urls = {
     login: '/signin',
-    // register:'/signup',
-    register:'/users',
-    forgotPassword: '/forgotPassword',
+    register:'/signup',
+    // register:'/users',
+    forgotPassword: 'auth/reset-password',
     getInvitation: 'admin/user',
-    changePassword:'/changePassword'
+    changePassword:
+        'auth/change-password'
 };
 
 export {

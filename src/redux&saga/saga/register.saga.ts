@@ -1,16 +1,18 @@
-import {call, fork, put, take} from 'redux-saga/effects';
+import {call, fork, take} from 'redux-saga/effects';
 import {authActions} from 'redux&saga/slices/auth.slice';
 import {UserService} from "../../services/user.service/user.service";
-import {ResponsePopup} from "../../components/tools/simple/response-popup/ResponsePopup";
 import {LoginProps} from "../../interfaces/auth/AuthProps";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
-import {fnErrorSaga, fnRegisterSaga} from "./fn/fn.saga";
+import {fnErrorSaga, pending, success} from "./fn/fn.saga";
 
-function* handleRegister(action: any) {
+function* handleRegister(action: PayloadAction<any>) {
     try {
-        yield fnRegisterSaga(action);
-    } catch (error: any) {
+        yield pending();
+        console.log(action.payload)
+        const data: AxiosResponse = yield call(UserService.register, action.payload);
+        yield success();
+    } catch (error:any) {
         yield fnErrorSaga(error);
     }
 }

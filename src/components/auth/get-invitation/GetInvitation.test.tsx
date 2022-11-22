@@ -5,6 +5,7 @@ import '@testing-library/jest-dom'
 import "@testing-library/jest-dom/extend-expect"
 import userEvent from "@testing-library/user-event";
 import {act} from "react-dom/test-utils";
+import {useAppDispatch} from "../../../hooks/toolkitHooks";
 
 
 const mockDispatch = jest.fn()
@@ -42,8 +43,11 @@ describe('Get invitation tests', () => {
             }
         });
 
-        const SendButton = screen.getByText('Send');
-        userEvent.click(SendButton);
+        await act(async () => {
+            const SendButton =await screen.getByText('Send');
+            await userEvent.click(SendButton);
+        })
+
         await expect(screen.getByLabelText('Email')).toBeInTheDocument();
         await expect(emailInput).toBeDefined();
     });
@@ -71,14 +75,22 @@ describe('Get invitation tests', () => {
         await expect(getByText('Delete')).toBeInTheDocument();
     });
 
-    it('error in email', async () => {
-        const {getByLabelText, container} = setup();
-        await act(async () => {
-            const passwordInput = getByLabelText("Email")
-            fireEvent.change(passwordInput, {target: {value: "123"}})
-        })
-        expect(container.innerHTML).toMatch("Only domain @incorainc.com is accepted")
+    it('dispatch must be called after click on button', async () => {
+        const {getByText,getByLabelText} = setup();
 
+        const Send = await getByText('Send');
+
+        fireEvent.input(getByLabelText("Email"), {
+            target: {
+                value: "cssccs@incorainc.com"
+            }
+        });
+
+        await act(async () => {
+            await userEvent.click(Send);
+        })
+
+        await expect(useAppDispatch()).toBeCalled()
     });
 
 })

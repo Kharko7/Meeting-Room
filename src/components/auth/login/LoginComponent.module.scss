@@ -11,9 +11,21 @@ $lighterSecondColor: var(--additionalLighterColor);
 $s: 100% / 8;
 $t: 0.001%;
 
-*{
-  box-sizing: border-box;
+
+.login_container,.form_container,.logo_container,.login_button,.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.login_container,.form_container,.logo_container{
+  flex-direction: column;
+}
+
+.form_container,.logo:after{
+  width: 100%;
+}
+
 
 .login_container {
   width:430px;
@@ -25,25 +37,14 @@ $t: 0.001%;
    -2px -2px 12px $firstShadow,
     2px 2px 8px $secondShadow,
    2px 2px 4px $thirdShadow;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 15px;
   box-sizing: border-box;
-
   z-index: 1;
-
 }
 
 .form_container{
-  width: 100%;
   max-height: 50%;
   min-height: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   color: $mainColor;
 }
 
@@ -54,42 +55,8 @@ $t: 0.001%;
 
   max-width: 200px;
   max-height: 40%;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-
-
 }
 
-.title {
-  padding-top: 20px;
-  text-align: center;
-  font-size: 30px;
-  letter-spacing: 0.5px;
-  animation: color-animation 4s linear infinite;
-  place-items: center;
-  //color: var(--mainColorFont);
-  color:var(--base1);
-  text-shadow:var(--text-box-shadow);
-  box-sizing: border-box;
-}
-
-.sub_title {
-  text-align: center;
-  font-size: 13px;
-  padding-top: 7px;
-  letter-spacing: 1px;
-  color:var(--base1);
-  text-shadow: var(--text-box-shadow);
-  box-sizing: border-box;
-
-}
-
-.title,.sub_title{
-  font-weight: 700;
-}
 .login_button {
   cursor: pointer;
   min-width:80%;
@@ -99,9 +66,6 @@ $t: 0.001%;
   font-family: 'Montserrat', sans-serif;
   margin-top: 10px;
   background: var(--base1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .error_container{
@@ -122,15 +86,10 @@ $t: 0.001%;
   transform-style: preserve-3d;
   outline: 1px solid transparent;
   will-change: border-radius;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .logo:before,
 .logo:after{
   content: '';
-  width: 100%;
   height: 100%;
   display: block;
   position: absolute;
@@ -161,14 +120,6 @@ $t: 0.001%;
 
   line-height: 180px;
   text-indent: -21px;
-}
-
-.incora{
-  z-index: 1;
-  font-size: 30px;
-  letter-spacing: 0.5px;
-  color: #F4F6FAFF;
-  font-weight: 700;
 }
 
 @keyframes morph{
@@ -208,6 +159,34 @@ $t: 0.001%;
 .link a {
   text-decoration: none;
   color:$linkColor;
-  font-size: 14px;
+  font-size: 12px;
+}
 
+.link a {
+  text-transform: uppercase;
+  background-image: linear-gradient(to right top,
+          var(--colorIcon),
+          var(--link),
+          var(--label)
+  );
+  background-size: 50% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnim 7.5s ease  alternate infinite;
+}
+
+
+@keyframes gradientAnim {
+  to {
+    background-position: 100% top;
+  }
+}
+
+
+.incora{
+  z-index: 1;
+  font-size: 30px;
+  letter-spacing: 0.5px;
+  color: #F4F6FAFF;
+  font-weight: 700;
 }

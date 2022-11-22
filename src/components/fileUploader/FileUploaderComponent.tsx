@@ -15,7 +15,7 @@ interface FileUploaderProps{
     size:"small"|"medium"|"large",
     showFileName?:boolean;
 }
-export function FileUploaderComponent({register,name,required,icon,size,showFileName}:FileUploaderProps){
+export function FileUploaderComponent({register,name,required,icon,size,showFileName=false}:FileUploaderProps){
     const [filename,setName] = useState("");
 
     function handleChange(event:any) {
@@ -25,7 +25,7 @@ export function FileUploaderComponent({register,name,required,icon,size,showFile
     return(
         <div className={cn(`wrapper-${size?size:"small"}`)}>
             <div className={cn(`file-upload-${size}`)}>
-                <input type="file"{...register(`${name}`, {
+                <input data-testid={'file'} type="file"{...register(`${name}`, {
                     required: required
                 })}
                        onChange={handleChange}
@@ -35,7 +35,7 @@ export function FileUploaderComponent({register,name,required,icon,size,showFile
                 </div>
             </div>
             {showFileName&&
-                <div className={cn(`file_name-${size?size:"small"}`)}>
+                <div data-testid={'select'} className={cn(`file_name-${size?size:"small"}`)}>
                     {filename?filename:"Select avatar"}
                 </div>}
         </div>

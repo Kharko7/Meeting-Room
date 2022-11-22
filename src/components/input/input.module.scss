@@ -12,29 +12,47 @@ $colorIcon: var(--colorIcon);
 $label: var(--label);
 $gradientInputField: var(--gradientInputField);
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--mainColorFont)!important;
+  -webkit-box-shadow:
+          inset -1px -1px 2px var(--base1)!important;
+  transition: background-color 5000s ease-in-out 0s;
+  border-radius: 50%;
+}
+
+
+.container-extra-small,.container-small,.container-medium,.container-large{
+  transition: ease-in-out, width .35s ease-in-out;
+}
+
+
 .container-extra-small{
   width: 380px;
   margin: 20px;
-  transition: ease-in-out, width .35s ease-in-out;
 }
 
 
 .container-small {
   width: 400px;
   margin: 20px;
-  transition: ease-in-out, width .35s ease-in-out;
 }
 
 .container-medium {
   width: 450px;
   margin: 20px;
-  transition: ease-in-out, width .35s ease-in-out;
 }
 
 .container-large {
   width: 500px;
   margin: 20px;
-  transition: ease-in-out, width .35s ease-in-out;
 }
 
 .container-extra-small .inputField, .container-small .inputField {
@@ -66,6 +84,8 @@ $gradientInputField: var(--gradientInputField);
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 
+
+
   &::placeholder {
     color: $placeholder;
     text-shadow: none;
@@ -79,7 +99,6 @@ $gradientInputField: var(--gradientInputField);
 
   }
 }
-
 .container-extra-small .inputField input, .container-small .inputField input {
   font-size: 18px;
 }
@@ -110,7 +129,7 @@ $gradientInputField: var(--gradientInputField);
 .inputField label {
   position: absolute;
   font-family: 'Montserrat', sans-serif;
-  color: $label;
+  color: var(--label);
   font-weight: 400;
   transition: all 0.5s ease-in-out;
   pointer-events: none;

@@ -9,6 +9,7 @@ import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {GetInvitationSchema} from "../../../utils/yup.validation";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
+import {NavLink} from "react-router-dom";
 
 const cn = classNames.bind(styles)
 
@@ -34,12 +35,8 @@ const GetInvitationComponent = () => {
 
     const dispatch = useAppDispatch();
 
-    // let {invitations} = useAppSelector(state => state.auth);
-    //
-    // // useEffect(()=>{},[invitations])
-
     const submit: SubmitHandler<any> = async (data) => {
-        dispatch(authActions.getInvitation(data.questions))
+        await dispatch(authActions.getInvitation(data.questions));
         reset();
     }
 
@@ -97,6 +94,11 @@ const GetInvitationComponent = () => {
                             }} size={"large"}>Send</Button>
                         </div>
                     </form>
+                    <div className={cn("link")}>
+                        <NavLink to={"/auth/forgotPassword"}>
+                            <span>Go to rooms</span>
+                        </NavLink>
+                    </div>
                 </div>
             </div>
         </div>
