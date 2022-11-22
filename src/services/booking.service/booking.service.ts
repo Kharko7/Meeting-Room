@@ -1,11 +1,11 @@
-import { OneBooking, RcurringBooking } from "interfaces/booking/Booking";
+import { OneBooking, EditRecurringBooking, AddRecurringBooking } from "interfaces/booking/Booking";
 import { axiosService } from "services/axios.service/axios.service";
 
 interface bookingServiceProps {
   url: string
 }
 interface bookingServicePost extends bookingServiceProps {
-  body: OneBooking | RcurringBooking
+  body: OneBooking | EditRecurringBooking | AddRecurringBooking
 }
 
 export const bookingService = {

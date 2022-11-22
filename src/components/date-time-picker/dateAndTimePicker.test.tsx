@@ -3,7 +3,6 @@ import '@testing-library/jest-dom'
 import DateAndTimePicker from './DateAndTimePicker';
 
 const onChange = jest.fn()
-const onAccept = jest.fn();
 
 const errorMsg = 'error message'
 const label = 'date picker'
@@ -14,7 +13,6 @@ const setup = () => render(
     minDate={'09/11/2022 09:00 AM'}
     errorMsg={errorMsg}
     onChange={onChange}
-    onAccept={onAccept}
     label={label}
   />)
 

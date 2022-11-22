@@ -14,12 +14,11 @@ interface User {
   lastName: string;
   role: string;
   userId: number;
-  
 };
 
 const InviteCoworkers = () => {
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
   const dispatch = useAppDispatch();
   const loading = open && users.length === 0;

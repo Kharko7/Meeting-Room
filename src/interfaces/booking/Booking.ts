@@ -5,7 +5,7 @@ interface ExtendedProps {
     invitedId?: number[],
     daysOfWeek?: string[],
     isRecurring: boolean,
-    recurringId: boolean | null
+    recurringId: number | null
 }
 
 export interface BookingEvent {
@@ -25,8 +25,8 @@ export interface OneBooking {
     invitations: number[],
 }
 
-export interface RcurringBooking {
-    recurringId?: number
+export interface EditRecurringBooking {
+    recurringId: number | null
     title: string,
     description: string,
     roomId: number,
@@ -38,6 +38,17 @@ export interface RcurringBooking {
     invitations: number[],
 }
 
+export interface AddRecurringBooking {
+    title: string,
+    description: string,
+    roomId: number,
+    startDate: string,
+    startTime: string,
+    endDate: string,
+    endTime: string,
+    daysOfWeek: string[],
+    invitations: number[],
+}
 export interface DeleteBookingInterface {
     id: number;
     isRecurring: boolean;

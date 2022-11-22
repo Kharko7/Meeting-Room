@@ -15,7 +15,7 @@ import bookingReducer, {
   getAllBookingsSuccess,
   addOneBooking,
   addRecurringBooking,
-  addOneBookingSuccess,
+  addBookingSuccess,
 } from 'redux&saga/slices/booking.slice'
 import {
   initialState,
@@ -62,7 +62,7 @@ describe('reducer booking test', () => {
   // })
 
   // it('should set one Bookings to bookiing reducer', () => {
-  //   expect(bookingReducer(initialState, addOneBookingSuccess(bookingsSuccsess))).toEqual(
+  //   expect(bookingReducer(initialState, addBookingSuccess(bookingsSuccsess))).toEqual(
   //     {
   //       ...initialState,
   //       bookings: [...initialState.bookings, ...bookingsSuccsess],

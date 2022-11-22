@@ -40,6 +40,8 @@ export const bookingEdit = {
   roomId: 4,
   floor: '2',
   bookingId: 22,
+  isRecurring: false,
+  recurringId: null,
 }
 
 export const bookingsSuccsess = [{
@@ -51,6 +53,7 @@ export const bookingsSuccsess = [{
     roomId: 1,
     description: "First meeting 01",
     isRecurring: false,
+    recurringId: null,
   }
 }]
 
@@ -60,7 +63,7 @@ export const daysOfWeek = ['1', '2', '4']
 export const error = { title: 'error title', floor: 'choose floor' };
 export const dateStart = "2022-11-19T14:00";
 export const dateEnd = "2022-11-19T18:00";
-export const actionGetAllBookings = { startDate: '2022-10-12T00:00', endDate: '2022-12-21T00:00' }
+export const actionGetAllBookings = { roomId: 1, startDate: '2022-10-12T00:00', endDate: '2022-12-21T00:00' }
 export const actionAddOneBooking = {
   title: 'Event 2',
   description: 'My event',

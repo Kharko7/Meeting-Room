@@ -11,17 +11,32 @@ let mockedSelector: any;
 const errorMsg = 'Title should contain from 1 to 20 characters'
 const mockStateWithErr = {
   booking: {
+    floor: '2',
     errors: { title: errorMsg },
     daysOfWeek: [],
+    rooms: [{
+      floor: 2,
+      name: 'big room',
+      roomId: 4,
+    },
+    {
+      floor: 2,
+      name: 'main',
+      roomId: 3,
+    }],
+    floors: [1, 2, 3],
   }
 }
 const mockState = {
   booking: {
     title: '',
-    floor: '2',
+    floor: '',
+    roomId: null,
     errors: {},
     daysOfWeek: [],
-  }
+    rooms: [],
+    floors: [1, 2, 3],
+  },
 }
 
 const setup = () => render(
@@ -31,12 +46,14 @@ const setup = () => render(
     handleRemoveEvent={handleRemoveEvent}
   />)
 
-describe('Booking tests with error', () => {
+
+describe('Booking form tests', () => {
   beforeEach(() => {
     jest.spyOn(hooks, 'useAppDispatch').mockReturnValue(mockDispatch)
     mockedSelector = jest.spyOn(hooks, 'useAppSelector')
 
-    mockedSelector.mockReturnValue(mockStateWithErr.booking)
+    mockedSelector
+      .mockReturnValue(mockStateWithErr.booking)
   })
 
   afterEach(() => {
@@ -45,7 +62,6 @@ describe('Booking tests with error', () => {
 
   it('should render Title Booking', () => {
     setup()
-
 
     const inputLabel = screen.getByText(/Booking/i)
 
@@ -89,25 +105,24 @@ describe('Booking tests with error', () => {
     expect(error).toBeInTheDocument()
   })
 
-  it('should be selector room disabled', () => {
+  it('should render selector floor', () => {
     setup()
 
-    const selector = screen.getByTestId('selector-room')
-    const selectorButton = within(selector).getByRole('button')
+    const selector = screen.getByTestId('selector-floor')
 
-    expect(selectorButton).toHaveAttribute('aria-disabled', 'true');
+    expect(selector).toBeTruthy();
   })
 
-  it("when click on selector floor should popup listbox and call dispatch", () => {
+  it("when click on selector room should popup listbox and call dispatch", () => {
     setup()
 
-    const selectFloor = screen.getByTestId('selector-floor');
+    const selectFloor = screen.getByTestId('selector-room');
     const buttonFloor = within(selectFloor).getByRole('button');
     fireEvent.mouseDown(buttonFloor);
     const listfloors = within(screen.getByRole('presentation')).getByRole('listbox');
-    fireEvent.click(screen.getByText('2'));
+    fireEvent.click(screen.getByText('big room'));
 
-    expect(mockDispatch).toBeCalledTimes(4)
+    expect(mockDispatch).toBeCalled()
     expect(listfloors).toBeInTheDocument();
   });
 
@@ -124,6 +139,7 @@ describe('Booking tests with error', () => {
     expect(mockDispatch).toBeCalled()
     expect(listitems).toHaveLength(7);
   });
+
   it("should render Start and End date picker and call dispatch", () => {
     setup()
 
@@ -133,7 +149,7 @@ describe('Booking tests with error', () => {
     fireEvent.change(dateStart, { target: { value: '09/11/2022 12:00 AM' } })
     fireEvent.change(dateEnd, { target: { value: '09/11/2022 15:00 AM' } })
 
-    expect(mockDispatch).toBeCalledTimes(2)
+    expect(mockDispatch).toBeCalled()
     expect(dateStart).toBeTruthy();
     expect(dateEnd).toBeTruthy();
   });
@@ -155,20 +171,6 @@ describe('Booking tests with error', () => {
     expect(button).not.toBeInTheDocument();
   });
 
-  it('click on selector rooms and select value call dispatch', () => {
-    mockedSelector.mockReturnValue(mockState.booking)
-    setup()
-
-    const selectorRoom = screen.getByTestId('selector-room')
-    const selectorButton = within(selectorRoom).getByRole('button')
-
-    fireEvent.mouseDown(selectorButton);
-    const listitems = within(screen.getByRole('listbox')).getAllByRole('option');
-    fireEvent.click(listitems[1]);
-
-    expect(mockDispatch).toBeCalled()
-  })
-
   it('should render Autocomplete invite coworkers', () => {
     setup()
 
@@ -179,6 +181,7 @@ describe('Booking tests with error', () => {
 
   it("should submit event", () => {
     mockedSelector.mockReturnValue(mockState.booking)
+
     setup()
     const button = screen.getByTestId('button-submit');
 
@@ -189,6 +192,7 @@ describe('Booking tests with error', () => {
 
   it("should remove event", () => {
     mockedSelector.mockReturnValue(mockState.booking)
+
     render(
       <BookingForm
         edit={true}
@@ -207,4 +211,13 @@ describe('Booking tests with error', () => {
     expect(button).toBeInTheDocument();
   });
 
+  it('should be selector room disabled', () => {
+    mockedSelector.mockReturnValue(mockState.booking)
+    setup()
+
+    const selector = screen.getByTestId('selector-room')
+    const selectorButton = within(selector).getByRole('button')
+
+    expect(selectorButton).toHaveAttribute('aria-disabled', 'true');
+  })
 })

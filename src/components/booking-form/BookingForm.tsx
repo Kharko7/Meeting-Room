@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import { Dayjs } from "dayjs";
 import styles from "./bookingForm.module.scss";
-import { roomsActions } from "redux&saga/slices/rooms.slice";
 import DateAndTimePicker from "components/date-time-picker";
 import Button from "components/button";
 import { Link } from "react-router-dom";
@@ -22,17 +21,11 @@ import {
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import InviteCoworkers from "./invite-coworkers/InviteCoworkers";
-import Selector from "./selector/Selector";
 import { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import { daysOfTheWeek } from "constants/booking-form";
 import SelectorMultiple from "./selector/SelectorMultiple";
 import { Errors } from "constants/errors";
-import {
-  checkMatchEndDate,
-  checkMatchStartDate,
-} from "utils/check-crossed-date";
-import SelectorFloorAndRoom from "./selector/SelectorFloorAndRoom";
+import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
 
 interface BookingFormProps {
   edit: boolean;
@@ -59,9 +52,8 @@ const BookingForm = ({
     description,
     roomId,
     daysOfWeek,
-    bookings,
   } = useAppSelector((state) => state.booking);
-  const { roomsByFloor, floors } = useAppSelector((state) => state.rooms);
+
   const onConfirm = () => {
     handleRemoveEvent();
     setOpenConfirmation(false);
@@ -101,24 +93,6 @@ const BookingForm = ({
       dispatch(setEnd(event.format("YYYY-MM-DDTHH:mm")));
     }
   };
-  const handleCloseStart = (value: Dayjs | null) => {
-    if (value !== null) {
-      const startDate = value.format("YYYY-MM-DDTHH:mm");
-      // const checkDateForMatch = checkMatchStartDate(bookings, startDate, end);
-      // checkDateForMatch
-      //   ? dispatch(setBookingError({ start: Errors.matchDate }))
-      //   : dispatch(setBookingError({ start: "" }));
-    }
-  };
-  const handleCloseEnd = (value: Dayjs | null) => {
-    if (value !== null) {
-      const endDate = value.format("YYYY-MM-DDTHH:mm");
-      // const checkDateForMatch = checkMatchEndDate(bookings, start, endDate);
-      // checkDateForMatch
-      //   ? dispatch(setBookingError({ end: Errors.matchDate }))
-      //   : dispatch(setBookingError({ end: "" }));
-    }
-  };
 
   const handleChangeWeek = (e: SelectChangeEvent<string[]>) => {
     const value = e.target.value;
@@ -126,44 +100,6 @@ const BookingForm = ({
       setDaysOfWeek(typeof value === "string" ? value.split(",") : value)
     );
   };
-
-  // const roomsByFloor = rooms.filter((room) => {
-  //   return room.floor === floor
-  // })
-  // const menuItemsRoom = roomsByFloor.map(room => (
-  //   <MenuItem
-  //     key={room.roomId}
-  //     value={room.roomId}>
-  //     {room.name}
-  //   </MenuItem>
-  // ))
-  // const menuItemsFloor = floors.map(floor => (
-  //   <MenuItem
-  //     key={floor}
-  //     value={floor}>
-  //     {floor}
-  //   </MenuItem>
-  // ))
-
-  const menuItemsRoom =
-    roomsByFloor[Number(floor) - 1].length > 0
-      ? roomsByFloor[Number(floor) - 1].map((room) => {
-          return (
-            <MenuItem key={room.roomId} value={room.roomId}>
-              {room.name}
-            </MenuItem>
-          );
-        })
-      : null;
-  const menuItemsFloor = floors.map((floor) => {
-    return (
-      roomsByFloor[Number(floor) - 1].length > 0 && (
-        <MenuItem key={floor} value={floor}>
-          {floor}
-        </MenuItem>
-      )
-    );
-  });
 
   return (
     <>
@@ -229,12 +165,10 @@ const BookingForm = ({
                 date={start}
                 errorMsg={errors.start}
                 onChange={handleChangeStart}
-                onAccept={handleCloseStart}
                 label="Start"
               />
               <DateAndTimePicker
                 date={end}
-                onAccept={handleCloseEnd}
                 minDate={start}
                 errorMsg={errors.end}
                 onChange={handleChangeEnd}
@@ -269,37 +203,14 @@ const BookingForm = ({
               }}
             >
               <SelectorFloorAndRoom
+                edit={edit}
                 valueFloor={floor}
                 valueRoom={roomId?.toString() || ""}
                 onChangeFloor={handleChangeFloor}
                 onChangeRoom={handleChangeRoom}
+                errorMsg={errors}
               />
             </Box>
-            {/* <Box
-              sx={{
-                display: "flex",
-                gap: "15px",
-                height: "80px",
-              }}
-            >  
-              <Selector
-                label="Choose floor"
-                value={floor || ""}
-                errorMsg={errors.floor}
-                menuItems={menuItemsFloor}
-                dataTestId="selector-floor"
-                onChange={handleChangeFloor}
-              />
-              <Selector
-                label="Choose room"
-                value={roomId?.toString() || ""}
-                errorMsg={errors.roomId}
-                disabled={!floor}
-                menuItems={menuItemsRoom}
-                dataTestId="selector-room"
-                onChange={handleChangeRoom}
-              /> 
-            </Box> */}
           </Grid>
           <Grid item xs={12}>
             <Box

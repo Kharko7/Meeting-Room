@@ -1,7 +1,7 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { OneBooking, RcurringBooking, BookingEvent, DeleteBookingInterface } from 'interfaces/booking/Booking';
+import { OneBooking, EditRecurringBooking, BookingEvent, DeleteBookingInterface, AddRecurringBooking } from 'interfaces/booking/Booking';
 export interface InitialStateBookig {
     title: string;
     start: string;
@@ -44,11 +44,34 @@ const bookingSlice = createSlice({
         deleteBookingById(state, action: PayloadAction<DeleteBookingInterface>) {
             state.loading = true;
         },
+        deleteBookingSuccess(state, action: PayloadAction<DeleteBookingInterface>) {
+            const newBookings = state.bookings.filter((booking: BookingEvent) => (
+                (action.payload.isRecurring
+                    ? booking.extendedProps.recurringId
+                    : booking.extendedProps.bookingId) !== action.payload.id
+            ))
+            state.bookings = newBookings
+            state.loading = false;
+        },
         editOneBooking(state, action: PayloadAction<any>) {
             state.loading = true;
         },
-        editRecurringBooking(state, action: PayloadAction<any>) {
+        editOneBookingSuccess(state, action: PayloadAction<number>) {
+            const newBookings = state.bookings.filter((booking: BookingEvent) => (
+                booking.extendedProps.bookingId !== action.payload
+            ))
+            state.bookings = newBookings
+            state.loading = false;
+        },
+        editRecurringBooking(state, action: PayloadAction<EditRecurringBooking>) {
             state.loading = true;
+        },
+        editRecurringBookingSuccess(state, action: PayloadAction<number>) {
+            const newBookings = state.bookings.filter((booking: BookingEvent) => (
+                booking.extendedProps.recurringId !== action.payload
+            ))
+            state.bookings = newBookings
+            state.loading = false;
         },
         getAllBookings(state, action: PayloadAction<Record<string, string | number>>) {
             state.loading = true;
@@ -60,11 +83,11 @@ const bookingSlice = createSlice({
         addOneBooking(state, action: PayloadAction<OneBooking>) {
             state.loading = true;
         },
-        addOneBookingSuccess(state, action: PayloadAction<BookingEvent[]>) {
-            state.loading = false;
+        addBookingSuccess(state, action: PayloadAction<BookingEvent[]>) {
             state.bookings = [...state.bookings, ...action.payload];
+            state.loading = false;
         },
-        addRecurringBooking(state, action: PayloadAction<RcurringBooking>) {
+        addRecurringBooking(state, action: PayloadAction<AddRecurringBooking>) {
             state.loading = true;
         },
         setRoomId(state, action: PayloadAction<number | null>) {
@@ -130,7 +153,9 @@ export const {
     editBooking,
     resetState,
     editOneBooking,
+    editOneBookingSuccess,
     editRecurringBooking,
+    editRecurringBookingSuccess,
     setBookingError,
     setDaysOfWeek,
     setDescription,
@@ -145,8 +170,9 @@ export const {
     getAllBookingsSuccess,
     addOneBooking,
     addRecurringBooking,
-    addOneBookingSuccess,
+    addBookingSuccess,
     deleteBookingById,
+    deleteBookingSuccess,
 } = bookingSlice.actions;
 
 const bookingReducer = bookingSlice.reducer;

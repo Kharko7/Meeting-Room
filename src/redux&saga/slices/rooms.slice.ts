@@ -3,7 +3,7 @@ interface devices {
   deviceId: number;
   name: string;
 }
-interface rooms {
+export interface Rooms {
   roomId: number;
   name: string;
   floor: number;
@@ -15,9 +15,9 @@ export interface InitialStateRooms {
   filter: null | string;
   floors: Array<number>;
   roomSoonestBookingsDays: any;
-  roomsByFloor: Array<Array<rooms>>;
+  roomsByFloor: Array<Array<Rooms>>;
   statuses: object;
-  rooms:Array<rooms>;
+  rooms:Array<Rooms>;
 }
 
 const initialState: InitialStateRooms = {

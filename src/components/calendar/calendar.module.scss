@@ -254,6 +254,17 @@ $backgroundColor: var(--calendar-bg);
   font-weight: 600;
   text-align: center;
 }
+:global(.fc-more-popover) {
+  z-index: 3 !important;
+  &.fc-popover-body {
+    max-height: 110px;
+    overflow: auto;
+  }
+}
+:global(.fc-popover-body) {
+  max-height: 110px;
+  overflow: auto;
+}
 
 ///////////////////// Title ////////////////////////
 :global(.fc-toolbar-title) {

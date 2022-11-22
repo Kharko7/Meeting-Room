@@ -24,18 +24,16 @@ import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { BookingEvent } from "interfaces/booking/Booking";
 import { disabledPressedButton } from "utils/disabled-pressed-button";
-import Selector from 'components/booking-form/selector/Selector';
-import { floors, rooms } from "constants/booking-form";
-import { MenuItem } from '@material-ui/core';
 import { SelectChangeEvent } from "@mui/material/Select";
 import { setFloor, setRoomId } from 'redux&saga/slices/booking.slice';
 import CheckboxWithLabel from "components/checkbox-with-label";
-import SelectorFloorAndRoom from "components/booking-form/selector/SelectorFloorAndRoom";
+import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
 
 const CalendarPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [showRoom, setShowRoom] = useState<string>('');
   const [showFloor, setShowFloor] = useState<string>('');
+  const [request, setRequest] = useState<boolean>(false);
   const weekends = getFromLocalStorage('weekends')
   const { setAlert } = useContext(SnackBarContext)
   const dispatch = useAppDispatch();
@@ -58,6 +56,19 @@ const CalendarPage = () => {
   } = useAppSelector(state => state.booking);
 
   useEffect(() => {
+    if (request) {
+      setRequest(false)
+      return
+    }
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi().view
+      const getFirstDay = dayjs(calendarApi.activeStart).format('YYYY-MM-DDTHH:mm');
+      const getLastDay = dayjs(calendarApi.activeEnd).format('YYYY-MM-DDTHH:mm');
+      dispatch(getAllBookings({ roomId: showRoom, startDate: getFirstDay, endDate: getLastDay }))
+    }
+  }, [showRoom, bookings.length, dispatch]);
+
+  useEffect(() => {
     if (errors.errorMsg) {
       setAlert({
         severity: snackbarVariants.error,
@@ -65,21 +76,12 @@ const CalendarPage = () => {
       })
       dispatch(setBookingError({ errorMsg: '' }));
     }
-  }, [dispatch, errors.errorMsg, setAlert]);
+  }, [dispatch, errors.errorMsg, errors.succsessMsg, setAlert]);
 
   const handleCloseModal = () => {
     setOpenModal(false);
     dispatch(resetState());
   };
-
-  const refreshCalendar = (delay: number) => {
-    if (calendarRef.current) {
-      const calendarApi = calendarRef.current?.getApi()
-      setTimeout(() => {
-        calendarApi.gotoDate(calendarApi.view.currentStart);
-      }, delay)
-    }
-  }
 
   const memoizedDateSelect = useCallback(
     (selectInfo: DateSelectArg) => {
@@ -94,11 +96,10 @@ const CalendarPage = () => {
   const memoizedEventSelect = useCallback(
     (eventInfo: EventClickArg) => {
       const event = eventInfo.event
-      //const floorByRoom = rooms.find((room: any) => room.roomId === event.extendedProps.roomId)
       const bookingEdit = {
         title: event.title,
-        start: event.startStr,
-        end: event.endStr,
+        start: dayjs(event.start).format('YYYY-MM-DDTHH:mm'),
+        end: dayjs(event.end).format('YYYY-MM-DDTHH:mm'),
         description: event.extendedProps.description,
         roomId: event.extendedProps.roomId,
         floor: '',
@@ -118,6 +119,7 @@ const CalendarPage = () => {
       const getLastDay = dayjs(dateInfo.end).format('YYYY-MM-DDTHH:mm');
       dispatch(getAllBookings({ roomId: showRoom, startDate: getFirstDay, endDate: getLastDay }))
       disabledPressedButton()
+      setRequest(true)
     },
     [dispatch, showRoom]
   );
@@ -127,10 +129,8 @@ const CalendarPage = () => {
       dispatch(deleteBookingById({ id: recurringId ? recurringId : bookingId, isRecurring: isRecurring }))
     }
     handleCloseModal();
-    if (calendarRef.current) {
-      refreshCalendar(500)
-    }
   };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!roomId) {
@@ -140,7 +140,6 @@ const CalendarPage = () => {
       dispatch(setBookingError({ roomId: Errors.roomId }))
       return
     }
-
     const baseParams = {
       title: title,
       description: description,
@@ -173,51 +172,25 @@ const CalendarPage = () => {
         ? dispatch(editRecurringBooking({ ...eventRecurring, recurringId: recurringId, }))
         : dispatch(editOneBooking({ ...eventOneDay, bookingId: bookingId }))
     }
-
     handleCloseModal();
-    refreshCalendar(1000)
   };
 
   const handleShowAllRooms = () => {
-    setShowRoom('')
-    setShowFloor('');
     dispatch(setRoomId(null));
     dispatch(setFloor(''));
-    if (calendarRef.current) {
-      refreshCalendar(0)
-    }
+    setShowRoom('');
+    setShowFloor('');
   }
 
   const handleChangeRoom = (e: SelectChangeEvent<string>) => {
     setShowRoom(e.target.value)
     dispatch(setRoomId(Number(e.target.value)));
-    //const floorByRoom = rooms.find((room: any) => room.roomId === Number(e.target.value))
-
-    // dispatch(setFloor(floorByRoom?.floor || ''))
-    refreshCalendar(0)
   };
+
   const handleChangeFloor = (e: SelectChangeEvent<string>) => {
     dispatch(setFloor(e.target.value))
     setShowFloor(e.target.value);
   };
-
-  // const roomsByFloor = rooms.filter((room) => {
-  //   return room.floor === showFloor
-  // })
-  // const menuItemsRoom = roomsByFloor.map((room) => (
-  //   <MenuItem
-  //     key={room.roomId}
-  //     value={room.roomId}>
-  //     {room.name}
-  //   </MenuItem>
-  // ))
-  // const menuItemsFloor = floors.map((floor) => (
-  //   <MenuItem
-  //     key={floor}
-  //     value={floor}>
-  //     {floor}
-  //   </MenuItem>
-  // ))
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', flexDirection: 'column' }}>
@@ -243,23 +216,6 @@ const CalendarPage = () => {
             onChangeFloor={handleChangeFloor}
             onChangeRoom={handleChangeRoom}
           />
-
-
-          {/* <Selector
-            label="Choose floor"
-            value={showFloor}
-            menuItems={menuItemsFloor}
-            dataTestId="selector-floor"
-            onChange={handleChangeFloor}
-          />
-          <Selector
-            label="Choose room"
-            value={showRoom}
-            disabled={!showFloor}
-            menuItems={menuItemsRoom}
-            dataTestId="selector-room"
-            onChange={handleChangeRoom}
-          /> */}
           < CheckboxWithLabel
             disabled={Boolean(!showRoom)}
             label='Show all rooms'
