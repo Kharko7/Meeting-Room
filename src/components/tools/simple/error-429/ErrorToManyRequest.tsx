@@ -17,7 +17,7 @@ const cn = classNames.bind(styles)
 const ErrorToManyRequest = () => {
 
     let {errorCode} = useAppSelector(state => state.auth);
-    let {isShowing,toggle} = useModal();
+    let {isShowing,toggle} = useModal()
 
     useEffect(()=>{
         errorCode===429&&toggle()

@@ -38,6 +38,7 @@ const ChangePasswordComponent = () => {
         if (success) {
             toggle();
             isShowing = false;
+            dispatch(authActions.success(false))
         }
         errorCode === 403 && setErrorOldPassword(true);
     }, [success, errorCode])
