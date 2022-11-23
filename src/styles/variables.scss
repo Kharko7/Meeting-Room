@@ -64,6 +64,7 @@
 
 
 
+  //--label: #a0a5a8;
   --label: #2a2a2a;
 
   --registration:#505050;
@@ -303,6 +304,14 @@
   //clouds
   --cloud-mail-box-shadow: -8px -8px 15px var(--base4),
   8px 8px 25px var(--base3);
+
+  --cloud-color: #efefef;
+  --cloud-color-dark: grey;
+
+  --sky: #eaddad;
+
+  --plane:var(--colorNavTitle3_2);
+
 
 
 
@@ -597,6 +606,12 @@
 
     --cloud-mail-box-shadow: -1px -1px 5px #323e47,
     1px 1px 5px #495967;
+
+    --cloud-color: #fff;
+    --cloud-color-dark: grey;
+    --sky:#00bbff;
+
+    --plane: #eedbab;
 
 
   }

@@ -13,7 +13,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// let checked = localStorage.getItem('theme');
 const checked = getFromLocalStorage('theme');
 let check = checked?JSON.parse(checked):false;
 check ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
