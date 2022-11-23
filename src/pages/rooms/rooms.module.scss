@@ -18,6 +18,7 @@
   &:hover {
     color: var(--accent-color);
   }
+  background-color: var(--primary-color);
 }
 .filters.active {
   box-shadow: var(--inset-input-shadow);
@@ -48,7 +49,7 @@
   //width: calc(100vw - 310px);
   width: calc(100vw - 20%);
 
-  background-color: var(--primary-color);
+  // background-color: var(--primary-color);
 }
 .roomsContainer {
   display: flex;
@@ -56,7 +57,7 @@
   width: 100%;
   height: 100%;
 
-  background-color: var(--primary-color);
+  // background-color: var(--primary-color);
 }
 .input {
   position: relative;
@@ -134,10 +135,10 @@
 .roomCardContainer {
   position: relative;
   display: flex;
-  width: 235px;
+  width: 250px;
   flex-direction: column;
   padding: 10px;
-  height: 110px;
+  height: 125px;
   justify-content: space-between;
 
   color: var(--primary-text-color);
@@ -184,11 +185,11 @@
 .membersIco,
 .conditionerIco,
 .boardIco {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
 
   background-size: contain;
-  background-size: 18px;
+  background-size: 25px;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -197,14 +198,14 @@
 }
 .projectorIco {
   background-image: url(./images/projector.png);
-  background-size: 20px;
+  background-size: 27px;
 }
 .conditionerIco {
   background-image: url(./images/conditioner.png);
 }
 .boardIco {
   background-image: url(./images/board.png);
-  background-size: 20px;
+  background-size: 27px;
 }
 .membersIco {
   background-image: url(./images/people.png);
@@ -280,14 +281,14 @@
 // Card-Info
 .info {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   right: 10px;
   width: 20px;
   height: 20px;
 }
 .svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   fill: var(--fill-svg-rooms);
   &:hover {
     fill: var(--accent-color);
@@ -304,7 +305,7 @@
 }
 .soonestBooking {
   border: 1px solid var(--accent-color);
-  width: 215px;
+  width: 225px;
   padding: 4px;
   box-shadow: var(--outset-box-shadow);
   border-radius: 4px;
@@ -313,7 +314,7 @@
 .soonestBookingTitle {
   color: var(--accent-color);
   text-transform: uppercase;
-  margin: 0;
+  margin: 0 0 10px 0 ;
 }
 .soonestBookingDesc {
   // margin:0;
@@ -329,10 +330,10 @@
 .infoBox {
   position: absolute;
   appearance: none;
-  top: 110px;
+  top: 125px;
   right: 0px;
   overflow: hidden;
-  width: 235px;
+  width: 250px;
   height: 0px;
   opacity: 0;
   z-index: 5;
@@ -408,4 +409,64 @@
   &:active {
     box-shadow: var(--inset-box-shadow);
   }
+}
+
+$background: var(--base1);
+$firstShadow: var(--base2);
+$secondShadow: var(--base3);
+$thirdShadow: var(--base4);
+$mainColor: var(--mainColorFont);
+$linkColor: var(--link);
+$errorColor: var(--errorColor);
+$additionalColor: var(--additionalColor);
+$lighterSecondColor: var(--additionalLighterColor);
+
+.boxInset,
+.boxInset2 {
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: var(--base1);
+  position: absolute;
+  box-shadow: var(--pages-decorationRoom-box-shadow-inset);
+}
+
+.boxInset {
+  top: 10px;
+  left: 20%;
+  z-index: -1;
+}
+
+.boxInset2 {
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  width: 500px;
+  height: 500px;
+}
+
+.boxOutset,
+.boxOutset2 {
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: var(--base1);
+  box-shadow: var(--pages-decorationRoom-box-shadow-outset);
+  position: absolute;
+}
+
+.boxOutset {
+  top: 0;
+  right: 20%;
+  z-index: -1;
+  width: 450px;
+  height: 450px;
+}
+
+.boxOutset2 {
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 }

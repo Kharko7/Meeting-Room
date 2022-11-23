@@ -11,7 +11,10 @@ import {
   addRecurringBooking,
   editBooking,
   getAllBookings,
+  editOneBooking,
   resetState,
+  deleteBookingById,
+  editRecurringBooking,
   setBookingError,
   setSelectedDate,
 } from "redux&saga/slices/booking.slice";
@@ -25,6 +28,9 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
   const weekends = getFromLocalStorage("weekends");
   const { setAlert } = useContext(SnackBarContext);
   const dispatch = useAppDispatch();
+  const ownBookings = useAppSelector((state) => state.ownBookings.bookings);
+  const { limit,totalCount, page } = useAppSelector((state) => state.ownBookings);
+  console.log(limit, page, totalCount);
   const {
     title,
     description,
@@ -39,6 +45,7 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
     errors,
     loading,
   } = useAppSelector((state) => state.booking);
+
   useEffect(() => {
     if (errors.errorMsg) {
       setAlert({
@@ -54,53 +61,48 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
     dispatch(resetState());
   };
   const handleRemoveEvent = () => {
-    /// To Do axios Remove Event by ID /////////////////////
+    if (bookingId) {
+      dispatch(
+        deleteBookingById({
+          id : bookingId,
+          isRecurring: false,
+        })
+      );
+    }
     handleCloseModal();
   };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!roomId) {
-      if (!floor) {
-        dispatch(setBookingError({ floor: Errors.floor }));
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!roomId) {
+        if (!floor) {
+          dispatch(setBookingError({ floor: Errors.floor }));
+        }
+        dispatch(setBookingError({ roomId: Errors.roomId }));
+        return;
       }
-      dispatch(setBookingError({ roomId: Errors.roomId }));
-      return;
-    }
+      const baseParams = {
+        title: title,
+        description: description,
+        roomId: roomId,
+        invitations: invitedId,
+      };
+      const eventOneDay = {
+        ...baseParams,
+        startDateTime: start,
+        endDateTime: end,
+      };
 
-    const eventOneDay = {
-      title: title,
-      description: description,
-      roomId: 1,
-      startDateTime: start,
-      endDateTime: end,
-      invitations: invitedId,
-    };
-    const eventRecurring = {
-      title: title,
-      description: description,
-      roomId: 1,
-      startDate: dayjs(start).format("YYYY-MM-DD"),
-      startTime: dayjs(start).format("HH:mm"),
-      endDate: dayjs(end).format("YYYY-MM-DD"),
-      endTime: dayjs(end).format("HH:mm"),
-      daysOfWeek: daysOfWeek,
-      invitations: invitedId,
-    };
-
-    const existEvent = bookings.some(
-      (event: BookingEvent) => event.extendedProps.bookingId === bookingId
-    );
-    if (!existEvent) {
-      if (daysOfWeek.length) {
-        dispatch(addRecurringBooking(eventRecurring));
-      } else {
-        dispatch(addOneBooking(eventOneDay));
+      const existEvent = ownBookings.some(
+        (event:any) => event.bookingId === bookingId
+      );
+      if (existEvent) {
+        if (!daysOfWeek.length) {
+          console.log(ownBookings);
+       dispatch(editOneBooking({ ...eventOneDay, bookingId: bookingId }));
       }
-    }
-
-    ////To Do axios edit//////////////////
-    handleCloseModal();
-  };
+      handleCloseModal();
+    };
+  }
   return (
     <Modal data-testid="modal-1" closeModal={handleCloseModal}>
       {loading ? (

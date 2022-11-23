@@ -22,23 +22,21 @@ export interface InitialStateBookig {
 }
 
 const OwnBookingsContainer = () => {
-  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const { totalCount, limit, bookings } = useAppSelector(
+  const { totalCount, limit, bookings,page } = useAppSelector(
     (state) => state.ownBookings
   );
   const pages = Math.ceil(totalCount / limit);
-
-
-
-
+  console.log(page, pages, limit, bookings, totalCount);
   const dispatch = useAppDispatch();
   const handleNext = () => {
+    setHasMore(true);
     if (page + 1 <= pages) {
-      setPage((prev) => prev + 1);
+      console.log("true 123")
+      dispatch(ownBookingsActions.setPage(page+1));
       dispatch(ownBookingsActions.getOwnBookings(page + 1));
     } else {
-      setHasMore(false);
+      // setHasMore(false);
     }
   };
   useEffect(() => {
@@ -65,7 +63,7 @@ const OwnBookingsContainer = () => {
       >
         <div className={styles.roomsCardsContainer}>
           {/* <MyRoomCard mockedData={mockedData}></MyRoomCard> */}
-          {bookings.map((booking, index) => {
+          {bookings.map((booking:any, index) => {
             return <OwnBookings key={index} booking={booking} index={index}></OwnBookings>;
           })}
         </div>

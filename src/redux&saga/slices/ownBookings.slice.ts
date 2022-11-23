@@ -13,12 +13,15 @@ export interface InitialStateBooking {
   bookings: Array<booking> | [];
   totalCount: number;
   limit: number;
+  page:number;
 }
 
 const initialState: InitialStateBooking = {
   bookings: [],
   totalCount: 0,
-  limit:0
+  limit:0,
+  page:1,
+
 };
 
 const ownBookingsSlice = createSlice({
@@ -29,13 +32,19 @@ const ownBookingsSlice = createSlice({
     setOwnBookings(state, { payload }) {
       state.bookings = state.bookings.concat(payload);
     },
+    setPage(state, action) {
+      state.page = action.payload;
+    },
     getTotal(state, { payload }) {},
     setTotal(state, { payload }) {
       state.totalCount = payload.totalCount;
       state.limit = payload.limit;
     },
-    resetState() {
-      return { ...initialState };
+    reset(state) {
+      state.totalCount = 0;
+      state.bookings = [];
+      state.limit = 0;
+      state.page = 1;
     },
   },
 });

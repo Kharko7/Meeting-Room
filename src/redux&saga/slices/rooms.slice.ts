@@ -17,16 +17,20 @@ export interface InitialStateRooms {
   roomSoonestBookingsDays: any;
   roomsByFloor: Array<Array<Rooms>>;
   statuses: object;
-  rooms:Array<Rooms>;
+  rooms: Array<Rooms>;
+  timeStatusUdated:number;
+  statusUpdatedCounter:number;
 }
 
 const initialState: InitialStateRooms = {
   filter: "all",
   floors: [],
-  rooms:[],
+  rooms: [],
   roomSoonestBookingsDays: [],
   roomsByFloor: [],
   statuses: {},
+  timeStatusUdated:0,
+  statusUpdatedCounter:0,
 };
 
 const roomsSlice = createSlice({
@@ -34,7 +38,7 @@ const roomsSlice = createSlice({
   initialState,
   reducers: {
     getRooms() {},
-    setRooms(state, action){
+    setRooms(state, action) {
       state.rooms = action.payload;
     },
     setFilters(state, action) {
@@ -50,10 +54,16 @@ const roomsSlice = createSlice({
     setRoomsByFloor(state, action) {
       state.roomsByFloor = action.payload;
     },
-    getRoomsStatus(state,{payload}){},
+    getRoomsStatus(state, { payload }) {},
     setRoomsStatus(state, { payload }) {
       //@ts-ignore
       state.statuses = payload;
+    },
+    setTimeStatusUdated(state, action) {
+      state.timeStatusUdated = action.payload;
+    },
+    setStatusUpdatedCounter(state,) {
+      state.statusUpdatedCounter = state.statusUpdatedCounter+1;
     },
     resetState() {
       return { ...initialState };

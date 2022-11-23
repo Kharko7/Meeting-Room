@@ -124,7 +124,10 @@ const bookingSlice = createSlice({
         setDaysOfWeek(state, action: PayloadAction<string[]>) {
             state.daysOfWeek = action.payload;
         },
-        editBooking(state, action: PayloadAction<EditBooking>) {
+        setBookingId(state,action){
+            state.bookingId = action.payload;
+        },
+        editBooking(state, action: PayloadAction<any>) {
             state.title = action.payload.title;
             state.start = action.payload.start;
             state.end = action.payload.end;
@@ -134,6 +137,16 @@ const bookingSlice = createSlice({
             state.bookingId = action.payload.bookingId;
             state.isRecurring = action.payload.isRecurring;
             state.recurringId = action.payload.recurringId;
+        },
+        editOwnBooking(state, action: PayloadAction<any>) {
+            state.title = action.payload.title;
+            state.start = action.payload.start;
+            state.end = action.payload.end;
+            state.roomId = action.payload.roomId;
+            state.floor = action.payload.floor;
+            state.description = action.payload.description;
+            state.bookingId = action.payload.bookingId;
+            state.isRecurring = action.payload.isRecurring;
         },
         resetState(state) {
             state.title = initialState.title;
@@ -153,6 +166,7 @@ export const {
     editBooking,
     resetState,
     editOneBooking,
+    editOwnBooking,
     editOneBookingSuccess,
     editRecurringBooking,
     editRecurringBookingSuccess,
@@ -166,6 +180,7 @@ export const {
     setTitle,
     setLoading,
     setInvite,
+    setBookingId,
     getAllBookings,
     getAllBookingsSuccess,
     addOneBooking,

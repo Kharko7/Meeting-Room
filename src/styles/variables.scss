@@ -12,7 +12,6 @@
   --primary-hover-color:#f8faff;
   --primary-hover-button-color: #f8faff;
 
-
   /* font  families */
   --primary-font-family: "Montserrat", sans-serif;
 
@@ -20,24 +19,22 @@
 
   // box
   --outset-box-shadow: -2px -2px 8px rgb(255 255 255),
-  -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
-  inset 2px 2px 4px rgb(255 255 255 / 10%);
+    -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
 
   --inset-box-shadow: inset -2px -2px 8px rgb(255 255 255),
-  inset -2px -2px 12px rgb(255 255 255 / 50%),
-  inset 2px 2px 8px rgb(0 0 0 / 15%), inset 2px 2px 4px rgb(255 255 255 / 10%);
+    inset -2px -2px 12px rgb(255 255 255 / 50%),
+    inset 2px 2px 8px rgb(0 0 0 / 15%), inset 2px 2px 4px rgb(255 255 255 / 10%);
 
   // input
   --inset-input-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-  inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-  inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-  inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
 
-  --hover-shadox-container:-4px -4px 10px rgba(255, 255, 255, 0.8),
-  -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
-  inset 4px 4px 10px rgb(0 0 0 / 2%);
-
-
+  --hover-shadox-container: -4px -4px 10px rgba(255, 255, 255, 0.8),
+    -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
+    inset 4px 4px 10px rgb(0 0 0 / 2%);
 
   //switcher
   --base1: #f4f6fa;
@@ -50,225 +47,206 @@
   --errorColor: #d55d5d;
   --additionalLighterColor: #b1dae7;
 
-  --logo-color-1:#34e0f0;
-  --logo-color-2:#00c4ff;
-  --logo-color-3:#48BDE88C;
-  --logo-color-4:#5BBDE0FF;
+  --logo-color-1: #34e0f0;
+  --logo-color-2: #00c4ff;
+  --logo-color-3: #48bde88c;
+  --logo-color-4: #5bbde0ff;
 
-  --logo-color-box-shadow:5px 5px 8px rgba(0, 102, 255, 0.21);
+  --logo-color-box-shadow: 5px 5px 8px rgba(0, 102, 255, 0.21);
 
   --incora: #eef0f3;
 
-  --text-box-shadow:1px 1px 3px rgb(185, 185, 185),
-  -1px -1px 2px rgba(203, 203, 203, 0.5);
+  --text-box-shadow: 1px 1px 3px rgb(185, 185, 185),
+    -1px -1px 2px rgba(203, 203, 203, 0.5);
 
 
 
   //--label: #a0a5a8;
   --label: #2a2a2a;
 
-  --registration:#505050;
+  --registration: #505050;
 
   --colorIcon: #757575;
 
   --gradientInputField: linear-gradient(
-                  to right,
-                  rgba(255, 255, 255, 0.13) 0%,
-                  rgba(255, 255, 255, 0.13) 77%,
-                  rgba(255, 255, 255, 0.5) 92%,
-                  rgba(255, 255, 255, 0.3) 100%
+    to right,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.13) 77%,
+    rgba(255, 255, 255, 0.5) 92%,
+    rgba(255, 255, 255, 0.3) 100%
   );
 
-  --bgHoverNavInReg:#EBEDF0;
+  --bgHoverNavInReg: #ebedf0;
 
-  --buttonColors:-2px -2px 8px rgb(255 255 255),
-  -2px -2px 12px rgb(255 255 255 / 60%), 2px 2px 8px rgb(0 0 0 / 15%),
-  inset 5px 5px 14px rgb(0 0 0 / 2%);
+  --buttonColors: -2px -2px 8px rgb(255 255 255),
+    -2px -2px 12px rgb(255 255 255 / 60%), 2px 2px 8px rgb(0 0 0 / 15%),
+    inset 5px 5px 14px rgb(0 0 0 / 2%);
 
-  --titleUpOnHover:#EBEDF0;
+  --titleUpOnHover: #ebedf0;
 
   --colorNavTitle1: #53aedf;
-  --colorNavTitle2:#3D8DAE;
-  --colorNavTitle3:#76c3da;
+  --colorNavTitle2: #3d8dae;
+  --colorNavTitle3: #76c3da;
 
-  --colorNavTitle1_2:#4a8edb;
-  --colorNavTitle2_2:#79b8d3;
-  --colorNavTitle3_2:#9cb8dc;
+  --colorNavTitle1_2: #4a8edb;
+  --colorNavTitle2_2: #79b8d3;
+  --colorNavTitle3_2: #9cb8dc;
 
-  --colorNavTitle1_3:#6e8ac9;
-  --colorNavTitle2_3:#4e89a2;
+  --colorNavTitle1_3: #6e8ac9;
+  --colorNavTitle2_3: #4e89a2;
   --colorNavTitle3_3: #848fd3;
 
-  --colorNavTitle1_4: #3D8DAE;
+  --colorNavTitle1_4: #3d8dae;
   --colorNavTitle2_4: #3daeae;
   --colorNavTitle3_4: #74abda;
 
-  --loginColorPasswordChange:#a0a5a8;
-  --loginHoverColorPasswordChange:#505050;
+  --loginColorPasswordChange: #a0a5a8;
+  --loginHoverColorPasswordChange: #505050;
 
-  --changePasswordTitle:#555;
+  --changePasswordTitle: #555;
 
+  --textNotFoundShadow: -2px -2px 2px rgb(255 255 255),
+    2px 1px 2px rgb(0 0 0 / 32%);
 
-  --textNotFoundShadow:-2px -2px 2px rgb(255 255 255), 2px 1px 2px rgb(0 0 0 / 32%);
+  --shadowNotFoundPage1: #177d88;
+  --shadowNotFoundPage2: #24c2d4;
+  --shadowNotFoundPage3: #1a8e9b;
 
-  --shadowNotFoundPage1:#177d88;
-  --shadowNotFoundPage2:#24c2d4;
-  --shadowNotFoundPage3:#1a8e9b;
-
-  --shadowNotFoundPage4:#21b4c4;
-  --shadowNotFoundPage5:#1bc1d4;
+  --shadowNotFoundPage4: #21b4c4;
+  --shadowNotFoundPage5: #1bc1d4;
   --shadowNotFoundPage6: #12cbe0;
 
   --facet: 0px 2px 3px rgba(255, 255, 255, 0.5);
 
-  --inset-input-shadow-auth:inset -2px -2px 8px var(--base1),
-  inset -2px -2px 12px var(--base2),
-  inset 2px 2px 8px var(--base3),
-  inset 2px 2px 4px var(--base4);
+  --inset-input-shadow-auth: inset -2px -2px 8px var(--base1),
+    inset -2px -2px 12px var(--base2), inset 2px 2px 8px var(--base3),
+    inset 2px 2px 4px var(--base4);
 
-
-
-  --placeHolder:rgba(255, 255, 255, 0.1);
+  --placeHolder: rgba(255, 255, 255, 0.1);
 
   //button
   --outset-shadow: -2px -2px 8px rgb(255 255 255),
-  -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
-  inset 2px 2px 4px rgb(255 255 255 / 10%);
+    -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
 
   --inset-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.8),
-  inset -2px -2px 5px rgba(255, 255, 255, 0.625),
-  inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-  inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+    inset -2px -2px 5px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
 
   --active-color: #cfcfd4;
 
-
   //sidebar&rooms
-  --indicator:#ff6e6e;
-  --blur:rgba(255, 255, 255, 0.376);
-  --user-img:-4px -4px 10px rgba(255, 255, 255, 0.8),
-  -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
-  inset 4px 4px 10px rgba(255, 255, 255, 0.1);
+  --indicator: #ff6e6e;
+  --blur: rgba(255, 255, 255, 0.376);
+  --user-img: -4px -4px 10px rgba(255, 255, 255, 0.8),
+    -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
+    inset 4px 4px 10px rgba(255, 255, 255, 0.1);
 
-  --room-box-shadow:var(--outset-box-shadow);
+  --room-box-shadow: var(--outset-box-shadow);
 
-  --fill-svg-rooms:#bcbcbc;
+  --fill-svg-rooms: #bcbcbc;
 
-  --info-box-shadow:-2px -2px 8px rgb(255 255 255),
-  -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
-  inset 2px 2px 4px rgb(255 255 255 / 10%);
+  --info-box-shadow: -2px -2px 8px rgb(255 255 255),
+    -2px -2px 12px rgb(255 255 255 / 50%), 2px 2px 8px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
 
-  --myRoomContainer-borderTop:#d1d1d1;
+  --myRoomContainer-borderTop: #d1d1d1;
 
   //navBtn
-  --link-NavBtn-box-shadow:-2px -2px 4px rgb(255 255 255 / 80%),
-  -2px -2px 4px rgb(255 255 255 / 63%), 2px 2px 2px rgb(0 0 0 / 15%),
-  inset 2px 2px 4px rgb(255 255 255 / 10%);
-
-
+  --link-NavBtn-box-shadow: -2px -2px 4px rgb(255 255 255 / 80%),
+    -2px -2px 4px rgb(255 255 255 / 63%), 2px 2px 2px rgb(0 0 0 / 15%),
+    inset 2px 2px 4px rgb(255 255 255 / 10%);
 
   --placeholder-input-color: rgb(192, 192, 192);
 
   //sekector
-  --hover-selector-container:rgba(0, 0, 0, 0.05);
+  --hover-selector-container: rgba(0, 0, 0, 0.05);
 
   //timePicker
-  --timePickerGlobalColor:#efefef;
+  --timePickerGlobalColor: #efefef;
 
   //datepicker
-  --PickerGlobalColor:black;
+  --PickerGlobalColor: black;
 
   //dateAndTimePicker
-  --dateAndTimePicker-selected-global:white;
+  --dateAndTimePicker-selected-global: white;
 
-  --datePicker-box-shadow:-2px -2px 5px rgba(255, 255, 255, 0.8),
-  -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
-  inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+  --datePicker-box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8),
+    -2px -2px 5px rgba(255, 255, 255, 0.625), 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
 
-  --dateAndTime-color:#25cee0;
+  --dateAndTime-color: #25cee0;
 
   //colorSelector
-  --color-selector:rgb(255, 255, 255);
-
+  --color-selector: rgb(255, 255, 255);
 
   //checkBoxWithLabel
-  --checkBoxWithLabel-shadow-outset: -2px -2px 6px -0.5px #ffffff, 3px 3px 6px 0px rgb(0 0 0 / 17%), 2px 2px 12px 0px rgb(0 0 0 / 10%);
-  --checkBoxWithLabel-shadow-inset:inset -1px -1px 3px -1.5px #ffffff, inset 1px 1px 4px 0px rgb(0 0 0 / 17%),
-  inset 4px 3px 4px 0px rgb(0 0 0 / 10%);
-
+  --checkBoxWithLabel-shadow-outset: -2px -2px 6px -0.5px #ffffff,
+    3px 3px 6px 0px rgb(0 0 0 / 17%), 2px 2px 12px 0px rgb(0 0 0 / 10%);
+  --checkBoxWithLabel-shadow-inset: inset -1px -1px 3px -1.5px #ffffff,
+    inset 1px 1px 4px 0px rgb(0 0 0 / 17%),
+    inset 4px 3px 4px 0px rgb(0 0 0 / 10%);
 
   //iconButton
 
-  --iconBtn-shadow-inset:inset -2px -2px 2px rgba(255, 255, 255, 0.8),
-  inset -2px -2px 2px rgba(255, 255, 255, 0.625),
-  inset 2px 2px 2px rgba(0, 0, 0, 0.15),
-  inset 2px 2px 2px rgba(255, 255, 255, 0.1);
+  --iconBtn-shadow-inset: inset -2px -2px 2px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 2px rgba(255, 255, 255, 0.625),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.15),
+    inset 2px 2px 2px rgba(255, 255, 255, 0.1);
 
   --iconBtn-shadow-inset2: inset -3px -3px 16px rgba(255, 255, 255, 0.8),
-  inset -3px -3px 6px rgba(255, 255, 255, 0.625),
-  inset 3px 3px 3px rgba(0, 0, 0, 0.15),
-  inset 3px 3px 6px rgba(255, 255, 255, 0.1);
+    inset -3px -3px 6px rgba(255, 255, 255, 0.625),
+    inset 3px 3px 3px rgba(0, 0, 0, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.1);
 
-  --iconBtn-shadow:
-          -4px -4px 10px rgba(255, 255, 255, 0.8),
-          -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
-          inset 4px 4px 10px rgba(255, 255, 255, 0.1);
-
+  --iconBtn-shadow: -4px -4px 10px rgba(255, 255, 255, 0.8),
+    -4px -4px 10px rgba(255, 255, 255, 0.625), 4px 4px 4px rgba(0, 0, 0, 0.15),
+    inset 4px 4px 10px rgba(255, 255, 255, 0.1);
 
   //toggle
 
-  --input-shadow-valid:
-          -8px -4px 8px 0px #ffffff73,
-          8px 4px 12px 0px rgba(94, 104, 121, 0.288);
-;
-
- --toggle-box-shadow: -8px -4px 8px 0px #ffffff73,
-  2px 2px 4px 0px rgba(94, 104, 121, 0.288),
-  inset -4px -4px 4px 0px #ffffff73,
-  inset 4px 4px 4px 0px rgba(94, 104, 121, 0.288);
-
-
+  --input-shadow-valid: -8px -4px 8px 0px #ffffff73,
+    8px 4px 12px 0px rgba(94, 104, 121, 0.288);
+  --toggle-box-shadow: -8px -4px 8px 0px #ffffff73,
+    2px 2px 4px 0px rgba(94, 104, 121, 0.288), inset -4px -4px 4px 0px #ffffff73,
+    inset 4px 4px 4px 0px rgba(94, 104, 121, 0.288);
 
   --toogle-bg-color: #eaecf2;
 
   --toogle-box-shadow-checked: -8px -4px 8px 0px hsla(0, 0%, 100%, 52%);
 
+  --toggle-sun: #dfa253ff;
 
-  --toggle-sun:#DFA253FF;
+  --toggle-moon: var(--base4);
 
-  --toggle-moon:var(--base4);
+  --animation-sun: spin 6s linear infinite;
 
-  --animation-sun:spin 6s linear infinite;
+  --toggle-position-left-before: 60px;
+  --toggle-position-left: 60px;
 
-  --toggle-position-left-before:60px;
-  --toggle-position-left:60px;
-
-  --toggle-animation:left 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+  --toggle-animation: left 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
 
   @keyframes spin {
     100% {
       -webkit-transform: rotate(360deg);
-      transform:rotate(360deg);
+      transform: rotate(360deg);
     }
   }
 
-
   //pagination
 
-  --pagination-box-shadow:-3px -3px 16px rgba(255, 255, 255, 0.8),
-  -3px -3px 6px rgba(255, 255, 255, 0.625),
-  3px 3px 3px rgba(0, 0, 0, 0.15),
-  inset 3px 3px 6px rgba(255, 255, 255, 0.1);;
+  --pagination-box-shadow: -3px -3px 16px rgba(255, 255, 255, 0.8),
+    -3px -3px 6px rgba(255, 255, 255, 0.625), 3px 3px 3px rgba(0, 0, 0, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.1);
 
-  --pagination-inset-box-shadow:inset -3px -3px 16px rgba(255, 255, 255, 0.8),
-  inset -3px -3px 6px rgba(255, 255, 255, 0.625),
-  inset 3px 3px 3px rgba(0, 0, 0, 0.15),
-  inset 3px 3px 6px rgba(255, 255, 255, 0.1);
+  --pagination-inset-box-shadow: inset -3px -3px 16px rgba(255, 255, 255, 0.8),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.625),
+    inset 3px 3px 3px rgba(0, 0, 0, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.1);
 
   //setting
-  --border-avatar-settings:#e7fffd;
-
-
+  --border-avatar-settings: #e7fffd;
 
   //CALENDAR
   --eventHighlight-box-shadow:inset 1px 2px 6px 0px #ffffff, inset -1px -3px 6px 1px #616161;
@@ -280,21 +258,25 @@
 
   --calendar-fc-event-bg-color: #3788d8;
   --calendar-fc-event-text-color: rgb(0, 0, 0);
-  --calendar-fc-highlight-color:rgba(163, 163, 163, 0.28);
+  --calendar-fc-highlight-color: rgba(163, 163, 163, 0.28);
   --calendar-fc-list-event-hover-bg-color: #09e4f837;
 
-  --calendar-bg:#ECF0F3;
+  --calendar-bg: #ecf0f3;
 
-  --buttonBoxShadowActive-box-shadow:var(--inset-box-shadow);
+  --buttonBoxShadowActive-box-shadow: var(--inset-box-shadow);
 
-  --buttonBoxShadow-box-shadow:var(--outset-box-shadow);
+  --buttonBoxShadow-box-shadow: var(--outset-box-shadow);
 
-
-//pages
+  //pages
   --pages-decoration-box-shadow-inset: inset 5px 5px 25px #d9dbdf,
-  inset -5px -5px 25px #ffffff;
+    inset -5px -5px 25px #ffffff;
 
   --pages-decoration-box-shadow-outset: 5px 5px 25px #d9dbdf,
+    -5px -5px 25px #ffffff;
+  --pages-decorationRoom-box-shadow-inset: inset 5px 5px 25px #d9dbdf6e,
+    inset -5px -5px 25px #ffffff;
+  --pages-decorationRoom-box-shadow-outset: 5px 5px 25px #d9dbdf7a,
+    -5px -5px 25px #ffffff7d;
   -5px -5px 25px #ffffff;
 
 //429
@@ -325,8 +307,8 @@
     --dark-text-color: #919191;
 
     --primary-hover-color: #344049;
-    --primary-hover-button-color: #3D4C57FF;
-    --active-color:#4C5D6BFF;
+    --primary-hover-button-color: #3d4c57ff;
+    --active-color: #4c5d6bff;
 
     //login
     --base1: #3f4e5a;
@@ -341,11 +323,11 @@
     --label: #a0a5a8;
     --colorIcon: #9d9d9d;
     --gradientInputField: linear-gradient(
-                    to right,
-                    rgb(3, 14, 23, 0.001) 0%,
-                    rgba(3, 14, 23, 0.001) 77%,
-                    rgba(3, 14, 23, 0.001) 92%,
-                    rgba(3, 14, 23, 0.001) 100%
+      to right,
+      rgb(3, 14, 23, 0.001) 0%,
+      rgba(3, 14, 23, 0.001) 77%,
+      rgba(3, 14, 23, 0.001) 92%,
+      rgba(3, 14, 23, 0.001) 100%
     );
 
     --placeHolder: #3f4e5a;
@@ -355,14 +337,13 @@
     --logo-color-1: #f09f34;
     --logo-color-2: rgba(255, 213, 0, 0.5);
     --logo-color-3: rgba(232, 195, 72, 0.55);
-    --logo-color-4:var(--additionalColor);
+    --logo-color-4: var(--additionalColor);
 
-    --logo-color-box-shadow:5px 5px 8px rgba(255, 213, 0, 0.21);
+    --logo-color-box-shadow: 5px 5px 8px rgba(255, 213, 0, 0.21);
 
     --incora: #455562;
 
-    --text-box-shadow:1px 1px 3px var(--base3),
-    -1px -1px 2px var(--base4);
+    --text-box-shadow: 1px 1px 3px var(--base3), -1px -1px 2px var(--base4);
 
     //register
     --bgHoverNavInReg: #364450;
@@ -387,13 +368,14 @@
     --titleUpOnHover: #344049;
 
     //change
-    --loginColorPasswordChange:#8f8f8f ;
+    --loginColorPasswordChange: #8f8f8f;
     --loginHoverColorPasswordChange: #cbced2;
     --changePasswordTitle: #a0a5a8;
 
     //notfoundndpage
     --accent-text-color: #dfa253;
-    --textNotFoundShadow:-2px -2px 2px rgba(42, 48, 52, 0.6), 2px 1px 2px rgba(255, 255, 255, 0.1);
+    --textNotFoundShadow: -2px -2px 2px rgba(42, 48, 52, 0.6),
+      2px 1px 2px rgba(255, 255, 255, 0.1);
 
     --shadowNotFoundPage1: #d39a50;
     --shadowNotFoundPage2: #eaab59;
@@ -404,50 +386,40 @@
 
     --shadowNotFoundPage6: #eaab59;
 
-    --facet:  0px 1px 1px rgb(243, 205, 158);
-
+    --facet: 0px 1px 1px rgb(243, 205, 158);
 
     // button
 
     --inset-box-shadow: inset -2px -2px 8px var(--base1),
-    inset -2px -2px 12px var(--base2),
-    inset 2px 2px 8px var(--base3),
-    inset 2px 2px 4px var(--base4);
+      inset -2px -2px 12px var(--base2), inset 2px 2px 8px var(--base3),
+      inset 2px 2px 4px var(--base4);
 
-    --outset-box-shadow: -2px -2px 8px var(--base1),
-    -2px -2px 4px var(--base2),
-    2px 2px 8px var(--base3),
-    inset 2px 2px 4px var(--base4);
+    --outset-box-shadow: -2px -2px 8px var(--base1), -2px -2px 4px var(--base2),
+      2px 2px 8px var(--base3), inset 2px 2px 4px var(--base4);
 
-    --inset-input-shadow: inset 4px 4px 5px
-  rgb(0 0 0 / 16%), inset -4px -4px 5px
-  rgb(255 255 255 / 6%);
+    --inset-input-shadow: inset 4px 4px 5px rgb(0 0 0 / 16%),
+      inset -4px -4px 5px rgb(255 255 255 / 6%);
 
-    --inset-input-shadow-auth:inset -2px -2px 8px var(--base1),
-    inset -2px -2px 12px var(--base2),
-    inset 2px 2px 8px var(--base3),
-    inset 2px 2px 4px var(--base4);
-
+    --inset-input-shadow-auth: inset -2px -2px 8px var(--base1),
+      inset -2px -2px 12px var(--base2), inset 2px 2px 8px var(--base3),
+      inset 2px 2px 4px var(--base4);
 
     //sidebar
     --accent-color: #dfa253;
     //--accent-color: #f4f6fa;
 
-    --user-img:-4px -4px 4px rgb(63, 78, 90),
-    -4px -4px 10px rgba(77, 94, 107, 0.3), 4px 4px 4px rgba(63, 77, 87, 0.06),
-    inset 4px 4px 10px rgba(63, 77, 87, 0.02);
+    --user-img: -4px -4px 4px rgb(63, 78, 90),
+      -4px -4px 10px rgba(77, 94, 107, 0.3), 4px 4px 4px rgba(63, 77, 87, 0.06),
+      inset 4px 4px 10px rgba(63, 77, 87, 0.02);
 
     --placeholder-input-color: #a0a5a8;
 
-    --info-box-shadow:-1px -1px 8px #3F4E5AFF,
-    -1px -1px 4px #3D4C57FF,
-    2px 2px 8px #344049FF,
-    inset 1px 1px 2px #4C5D6BFF;
+    --info-box-shadow: -1px -1px 8px #3f4e5aff, -1px -1px 4px #3d4c57ff,
+      2px 2px 8px #344049ff, inset 1px 1px 2px #4c5d6bff;
 
     //--info-box-shadow:var(--outset-box-shadow);
 
     --myRoomContainer-borderTop: var(--accent-text-color);
-
 
     //rooms
 
@@ -458,25 +430,17 @@
     --indicator: #ff6e6e;
     --blur: rgba(63, 78, 90, 0.37);
 
-    --fill-svg-rooms:#a0a5a8;
+    --fill-svg-rooms: #a0a5a8;
 
-
-    --room-box-shadow:-1px -1px 4px #3F4E5AFF,
-    -1px -1px 4px #3D4C57FF,
-    2px 2px 8px #344049FF,
-    inset 1px 1px 2px #4C5D6BFF;
-
+    --room-box-shadow: -1px -1px 4px #3f4e5aff, -1px -1px 4px #3d4c57ff,
+      2px 2px 8px #344049ff, inset 1px 1px 2px #4c5d6bff;
 
     //navBtn
 
-    --link-NavBtn-box-shadow:var(--outset-box-shadow);
-
-
-
+    --link-NavBtn-box-shadow: var(--outset-box-shadow);
 
     //selector
     --hover-selector-container: #485864;
-
 
     //timePicker
     --timePickerGlobalColor: #485864;
@@ -484,117 +448,101 @@
     //datePicker
     --PickerGlobalColor: #ffffff;
 
-    --dateAndTimePicker-selected-global:black;
+    --dateAndTimePicker-selected-global: black;
 
-    --datePicker-box-shadow:-2px -2px 2px #3F4E5AFF,
-    -2px -2px 2px #3D4C57FF, 2px 2px 2px #344049FF,
-    inset 2px 2px 5px  #4C5D6BFF;
+    --datePicker-box-shadow: -2px -2px 2px #3f4e5aff, -2px -2px 2px #3d4c57ff,
+      2px 2px 2px #344049ff, inset 2px 2px 5px #4c5d6bff;
 
     --dateAndTime-color: #e0d025;
-
 
     //colorSelrctor
     --color-selector: rgb(0, 0, 0);
 
     //checkBoxWithLabel
-    --checkBoxWithLabel-shadow-outset: -2px -2px 6px -0.5px #000000, 3px 3px 6px 0px rgb(0 0 0 / 83%), 2px 2px 12px 0px rgb(0 0 0 / 90%);
+    --checkBoxWithLabel-shadow-outset: -2px -2px 6px -0.5px #000000,
+      3px 3px 6px 0px rgb(0 0 0 / 83%), 2px 2px 12px 0px rgb(0 0 0 / 90%);
 
-    --checkBoxWithLabel-shadow-inset:inset -1px -1px 3px -1.5px #000000, inset 1px 1px 4px 0px rgb(0 0 0 / 83%),
-    inset 4px 3px 4px 0px  rgb(0 0 0 / 90%);
-
+    --checkBoxWithLabel-shadow-inset: inset -1px -1px 3px -1.5px #000000,
+      inset 1px 1px 4px 0px rgb(0 0 0 / 83%),
+      inset 4px 3px 4px 0px rgb(0 0 0 / 90%);
 
     //iconButton
-    --iconBtn-shadow-inset:inset -2px -2px 2px #3f4e5a,
-    inset -2px -2px 2px rgba(61, 76, 87, 0.62),
-    inset 2px 2px 2px rgba(52, 64, 73, 0.15),
-    inset 2px 2px 2px rgba(76, 93, 107, 0.02);
+    --iconBtn-shadow-inset: inset -2px -2px 2px #3f4e5a,
+      inset -2px -2px 2px rgba(61, 76, 87, 0.62),
+      inset 2px 2px 2px rgba(52, 64, 73, 0.15),
+      inset 2px 2px 2px rgba(76, 93, 107, 0.02);
 
-    --iconBtn-shadow:    -4px -4px 2px rgb(63, 78, 90),
-    -2px -2px 2px rgba(61, 76, 87, 0.72),
-    4px 4px 4px rgba(52, 64, 73, 0.25),
-    inset 4px 4px 2px rgba(76, 93, 107, 0.06);
+    --iconBtn-shadow: -4px -4px 2px rgb(63, 78, 90),
+      -2px -2px 2px rgba(61, 76, 87, 0.72), 4px 4px 4px rgba(52, 64, 73, 0.25),
+      inset 4px 4px 2px rgba(76, 93, 107, 0.06);
 
     --iconBtn-shadow-inset2: inset -3px -3px 16px var(--base1),
-    inset -3px -3px 6px var(--base2),
-    inset 3px 3px 3px var(--base3),
-    inset 3px 3px 6px var(--base4);
-
-
+      inset -3px -3px 6px var(--base2), inset 3px 3px 3px var(--base3),
+      inset 3px 3px 6px var(--base4);
 
     //toggle
-    --input-shadow-valid:
-            -8px -4px 8px 0px var(--base1),
-            8px 4px 12px 0px rgba(63, 78, 90, 0.29);
-  ;
-
-    --toggle-box-shadow: -8px -4px 8px 0px #3F4E5AFF,
-    1px 1px 2px 0px rgba(0, 0, 0, 0.2),
-    inset -4px -4px 4px 0px rgba(0, 0, 0, 0.05),
-    inset 4px 4px 4px 0px rgba(0, 0, 0, 0.05);
-
+    --input-shadow-valid: -8px -4px 8px 0px var(--base1),
+      8px 4px 12px 0px rgba(63, 78, 90, 0.29);
+    --toggle-box-shadow: -8px -4px 8px 0px #3f4e5aff,
+      1px 1px 2px 0px rgba(0, 0, 0, 0.2),
+      inset -4px -4px 4px 0px rgba(0, 0, 0, 0.05),
+      inset 4px 4px 4px 0px rgba(0, 0, 0, 0.05);
 
     --toogle-bg-color: #394854;
 
     --toogle-box-shadow-checked: -2px -2px 2px 0px hsla(207, 17%, 25%, 0.5);
 
-    --toggle-moon:#F4F6FAFF;
+    --toggle-moon: #f4f6faff;
     --toggle-sun: rgba(63, 78, 90, 0);
-    --animation-sun:spin 0s linear infinite;
+    --animation-sun: spin 0s linear infinite;
 
-    --toggle-position-left-before:0px;
-    --toggle-position-left:0px;
+    --toggle-position-left-before: 0px;
+    --toggle-position-left: 0px;
 
-    --toggle-animation:right 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
-
+    --toggle-animation: right 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
 
     //pagination
 
-    --pagination-box-shadow:var(--outset-box-shadow);
+    --pagination-box-shadow: var(--outset-box-shadow);
 
-    --pagination-inset-box-shadow:var(--inset-box-shadow);
+    --pagination-inset-box-shadow: var(--inset-box-shadow);
 
-
-  //settings
-  --border-avatar-settings: #fffae7;
-
-
-
+    //settings
+    --border-avatar-settings: #fffae7;
 
     //CALENDAR
 
-    --eventHighlight-box-shadow:inset 1px 2px 6px 0px #3f4e5a, inset -1px -3px 6px 1px #c6c7c7;
+    --eventHighlight-box-shadow: inset 1px 2px 6px 0px #3f4e5a,
+      inset -1px -3px 6px 1px #c6c7c7;
 
-    --BorderForTableInsideBodyMonth-box-shadow:7px 7px 10px 3px #273641, -2px -2px 11px 2px #364a59;
+    --BorderForTableInsideBodyMonth-box-shadow: 7px 7px 10px 3px #273641,
+      -2px -2px 11px 2px #364a59;
 
-    --NUMBEROFDAYTOP-box-shadow:var(--datePicker-box-shadow);
+    --NUMBEROFDAYTOP-box-shadow: var(--datePicker-box-shadow);
 
     --SCREENCALENDAR-box-shadow: -9px -9px 17px 0px #3F4E5AFF, 8px 8px 17px 0px rgb(76, 94, 108);
 
+    --HEADERLanguageBUTTTONS-focus-box-shadow: inset -2px -2px 8px #3f4e5aff,
+      inset 1px 1px 7px rgb(0 0 0 / 15%);
 
-    --HEADERLanguageBUTTTONS-focus-box-shadow:inset -2px -2px 8px #3F4E5AFF, inset 1px 1px 7px rgb(0 0 0 / 15%);
-
-
-    --HEADERLanguageBUTTTONS-box-shadow:inset -2px -2px 8px #3F4E5AFF, inset 1px 1px 7px rgb(0 0 0 / 15%);
+    --HEADERLanguageBUTTTONS-box-shadow: inset -2px -2px 8px #3f4e5aff,
+      inset 1px 1px 7px rgb(0 0 0 / 15%);
 
     --calendar-fc-event-bg-color: #eaab59;
     //--calendar-fc-event-bg-color: #f4f6fa;
     --calendar-fc-event-text-color: white;
-    --calendar-fc-highlight-color:rgba(163, 163, 163, 0.28);
-
+    --calendar-fc-highlight-color: rgba(163, 163, 163, 0.28);
 
     --calendar-fc-list-event-hover-bg-color: rgba(248, 9, 9, 0.22);
-    --calendar-bg:#2b3b47;
+    --calendar-bg: #2b3b47;
 
-    --buttonBoxShadowActive-box-shadow:var(--inset-box-shadow);
+    --buttonBoxShadowActive-box-shadow: var(--inset-box-shadow);
 
-    --buttonBoxShadow-box-shadow:1px 1px 3px #212d36,
-    -1px -1px 3px #354958;
-
+    --buttonBoxShadow-box-shadow: 1px 1px 3px #212d36, -1px -1px 3px #354958;
 
     //pages
     --pages-decoration-box-shadow-outset: -2px -2px 12px var(--base2),
-    2px 2px 8px var(--base3),
-    2px 2px 4px var(--base4);
+      2px 2px 8px var(--base3), 2px 2px 4px var(--base4);
 
     --pages-decoration-box-shadow-inset: inset -2px -2px 12px var(--base2),
     inset 2px 2px 8px var(--base3),

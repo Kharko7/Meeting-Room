@@ -3,24 +3,49 @@ import Header from "./header/Header";
 import Floors from "./main/Floor";
 import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
 import { useEffect } from "react";
+import moment, { now } from "moment";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 import Loader from "pages/layout/loader/Loader";
 const Rooms = () => {
-  const { roomsByFloor, floors, filter, rooms } = useAppSelector(
-    (state) => state.rooms
-  );
-  const dispatch = useAppDispatch();
-  // setInterval(() => {
-  //   console.log('60 second left')
-  //   rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
-  // }, 60000);
-  useEffect(() => {
-   rooms.length == 0 && dispatch(roomsActions.getRooms());
+  const {
+    roomsByFloor,
+    floors,
+    filter,
+    rooms,
+    timeStatusUdated,
+    statusUpdatedCounter,
+  } = useAppSelector((state) => state.rooms);
 
-    // rooms.length == 0 && dispatch(roomsActions.getRoomsStatus());
+
+  const dispatch = useAppDispatch();
+  const HandleStatus = () => {
+    if (rooms.length > 0) {
+      const timeStatus = Date.now();
+      console.log(
+        "60 second left",
+        timeStatusUdated,
+        timeStatus,
+        statusUpdatedCounter
+      );
+      dispatch(roomsActions.setTimeStatusUdated(timeStatus));
+      dispatch(roomsActions.setStatusUpdatedCounter());
+      dispatch(roomsActions.getRoomsStatus(rooms));
+    }
+  };
+  useEffect(() => {
+    rooms.length == 0 && dispatch(roomsActions.getRooms());
   }, []);
   useEffect(() => {
-    rooms.length > 0 && dispatch(roomsActions.getRoomsStatus(rooms));
+    console.log("useEffect");
+    if (rooms.length > 0) {
+      setInterval(HandleStatus, 60000);
+      console.log("useEffect inside");
+      statusUpdatedCounter==0 && HandleStatus();
+      // const timeStatus = Date.now();
+      // dispatch(roomsActions.setStatusUpdatedCounter(statusUpdatedCounter + 1));
+      // dispatch(roomsActions.setTimeStatusUdated(timeStatus));
+      // dispatch(roomsActions.getRoomsStatus(rooms));
+    }
   }, [rooms]);
 
   return (
@@ -28,6 +53,9 @@ const Rooms = () => {
       <div className={styles.mainContainer}>
         <Header />
         <div className={styles.roomsList}>
+          <div className={styles.boxInset}></div>
+          <div className={styles.boxOutset}></div>
+
           {Object.keys(roomsByFloor).length > 0 && filter == "all" ? (
             floors.map((currentFloor, index) => {
               return <Floors key={index} currentFloor={currentFloor}></Floors>;
@@ -45,6 +73,8 @@ const Rooms = () => {
               <Loader size="large" />
             </div>
           )}
+          <div className={styles.boxInset2}></div>
+          <div className={styles.boxOutset2}></div>
         </div>
       </div>
     </div>

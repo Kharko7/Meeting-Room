@@ -53,7 +53,6 @@ const ModalRooms = ({ setOpenModal }) => {
     dispatch(resetState());
   };
   const handleRemoveEvent = () => {
-    /// To Do axios Remove Event by ID /////////////////////
     handleCloseModal();
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,25 +64,24 @@ const ModalRooms = ({ setOpenModal }) => {
       dispatch(setBookingError({ roomId: Errors.roomId }));
       return;
     }
-
-    const eventOneDay = {
+    const baseParams = {
       title: title,
       description: description,
-      roomId: 1,
-      startDateTime: start,
-      endDateTime: end,
+      roomId: roomId,
       invitations: invitedId,
     };
+    const eventOneDay = {
+      ...baseParams,
+      startDateTime: start,
+      endDateTime: end,
+    };
     const eventRecurring = {
-      title: title,
-      description: description,
-      roomId: 1,
+      ...baseParams,
       startDate: dayjs(start).format("YYYY-MM-DD"),
       startTime: dayjs(start).format("HH:mm"),
       endDate: dayjs(end).format("YYYY-MM-DD"),
       endTime: dayjs(end).format("HH:mm"),
       daysOfWeek: daysOfWeek,
-      invitations: invitedId,
     };
 
     const existEvent = bookings.some(
@@ -95,9 +93,7 @@ const ModalRooms = ({ setOpenModal }) => {
       } else {
         dispatch(addOneBooking(eventOneDay));
       }
-    }
-
-    ////To Do axios edit//////////////////
+    } 
     handleCloseModal();
   };
   return (
