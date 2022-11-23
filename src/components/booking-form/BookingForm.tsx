@@ -218,7 +218,7 @@ const BookingForm = ({
             >
               {edit && (
                 <Button
-                  type="button"
+                  styleType='error'
                   dataTestId="button-delete"
                   onclick={() => setOpenConfirmation(true)}
                 >

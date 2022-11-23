@@ -1,29 +1,3 @@
-:global(fieldset.MuiOutlinedInput-notchedOutline) {
-  border: 0px solid var(--PickerGlobalColor) !important;
-  border-radius: 100px;
-  box-shadow: var(--inset-input-shadow);
-}
-
-:global(div.MuiInputBase-root) {
-  padding-right: 20px;
-}
-:global(.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper) {
-  box-shadow: var(--outset-box-shadow) !important;
-}
-:global(.MuiClock-squareMask) {
-  box-shadow: var(--inset-input-shadow);
-}
-:global(div.MuiInputBase-multiline),
-:global(input.MuiInputBase-input) {
-  padding-left: 23px;
-}
-:global(label.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root) {
-  left: 10px
-}
-:global(p.MuiFormHelperText-contained) {
-  margin-left: 24px;
-}
-
 :global(.MuiIconButton-root) {
   width: 35px;
   height: 35px;
@@ -36,14 +10,12 @@
     box-shadow: var(--inset-input-shadow);
   }
 }
-
 :global(.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton),
 :global(.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton) {
   color: var(--accent-text-color) !important;
   box-shadow: var(--inset-input-shadow);
 }
 :global(.css-1wahiw3-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton),
-//.MuiPaper-root,
 :global(.css-kjd0cg-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton) {
   background-color: var(--primary-color) !important;
 }

@@ -1,34 +1,29 @@
 import TextField from '@mui/material/TextField';
-import {Box} from '@mui/material';
-import {useState} from 'react'
+import { Box } from '@mui/material';
+import { useState } from 'react'
 import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss'
 import Avatar from './avatar/Avatar';
 import Button from 'components/button';
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CheckboxWithLabel from 'components/checkbox-with-label';
 import {
     getFromLocalStorage, getUserData,
     removeFromLocalStorage,
     setToLocalStorage
 } from 'services/local-storage.service';
-import {Errors} from 'constants/errors';
+import { Errors } from 'constants/errors';
 import Typography from '@mui/material/Typography'
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Toggle from "../toggle/Toggle";
-import {useAppSelector} from "../../hooks/toolkitHooks";
-
 
 const cn = classNames.bind(styles);
-
 interface FormValues {
     firstName: string;
     lastName: string;
 }
-
 type FormName = 'firstName' | 'lastName'
 const userName: FormName[] = ['firstName', 'lastName']
-
 
 const ProfileForm = () => {
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
@@ -47,40 +42,39 @@ const ProfileForm = () => {
     const handleSelectedImg = (file: File) => {
         setSelectedImage(file)
     }
-    const handleLogOut =async () => {
+    const handleLogOut = () => {
         removeFromLocalStorage('access')
         removeFromLocalStorage('user')
         removeFromLocalStorage('role')
-        /// dispatch(userLogout())
-        navigate('/auth/login', {replace: true})
+        navigate('/auth/login', { replace: true })
     }
 
     const {
         reset,
         register,
         handleSubmit,
-        formState: {errors, isDirty, isValid}
-    } = useForm<FormValues>({mode: 'onBlur'});
+        formState: { errors, isDirty, isValid }
+    } = useForm<FormValues>({ mode: 'onBlur' });
 
     const submit = (data: any) => {
-        // console.log(data)
         reset()
     }
 
     const themeLS = getFromLocalStorage('theme');
-    let theme = themeLS?JSON.parse(themeLS):undefined;
+    let theme = themeLS ? JSON.parse(themeLS) : undefined;
 
-    const {firstName,lastName,role,email} = getUserData();
+    const { firstName, lastName, email } = getUserData();
 
-    const user = {firstName: firstName, lastName: lastName}
+    const user = { firstName: firstName, lastName: lastName }
 
     const inputUserName = userName.map((name: FormName) => (
         <TextField
             key={name}
-            sx={{mr: '10px', width: '290px'}}
+            sx={{ mr: '10px', width: '290px' }}
             defaultValue={user[name] || ''}
             label={name === 'firstName' ? 'First name' : 'Last name'}
             error={Boolean(errors[name])}
+            data-testid={name}
             helperText={errors[name] ? errors[name]?.message : ''}
             {...register(name, {
                 required: Errors.userLength,
@@ -98,15 +92,15 @@ const ProfileForm = () => {
 
     return (
         <Box className={cn('ProfileContainer')}>
-            <div className={cn('profile')}><Box sx={{color: 'var(--accent-text-color)'}} component="h1"> Profile</Box>
+            <div className={cn('profile')}><Box sx={{ color: 'var(--accent-text-color)' }} component="h1"> Profile</Box>
                 <div className={cn('toggle')}><Toggle type={"themeToggle"} onclick={() => {
                     theme = !theme;
-                    setToLocalStorage('theme',JSON.stringify(theme));
+                    setToLocalStorage('theme', JSON.stringify(theme));
                     theme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
-                }} size={"large"}/>
+                }} size={"large"} />
                 </div>
             </div>
-            <Box sx={{position: 'relative', textAlign: 'center', mb: '40px',}}>
+            <Box sx={{ position: 'relative', textAlign: 'center', mb: '40px', }}>
                 <Avatar
                     imageUrl={imageUrl}
                     handleImageUrl={handleImageUrl}
@@ -114,7 +108,7 @@ const ProfileForm = () => {
                 />
                 <Typography
                     variant='h5'
-                    sx={{mt: '20px', textAlign: 'center', color: 'var(--accent-text-color)'}}
+                    sx={{ mt: '20px', textAlign: 'center', color: 'var(--accent-text-color)' }}
                 > {email}
                 </Typography>
             </Box>
@@ -124,10 +118,10 @@ const ProfileForm = () => {
                 autoComplete="off"
                 onSubmit={handleSubmit(submit)}
             >
-                <Box sx={{mb: '20px', height: '80px'}}>
+                <Box sx={{ mb: '20px', height: '80px' }}>
                     {inputUserName}
                 </Box>
-                <Box sx={{display: 'flex', justifyContent: 'center'}}>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Button
                         disabled={!isDirty || !isValid}
                         type='submit'
@@ -137,15 +131,15 @@ const ProfileForm = () => {
                     </Button>
                 </Box>
             </Box>
-            <Box sx={{m: '30px 0'}}>
+            <Box sx={{ m: '30px 0' }}>
                 < CheckboxWithLabel
                     label='Show weekends on calendar'
                     checked={weekends}
                     onChange={handleWeekendsToggle}
-                    sx={{marginLeft: '0', color: 'var(--accent-text-color)', fontSize: '20px'}}
+                    sx={{ marginLeft: '0', color: 'var(--accent-text-color)', fontSize: '20px' }}
                 />
             </Box>
-            <Box sx={{textAlign: 'end'}}>
+            <Box sx={{ textAlign: 'end' }}>
                 <Button
                     dataTestId='button-log-out'
                     onclick={handleLogOut}

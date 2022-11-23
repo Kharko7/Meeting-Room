@@ -2,6 +2,8 @@ import bookingReducer, {
   setRoomId,
   editBooking,
   resetState,
+  editOneBooking,
+  editRecurringBooking,
   setBookingError,
   setDaysOfWeek,
   setDescription,
@@ -11,11 +13,14 @@ import bookingReducer, {
   setStart,
   setTitle,
   setLoading,
+  setInvite,
   getAllBookings,
   getAllBookingsSuccess,
   addOneBooking,
   addRecurringBooking,
   addBookingSuccess,
+  deleteBookingById,
+  deleteBookingSuccess,
 } from 'redux&saga/slices/booking.slice'
 import {
   initialState,
@@ -31,6 +36,10 @@ import {
   actionGetAllBookings,
   actionAddOneBooking,
   actionAddRecurringBooking,
+  actionDeleteById,
+  actionEditOneBooking,
+  actionEditRecurringBooking,
+  invitations,
 } from './reducer.variables'
 
 describe('reducer booking test', () => {
@@ -54,22 +63,42 @@ describe('reducer booking test', () => {
       { ...initialState, loading: true }
     )
   })
+  it('should call action deleteBookingById and set Loading true to bookiing reducer', () => {
+    expect(bookingReducer(initialState, deleteBookingById(actionDeleteById))).toEqual(
+      { ...initialState, loading: true }
+    )
+  })
+  it('should call action editOneBooking and set Loading true to bookiing reducer', () => {
+    expect(bookingReducer(initialState, editOneBooking(actionEditOneBooking))).toEqual(
+      { ...initialState, loading: true }
+    )
+  })
+  it('should call action editRecurringBooking and set Loading true to bookiing reducer', () => {
+    expect(bookingReducer(initialState, editRecurringBooking(actionEditRecurringBooking))).toEqual(
+      { ...initialState, loading: true }
+    )
+  })
 
-  // it('should set all Bookings to bookiing reducer', () => {
-  //   expect(bookingReducer(initialState, getAllBookingsSuccess(bookingsSuccsess))).toEqual(
-  //     { ...initialState, bookings: bookingsSuccsess, loading: false }
-  //   )
-  // })
+  it('should set all Bookings to bookiing reducer', () => {
+    expect(bookingReducer(initialState, getAllBookingsSuccess(bookingsSuccsess))).toEqual(
+      { ...initialState, bookings: bookingsSuccsess, loading: false }
+    )
+  })
+  it('should delete booking by Id', () => {
+    expect(bookingReducer({ ...initialState, bookings: bookingsSuccsess }, deleteBookingSuccess(actionDeleteById))).toEqual(
+      { ...initialState, bookings: [], loading: false }
+    )
+  })
 
-  // it('should set one Bookings to bookiing reducer', () => {
-  //   expect(bookingReducer(initialState, addBookingSuccess(bookingsSuccsess))).toEqual(
-  //     {
-  //       ...initialState,
-  //       bookings: [...initialState.bookings, ...bookingsSuccsess],
-  //       loading: false
-  //     }
-  //   )
-  // })
+  it('should set one Bookings to bookiing reducer', () => {
+    expect(bookingReducer(initialState, addBookingSuccess(bookingsSuccsess))).toEqual(
+      {
+        ...initialState,
+        bookings: [...initialState.bookings, ...bookingsSuccsess],
+        loading: false
+      }
+    )
+  })
 
   it('should set RoomId to bookiing reducer', () => {
     expect(bookingReducer(initialState, setRoomId(roomId))).toEqual(
@@ -99,6 +128,12 @@ describe('reducer booking test', () => {
   it('should set DaysOfWeek to bookiing reducer', () => {
     expect(bookingReducer(initialState, setDaysOfWeek(daysOfWeek))).toEqual(
       { ...initialState, daysOfWeek: daysOfWeek }
+    )
+  })
+
+  it('should set  Invite ID to bookiing reducer', () => {
+    expect(bookingReducer(initialState, setInvite(invitations))).toEqual(
+      { ...initialState, invitedId: invitations }
     )
   })
 

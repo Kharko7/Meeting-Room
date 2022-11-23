@@ -16,13 +16,25 @@ export interface BookingEvent {
 }
 
 export interface OneBooking {
-    bookingId?: number;
+    bookingId?: number | null;
     title: string,
     description: string,
     roomId: number,
     startDateTime: string,
     endDateTime: string,
     invitations: number[],
+}
+
+export interface EditBooking {
+    bookingId: number | null;
+    title: string,
+    description: string,
+    roomId: number,
+    start: string,
+    end: string,
+    floor: string,
+    isRecurring: boolean,
+    recurringId: number | null,
 }
 
 export interface EditRecurringBooking {

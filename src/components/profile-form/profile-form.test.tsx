@@ -6,6 +6,7 @@ import ProfileForm from './ProfileForm';
 const mockNavigate = jest.fn();
 const mockSetLocalStorage = jest.fn();
 const mockRemoveLocalStorage = jest.fn();
+const mockUserData = { firstName: 'User', lastName: 'First', email: 'user1@incorainc.com' }
 
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -20,11 +21,22 @@ jest.mock('services/local-storage.service', () => ({
       return false
     } else return 'false'
   },
+  getUserData: () => mockUserData,
 }));
 
 const setup = () => render(<ProfileForm />)
 
 describe('Profile form tests', () => {
+
+  it('should render firstName and lastName input', () => {
+    setup()
+
+    const inputFirstName = screen.getByTestId('firstName')
+    const inputLastName = screen.getByTestId('lastName')
+
+    expect(inputFirstName).toBeInTheDocument()
+    expect(inputLastName).toBeInTheDocument()
+  })
 
   it('should render Checkbox', async () => {
     setup()

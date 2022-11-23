@@ -1,14 +1,3 @@
-// :global(.MuiOutlinedInput-notchedOutline) {
-//   border: 0px solid var(--PickerGlobalColor) !important;
-//   border-radius: 100px !important;
-//   box-shadow: var(--inset-input-shadow);
-// }
-// :global(.MuiInputBase-root) {
-//   padding-right: 20px !important;
-// }
-:global(.MuiInputBase-input) {
-  color: var(--label) !important;
-}
 :global(.MuiIconButton-edgeEnd[aria-label^="Choose date"]) {
   width: 35px;
   height: 35px;
