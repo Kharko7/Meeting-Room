@@ -24,7 +24,7 @@ $backgroundColor: var(--calendar-bg);
 /////////// HEADER 2 BUTTTONS PREVIOUS AND NEXT   //////////////////////////////
 :global(.fc) {
   font-family: var(--primary-font-family);
-  color: var(--label);
+  color: var(--label2);
 }
 :global(.fc-prev-button.fc-button.fc-button-primary),
 :global(.fc-next-button.fc-button.fc-button-primary) {
