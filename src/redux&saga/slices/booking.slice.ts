@@ -1,7 +1,7 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { OneBooking, EditRecurringBooking, BookingEvent, DeleteBookingInterface, AddRecurringBooking } from 'interfaces/booking/Booking';
+import { OneBooking, EditRecurringBooking, BookingEvent, DeleteBookingInterface, AddRecurringBooking, EditBooking } from 'interfaces/booking/Booking';
 export interface InitialStateBookig {
     title: string;
     start: string;
@@ -53,7 +53,7 @@ const bookingSlice = createSlice({
             state.bookings = newBookings
             state.loading = false;
         },
-        editOneBooking(state, action: PayloadAction<any>) {
+        editOneBooking(state, action: PayloadAction<OneBooking>) {
             state.loading = true;
         },
         editOneBookingSuccess(state, action: PayloadAction<number>) {
@@ -124,7 +124,7 @@ const bookingSlice = createSlice({
         setDaysOfWeek(state, action: PayloadAction<string[]>) {
             state.daysOfWeek = action.payload;
         },
-        editBooking(state, action: PayloadAction<any>) {
+        editBooking(state, action: PayloadAction<EditBooking>) {
             state.title = action.payload.title;
             state.start = action.payload.start;
             state.end = action.payload.end;

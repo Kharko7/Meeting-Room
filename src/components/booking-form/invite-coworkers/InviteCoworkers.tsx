@@ -73,6 +73,9 @@ const InviteCoworkers = () => {
               border: '0px solid var(--PickerGlobalColor)',
               borderRadius: "25px"
             },
+            '& .MuiChip-label': {
+              color: 'var(--mainColorFont)'
+            }
           }}
           {...params}
           label="Invite coworkers"

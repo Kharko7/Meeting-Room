@@ -49,14 +49,17 @@ export const bookingsSuccsess = [{
   start: "2022-11-12T12:00",
   end: "2022-11-12T14:00",
   extendedProps: {
-    bookingId: 115,
+    bookingId: 1,
     roomId: 1,
     description: "First meeting 01",
     isRecurring: false,
     recurringId: null,
   }
 }]
-
+export const actionDeleteById = {
+  id: 1,
+  isRecurring: false,
+}
 export const roomId = 123456;
 export const text = "My event";
 export const daysOfWeek = ['1', '2', '4']
@@ -72,6 +75,11 @@ export const actionAddOneBooking = {
   endDateTime: '2022-11-12T10:00',
   invitations: [],
 }
+export const actionEditOneBooking = {
+  ...actionAddOneBooking,
+  title: 'event 3',
+  bookingId: 10
+}
 export const actionAddRecurringBooking = {
   title: 'Event 2',
   description: 'My event',
@@ -83,4 +91,13 @@ export const actionAddRecurringBooking = {
   daysOfWeek: ['4'],
   invitations: [],
 };
-export const urlGetAllBookings = "bookings?roomId=1&startDate=2022-10-12T00:00&endDate=2022-12-21T00:00"
+
+export const actionEditRecurringBooking = {
+  ...actionAddRecurringBooking,
+  title: 'Recurring',
+  recurringId: 5,
+};
+
+export const urlGetAllBookings = "bookings?roomId=1&startDate=2022-10-12T00:00&endDate=2022-12-21T00:00";
+
+export const invitations = [1, 2, 3]

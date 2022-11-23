@@ -13,13 +13,35 @@ interface ConfirmDialogProps {
 }
 
 const ConfirmDialog = ({ open, message, onDismiss, onConfirm }: ConfirmDialogProps) => {
-
-  const boxShadow = '2px 2px 20px 1px rgb(69 69 69 / 70%), -5px -5px 16px -4px rgb(255 255 255)'
+  const style = {
+    width: '500px',
+    height: '220px',
+    borderRadius: '20px',
+    backgroundColor: 'var(--primary-color)',
+    '& h2': {
+      fontSize: '22px',
+      letterSpacing: '0.9px',
+      color: 'var(--accent-text-color)',
+    },
+    '& p': {
+      fontSize: '20px',
+      color: 'var(--mainColorFont)',
+    },
+    '& .MuiDialogActions-root': {
+      justifyContent: 'space-between',
+    },
+    '& .MuiDialogContent-root': {
+      display: 'flex',
+      alignItems: 'center',
+      borderTopColor: 'var(--accent-text-color)',
+      borderBottomColor: 'var(--accent-text-color)',
+    },
+  }
 
   return (
     <>
       <Dialog
-        sx={{ '& .MuiDialog-paper': { boxShadow: boxShadow } }}
+        sx={{ '& .MuiDialog-paper': style }}
         open={open}
         onClose={onDismiss}
       >
@@ -32,8 +54,8 @@ const ConfirmDialog = ({ open, message, onDismiss, onConfirm }: ConfirmDialogPro
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ p: '20px' }}>
-          <Button size='small' onclick={onConfirm}>Yes</Button>
-          <Button size='small' onclick={onDismiss}> No </Button>
+          <Button styleType='error' onclick={onConfirm}>Yes</Button>
+          <Button onclick={onDismiss}> No </Button>
         </DialogActions>
       </Dialog>
     </>

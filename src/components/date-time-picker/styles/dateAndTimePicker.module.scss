@@ -45,3 +45,11 @@
   left: 9px;
   color: var(--label);
 }
+
+:global(.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper) {
+  box-shadow: var(--outset-box-shadow) !important;
+}
+:global(.MuiClock-squareMask) {
+  box-shadow: var(--inset-input-shadow);
+}
+
