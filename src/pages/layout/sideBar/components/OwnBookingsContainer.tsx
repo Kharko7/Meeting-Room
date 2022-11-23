@@ -35,9 +35,7 @@ const OwnBookingsContainer = () => {
       console.log("true 123")
       dispatch(ownBookingsActions.setPage(page+1));
       dispatch(ownBookingsActions.getOwnBookings(page + 1));
-    } else {
-      // setHasMore(false);
-    }
+    } 
   };
   useEffect(() => {
     dispatch(ownBookingsActions.getTotal(1));
