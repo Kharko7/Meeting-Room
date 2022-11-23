@@ -90,11 +90,8 @@ export function* addOneBooking(action: PayloadAction<OneBooking>) {
         },
       ])
     );
-    console.log("step1")
     yield put(ownBookingsActions.reset());
-    console.log("step2")
     yield put(ownBookingsActions.getTotal(1));
-    console.log("step3")
     yield RoomBookingPopup.Success();
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
