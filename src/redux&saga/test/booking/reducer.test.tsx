@@ -195,6 +195,7 @@ describe('reducer booking test', () => {
         floor: bookingEdit.floor,
         description: bookingEdit.description,
         bookingId: bookingEdit.bookingId,
+        daysOfWeek: bookingEdit.daysOfWeek,
       }
     )
   })

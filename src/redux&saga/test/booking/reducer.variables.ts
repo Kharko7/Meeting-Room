@@ -25,11 +25,11 @@ export const state = {
   description: 'This is my event',
   invitedId: [],
   errors: {},
-  daysOfWeek: ['1', '2', '4'],
   bookings: [],
   bookingId: null,
   isRecurring: false,
   recurringId: null,
+  daysOfWeek: [],
 };
 
 export const bookingEdit = {
@@ -42,6 +42,8 @@ export const bookingEdit = {
   bookingId: 22,
   isRecurring: false,
   recurringId: null,
+  daysOfWeek: ['1', '2', '4'],
+  invitedId: [],
 }
 
 export const bookingsSuccsess = [{
@@ -54,6 +56,8 @@ export const bookingsSuccsess = [{
     description: "First meeting 01",
     isRecurring: false,
     recurringId: null,
+    invitations: [],
+    daysOfWeek: null,
   }
 }]
 export const actionDeleteById = {
@@ -88,7 +92,7 @@ export const actionAddRecurringBooking = {
   startTime: '08:00',
   endDate: '2022-11-18',
   endTime: '10:00',
-  daysOfWeek: ['4'],
+  daysOfWeek: [4],
   invitations: [],
 };
 

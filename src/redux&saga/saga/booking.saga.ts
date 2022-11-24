@@ -21,75 +21,54 @@ import {
   AddRecurringBooking,
 } from "interfaces/booking/Booking";
 import { bookingService } from "services/booking.service/booking.service";
+
 dayjs.extend(utc);
 
-export function* getAllBookings(
-  action: PayloadAction<Record<string, string | number>>
-) {
-  const { startDate, endDate, roomId } = action.payload;
+export function* getAllBookings(action: PayloadAction<Record<string, string | number>>) {
+  const { startDate, endDate, roomId } = action.payload
   try {
-    const response: AxiosResponse = yield call(bookingService.get, {
-      url: `bookings?roomId=${
-        roomId ? roomId : "*"
-      }&startDate=${startDate}&endDate=${endDate}`,
-    });
+    const response: AxiosResponse = yield call(bookingService.get, { url: `bookings?roomId=${roomId ? roomId : '*'}&startDate=${startDate}&endDate=${endDate}` })
     const data = response.data.bookings.map((event: any) => {
       return {
         title: event.title,
-        start: dayjs.utc(event.startDateTime).format("YYYY-MM-DDTHH:mm"),
-        end: dayjs.utc(event.endDateTime).format("YYYY-MM-DDTHH:mm"),
+        start: dayjs.utc(event.startDateTime).format('YYYY-MM-DDTHH:mm'),
+        end: dayjs.utc(event.endDateTime).format('YYYY-MM-DDTHH:mm'),
         extendedProps: {
           bookingId: event.bookingId,
           roomId: event.room_FK,
           description: event.description,
           isRecurring: event.isRecurring,
           recurringId: event.recurringId,
-        },
-      };
-    });
+          invitations: event.invitations,
+          daysOfWeek: event.daysOfWeek,
+        }
+      }
+    })
     yield put(getAllBookingsSuccess(data));
   } catch (error: any) {
-    yield put(
-      setBookingError({
-        errorMsg: error.response.data?.message || error.response.statusText,
-      })
-    );
+    yield put(setBookingError({ errorMsg: error.response.data?.message || error.response.statusText }));
     yield put(setLoading(false));
   }
 }
 
 export function* addOneBooking(action: PayloadAction<OneBooking>) {
   try {
-    const response: AxiosResponse = yield call(bookingService.post, {
-      url: "bookings/one-time",
-      body: action.payload,
-    });
-    const {
+    const response: AxiosResponse = yield call(bookingService.post, { url: 'bookings/one-time', body: action.payload })
+    const { title, startDateTime, endDateTime, bookingId, room_FK, description, isRecurring, recurringId, invitations, daysOfWeek } = response.data
+    yield put(addBookingSuccess([{
       title,
-      startDateTime,
-      endDateTime,
-      bookingId,
-      room_FK,
-      description,
-      isRecurring,
-      recurringId,
-    } = response.data;
-    yield put(
-      addBookingSuccess([
-        {
-          title,
-          start: startDateTime,
-          end: endDateTime,
-          extendedProps: {
-            bookingId,
-            description,
-            isRecurring,
-            recurringId,
-            roomId: room_FK,
-          },
-        },
-      ])
-    );
+      start: startDateTime,
+      end: endDateTime,
+      extendedProps: {
+        bookingId,
+        description,
+        isRecurring,
+        recurringId,
+        invitations,
+        daysOfWeek,
+        roomId: room_FK,
+      }
+    }]));
     yield put(ownBookingsActions.reset());
     yield put(ownBookingsActions.getTotal(1));
     const location = window.location.pathname.toString();
@@ -106,14 +85,9 @@ export function* addOneBooking(action: PayloadAction<OneBooking>) {
   }
 }
 
-export function* addRecurringBooking(
-  action: PayloadAction<AddRecurringBooking>
-) {
+export function* addRecurringBooking(action: PayloadAction<AddRecurringBooking>) {
   try {
-    const response: AxiosResponse = yield call(bookingService.post, {
-      url: "bookings/recurring",
-      body: action.payload,
-    });
+    const response: AxiosResponse = yield call(bookingService.post, { url: 'bookings/recurring', body: action.payload })
     const getEvents = response.data.map((event: any) => ({
       title: event.title,
       start: event.startDateTime,
@@ -124,8 +98,10 @@ export function* addRecurringBooking(
         description: event.description,
         isRecurring: event.isRecurring,
         recurringId: event.recurringId,
-      },
-    }));
+        invitations: event.invitations,
+        daysOfWeek: event.daysOfWeek,
+      }
+    }))
     yield put(addBookingSuccess(getEvents));
     yield put(ownBookingsActions.reset());
     yield put(ownBookingsActions.getTotal(1));
@@ -159,15 +135,10 @@ export function* editOneBooking(action: PayloadAction<OneBooking>) {
   }
 }
 
-export function* editRecurringBooking(
-  action: PayloadAction<EditRecurringBooking>
-) {
+export function* editRecurringBooking(action: PayloadAction<EditRecurringBooking>) {
   const { recurringId } = action.payload;
   try {
-    yield call(bookingService.patch, {
-      url: "bookings/recurring",
-      body: action.payload,
-    });
+    yield call(bookingService.patch, { url: "bookings/recurring", body: action.payload, });
     if (recurringId) {
       yield put(editRecurringBookingSuccess(recurringId));
     }
@@ -182,9 +153,7 @@ export function* editRecurringBooking(
 export function* deleteBooking(action: PayloadAction<DeleteBookingInterface>) {
   const { id, isRecurring } = action.payload;
   try {
-    yield call(bookingService.delete, {
-      url: `bookings/${isRecurring ? "recurring" : "one-time"}/${id}`,
-    });
+    yield call(bookingService.delete, { url: `bookings/${isRecurring ? "recurring" : "one-time"}/${id}` });
     yield put(deleteBookingSuccess({ id: id, isRecurring: isRecurring }));
     yield put(ownBookingsActions.reset());
     yield put(ownBookingsActions.getTotal(1));

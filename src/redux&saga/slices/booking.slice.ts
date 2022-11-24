@@ -12,7 +12,7 @@ export interface InitialStateBookig {
     bookingId: number | null;
     description: string;
     invitedId: number[];
-    daysOfWeek: string[];
+    daysOfWeek: string[] | null;
     errors: Record<string, string>;
     bookings: BookingEvent[];
     isRecurring: boolean;
@@ -137,6 +137,8 @@ const bookingSlice = createSlice({
             state.bookingId = action.payload.bookingId;
             state.isRecurring = action.payload.isRecurring;
             state.recurringId = action.payload.recurringId;
+            state.daysOfWeek = action.payload.daysOfWeek;
+            state.invitedId = action.payload.invitedId;
         },
         editOwnBooking(state, action: PayloadAction<any>) {
             state.title = action.payload.title;

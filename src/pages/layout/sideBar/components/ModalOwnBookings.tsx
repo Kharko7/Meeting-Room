@@ -102,14 +102,15 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
       startTime: dayjs(start).format("HH:mm"),
       endDate: dayjs(end).format("YYYY-MM-DD"),
       endTime: dayjs(end).format("HH:mm"),
-      daysOfWeek: daysOfWeek,
       recurringId: null,
+      daysOfWeek: daysOfWeek ? daysOfWeek.map(id => Number(id)) : daysOfWeek,
+      invitations: invitedId,
     };
     const existEvent = ownBookings.some(
       (event: any) => event.bookingId === bookingId
     );
     if (existEvent) {
-      if (!daysOfWeek.length) {
+      if (daysOfWeek !== null &&  !daysOfWeek.length) {
         dispatch(editOneBooking(eventOneDay));
       } else {
         dispatch(editRecurringBooking(eventRecurring));

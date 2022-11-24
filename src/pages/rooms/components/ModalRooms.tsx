@@ -81,14 +81,15 @@ const ModalRooms = ({ setOpenModal }) => {
       startTime: dayjs(start).format("HH:mm"),
       endDate: dayjs(end).format("YYYY-MM-DD"),
       endTime: dayjs(end).format("HH:mm"),
-      daysOfWeek: daysOfWeek,
+      daysOfWeek: daysOfWeek ? daysOfWeek.map(id => Number(id)) : daysOfWeek,
+      invitations: invitedId,
     };
 
     const existEvent = bookings.some(
       (event: BookingEvent) => event.extendedProps.bookingId === bookingId
     );
     if (!existEvent) {
-      if (daysOfWeek.length) {
+      if (daysOfWeek !== null && daysOfWeek.length) {
         dispatch(addRecurringBooking(eventRecurring));
       } else {
         dispatch(addOneBooking(eventOneDay));

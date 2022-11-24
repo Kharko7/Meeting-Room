@@ -96,6 +96,9 @@ const CalendarPage = () => {
   const memoizedEventSelect = useCallback(
     (eventInfo: EventClickArg) => {
       const event = eventInfo.event
+      const invitedUserId = event.extendedProps.invitations.length
+        ? event.extendedProps.invitations.map((userId: any) => userId.invitedId_FK)
+        : []
       const bookingEdit = {
         title: event.title,
         start: dayjs(event.start).format('YYYY-MM-DDTHH:mm'),
@@ -105,7 +108,9 @@ const CalendarPage = () => {
         floor: '',
         bookingId: event.extendedProps.bookingId,
         isRecurring: event.extendedProps.isRecurring,
-        recurringId: event.extendedProps.recurringId
+        recurringId: event.extendedProps.recurringId,
+        daysOfWeek: event.extendedProps.daysOfWeek,
+        invitedId: invitedUserId,
       }
       dispatch(editBooking(bookingEdit));
       setOpenModal(true);
@@ -157,12 +162,12 @@ const CalendarPage = () => {
       startTime: dayjs(start).format('HH:mm'),
       endDate: dayjs(end).format('YYYY-MM-DD'),
       endTime: dayjs(end).format('HH:mm'),
-      daysOfWeek: daysOfWeek,
+      daysOfWeek: daysOfWeek ? daysOfWeek.map(id => Number(id)) : daysOfWeek,
     }
 
     const existEvent = bookings.some((event: BookingEvent) => event.extendedProps.bookingId === bookingId)
     if (!existEvent) {
-      if (daysOfWeek.length) {
+      if (daysOfWeek !== null && daysOfWeek.length) {
         dispatch(addRecurringBooking(eventRecurring))
       } else {
         dispatch(addOneBooking(eventOneDay))

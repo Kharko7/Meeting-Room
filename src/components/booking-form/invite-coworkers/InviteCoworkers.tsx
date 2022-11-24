@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { axiosService } from 'services/axios.service/axios.service';
-import { useAppDispatch } from 'hooks/toolkitHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
 import { setInvite } from 'redux&saga/slices/booking.slice';
 import { SnackBarContext } from 'context/snackbar-context';
 import { snackbarVariants } from 'constants/snackbar';
@@ -15,15 +15,22 @@ interface User {
   role: string;
   userId: number;
 };
+interface InviteCoworkersProps {
+  edit: boolean;
+};
 
-const InviteCoworkers = () => {
+const InviteCoworkers = ({ edit }: InviteCoworkersProps) => {
 
   const [open, setOpen] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
+  const [editBooking, setEditBooking] = useState<boolean>(edit);
   const dispatch = useAppDispatch();
-  const loading = open && users.length === 0;
   const { setAlert } = useContext(SnackBarContext)
+  const {
+    invitedId,
+  } = useAppSelector((state) => state.booking);
 
+  const loading = invitedId.length ? (editBooking && users.length === 0) || (open && users.length === 0) : open && users.length === 0
   useEffect(() => {
     if (!loading) {
       return
@@ -33,6 +40,7 @@ const InviteCoworkers = () => {
       .then((response) => {
         setUsers(response.data)
       }).catch((error) => {
+        setEditBooking(false)
         setOpen(false)
         setAlert({
           severity: snackbarVariants.error,
@@ -40,6 +48,8 @@ const InviteCoworkers = () => {
         })
       })
   }, [loading, setAlert]);
+  
+  const usersName = editBooking ? users.filter((user) => invitedId.includes(user.userId)) : undefined
 
   return (
     <Autocomplete
@@ -56,6 +66,7 @@ const InviteCoworkers = () => {
         setOpen(false);
       }}
       getOptionLabel={(option) => option.firstName + ' ' + option.lastName}
+      value={usersName}
       options={users}
       loading={loading}
       onChange={(_, value) => dispatch(setInvite(value.map(users => users.userId)))}

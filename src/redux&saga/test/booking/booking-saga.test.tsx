@@ -19,6 +19,8 @@ describe('saga getAllBookings test', () => {
         description: "First meeting 01",
         isRecurring: false,
         recurringId: null,
+        invitations: [],
+        daysOfWeek: null,
       }]
     }
   }
@@ -97,6 +99,8 @@ describe('saga addOneBooking test', () => {
       room_FK: 1,
       isRecurring: false,
       recurringId: null,
+      invitations: [],
+      daysOfWeek: null,
     }
   }
   const succsess = [{
@@ -108,7 +112,9 @@ describe('saga addOneBooking test', () => {
       roomId: response.data.room_FK,
       description: response.data.description,
       isRecurring: response.data.isRecurring,
-      recurringId: response.data.recurringId
+      recurringId: response.data.recurringId,
+      invitations: response.data.invitations,
+      daysOfWeek: response.data.daysOfWeek,
     }
   }]
 
@@ -165,6 +171,8 @@ describe('saga addRecurringBooking test', () => {
       room_FK: action.payload.roomId,
       isRecurring: true,
       recurringId: 10,
+      invitations: [],
+      daysOfWeek: ['2', '4'],
     },
     {
       title: action.payload.title,
@@ -175,6 +183,8 @@ describe('saga addRecurringBooking test', () => {
       room_FK: action.payload.roomId,
       isRecurring: true,
       recurringId: 10,
+      invitations: [],
+      daysOfWeek: ['2', '4'],
     },
     ]
   }
@@ -188,6 +198,8 @@ describe('saga addRecurringBooking test', () => {
       description: event.description,
       isRecurring: event.isRecurring,
       recurringId: event.recurringId,
+      invitations: event.invitations,
+      daysOfWeek: event.daysOfWeek,
     }
   }))
 

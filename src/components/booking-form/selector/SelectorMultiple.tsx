@@ -8,7 +8,7 @@ interface SelectorMultipleProps {
   errorMsg?: string;
   disabled?: boolean;
   label: string;
-  daysOfWeek: Record<string, number>;
+  daysOfWeek: Record<string, string>;
   dataTestId: string;
   onChange: (event: SelectChangeEvent<string[]>) => void;
 }
