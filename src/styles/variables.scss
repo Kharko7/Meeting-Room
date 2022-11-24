@@ -298,6 +298,11 @@
   --pages-decoration-box-shadow-outset: 5px 5px 25px #d9dbdf,
   -5px -5px 25px #ffffff;
 
+  --pages-decorationRoom-box-shadow-inset: inset 5px 5px 25px #d9dbdf6e,
+    inset -5px -5px 25px #ffffff;
+  --pages-decorationRoom-box-shadow-outset: 5px 5px 25px #d9dbdf7a,
+    -5px -5px 25px #ffffff7d;
+
 //429
   --advise-color: #f0f1f5;
 
@@ -566,11 +571,13 @@
 
     --NUMBEROFDAYTOP-box-shadow:var(--datePicker-box-shadow);
 
+
     --SCREENCALENDAR-box-shadow: var(--iconBtn-shadow);
     //--SCREENCALENDAR-box-shadow: -9px -9px 17px 0px #3F4E5AFF, 8px 8px 17px 0px rgb(76, 94, 108);
 
 
-    --HEADERLanguageBUTTTONS-focus-box-shadow:inset -2px -2px 8px #3F4E5AFF, inset 1px 1px 7px rgb(0 0 0 / 15%);
+
+    --SCREENCALENDAR-box-shadow: -9px -9px 17px 0px #3F4E5AFF, 8px 8px 17px 0px rgb(76, 94, 108);
 
 
     --HEADERLanguageBUTTTONS-box-shadow:inset -2px -2px 8px #3F4E5AFF, inset 1px 1px 7px rgb(0 0 0 / 15%);
@@ -597,7 +604,13 @@
 
     --pages-decoration-box-shadow-inset: inset -2px -2px 12px var(--base2),
     inset 2px 2px 8px var(--base3),
-    inset 2px 2px 4px var(--base4);;
+    inset 2px 2px 4px var(--base4);
+    --pages-decorationRoom-box-shadow-outset: -2px -2px 12px var(--base2),
+    2px 2px 8px var(--base3),
+    2px 2px 4px var(--base4);
+    --pages-decorationRoom-box-shadow-inset: inset -2px -2px 12px var(--base2),
+    inset 2px 2px 8px var(--base3),
+    inset 2px 2px 4px var(--base4);
 
 //429
     --advise-color: #454f57;

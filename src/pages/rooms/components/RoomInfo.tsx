@@ -5,6 +5,7 @@ import Loader from "pages/layout/loader/Loader";
 import "../rooms.module.scss";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
 import InfiniteScroll from "react-infinite-scroll-component";
+import dayjs from "dayjs";
 //@ts-ignore
 const RoomInfo = ({ openInfo, setOpenInfo, setOpen }) => {
   const roomInfo = useAppSelector(
@@ -43,17 +44,17 @@ const RoomInfo = ({ openInfo, setOpenInfo, setOpen }) => {
                     </div>
                     {/* <div className={styles.soonestBookingDesc}>Time</div> */}
                     <div className={styles.soonestBookingDesc}>
-                      Start:
+                      Starts:
                       <span>
-                        {booking.startDateTime.slice(11, 16)}{" "}
-                        {booking.startDateTime.slice(0, 10)}
+                        {dayjs(booking.startDateTime).format("HH:mm")}{" | "}
+                        {dayjs(booking.startDateTime).format("DD MMMM YYYY")}
                       </span>
                     </div>
                     <div className={styles.soonestBookingDesc}>
-                      Finish:
+                      Ends:
                       <span>
-                        {booking.endDateTime.slice(11, 16)}{" "}
-                        {booking.endDateTime.slice(0, 10)}
+                        {dayjs(booking.endDateTime).format("HH:mm")} {" | "}
+                        {dayjs(booking.endDateTime).format("DD MMMM YYYY")}
                       </span>
                     </div>
                   </div>
@@ -61,20 +62,11 @@ const RoomInfo = ({ openInfo, setOpenInfo, setOpen }) => {
               })
             ) : (
               <p className={styles.thisRoom}>
-                This room is available for the next 10 days
+               Please wait, maybe this room is available for the next 10 days
               </p>
             )}
           </div>
         </InfiniteScroll>
-        <div
-          className={styles.btn}
-          onClick={() => {
-            setOpen(true);
-            setOpenInfo(false);
-          }}
-        >
-          To book
-        </div>
       </span>
     </span>
   );

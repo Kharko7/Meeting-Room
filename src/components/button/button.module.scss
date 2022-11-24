@@ -33,7 +33,7 @@
     font-size: 12px;
   }
   &.medium {
-    width: 204px;
+    min-width: 204px;//changed
     height: 34px;
 
     font-size: 14px;

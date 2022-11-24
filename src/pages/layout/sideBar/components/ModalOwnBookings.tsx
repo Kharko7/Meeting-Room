@@ -11,7 +11,11 @@ import {
   addRecurringBooking,
   editBooking,
   getAllBookings,
+  editOneBooking,
+  editOwnBooking,
   resetState,
+  deleteBookingById,
+  editRecurringBooking,
   setBookingError,
   setSelectedDate,
 } from "redux&saga/slices/booking.slice";
@@ -25,6 +29,10 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
   const weekends = getFromLocalStorage("weekends");
   const { setAlert } = useContext(SnackBarContext);
   const dispatch = useAppDispatch();
+  const ownBookings = useAppSelector((state) => state.ownBookings.bookings);
+  const { limit, totalCount, page } = useAppSelector(
+    (state) => state.ownBookings
+  );
   const {
     title,
     description,
@@ -38,6 +46,7 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
     invitedId,
     errors,
     loading,
+    isRecurring,
   } = useAppSelector((state) => state.booking);
   useEffect(() => {
     if (errors.errorMsg) {
@@ -54,7 +63,14 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
     dispatch(resetState());
   };
   const handleRemoveEvent = () => {
-    /// To Do axios Remove Event by ID /////////////////////
+    if (bookingId) {
+      dispatch(
+        deleteBookingById({
+          id: bookingId,
+          isRecurring: isRecurring,
+        })
+      );
+    }
     handleCloseModal();
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,54 +82,48 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
       dispatch(setBookingError({ roomId: Errors.roomId }));
       return;
     }
+    const baseParams = {
+      title: title,
+      description: description,
+      roomId: roomId,
+      invitations: invitedId,
+      bookingId: bookingId,
+    };
 
     const eventOneDay = {
-      title: title,
-      description: description,
-      roomId: 1,
+      ...baseParams,
       startDateTime: start,
       endDateTime: end,
-      invitations: invitedId,
     };
+
     const eventRecurring = {
-      title: title,
-      description: description,
-      roomId: 1,
+      ...baseParams,
       startDate: dayjs(start).format("YYYY-MM-DD"),
       startTime: dayjs(start).format("HH:mm"),
       endDate: dayjs(end).format("YYYY-MM-DD"),
       endTime: dayjs(end).format("HH:mm"),
       daysOfWeek: daysOfWeek,
-      invitations: invitedId,
+      recurringId: null,
     };
-
-    const existEvent = bookings.some(
-      (event: BookingEvent) => event.extendedProps.bookingId === bookingId
+    const existEvent = ownBookings.some(
+      (event: any) => event.bookingId === bookingId
     );
-    if (!existEvent) {
-      if (daysOfWeek.length) {
-        dispatch(addRecurringBooking(eventRecurring));
+    if (existEvent) {
+      if (!daysOfWeek.length) {
+        dispatch(editOneBooking(eventOneDay));
       } else {
-        dispatch(addOneBooking(eventOneDay));
+        dispatch(editRecurringBooking(eventRecurring));
       }
     }
-
-    ////To Do axios edit//////////////////
-    handleCloseModal();
   };
   return (
     <Modal data-testid="modal-1" closeModal={handleCloseModal}>
-      {loading ? (
-        <div style={{ paddingTop: "20px" }}>
-          <Loader size="medium"></Loader>
-        </div>
-      ) : (
+
         <BookingForm
           handleSubmit={handleSubmit}
           handleRemoveEvent={handleRemoveEvent}
           edit={true}
         />
-      )}
     </Modal>
   );
 };
