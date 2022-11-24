@@ -14,13 +14,12 @@ import { ResponsePopup } from "pages/rooms/PopupStatus";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RoomsService } from "services/room.service/rooms.service";
 import { useAppSelector } from "hooks/toolkitHooks";
+import { NavLink, useLocation } from "react-router-dom";
 function* workerStatus(arr: any) {
   const { timeStatusUdated, rooms, statusUpdatedCounter } = yield select(
     (state) => state.rooms
   );
 
-  console.log(timeStatusUdated, "timeStatusUdated");
-  console.log(statusUpdatedCounter, "statusUpdatedCounter");
   const time = Date.now();
   const bool =
     statusUpdatedCounter == 1 ? true : timeStatusUdated + 60000 >= time;
@@ -29,11 +28,9 @@ function* workerStatus(arr: any) {
       const dataRoomsStatus1: AxiosResponse = yield call(
         RoomsService.getRoomsStatus1
       );
-
       const dataRoomsStatus2: AxiosResponse = yield call(
         RoomsService.getRoomsStatus2
       );
-
       const date = arr.payload.reduce((p: any, c: any) => {
         const name = c.roomId;
         //@ts-ignore
@@ -55,12 +52,17 @@ function* workerStatus(arr: any) {
         });
       });
       yield put(roomsActions.setRoomsStatus(date));
-      yield ResponsePopup.Success();
+      const location = window.location.pathname.toString();
+      if (location == "/rooms" && statusUpdatedCounter == 1) {
+        yield ResponsePopup.Success();
+      }
     } else {
-      yield ResponsePopup.Wait();
+      // const location = window.location.pathname.toString();
+      // if (location == "/rooms") {
+      //   yield ResponsePopup.Wait();
+      // }
     }
   } catch (error: any) {
-    if (statusUpdatedCounter != 1) yield ResponsePopup.ErrorPopup(error);
   }
 }
 export function* watchRoomsStatus() {

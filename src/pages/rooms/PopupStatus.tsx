@@ -3,20 +3,21 @@ import "animate.css";
 
 const Toast = Swal.mixin({
   toast: true,
-  position: "bottom-end",
+  position: "bottom-left",
   showConfirmButton: false,
   didOpen: (toast) => {
     toast.addEventListener("mouseenter", Swal.stopTimer);
     toast.addEventListener("mouseleave", Swal.resumeTimer);
   },
   showClass: {
-    popup: "animate__animated  animate__bounceIn animate__headShake",
+    popup: "animate__animated  animate__bounceIn ",
   },
   hideClass: {
     popup: "animate__animated animate__fadeOut",
   },
   background: "var(--base1)",
   color: "var(--mainColorFont)",
+ width:"90px",
 });
 
 export const ResponsePopup = {
@@ -32,8 +33,8 @@ export const ResponsePopup = {
   Success: async () => {
     return Toast.fire({
       icon: "success",
-      title: "Room status updated",
-      timer: 2000,
+      title: "",
+      timer: 1000,
       timerProgressBar: true,
     });
   },
@@ -41,7 +42,7 @@ export const ResponsePopup = {
     return Toast.fire({
       icon: "info",
       title: "Please wait, room status is being updated",
-      timer: 2000,
+      timer: 1000,
       timerProgressBar: true,
     });
   },

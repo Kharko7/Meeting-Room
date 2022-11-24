@@ -16,35 +16,22 @@ const Rooms = () => {
     statusUpdatedCounter,
   } = useAppSelector((state) => state.rooms);
 
-
   const dispatch = useAppDispatch();
   const HandleStatus = () => {
     if (rooms.length > 0) {
       const timeStatus = Date.now();
-      console.log(
-        "60 second left",
-        timeStatusUdated,
-        timeStatus,
-        statusUpdatedCounter
-      );
-      dispatch(roomsActions.setTimeStatusUdated(timeStatus));
-      dispatch(roomsActions.setStatusUpdatedCounter());
-      dispatch(roomsActions.getRoomsStatus(rooms));
+        dispatch(roomsActions.setTimeStatusUdated(timeStatus));
+        dispatch(roomsActions.setStatusUpdatedCounter());
+        dispatch(roomsActions.getRoomsStatus(rooms));
     }
   };
   useEffect(() => {
     rooms.length == 0 && dispatch(roomsActions.getRooms());
   }, []);
   useEffect(() => {
-    console.log("useEffect");
     if (rooms.length > 0) {
       setInterval(HandleStatus, 60000);
-      console.log("useEffect inside");
-      statusUpdatedCounter==0 && HandleStatus();
-      // const timeStatus = Date.now();
-      // dispatch(roomsActions.setStatusUpdatedCounter(statusUpdatedCounter + 1));
-      // dispatch(roomsActions.setTimeStatusUdated(timeStatus));
-      // dispatch(roomsActions.getRoomsStatus(rooms));
+      statusUpdatedCounter == 0 && HandleStatus();
     }
   }, [rooms]);
 

@@ -92,11 +92,17 @@ export function* addOneBooking(action: PayloadAction<OneBooking>) {
     );
     yield put(ownBookingsActions.reset());
     yield put(ownBookingsActions.getTotal(1));
-    yield RoomBookingPopup.Success();
+    const location = window.location.pathname.toString();
+    if (location == "/rooms") {
+      yield RoomBookingPopup.Success();
+    }
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
-    yield RoomBookingPopup.ErrorPopup(error);
+    const location = window.location.pathname.toString();
+    if (location == "/rooms") {
+      yield RoomBookingPopup.ErrorPopup(error);
+    }
   }
 }
 
@@ -123,11 +129,17 @@ export function* addRecurringBooking(
     yield put(addBookingSuccess(getEvents));
     yield put(ownBookingsActions.reset());
     yield put(ownBookingsActions.getTotal(1));
-        yield RoomBookingPopup.Success();
+    const location = window.location.pathname.toString();
+    if (location == "/rooms") {
+      yield RoomBookingPopup.Success();
+    }
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
-        yield RoomBookingPopup.ErrorPopup(error);
+    const location = window.location.pathname.toString();
+    if (location == "/rooms") {
+      yield RoomBookingPopup.ErrorPopup(error);
+    }
   }
 }
 
@@ -144,7 +156,6 @@ export function* editOneBooking(action: PayloadAction<OneBooking>) {
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
-            yield RoomBookingPopup.ErrorPopup(error);
   }
 }
 
@@ -174,7 +185,6 @@ export function* deleteBooking(action: PayloadAction<DeleteBookingInterface>) {
     yield call(bookingService.delete, {
       url: `bookings/${isRecurring ? "recurring" : "one-time"}/${id}`,
     });
-    console.log(id);
     yield put(deleteBookingSuccess({ id: id, isRecurring: isRecurring }));
     yield put(ownBookingsActions.reset());
     yield put(ownBookingsActions.getTotal(1));

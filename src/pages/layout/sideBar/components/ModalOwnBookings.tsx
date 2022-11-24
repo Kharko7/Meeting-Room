@@ -12,6 +12,7 @@ import {
   editBooking,
   getAllBookings,
   editOneBooking,
+  editOwnBooking,
   resetState,
   deleteBookingById,
   editRecurringBooking,
@@ -29,8 +30,9 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
   const { setAlert } = useContext(SnackBarContext);
   const dispatch = useAppDispatch();
   const ownBookings = useAppSelector((state) => state.ownBookings.bookings);
-  const { limit,totalCount, page } = useAppSelector((state) => state.ownBookings);
-  console.log(limit, page, totalCount);
+  const { limit, totalCount, page } = useAppSelector(
+    (state) => state.ownBookings
+  );
   const {
     title,
     description,
@@ -44,8 +46,8 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
     invitedId,
     errors,
     loading,
+    isRecurring,
   } = useAppSelector((state) => state.booking);
-
   useEffect(() => {
     if (errors.errorMsg) {
       setAlert({
@@ -64,58 +66,64 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
     if (bookingId) {
       dispatch(
         deleteBookingById({
-          id : bookingId,
-          isRecurring: false,
+          id: bookingId,
+          isRecurring: isRecurring,
         })
       );
     }
     handleCloseModal();
   };
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (!roomId) {
-        if (!floor) {
-          dispatch(setBookingError({ floor: Errors.floor }));
-        }
-        dispatch(setBookingError({ roomId: Errors.roomId }));
-        return;
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!roomId) {
+      if (!floor) {
+        dispatch(setBookingError({ floor: Errors.floor }));
       }
-      const baseParams = {
-        title: title,
-        description: description,
-        roomId: roomId,
-        invitations: invitedId,
-      };
-      const eventOneDay = {
-        ...baseParams,
-        startDateTime: start,
-        endDateTime: end,
-      };
-
-      const existEvent = ownBookings.some(
-        (event:any) => event.bookingId === bookingId
-      );
-      if (existEvent) {
-        if (!daysOfWeek.length) {
-          console.log(ownBookings);
-       dispatch(editOneBooking({ ...eventOneDay, bookingId: bookingId }));
-      }
-      handleCloseModal();
+      dispatch(setBookingError({ roomId: Errors.roomId }));
+      return;
+    }
+    const baseParams = {
+      title: title,
+      description: description,
+      roomId: roomId,
+      invitations: invitedId,
+      bookingId: bookingId,
     };
-  }
+
+    const eventOneDay = {
+      ...baseParams,
+      startDateTime: start,
+      endDateTime: end,
+    };
+
+    const eventRecurring = {
+      ...baseParams,
+      startDate: dayjs(start).format("YYYY-MM-DD"),
+      startTime: dayjs(start).format("HH:mm"),
+      endDate: dayjs(end).format("YYYY-MM-DD"),
+      endTime: dayjs(end).format("HH:mm"),
+      daysOfWeek: daysOfWeek,
+      recurringId: null,
+    };
+    const existEvent = ownBookings.some(
+      (event: any) => event.bookingId === bookingId
+    );
+    if (existEvent) {
+      if (!daysOfWeek.length) {
+        dispatch(editOneBooking(eventOneDay));
+      } else {
+        dispatch(editRecurringBooking(eventRecurring));
+      }
+    }
+  };
   return (
     <Modal data-testid="modal-1" closeModal={handleCloseModal}>
-      {loading ? (
-        <div style={{ paddingTop: "20px" }}>
-          <Loader size="medium"></Loader>
-        </div>
-      ) : (
+
         <BookingForm
           handleSubmit={handleSubmit}
           handleRemoveEvent={handleRemoveEvent}
           edit={true}
         />
-      )}
     </Modal>
   );
 };

@@ -27,12 +27,9 @@ const OwnBookingsContainer = () => {
     (state) => state.ownBookings
   );
   const pages = Math.ceil(totalCount / limit);
-  console.log(page, pages, limit, bookings, totalCount);
   const dispatch = useAppDispatch();
   const handleNext = () => {
-    setHasMore(true);
     if (page + 1 <= pages) {
-      console.log("true 123")
       dispatch(ownBookingsActions.setPage(page+1));
       dispatch(ownBookingsActions.getOwnBookings(page + 1));
     } 

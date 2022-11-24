@@ -4,9 +4,8 @@ import { RegistrationProps } from "../../interfaces/auth/AuthProps";
 import axios from "axios";
 
 export const OwnBookingsService = {
-  getOwnBookings: async (next:number=1) => {
-    console.log("getOwnBookings");
-    return await axiosService.get(`bookings/own?page=${next}&limit=4`);
+  getOwnBookings: async (next:number=1) => { 
+    return await axiosService.get(`bookings/own?page=1&limit=100`);
   },
 };
 

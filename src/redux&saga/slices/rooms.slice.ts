@@ -18,8 +18,9 @@ export interface InitialStateRooms {
   roomsByFloor: Array<Array<Rooms>>;
   statuses: object;
   rooms: Array<Rooms>;
-  timeStatusUdated:number;
-  statusUpdatedCounter:number;
+  timeStatusUdated: number;
+  statusUpdatedCounter: number;
+  location: string;
 }
 
 const initialState: InitialStateRooms = {
@@ -29,8 +30,9 @@ const initialState: InitialStateRooms = {
   roomSoonestBookingsDays: [],
   roomsByFloor: [],
   statuses: {},
-  timeStatusUdated:0,
-  statusUpdatedCounter:0,
+  timeStatusUdated: 0,
+  statusUpdatedCounter: 0,
+  location: "/rooms",
 };
 
 const roomsSlice = createSlice({
@@ -62,11 +64,14 @@ const roomsSlice = createSlice({
     setTimeStatusUdated(state, action) {
       state.timeStatusUdated = action.payload;
     },
-    setStatusUpdatedCounter(state,) {
-      state.statusUpdatedCounter = state.statusUpdatedCounter+1;
+    setStatusUpdatedCounter(state) {
+      state.statusUpdatedCounter = state.statusUpdatedCounter + 1;
     },
     resetState() {
       return { ...initialState };
+    },
+    setLocation(state, action) {
+      state.location = action.payload;
     },
   },
 });
