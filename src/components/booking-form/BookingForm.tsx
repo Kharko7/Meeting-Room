@@ -26,7 +26,7 @@ import { daysOfTheWeek } from "constants/booking-form";
 import SelectorMultiple from "./selector/SelectorMultiple";
 import { Errors } from "constants/errors";
 import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
-
+import { roomsActions } from "redux&saga/slices/rooms.slice"; //added
 interface BookingFormProps {
   edit: boolean;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -43,16 +43,8 @@ const BookingForm = ({
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const {
-    title,
-    start,
-    end,
-    floor,
-    errors,
-    description,
-    roomId,
-    daysOfWeek,
-  } = useAppSelector((state) => state.booking);
+  const { title, start, end, floor, errors, description, roomId, daysOfWeek } =
+    useAppSelector((state) => state.booking);
 
   const onConfirm = () => {
     handleRemoveEvent();
@@ -100,7 +92,10 @@ const BookingForm = ({
       setDaysOfWeek(typeof value === "string" ? value.split(",") : value)
     );
   };
-
+  const handleGoToCalendar = () => {
+    //added
+    dispatch(roomsActions.setLocation("/calendar")); //added
+  }; //added
   return (
     <>
       <Typography
@@ -158,9 +153,7 @@ const BookingForm = ({
                 helperText={errors.description ? errors.description : ""}
               />
             </Box>
-            <Box
-              sx={{ display: "flex", gap: "15px", height: "80px" }}
-            >
+            <Box sx={{ display: "flex", gap: "15px", height: "80px" }}>
               <DateAndTimePicker
                 date={start}
                 errorMsg={errors.start}
@@ -175,15 +168,17 @@ const BookingForm = ({
                 label="End"
               />
             </Box>
-
+            
           </Grid>
           <Grid item xs={6}>
-            <Box sx={{
-              mb: "21px",
-              display: "flex",
-              gap: "15px",
-              height: "80px",
-            }}>
+            <Box
+              sx={{
+                mb: "21px",
+                display: "flex",
+                gap: "15px",
+                height: "80px",
+              }}
+            >
               <SelectorMultiple
                 value={daysOfWeek}
                 dataTestId="selector-multiple"
@@ -192,7 +187,7 @@ const BookingForm = ({
                 onChange={handleChangeWeek}
               />
             </Box>
-            <Box sx={{ mb: "25px", height: "120px", }}>
+            <Box sx={{ mb: "25px", height: "120px" }}>
               <InviteCoworkers />
             </Box>
             <Box
@@ -218,7 +213,7 @@ const BookingForm = ({
             >
               {edit && (
                 <Button
-                  styleType='error'
+                  styleType="error"
                   dataTestId="button-delete"
                   onclick={() => setOpenConfirmation(true)}
                 >
@@ -228,7 +223,7 @@ const BookingForm = ({
               <Button
                 disabled={Boolean(Object.values(errors).join(""))}
                 type="submit"
-                onclick={() => { }}
+                onclick={() => {}}
                 dataTestId="button-submit"
               >
                 Save
@@ -245,8 +240,11 @@ const BookingForm = ({
       />
       {linkToCalendar && (
         <Link to="/calendar">
-          {" "}
-          <div className={styles.linkToCalendarContainer}>
+          <div
+            className={styles.linkToCalendarContainer}
+            onClick={() => handleGoToCalendar()}
+          >
+            {/* added onClick */}
             <span className={styles.goToCalendar}>
               Can't find a free date? Go to the calendar{" "}
             </span>

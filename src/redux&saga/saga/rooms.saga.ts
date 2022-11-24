@@ -1,60 +1,68 @@
-import { call, put, all, take, fork, takeLatest } from "redux-saga/effects";
+import {
+  call,
+  put,
+  all,
+  take,
+  select,
+  fork,
+  takeLatest,
+} from "redux-saga/effects";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 import { AxiosResponse } from "axios";
 import moment, { now } from "moment";
-
+import { ResponsePopup } from "pages/rooms/PopupStatus";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RoomsService } from "services/room.service/rooms.service";
 import { useAppSelector } from "hooks/toolkitHooks";
-function* workerFloors(data: any) {
-  try {
-    const floors = data[0].office.floors;
-    const arrFloors = Array.from({ length: floors }, (_, i) => i + 1);
-    yield put(roomsActions.setCountOfFloors(arrFloors));
-    const arr: any = [];
-    arrFloors.map((index) => {
-      arr[index - 1] = [];
-    });
-    data.map((room: any) => {
-      arr[room.floor - 1].push(room);
-    });
-    yield put(roomsActions.setRoomsByFloor(arr));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
+import { NavLink, useLocation } from "react-router-dom";
 function* workerStatus(arr: any) {
-  try {
-    const dataRoomsStatus1: AxiosResponse = yield call(
-      RoomsService.getRoomsStatus1
-    );
-    const dataRoomsStatus2: AxiosResponse = yield call(
-      RoomsService.getRoomsStatus2
-    );
-    const date = arr.payload.reduce((p: any, c: any) => {
-      const name = c.roomId;
-      //@ts-ignore
-      p[name] = false;
-      return p;
-    }, {});
+  const { timeStatusUdated, rooms, statusUpdatedCounter } = yield select(
+    (state) => state.rooms
+  );
 
-    const dataRoomsStatus = [
-      ...dataRoomsStatus1.data,
-      ...dataRoomsStatus2.data,
-    ];
-    dataRoomsStatus.map((room: any) => {
-      room.bookings.map((booking: any) => {
-        const a = moment(now());
-        const b = moment(booking.startDateTime);
-        const x = moment(booking.endDateTime);
-        const trues = a.isBetween(b, x);
-        if (trues) date[room.roomId] = true;
+  const time = Date.now();
+  const bool =
+    statusUpdatedCounter == 1 ? true : timeStatusUdated + 60000 >= time;
+  try {
+    if (rooms.length > 0 && bool) {
+      const dataRoomsStatus1: AxiosResponse = yield call(
+        RoomsService.getRoomsStatus1
+      );
+      const dataRoomsStatus2: AxiosResponse = yield call(
+        RoomsService.getRoomsStatus2
+      );
+      const date = arr.payload.reduce((p: any, c: any) => {
+        const name = c.roomId;
+        //@ts-ignore
+        p[name] = false;
+        return p;
+      }, {});
+
+      const dataRoomsStatus = [
+        ...dataRoomsStatus1.data,
+        ...dataRoomsStatus2.data,
+      ];
+      dataRoomsStatus.map((room: any) => {
+        room.bookings.map((booking: any) => {
+          const a = moment(now());
+          const b = moment(booking.startDateTime);
+          const x = moment(booking.endDateTime);
+          const trues = a.isBetween(b, x);
+          if (trues) date[room.roomId] = true;
+        });
       });
-    });
-     yield put(roomsActions.setRoomsStatus(date));
-  } catch (error) {
-    console.log(error);
+      yield put(roomsActions.setRoomsStatus(date));
+      const location = window.location.pathname.toString();
+      if (location == "/rooms" && statusUpdatedCounter == 1) {
+        yield ResponsePopup.Success();
+      }
+    } else {
+      // const location = window.location.pathname.toString();
+      // if (location == "/rooms") {
+      //   yield ResponsePopup.Wait();
+      // }
+    }
+  } catch (error: any) {
   }
 }
 export function* watchRoomsStatus() {

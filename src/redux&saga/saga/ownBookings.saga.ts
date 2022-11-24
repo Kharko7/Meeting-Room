@@ -25,6 +25,7 @@ function* workerTotalCounts(a: any) {
       totalCount: data?.data.totalCount,
       limit: data?.data.limit,
     };
+
     yield put(ownBookingsActions.setTotal(total));
     yield put(ownBookingsActions.setOwnBookings(data?.data.bookings));
   } catch (error) {

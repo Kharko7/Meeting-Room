@@ -20,7 +20,6 @@ const SideBar = ({ userName }: SideBarProps) => {
   const location = useLocation();
   let {isShowing, toggle} = useModal();
   const {firstName,lastName,role} = getUserData();
-
   useEffect(()=>{},[colorsFn])
   
   return (
