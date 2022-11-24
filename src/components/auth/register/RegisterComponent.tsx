@@ -42,8 +42,8 @@ const RegisterComponent = () => {
         }
 
         if(!regex.incoraEmail.test(params.email?params.email:'none')&&!success){
-            ResponsePopup.ErrorPopup('404\nWrong registration link').then()
             navigate('/auth/login');
+            ResponsePopup.ErrorPopup('404\nWrong registration link').then()
         }
 
     }, [success,params.email]);

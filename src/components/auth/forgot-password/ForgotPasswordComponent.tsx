@@ -8,16 +8,14 @@ import {EmailSchema} from "../../../utils/yup.validation";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useModal} from "../../../hooks/show.modal";
 import {DialogComponent} from "../../dialog/DialogComponent";
 import CloseBtn from "../../close-btn/CloseBtn";
 import "animate.css";
 
 import {FaCloud,} from 'react-icons/fa';
-import { RiMailSendLine } from "react-icons/ri";
-import { SiMinutemailer } from "react-icons/si";
-
+import {SiMinutemailer} from "react-icons/si";
 
 
 const cn = classNames.bind(styles)

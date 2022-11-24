@@ -9,7 +9,6 @@ import {fnErrorSaga, pending, success} from "./fn/fn.saga";
 function* handleGetInvitation(action:PayloadAction<any>) {
     try {
         yield pending();
-        console.log(action.payload)
         const {data}: AxiosResponse = yield call(UserService.getInvitation, action.payload);
         yield success();
         yield put(authActions.success(false));

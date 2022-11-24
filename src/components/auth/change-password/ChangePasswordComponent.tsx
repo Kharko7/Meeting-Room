@@ -13,9 +13,6 @@ import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
 import {getUserData} from "../../../services/local-storage.service";
 import LoadingComponent from "../../tools/simple/loading/LoadingComponent";
-import {DialogComponent} from "../../dialog/DialogComponent";
-import {useModal} from "../../../hooks/show.modal";
-import CloseBtn from "../../close-btn/CloseBtn";
 import ErrorToManyRequest from "../../tools/simple/error-429/ErrorToManyRequest";
 
 const cn = classNames.bind(styles)

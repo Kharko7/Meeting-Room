@@ -10,7 +10,6 @@ import {fnErrorSaga, pending, success} from "./fn/fn.saga";
 function* handleChangePassword(action:PayloadAction<any>) {
     try {
         yield pending();
-        console.log('change')
         const data: AxiosResponse = yield call(UserService.changePassword, action.payload);
         yield success();
     } catch (error: any) {
