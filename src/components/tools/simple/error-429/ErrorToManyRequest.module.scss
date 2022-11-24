@@ -1,10 +1,10 @@
 
-.error-container, .error-box, .error-icon,.error-advise,.error-icon-box  {
+.error-container, .error-box, .error-icon,.error-advise,.error-icon-box,.error-title-container  {
   align-items: center;
   display: flex;
 }
 
-.error-container, .error-icon,.error-advise,.error-icon-box {
+.error-container, .error-icon,.error-advise,.error-icon-box,.error-box,.error-title-container {
   justify-content: center;
 }
 
@@ -12,7 +12,7 @@
   color: var(--errorColor);
 }
 
-.error-icon,.error-title-container,.error-icon-box{
+.error-icon,.error-icon-box{
   box-shadow: var(--outset-box-shadow);
 
 }
@@ -21,19 +21,18 @@
 
 }
 
-
 .error-container {
   width: 100%;
 }
 
 .error-box {
   width: 90%;
-  justify-content: space-between;
   margin-bottom: 30px;
   margin-top: 30px;
-  box-shadow: var(--outset-box-shadow);
+  box-shadow: var(--inset-box-shadow);
   padding: 30px;
   border-radius: 40px;
+  background: var(--base1);
 }
 
 .error-icon {
@@ -46,38 +45,28 @@
 }
 
 .error-icon svg {
-  font-size: 9em;
+  font-size: 7em;
 }
 
 .error-png {
   width: 100px;
 }
 
-
-.error-title-container {
-  display: flex;
-  justify-content: flex-start;
-  border-radius: 20px 50% 20px 20px;
-  padding: 10px;
-
-}
-
 .code {
-  font-size: 4em;
+  font-size: 8em;
+  font-weight: 700;
   color: var(--base1);
   text-shadow: var(--text-box-shadow);
 }
 
-.forbidden {
-  font-size: 1.3em;
-  font-weight: 500;
-}
-
 .error-title {
-  font-weight: 500;
-  font-size: 1.8em;
+  font-weight: 700;
+  font-size: 3em;
   margin-top: 5px;
   margin-bottom: 5px;
+
+  color: var(--base1);
+  text-shadow: var(--text-box-shadow);
 }
 
 .error-advise {
@@ -88,9 +77,9 @@
 }
 
 .error-icon-box {
-   padding: 5px;
+  padding: 5px;
   border-radius: 20px;
-  color: var(--label);
+  color: var(--mainColorFont);
 }
 
 .error-icon-box svg path:nth-child(2){

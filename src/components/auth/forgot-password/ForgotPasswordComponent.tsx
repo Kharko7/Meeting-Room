@@ -8,14 +8,15 @@ import {EmailSchema} from "../../../utils/yup.validation";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {useAppDispatch, useAppSelector} from "../../../hooks/toolkitHooks";
 import {authActions} from "../../../redux&saga/slices/auth.slice";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useModal} from "../../../hooks/show.modal";
 import {DialogComponent} from "../../dialog/DialogComponent";
 import CloseBtn from "../../close-btn/CloseBtn";
 import "animate.css";
 
-import {FaPaperPlane,FaCloud} from 'react-icons/fa';
-import {setToLocalStorage} from "../../../services/local-storage.service";
+import {FaCloud,} from 'react-icons/fa';
+import {SiMinutemailer} from "react-icons/si";
+
 
 const cn = classNames.bind(styles)
 
@@ -25,7 +26,7 @@ const ForgotPasswordComponent = () => {
         resolver: yupResolver(EmailSchema)
     });
     const dispatch = useAppDispatch();
-    let {success,errorCode} = useAppSelector(state => state.auth);
+    let {success} = useAppSelector(state => state.auth);
     let {isShowing, toggle} = useModal();
 
     useEffect(() => {
@@ -68,7 +69,7 @@ const ForgotPasswordComponent = () => {
                             </div>
                                 <div className={cn('loader')}>
                                     <div className={cn('plane')}>
-                                        <i className={cn("fas",'fa-plane')}><FaPaperPlane/></i>
+                                        <i className={cn("fas",'fa-plane')}><SiMinutemailer/></i>
                                         <i className={cn("fas","fa-cloud",'one')} ><FaCloud/></i>
                                         <i className={cn("fas","fa-cloud",'two')} ><FaCloud/></i>
                                         <i className={cn("fas","fa-cloud",'three')} ><FaCloud/></i>

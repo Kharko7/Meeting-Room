@@ -9,7 +9,6 @@ import {fnErrorSaga, pending, success} from "./fn/fn.saga";
 function* handleRegister(action: PayloadAction<any>) {
     try {
         yield pending();
-        console.log(action.payload)
         const data: AxiosResponse = yield call(UserService.register, action.payload);
         yield success();
     } catch (error:any) {

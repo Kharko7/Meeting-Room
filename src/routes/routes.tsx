@@ -15,7 +15,7 @@ const AppRouter = () => {
             <Route path={"*"} element={<NotFound/>}/>
             <Route path={'/auth'} element={<AuthRoute/>}>
                 <Route path={'login'} element={<LoginPage/>}></Route>
-                <Route path={'signup/:email'} element={<RegisterPage/>}></Route>
+                <Route path={'signup/email=:email'} element={<RegisterPage/>}></Route>
                 <Route path={'forgotPassword'} element={<ForgotPasswordPage/>}></Route>
             </Route>
             <Route path='' element={<ProtectedRoute />}>

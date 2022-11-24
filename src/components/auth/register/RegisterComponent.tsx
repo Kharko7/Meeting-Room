@@ -35,10 +35,6 @@ const RegisterComponent = () => {
 
     const [errorPassword, setErrorPassword] = useState<boolean>(false);
 
-    // const email = params.email;
-
-    // console.log(email)
-
     useEffect(() => {
         if (success) {
             dispatch(authActions.success(false))
@@ -46,11 +42,12 @@ const RegisterComponent = () => {
         }
 
         if(!regex.incoraEmail.test(params.email?params.email:'none')&&!success){
-            ResponsePopup.ErrorPopup('404\nWrong registration link').then()
             navigate('/auth/login');
+            ResponsePopup.ErrorPopup('404\nWrong registration link').then()
         }
 
     }, [success,params.email]);
+
 
 
 
@@ -61,6 +58,7 @@ const RegisterComponent = () => {
                 console.log(data)
                 data = registerClear(data);
                 await dispatch(authActions.register(data));
+                setErrorPassword(false);
             } else {
                 setErrorPassword(true);
             }

@@ -14,7 +14,6 @@ export const UserService = {
         return await axiosService.post(`${urls.changePassword}`, data);
     },
     forgotPassword: async (data:ForgotPasswordProps) => {
-        console.log("fp"+data)
         return await axiosService.post(`${urls.forgotPassword}`, data)},
     getInvitation:async (email:string[])=>await axiosService.post(`${urls.getInvitation}`,email)
 };

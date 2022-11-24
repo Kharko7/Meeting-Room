@@ -20,6 +20,10 @@ $backgroundColor: var(--calendar-bg);
   --fc-daygrid-event-dot-width: 11px;
   --fc-list-event-hover-bg-color: var(--calendar-fc-list-event-hover-bg-color);
 }
+:global(.fc-theme-standard .fc-list-day-cushion){
+  background: var(--base3);
+}
+
 
 /////////// HEADER 2 BUTTTONS PREVIOUS AND NEXT   //////////////////////////////
 :global(.fc) {
