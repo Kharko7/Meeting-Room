@@ -30,14 +30,11 @@ const ChangePasswordComponent = () => {
     const [error, setError] = useState<boolean>(false);
     const [errorOldPassword, setErrorOldPassword] = useState<boolean>(false);
     const {success, errorCode} = useAppSelector(state => state.auth);
-    let {isShowing, toggle} = useModal();
 
     const user_data = getUserData();
 
     useEffect(() => {
         if (success) {
-            toggle();
-            isShowing = false;
             dispatch(authActions.success(false))
         }
         errorCode === 403 && setErrorOldPassword(true);
@@ -62,30 +59,6 @@ const ChangePasswordComponent = () => {
             <LoadingComponent/>
             <ErrorToManyRequest/>
             <form onSubmit={handleSubmit(submit)} className={cn("form_container")}>
-                {
-                    isShowing && <>
-                        <DialogComponent isShowing={isShowing} children={<div className={cn('container-success-modal')}>
-                            <div className={cn('modal-title-box')}>
-                                <div className={cn("modal-circle")}></div>
-                                <div className={cn("modal-text")}>Your password has been successfully changed</div>
-                                <div className={cn("modal-circle")}></div>
-                            </div>
-
-                            <div className={cn('success-checkmark')}>
-                                <div className={cn("check-icon")}>
-                                    <span className={cn("icon-line", "line-tip")}></span>
-                                    <span className={cn("icon-line", "line-long")}></span>
-                                    <div className={cn("icon-circle")}></div>
-                                    <div className={cn("icon-fix")}></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <Button onclick={toggle} children={'OK'}/>
-                            </div>
-                        </div>}/>
-                    </>
-                }
                 <div className={cn("title")}>Password Change</div>
                 <div className={cn("login")}>
                     <KeyIcon/>

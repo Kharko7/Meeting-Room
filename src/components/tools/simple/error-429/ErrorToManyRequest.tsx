@@ -10,6 +10,7 @@ import "animate.css";
 import classNames from 'classnames/bind';
 import styles from './ErrorToManyRequest.module.scss'
 import {useAppSelector} from "../../../../hooks/toolkitHooks";
+import { FaAngellist } from 'react-icons/fa';
 
 const cn = classNames.bind(styles)
 
@@ -17,7 +18,7 @@ const cn = classNames.bind(styles)
 const ErrorToManyRequest = () => {
 
     let {errorCode} = useAppSelector(state => state.auth);
-    let {isShowing,toggle} = useModal()
+    let {isShowing,toggle} = useModal();
 
     useEffect(()=>{
         errorCode===429&&toggle()
@@ -28,14 +29,8 @@ const ErrorToManyRequest = () => {
             <CloseBtn onclick={toggle}></CloseBtn>
             <div className={cn('error-box')}>
                 <div className={cn('error-title-container')}>
-                    <div className={cn('error-code-box')}>
                         <span className={cn('code')}>429</span>
-                        <span className={cn('forbidden')}>{" forbidden"}</span>
-                    </div>
-                    <div className={cn('error-title')}>Too many requests</div>
-                </div>
-                <div className={cn('error-icon')}>
-                    <MoodBadIcon/>
+                        <div className={cn('error-title')}>Too many requests</div>
                 </div>
             </div>
             <div className={cn('error-advise')}>

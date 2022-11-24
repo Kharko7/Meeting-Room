@@ -35,10 +35,6 @@ const RegisterComponent = () => {
 
     const [errorPassword, setErrorPassword] = useState<boolean>(false);
 
-    // const email = params.email;
-
-    // console.log(email)
-
     useEffect(() => {
         if (success) {
             dispatch(authActions.success(false))
@@ -55,12 +51,14 @@ const RegisterComponent = () => {
 
 
 
+
     const submit: SubmitHandler<any> = async (data) => {
             if (checkPasswordMatch(data.password, data.passwordConfirm)) {
                 data.email = params.email;
                 console.log(data)
                 data = registerClear(data);
                 await dispatch(authActions.register(data));
+                setErrorPassword(false);
             } else {
                 setErrorPassword(true);
             }
