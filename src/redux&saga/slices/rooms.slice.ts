@@ -32,7 +32,7 @@ const initialState: InitialStateRooms = {
   statuses: {},
   timeStatusUdated: 0,
   statusUpdatedCounter: 0,
-  location: "/rooms",
+  location:  window.location.pathname.toString(),
 };
 
 const roomsSlice = createSlice({
