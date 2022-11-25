@@ -37,7 +37,7 @@ const OwnBookings = ({ booking, index }) => {
   const floor = rooms.filter((el) => el.roomId == booking.room_FK);
 
   const handleEdit = () => {
-    console.log(start, " ", end, "utc ",dayjs.utc(booking.startDateTime).format("YYYY-MM-DDTHH:mm"));
+    const invitations = booking.invitations.map((id:any)=>id.invitedId_FK)
     dispatch(
       editOwnBooking({
         title: booking.title,
@@ -48,7 +48,7 @@ const OwnBookings = ({ booking, index }) => {
         bookingId: booking.bookingId,
         floor: floor[0].floor,
         isRecurring: booking.isRecurring,
-        invitedId: booking.invitedId,
+        invitedId: invitations,
       })
     );
   };

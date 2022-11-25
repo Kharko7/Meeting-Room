@@ -104,7 +104,8 @@ const ModalOwnRooms = ({ setOpenModal, booking }) => {
       endTime: dayjs(end).format("HH:mm"),
       recurringId: null,
       daysOfWeek: daysOfWeek ? daysOfWeek.map(id => Number(id)) : daysOfWeek,
-      invitations: invitedId,
+      invitedId: invitedId,
+
     };
     const existEvent = ownBookings.some(
       (event: any) => event.bookingId === bookingId

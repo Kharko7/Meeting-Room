@@ -8,6 +8,7 @@ interface booking {
   isRecurring: boolean;
   creatorId_FK: number;
   room_FK: number;
+  invitations:Array<number>;
 }
 export interface InitialStateBooking {
   bookings: Array<booking> | [];
