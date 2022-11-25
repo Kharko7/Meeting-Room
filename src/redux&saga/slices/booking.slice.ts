@@ -149,6 +149,7 @@ const bookingSlice = createSlice({
             state.description = action.payload.description;
             state.bookingId = action.payload.bookingId;
             state.isRecurring = action.payload.isRecurring;
+            state.invitedId=action.payload.invitedId;
         },
         resetState(state) {
             state.title = initialState.title;
