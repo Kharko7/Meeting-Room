@@ -2,6 +2,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { styles } from 'components/selector-floor-and-room/selector-styles';
 
 interface SelectorMultipleProps {
   value: string[],
@@ -25,13 +26,21 @@ const SelectorMultiple = ({ dataTestId, value, label, daysOfWeek, onChange }: Se
 
   return (
     <FormControl
-      fullWidth>
+      fullWidth
+      sx={{
+        '& .MuiSelect-select': styles.input
+      }}>
       <InputLabel >{label}</InputLabel>
       <Select
         data-testid={dataTestId}
         multiple
         value={value}
-        MenuProps={{ disableAutoFocusItem: true }}
+        MenuProps={{
+          disableAutoFocusItem: true,
+          sx: {
+            '& .MuiPaper-root': styles.paper,
+          }
+        }}
         onChange={onChange}
       >
         {menuItems}

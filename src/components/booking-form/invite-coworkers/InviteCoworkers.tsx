@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
 import { setInvite } from 'redux&saga/slices/booking.slice';
 import { SnackBarContext } from 'context/snackbar-context';
 import { snackbarVariants } from 'constants/snackbar';
+import { styles } from 'components/selector-floor-and-room/selector-styles';
+import { Paper } from '@material-ui/core';
 
 interface User {
   email: string;
@@ -26,9 +28,7 @@ const InviteCoworkers = ({ edit }: InviteCoworkersProps) => {
   const [editBooking, setEditBooking] = useState<boolean>(edit);
   const dispatch = useAppDispatch();
   const { setAlert } = useContext(SnackBarContext)
-  const {
-    invitedId,
-  } = useAppSelector((state) => state.booking);
+  const { invitedId } = useAppSelector((state) => state.booking);
 
   const loading = invitedId.length ? (editBooking && users.length === 0) || (open && users.length === 0) : open && users.length === 0
   useEffect(() => {
@@ -69,6 +69,12 @@ const InviteCoworkers = ({ edit }: InviteCoworkersProps) => {
       value={usersName}
       options={users}
       loading={loading}
+      PaperComponent={({ children }) => (
+        <Paper style={styles.paper}>{children}</Paper>
+      )}
+      sx={{
+        '& .MuiInputBase-input ': { pl: '15px!Important' },
+      }}
       onChange={(_, value) => dispatch(setInvite(value.map(users => users.userId)))}
       renderInput={(params) => (
         <TextField
