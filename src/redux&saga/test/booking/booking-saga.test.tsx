@@ -19,6 +19,8 @@ describe('saga getAllBookings test', () => {
         description: "First meeting 01",
         isRecurring: false,
         recurringId: null,
+        invitations: [],
+        daysOfWeek: null,
       }]
     }
   }
@@ -97,6 +99,8 @@ describe('saga addOneBooking test', () => {
       room_FK: 1,
       isRecurring: false,
       recurringId: null,
+      invitations: [],
+      daysOfWeek: null,
     }
   }
   const succsess = [{
@@ -108,7 +112,9 @@ describe('saga addOneBooking test', () => {
       roomId: response.data.room_FK,
       description: response.data.description,
       isRecurring: response.data.isRecurring,
-      recurringId: response.data.recurringId
+      recurringId: response.data.recurringId,
+      invitations: response.data.invitations,
+      daysOfWeek: response.data.daysOfWeek,
     }
   }]
 
@@ -118,6 +124,8 @@ describe('saga addOneBooking test', () => {
     expect(saga.next(response).value).toEqual(
       put(addBookingSuccess(succsess))
     )
+    saga.next()
+    saga.next()
     expect(saga.next().done).toBeTruthy()
   })
 })
@@ -165,6 +173,8 @@ describe('saga addRecurringBooking test', () => {
       room_FK: action.payload.roomId,
       isRecurring: true,
       recurringId: 10,
+      invitations: [],
+      daysOfWeek: ['2', '4'],
     },
     {
       title: action.payload.title,
@@ -175,6 +185,8 @@ describe('saga addRecurringBooking test', () => {
       room_FK: action.payload.roomId,
       isRecurring: true,
       recurringId: 10,
+      invitations: [],
+      daysOfWeek: ['2', '4'],
     },
     ]
   }
@@ -188,6 +200,8 @@ describe('saga addRecurringBooking test', () => {
       description: event.description,
       isRecurring: event.isRecurring,
       recurringId: event.recurringId,
+      invitations: event.invitations,
+      daysOfWeek: event.daysOfWeek,
     }
   }))
 
@@ -196,10 +210,12 @@ describe('saga addRecurringBooking test', () => {
     expect(saga.next().value).toEqual(call(bookingService.post, { url: 'bookings/recurring', body: action.payload }));
     expect(saga.next(response).value).toEqual(
       put(addBookingSuccess(success))
-    )
-    expect(saga.next().done).toBeTruthy()
-  })
-})
+    );
+    saga.next();
+    saga.next();
+    expect(saga.next().done).toBeTruthy();
+  });
+});
 
 describe('saga addRecurringBooking error 400 test', () => {
   const error = {
@@ -209,7 +225,7 @@ describe('saga addRecurringBooking error 400 test', () => {
         statusCode: 400,
       },
     }
-  }
+  };
   const action = {
     payload: actionAddRecurringBooking,
     type: 'booking/addRecurringBooking'
@@ -241,6 +257,8 @@ describe('saga deleteBooking test', () => {
     expect(saga.next().value).toEqual(
       put(deleteBookingSuccess(actionDeleteBooking))
     )
+    saga.next()
+    saga.next()
     expect(saga.next().done).toBeTruthy()
   })
 })
@@ -288,6 +306,8 @@ describe('saga editOneBooking test', () => {
     expect(saga.next(response).value).toEqual(
       put(editOneBookingSuccess(success))
     )
+    saga.next()
+    saga.next()
     expect(saga.next().done).toBeTruthy()
   })
 })
@@ -334,6 +354,8 @@ describe('saga editRecurringBooking test', () => {
     expect(saga.next(response).value).toEqual(
       put(editRecurringBookingSuccess(success))
     )
+    saga.next()
+    saga.next()
     expect(saga.next().done).toBeTruthy()
   })
 })

@@ -21,6 +21,8 @@ const mockData: BookingEvent[] = [{
     description: 'First commit',
     isRecurring: false,
     recurringId: null,
+    invitations: [],
+    daysOfWeek: null,
   },
 },
 ]

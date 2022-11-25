@@ -3,9 +3,10 @@ interface ExtendedProps {
     bookingId: number;
     description: string,
     invitedId?: number[],
-    daysOfWeek?: string[],
     isRecurring: boolean,
-    recurringId: number | null
+    recurringId: number | null,
+    invitations: any,
+    daysOfWeek: string[] | null,
 }
 
 export interface BookingEvent {
@@ -35,6 +36,8 @@ export interface EditBooking {
     floor: string,
     isRecurring: boolean,
     recurringId: number | null,
+    daysOfWeek: string[] | null,
+    invitedId: number[],
 }
 
 export interface EditRecurringBooking {
@@ -46,7 +49,7 @@ export interface EditRecurringBooking {
     startTime: string,
     endDate: string,
     endTime: string,
-    daysOfWeek: string[],
+    daysOfWeek: number[] | null,
     invitations: number[],
 }
 
@@ -58,7 +61,7 @@ export interface AddRecurringBooking {
     startTime: string,
     endDate: string,
     endTime: string,
-    daysOfWeek: string[],
+    daysOfWeek: number[] | null,
     invitations: number[],
 }
 export interface DeleteBookingInterface {

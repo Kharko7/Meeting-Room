@@ -1,12 +1,12 @@
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import './selector.module.scss'
 import { FormHelperText } from '@material-ui/core';
 import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
 import { Rooms, roomsActions } from 'redux&saga/slices/rooms.slice';
+import { styles } from './selector-styles'
 
 interface SelectorProps {
   edit?: boolean;
@@ -75,9 +75,18 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
       <FormControl
         error={Boolean(errorMsg.floor)}
         fullWidth
+        sx={{
+          '& .MuiSelect-select': styles.input
+        }}
       >
         <InputLabel >{'Choose floor'}</InputLabel>
         <Select
+          MenuProps={{
+            disableAutoFocusItem: true,
+            sx: {
+              '& .MuiPaper-root': styles.paper
+            }
+          }}
           open={open}
           onOpen={() => {
             setOpen(true);
@@ -87,7 +96,6 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
           }}
           data-testid='selector-floor'
           value={valueFloor ? valueFloor : floorByRoomId?.floor.toString() || ''}
-          MenuProps={{ disableAutoFocusItem: true }}
           onChange={onChangeFloor}
         >
           {menuItemsFloor}
@@ -97,11 +105,20 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
       <FormControl
         error={Boolean(errorMsg.roomId)}
         disabled={Boolean(!valueRoom) && !valueFloor}
-        fullWidth>
+        fullWidth
+        sx={{
+          '& .MuiSelect-select': styles.input
+        }}
+      >
         <InputLabel >{'Choose room'}</InputLabel>
         <Select
+          MenuProps={{
+            disableAutoFocusItem: true,
+            sx: {
+              '& .MuiPaper-root': styles.paper
+            }
+          }}
           value={valueRoom}
-          MenuProps={{ disableAutoFocusItem: true }}
           onChange={onChangeRoom}
           data-testid='selector-room'
         >

@@ -180,15 +180,15 @@ const BookingForm = ({
               }}
             >
               <SelectorMultiple
-                value={daysOfWeek}
+                value={daysOfWeek ? daysOfWeek : []}
                 dataTestId="selector-multiple"
                 label="Days of week"
                 daysOfWeek={daysOfTheWeek}
                 onChange={handleChangeWeek}
               />
             </Box>
-            <Box sx={{ mb: "25px", height: "120px" }}>
-              <InviteCoworkers />
+            <Box sx={{ mb: "25px", height: "120px", }}>
+              <InviteCoworkers edit={edit}/>
             </Box>
             <Box
               sx={{

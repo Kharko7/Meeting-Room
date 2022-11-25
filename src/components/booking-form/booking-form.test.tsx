@@ -14,6 +14,7 @@ const mockStateWithErr = {
     floor: '2',
     errors: { title: errorMsg },
     daysOfWeek: [],
+    invitedId: [],
     rooms: [{
       floor: 2,
       name: 'big room',
@@ -29,6 +30,7 @@ const mockStateWithErr = {
 }
 const mockState = {
   booking: {
+    invitedId: [],
     title: '',
     floor: '',
     roomId: null,

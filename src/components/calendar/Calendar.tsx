@@ -105,7 +105,7 @@ export default React.memo(function Calendar({ data, calendarRef, weekends, loadi
         position: 'absolute',
         top: '10%', left: '0%',
         fontSize: '40px',
-        zIndex: loading ? '30' : '-1000',
+        zIndex: loading ? '3' : '-1000',
         width: '100%',
         height: 'calc(100% - 10%)',
       }}>
