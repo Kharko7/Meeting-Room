@@ -6,8 +6,6 @@ import { styles } from 'components/selector-floor-and-room/selector-styles';
 
 interface SelectorMultipleProps {
   value: string[],
-  errorMsg?: string;
-  disabled?: boolean;
   label: string;
   daysOfWeek: Record<string, string>;
   dataTestId: string;

@@ -3,8 +3,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { axiosService } from 'services/axios.service/axios.service';
-import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
-import { setInvite } from 'redux&saga/slices/booking.slice';
 import { SnackBarContext } from 'context/snackbar-context';
 import { snackbarVariants } from 'constants/snackbar';
 import { styles } from 'components/selector-floor-and-room/selector-styles';
@@ -19,18 +17,17 @@ interface User {
 };
 interface InviteCoworkersProps {
   edit: boolean;
+  value: number[];
+  onChange: (value: number[]) => void;
 };
 
-const InviteCoworkers = ({ edit }: InviteCoworkersProps) => {
-
+const InviteCoworkers = ({ edit, value, onChange }: InviteCoworkersProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
   const [editBooking, setEditBooking] = useState<boolean>(edit);
-  const dispatch = useAppDispatch();
   const { setAlert } = useContext(SnackBarContext)
-  const { invitedId } = useAppSelector((state) => state.booking);
 
-  const loading = invitedId.length ? (editBooking && users.length === 0) || (open && users.length === 0) : open && users.length === 0
+  const loading = value.length ? (editBooking && users.length === 0) || (open && users.length === 0) : open && users.length === 0
   useEffect(() => {
     if (!loading) {
       return
@@ -48,8 +45,13 @@ const InviteCoworkers = ({ edit }: InviteCoworkersProps) => {
         })
       })
   }, [loading, setAlert]);
-  
-  const usersName = editBooking ? users.filter((user) => invitedId.includes(user.userId)) : undefined
+
+  const handleChange = (_: React.SyntheticEvent<Element, Event>, value: User[]) => {
+    const coworkersId = value.map((users) => users.userId)
+    onChange(coworkersId)
+  }
+
+  const usersName = editBooking ? users.filter((user) => value.includes(user.userId)) : undefined
 
   return (
     <Autocomplete
@@ -75,7 +77,7 @@ const InviteCoworkers = ({ edit }: InviteCoworkersProps) => {
       sx={{
         '& .MuiInputBase-input ': { pl: '15px!Important' },
       }}
-      onChange={(_, value) => dispatch(setInvite(value.map(users => users.userId)))}
+      onChange={handleChange}
       renderInput={(params) => (
         <TextField
           sx={{

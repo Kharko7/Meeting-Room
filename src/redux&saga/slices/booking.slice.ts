@@ -124,7 +124,7 @@ const bookingSlice = createSlice({
         setDaysOfWeek(state, action: PayloadAction<string[]>) {
             state.daysOfWeek = action.payload;
         },
-        setBookingId(state,action){
+        setBookingId(state, action) {
             state.bookingId = action.payload;
         },
         editBooking(state, action: PayloadAction<any>) {
@@ -132,7 +132,6 @@ const bookingSlice = createSlice({
             state.start = action.payload.start;
             state.end = action.payload.end;
             state.roomId = action.payload.roomId;
-            state.floor = action.payload.floor;
             state.description = action.payload.description;
             state.bookingId = action.payload.bookingId;
             state.isRecurring = action.payload.isRecurring;
@@ -149,7 +148,7 @@ const bookingSlice = createSlice({
             state.description = action.payload.description;
             state.bookingId = action.payload.bookingId;
             state.isRecurring = action.payload.isRecurring;
-            state.invitedId=action.payload.invitedId;
+            state.invitedId = action.payload.invitedId;
         },
         resetState(state) {
             state.title = initialState.title;
@@ -161,6 +160,7 @@ const bookingSlice = createSlice({
             state.bookingId = initialState.bookingId
             state.recurringId = initialState.recurringId;
             state.errors = initialState.errors;
+            state.floor = '';
         },
     },
 });

@@ -29,6 +29,8 @@ const ProfileForm = () => {
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const { firstName, lastName, email } = getUserData();
+
     const navigate = useNavigate()
 
     const handleWeekendsToggle = () => {
@@ -54,7 +56,13 @@ const ProfileForm = () => {
         register,
         handleSubmit,
         formState: { errors, isDirty, isValid }
-    } = useForm<FormValues>({ mode: 'onBlur' });
+    } = useForm<FormValues>({
+        mode: 'onBlur',
+        defaultValues: {
+            firstName,
+            lastName
+        }
+    });
 
     const submit = (data: any) => {
         reset()
@@ -63,15 +71,10 @@ const ProfileForm = () => {
     const themeLS = getFromLocalStorage('theme');
     let theme = themeLS ? JSON.parse(themeLS) : undefined;
 
-    const { firstName, lastName, email } = getUserData();
-
-    const user = { firstName: firstName, lastName: lastName }
-
     const inputUserName = userName.map((name: FormName) => (
         <TextField
             key={name}
             sx={{ mr: '10px', width: '290px' }}
-            defaultValue={user[name] || ''}
             label={name === 'firstName' ? 'First name' : 'Last name'}
             error={Boolean(errors[name])}
             data-testid={name}

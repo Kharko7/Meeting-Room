@@ -19,7 +19,6 @@ import {
   setSelectedDate,
 } from "redux&saga/slices/booking.slice";
 import dayjs from "dayjs";
-import { Errors } from "constants/errors";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { BookingEvent } from "interfaces/booking/Booking";
@@ -39,18 +38,10 @@ const CalendarPage = () => {
   const dispatch = useAppDispatch();
   const calendarRef: React.MutableRefObject<FullCalendar | null> = useRef(null);
   const {
-    title,
-    description,
-    start,
-    end,
-    roomId,
-    floor,
     bookingId,
     bookings,
-    daysOfWeek,
     errors,
     loading,
-    invitedId,
     isRecurring,
     recurringId,
   } = useAppSelector(state => state.booking);
@@ -105,7 +96,6 @@ const CalendarPage = () => {
         end: dayjs(event.end).format('YYYY-MM-DDTHH:mm'),
         description: event.extendedProps.description,
         roomId: event.extendedProps.roomId,
-        floor: '',
         bookingId: event.extendedProps.bookingId,
         isRecurring: event.extendedProps.isRecurring,
         recurringId: event.extendedProps.recurringId,
@@ -135,39 +125,40 @@ const CalendarPage = () => {
     }
     handleCloseModal();
   };
+  const handleSubmit = (values: any) => {
+    const {
+      title,
+      description,
+      selectRoom,
+      iviteCoworkers,
+      dateStart,
+      dateEnd,
+      selectDays,
+    } = values
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!roomId) {
-      if (!floor) {
-        dispatch(setBookingError({ floor: Errors.floor }))
-      }
-      dispatch(setBookingError({ roomId: Errors.roomId }))
-      return
-    }
     const baseParams = {
       title: title,
       description: description,
-      roomId: roomId,
-      invitations: invitedId,
+      roomId: Number(selectRoom),
+      invitations: iviteCoworkers,
     }
     const eventOneDay = {
       ...baseParams,
-      startDateTime: start,
-      endDateTime: end,
+      startDateTime: dateStart,
+      endDateTime: dateEnd,
     }
     const eventRecurring = {
       ...baseParams,
-      startDate: dayjs(start).format('YYYY-MM-DD'),
-      startTime: dayjs(start).format('HH:mm'),
-      endDate: dayjs(end).format('YYYY-MM-DD'),
-      endTime: dayjs(end).format('HH:mm'),
-      daysOfWeek: daysOfWeek ? daysOfWeek.map(id => Number(id)) : daysOfWeek,
+      startDate: dayjs(dateStart).format('YYYY-MM-DD'),
+      startTime: dayjs(dateStart).format('HH:mm'),
+      endDate: dayjs(dateEnd).format('YYYY-MM-DD'),
+      endTime: dayjs(dateEnd).format('HH:mm'),
+      daysOfWeek: selectDays.length ? selectDays.map((id: string) => Number(id)) : selectDays,
     }
 
     const existEvent = bookings.some((event: BookingEvent) => event.extendedProps.bookingId === bookingId)
     if (!existEvent) {
-      if (daysOfWeek !== null && daysOfWeek.length) {
+      if (selectDays !== null && selectDays.length) {
         dispatch(addRecurringBooking(eventRecurring))
       } else {
         dispatch(addOneBooking(eventOneDay))
