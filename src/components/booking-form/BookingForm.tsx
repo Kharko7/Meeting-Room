@@ -1,22 +1,14 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
-import { Dayjs } from "dayjs";
-import styles from "./bookingForm.module.scss";
+import "./bookingForm.module.scss";
 import DateAndTimePicker from "components/date-time-picker";
 import Button from "components/button";
-import { Link } from "react-router-dom";
 import ConfirmDialog from "components/confirm-dialog";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
 import {
-  setRoomId,
-  setBookingError,
-  setDaysOfWeek,
-  setDescription,
-  setEnd,
   setFloor,
-  setStart,
-  setTitle,
+  setBookingError,
 } from "redux&saga/slices/booking.slice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -24,18 +16,28 @@ import InviteCoworkers from "./invite-coworkers/InviteCoworkers";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { daysOfTheWeek } from "constants/booking-form";
 import SelectorMultiple from "./selector/SelectorMultiple";
-import { Errors } from "constants/errors";
 import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
-import { roomsActions } from "redux&saga/slices/rooms.slice"; //added
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { bookingSchema } from "validators/booking";
+
 interface BookingFormProps {
   edit: boolean;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (data: any) => void;
   handleRemoveEvent: () => void;
-  linkToCalendar?: boolean;
+}
+
+interface FormValues {
+  title: string;
+  description: string;
+  dateStart: string;
+  dateEnd: string;
+  selectRoom: string;
+  selectDays: string[];
+  iviteCoworkers: number[];
 }
 
 const BookingForm = ({
-  linkToCalendar = false,
   edit,
   handleSubmit,
   handleRemoveEvent,
@@ -43,7 +45,7 @@ const BookingForm = ({
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const { title, start, end, floor, errors, description, roomId, daysOfWeek } =
+  const { title, start, end, floor, errors, description, roomId, daysOfWeek, invitedId } =
     useAppSelector((state) => state.booking);
 
   const onConfirm = () => {
@@ -54,48 +56,33 @@ const BookingForm = ({
     setOpenConfirmation(false);
   };
 
-  const handleBlurTitle = () => {
-    if (title?.trim().length > 40 || title?.trim().length < 5) {
-      dispatch(setBookingError({ title: Errors.titleLength }));
-    } else dispatch(setBookingError({ title: "" }));
-  };
-  const handleBlurDescription = () => {
-    if (description?.trim().length > 200 || description?.trim().length < 5) {
-      dispatch(setBookingError({ description: Errors.descriptionLength }));
-    } else dispatch(setBookingError({ description: "" }));
-  };
+  const {
+    register,
+    getValues,
+    control,
+    setValue,
+    handleSubmit: Submit,
+    formState: { errors: Error, isDirty }
+  } = useForm<FormValues>({
+    mode: 'onBlur',
+    resolver: yupResolver(bookingSchema),
+    defaultValues: {
+      title,
+      description,
+      dateStart: start,
+      dateEnd: end,
+      selectRoom: roomId?.toString() || '',
+      selectDays: daysOfWeek || [],
+      iviteCoworkers: invitedId,
+    }
+  });
 
-  const handleChangeRoom = (e: SelectChangeEvent<string>) => {
-    dispatch(setRoomId(Number(e.target.value)));
-    dispatch(setBookingError({ roomId: "" }));
-  };
   const handleChangeFloor = (e: SelectChangeEvent<string>) => {
     dispatch(setFloor(e.target.value));
-    dispatch(setRoomId(null));
     dispatch(setBookingError({ floor: "" }));
+    setValue('selectRoom', '')
   };
 
-  const handleChangeStart = (event: Dayjs | null) => {
-    if (event !== null) {
-      dispatch(setStart(event.format("YYYY-MM-DDTHH:mm")));
-    }
-  };
-  const handleChangeEnd = (event: Dayjs | null) => {
-    if (event !== null) {
-      dispatch(setEnd(event.format("YYYY-MM-DDTHH:mm")));
-    }
-  };
-
-  const handleChangeWeek = (e: SelectChangeEvent<string[]>) => {
-    const value = e.target.value;
-    dispatch(
-      setDaysOfWeek(typeof value === "string" ? value.split(",") : value)
-    );
-  };
-  const handleGoToCalendar = () => {
-    //added
-    dispatch(roomsActions.setLocation("/calendar")); //added
-  }; //added
   return (
     <>
       <Typography
@@ -111,22 +98,20 @@ const BookingForm = ({
       <Box
         sx={{ displa: "flex", flexDirection: "column", p: "20px" }}
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={Submit(handleSubmit)}
         autoComplete="off"
       >
         <Grid container maxWidth={1000} spacing={3}>
           <Grid item xs={6}>
             <Box sx={{ mb: "25px", height: "75px" }}>
               <TextField
-                error={Boolean(errors.title)}
+                error={Boolean(Error.title)}
                 autoFocus
                 label="Title"
                 data-testid="input-title"
                 fullWidth
-                value={title}
-                onBlur={handleBlurTitle}
-                onChange={(event) => dispatch(setTitle(event.target.value))}
-                helperText={errors.title ? errors.title : ""}
+                helperText={Error.title?.message}
+                {...register('title')}
               />
             </Box>
             <Box
@@ -139,36 +124,43 @@ const BookingForm = ({
               }}
             >
               <TextField
-                value={description}
-                onChange={(event) =>
-                  dispatch(setDescription(event.target.value))
-                }
                 label="Description"
                 fullWidth
                 multiline
                 rows={3}
-                onBlur={handleBlurDescription}
                 data-testid="input-description"
-                error={Boolean(errors.description)}
-                helperText={errors.description ? errors.description : ""}
+                error={Boolean(Error.description)}
+                helperText={Error.description?.message}
+                {...register('description')}
               />
             </Box>
             <Box sx={{ display: "flex", gap: "15px", height: "80px" }}>
-              <DateAndTimePicker
-                date={start}
-                errorMsg={errors.start}
-                onChange={handleChangeStart}
-                label="Start"
+              <Controller
+                name="dateStart"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <DateAndTimePicker
+                    label="Start"
+                    date={value}
+                    errorMsg={Error.dateStart?.message ? Error.dateStart.message : ''}
+                    onChange={onChange}
+                  />
+                )}
               />
-              <DateAndTimePicker
-                date={end}
-                minDate={start}
-                errorMsg={errors.end}
-                onChange={handleChangeEnd}
-                label="End"
+              <Controller
+                name="dateEnd"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <DateAndTimePicker
+                    errorMsg={Error.dateEnd?.message ? Error.dateEnd.message : ''}
+                    label="End"
+                    minDate={getValues('dateStart')}
+                    date={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </Box>
-            
           </Grid>
           <Grid item xs={6}>
             <Box
@@ -179,16 +171,28 @@ const BookingForm = ({
                 height: "80px",
               }}
             >
-              <SelectorMultiple
-                value={daysOfWeek ? daysOfWeek : []}
-                dataTestId="selector-multiple"
-                label="Days of week"
-                daysOfWeek={daysOfTheWeek}
-                onChange={handleChangeWeek}
+              <Controller
+                name="selectDays"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <SelectorMultiple
+                    value={value}
+                    dataTestId="selector-multiple"
+                    label="Days of week"
+                    daysOfWeek={daysOfTheWeek}
+                    onChange={onChange}
+                  />
+                )}
               />
             </Box>
             <Box sx={{ mb: "25px", height: "120px", }}>
-              <InviteCoworkers edit={edit}/>
+              <Controller
+                name="iviteCoworkers"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <InviteCoworkers edit={edit} value={value} onChange={onChange} />
+                )}
+              />
             </Box>
             <Box
               sx={{
@@ -197,13 +201,20 @@ const BookingForm = ({
                 height: "80px",
               }}
             >
-              <SelectorFloorAndRoom
-                edit={edit}
-                valueFloor={floor}
-                valueRoom={roomId?.toString() || ""}
-                onChangeFloor={handleChangeFloor}
-                onChangeRoom={handleChangeRoom}
-                errorMsg={errors}
+              <Controller
+                name="selectRoom"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <SelectorFloorAndRoom
+                    edit={edit}
+                    valueFloor={floor}
+                    valueRoom={value}
+                    onChangeFloor={handleChangeFloor}
+                    onChangeRoom={onChange}
+                    errorFloor={errors.floor || ''}
+                    errorRoom={Error.selectRoom?.message ? Error.selectRoom.message : ''}
+                  />
+                )}
               />
             </Box>
           </Grid>
@@ -221,9 +232,9 @@ const BookingForm = ({
                 </Button>
               )}
               <Button
-                disabled={Boolean(Object.values(errors).join(""))}
+                disabled={!isDirty}
                 type="submit"
-                onclick={() => {}}
+                onclick={() => { }}
                 dataTestId="button-submit"
               >
                 Save
@@ -238,33 +249,7 @@ const BookingForm = ({
         onConfirm={onConfirm}
         onDismiss={onDismiss}
       />
-      {linkToCalendar && (
-        <Link to="/calendar">
-          <div
-            className={styles.linkToCalendarContainer}
-            onClick={() => handleGoToCalendar()}
-          >
-            {/* added onClick */}
-            <span className={styles.goToCalendar}>
-              Can't find a free date? Go to the calendar{" "}
-            </span>
-            <svg
-              className={styles.svg}
-              clipRule="evenodd"
-              fillRule="evenodd"
-              strokeLinejoin="round"
-              strokeMiterlimit="2"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                fillRule="nonzero"
-              />
-            </svg>
-          </div>
-        </Link>
-      )}
+
     </>
   );
 };

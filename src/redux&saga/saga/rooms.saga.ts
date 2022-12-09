@@ -25,12 +25,12 @@ function* workerStatus(arr: any) {
     statusUpdatedCounter == 1 ? true : timeStatusUdated + 60000 >= time;
   try {
     if (rooms.length > 0 && bool) {
-      const dataRoomsStatus1: AxiosResponse = yield call(
-        RoomsService.getRoomsStatus1
-      );
-      const dataRoomsStatus2: AxiosResponse = yield call(
-        RoomsService.getRoomsStatus2
-      );
+      // const dataRoomsStatus1: AxiosResponse = yield call(
+      //   RoomsService.getRoomsStatus1
+      // );
+      // const dataRoomsStatus2: AxiosResponse = yield call(
+      //   RoomsService.getRoomsStatus2
+      // );
       const date = arr.payload.reduce((p: any, c: any) => {
         const name = c.roomId;
         //@ts-ignore
@@ -38,19 +38,19 @@ function* workerStatus(arr: any) {
         return p;
       }, {});
 
-      const dataRoomsStatus = [
-        ...dataRoomsStatus1.data,
-        ...dataRoomsStatus2.data,
-      ];
-      dataRoomsStatus.map((room: any) => {
-        room.bookings.map((booking: any) => {
-          const a = moment(now());
-          const b = moment(booking.startDateTime);
-          const x = moment(booking.endDateTime);
-          const trues = a.isBetween(b, x);
-          if (trues) date[room.roomId] = true;
-        });
-      });
+      // const dataRoomsStatus = [
+      //   ...dataRoomsStatus1.data,
+      //   ...dataRoomsStatus2.data,
+      // ];
+      // dataRoomsStatus.map((room: any) => {
+      //   room.bookings.map((booking: any) => {
+      //     const a = moment(now());
+      //     const b = moment(booking.startDateTime);
+      //     const x = moment(booking.endDateTime);
+      //     const trues = a.isBetween(b, x);
+      //     if (trues) date[room.roomId] = true;
+      //   });
+      // });
       yield put(roomsActions.setRoomsStatus(date));
       const location = window.location.pathname.toString();
       if (location == "/rooms" && statusUpdatedCounter == 1) {

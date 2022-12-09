@@ -12,12 +12,13 @@ interface SelectorProps {
   edit?: boolean;
   valueFloor: string;
   valueRoom: string;
-  errorMsg?: Record<string, string>;
+  errorFloor?: string;
+  errorRoom?: string;
   onChangeFloor: (event: SelectChangeEvent<string>) => void;
   onChangeRoom: (event: SelectChangeEvent<string>) => void;
 }
 
-const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = false, onChangeFloor, onChangeRoom }: SelectorProps) => {
+const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoom = '', edit = false, onChangeFloor, onChangeRoom }: SelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const { rooms, floors } = useAppSelector((state) => state.rooms);
   const dispatch = useAppDispatch();
@@ -42,14 +43,15 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
   }, [dispatch, loadingEdit]);
 
   let floorByRoomId: Rooms | undefined;
-  if (!valueFloor && valueRoom) {
+  if (valueRoom) {
     floorByRoomId = rooms.find((room) => {
       return room.roomId === Number(valueRoom)
     })
   }
+  const getFloor = valueFloor && !valueRoom ? valueFloor : floorByRoomId?.floor || '';
 
   const roomsByFloor = rooms.filter((room) => {
-    return room.floor === (Number(valueFloor) || floorByRoomId?.floor)
+    return room.floor === getFloor
   })
 
   const itemLoading = <MenuItem sx={{ cursor: 'default' }} ><i>Loading...</i></MenuItem >
@@ -73,7 +75,7 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
   return (
     <>
       <FormControl
-        error={Boolean(errorMsg.floor)}
+        error={Boolean(errorFloor)}
         fullWidth
         sx={{
           '& .MuiSelect-select': styles.input
@@ -95,15 +97,15 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
             setOpen(false);
           }}
           data-testid='selector-floor'
-          value={valueFloor ? valueFloor : floorByRoomId?.floor.toString() || ''}
+          value={valueFloor && !valueRoom ? valueFloor : floorByRoomId?.floor.toString() || ''}
           onChange={onChangeFloor}
         >
           {menuItemsFloor}
         </Select >
-        <FormHelperText variant='filled' error color='red'>{errorMsg.floor ? errorMsg.floor : ''}</FormHelperText>
+        <FormHelperText variant='filled' error color='red'>{errorFloor}</FormHelperText>
       </FormControl >
       <FormControl
-        error={Boolean(errorMsg.roomId)}
+        error={Boolean(errorRoom)}
         disabled={Boolean(!valueRoom) && !valueFloor}
         fullWidth
         sx={{
@@ -124,7 +126,7 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorMsg = {}, edit = fal
         >
           {loadingEdit ? itemLoading : menuItemsRoom}
         </Select>
-        <FormHelperText variant='filled' error color='red'>{errorMsg.roomId ? errorMsg.roomId : ''}</FormHelperText>
+        <FormHelperText variant='filled' error color='red'>{errorRoom}</FormHelperText>
       </FormControl>
     </>
   );

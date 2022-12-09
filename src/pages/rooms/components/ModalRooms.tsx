@@ -105,7 +105,6 @@ const ModalRooms = ({ setOpenModal }) => {
         </div>
       ) : (
         <BookingForm
-          linkToCalendar={true}
           handleSubmit={handleSubmit}
           handleRemoveEvent={handleRemoveEvent}
           edit={false}
