@@ -1,4 +1,4 @@
-import { regex } from "constants/valid/regex";
+import { regex } from "constants/regexp";
 import * as yup from "yup";
 import {validErrorsMsg} from "../constants/valid/valid.errors.msg";
 

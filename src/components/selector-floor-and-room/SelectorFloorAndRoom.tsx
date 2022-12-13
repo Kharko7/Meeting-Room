@@ -77,9 +77,7 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoo
       <FormControl
         error={Boolean(errorFloor)}
         fullWidth
-        sx={{
-          '& .MuiSelect-select': styles.input
-        }}
+        sx={styles.selector}
       >
         <InputLabel >{'Choose floor'}</InputLabel>
         <Select
@@ -108,9 +106,7 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoo
         error={Boolean(errorRoom)}
         disabled={Boolean(!valueRoom) && !valueFloor}
         fullWidth
-        sx={{
-          '& .MuiSelect-select': styles.input
-        }}
+        sx={styles.selector}
       >
         <InputLabel >{'Choose room'}</InputLabel>
         <Select

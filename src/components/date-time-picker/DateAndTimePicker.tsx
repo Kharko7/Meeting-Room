@@ -1,4 +1,4 @@
-import './styles/dateAndTimePicker.module.scss'
+import style from './styles/dateAndTimePicker.module.scss'
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -30,14 +30,7 @@ const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ errorMsg, label =
         renderInput={(params) => (
           <TextField
             {...params}
-            sx={{
-              '& .MuiFormLabel-root[data-shrink="true"]': {
-                top: ' -11px',
-                fontSize: '20px',
-                left: ' 9px',
-                color: 'var(--label)',
-              }
-            }}
+            className={style.label}
             onKeyDown={(e) => e.preventDefault()}
             error={Boolean(errorMsg)}
             helperText={errorMsg}

@@ -1,0 +1,17 @@
+.label {
+  label[data-shrink="true"] {
+    font-size: 20px;
+    top: -11px;
+    left: 9px;
+    color: var(--label);
+  }
+  label[data-shrink="false"] {
+    left: 10px;
+    color: var(--mainColorFont);
+  }
+  fieldset {
+    border: 0px solid var(--PickerGlobalColor) !important;
+    border-radius: 100px;
+    box-shadow: var(--inset-input-shadow);
+  }
+}
