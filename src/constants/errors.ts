@@ -7,4 +7,5 @@ export enum Errors {
   matchDate = 'In this time meeting already exist',
   email = "Only latin characters and domain @incorainc.com is accepted",
   password = "Enter at least 8 characters, including lowercase, uppercase, numbers and special symbols",
+  emptyField = 'This field cannot be empty',
 }

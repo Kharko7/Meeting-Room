@@ -3,6 +3,13 @@ import * as yup from "yup";
 import { Errors } from "constants/errors";
 import { regex } from "constants/regexp";
 
+export const LoginSchema = yup.object().shape({
+  email: yup.string()
+    .required(Errors.emptyField),
+  password: yup.string()
+    .required(Errors.emptyField)
+});
+
 export const RegisterSchema = yup.object().shape({
   login: yup.string()
     .required("")

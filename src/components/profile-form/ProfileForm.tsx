@@ -1,21 +1,21 @@
-import TextField from '@mui/material/TextField';
-import { Box } from '@mui/material';
+import {TextField, Typography, Box} from '@mui/material';
 import { useState } from 'react'
+import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss'
 import Avatar from './avatar/Avatar';
 import Button from 'components/button';
-import { useForm } from "react-hook-form";
 import CheckboxWithLabel from 'components/checkbox-with-label';
 import {
-    getFromLocalStorage, getUserData,
+    getFromLocalStorage,
     removeFromLocalStorage,
     setToLocalStorage
 } from 'services/local-storage.service';
 import { Errors } from 'constants/errors';
-import Typography from '@mui/material/Typography'
-import { useNavigate } from 'react-router-dom';
 import Toggle from "../toggle/Toggle";
+import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
+import { resetState } from 'redux&saga/slices/user.slice';
 
 const cn = classNames.bind(styles);
 interface FormValues {
@@ -26,12 +26,14 @@ type FormName = 'firstName' | 'lastName'
 const userName: FormName[] = ['firstName', 'lastName']
 
 const ProfileForm = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate()
+
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const { firstName, lastName, email } = getUserData();
+    const { lastName, userEmail, firstName } = useAppSelector((state) => state.user);
 
-    const navigate = useNavigate()
 
     const handleWeekendsToggle = () => {
         setWeekends(prev => !prev)
@@ -45,10 +47,9 @@ const ProfileForm = () => {
         setSelectedImage(file)
     }
     const handleLogOut = () => {
-        removeFromLocalStorage('access')
-        removeFromLocalStorage('user')
-        removeFromLocalStorage('role')
-        navigate('/auth/login', { replace: true })
+        dispatch(resetState())
+        removeFromLocalStorage('token')
+        navigate('/login', { replace: true })
     }
 
     const {
@@ -112,7 +113,7 @@ const ProfileForm = () => {
                 <Typography
                     variant='h5'
                     sx={{ mt: '20px', textAlign: 'center', color: 'var(--accent-text-color)' }}
-                > {email}
+                > {userEmail}
                 </Typography>
             </Box>
             <Box

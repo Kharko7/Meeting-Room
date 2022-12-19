@@ -5,11 +5,12 @@ export const styles = {
       boxShadow: 'var( --outset-box-shadow)',
       borderRadius: '40px',
       lineHeight: 'normal',
-      '&:active': {
+      '&:disabled, &:active': {
         boxShadow: 'var(--inset-input-shadow)',
         transform: 'scale(0.99)',
         color: 'var(--active-color)',
-      }
+      },
+
     }
   }
 }

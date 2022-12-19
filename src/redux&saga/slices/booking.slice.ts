@@ -25,8 +25,8 @@ const initialState: InitialStateBookig = {
     description: '',
     start: '',
     end: '',
-    roomId: null,
     bookingId: null,
+    roomId: null,
     floor: '',
     invitedId: [],
     daysOfWeek: [],
@@ -160,7 +160,6 @@ const bookingSlice = createSlice({
             state.bookingId = initialState.bookingId
             state.recurringId = initialState.recurringId;
             state.errors = initialState.errors;
-            state.floor = '';
         },
     },
 });

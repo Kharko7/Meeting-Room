@@ -31,7 +31,6 @@ import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFlo
 const CalendarPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [showRoom, setShowRoom] = useState<string>('');
-  const [showFloor, setShowFloor] = useState<string>('');
   const [request, setRequest] = useState<boolean>(false);
   const weekends = getFromLocalStorage('weekends')
   const { setAlert } = useContext(SnackBarContext)
@@ -42,6 +41,8 @@ const CalendarPage = () => {
     bookings,
     errors,
     loading,
+    roomId,
+    floor,
     isRecurring,
     recurringId,
   } = useAppSelector(state => state.booking);
@@ -67,7 +68,7 @@ const CalendarPage = () => {
       })
       dispatch(setBookingError({ errorMsg: '' }));
     }
-  }, [dispatch, errors.errorMsg, errors.succsessMsg, setAlert]);
+  }, [dispatch, errors.errorMsg, setAlert]);
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -175,7 +176,6 @@ const CalendarPage = () => {
     dispatch(setRoomId(null));
     dispatch(setFloor(''));
     setShowRoom('');
-    setShowFloor('');
   }
 
   const handleChangeRoom = (e: SelectChangeEvent<string>) => {
@@ -185,7 +185,7 @@ const CalendarPage = () => {
 
   const handleChangeFloor = (e: SelectChangeEvent<string>) => {
     dispatch(setFloor(e.target.value))
-    setShowFloor(e.target.value);
+    dispatch(setRoomId(null))
   };
 
   return (
@@ -207,8 +207,8 @@ const CalendarPage = () => {
           }}
         >
           <SelectorFloorAndRoom
-            valueFloor={showFloor}
-            valueRoom={showRoom}
+            valueFloor={floor}
+            valueRoom={roomId?.toString() || ''}
             onChangeFloor={handleChangeFloor}
             onChangeRoom={handleChangeRoom}
           />
