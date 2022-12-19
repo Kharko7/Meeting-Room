@@ -1,3 +1,16 @@
+.label {
+  & label[data-shrink="true"] {
+    font-size: 20px;
+    top: -11px;
+    left: 9px;
+    color: var(--label);
+  }
+  & label[data-shrink="false"] {
+    left: 10px;
+    color: var(--mainColorFont);
+  }
+}
+
 :global(button.css-h2z9v1-MuiButtonBase-root-MuiIconButton-root-MuiClock-amButton),
 :global(button.css-rjqbug-MuiButtonBase-root-MuiIconButton-root-MuiClock-pmButton) {
   box-shadow: var(--inset-input-shadow) !important;
@@ -38,12 +51,6 @@
   background-repeat: no-repeat;
   margin-right: -12px !important;
   border-radius: 50% !important;
-}
-:global(label.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root) {
-  font-size: 20px;
-  top: -11px;
-  left: 9px;
-  color: var(--label);
 }
 
 :global(.css-1yllih9-MuiPaper-root-MuiPickersPopper-paper) {

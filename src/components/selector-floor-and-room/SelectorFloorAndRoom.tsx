@@ -11,21 +11,20 @@ import { styles } from './selector-styles'
 interface SelectorProps {
   edit?: boolean;
   valueFloor: string;
-  valueRoom: string;
+  valueRoom?: string;
   errorFloor?: string;
   errorRoom?: string;
   onChangeFloor: (event: SelectChangeEvent<string>) => void;
   onChangeRoom: (event: SelectChangeEvent<string>) => void;
 }
 
-const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoom = '', edit = false, onChangeFloor, onChangeRoom }: SelectorProps) => {
+const SelectorFloorAndRoom = ({ valueFloor, valueRoom='', errorFloor = '', errorRoom = '', edit = false, onChangeFloor, onChangeRoom }: SelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const { rooms, floors } = useAppSelector((state) => state.rooms);
   const dispatch = useAppDispatch();
 
   const loading = open && rooms.length === 0;
   const loadingEdit = edit && rooms.length === 0
-
   useEffect(() => {
     if (!loading) {
       return
@@ -51,9 +50,8 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoo
   const getFloor = valueFloor && !valueRoom ? valueFloor : floorByRoomId?.floor || '';
 
   const roomsByFloor = rooms.filter((room) => {
-    return room.floor === getFloor
+    return room.floor ===  Number(getFloor)
   })
-
   const itemLoading = <MenuItem sx={{ cursor: 'default' }} ><i>Loading...</i></MenuItem >
 
   const menuItemsRoom = roomsByFloor ? roomsByFloor.map((room: any) => (
@@ -77,9 +75,7 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoo
       <FormControl
         error={Boolean(errorFloor)}
         fullWidth
-        sx={{
-          '& .MuiSelect-select': styles.input
-        }}
+        sx={styles.selector}
       >
         <InputLabel >{'Choose floor'}</InputLabel>
         <Select
@@ -108,9 +104,7 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom, errorFloor = '', errorRoo
         error={Boolean(errorRoom)}
         disabled={Boolean(!valueRoom) && !valueFloor}
         fullWidth
-        sx={{
-          '& .MuiSelect-select': styles.input
-        }}
+        sx={styles.selector}
       >
         <InputLabel >{'Choose room'}</InputLabel>
         <Select

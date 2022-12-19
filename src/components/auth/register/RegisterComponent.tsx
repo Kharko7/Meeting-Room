@@ -16,7 +16,7 @@ import {RegisterSchema} from "../../../utils/yup.validation";
 
 import 'animate.css';
 import {ResponsePopup} from "../../tools/simple/response-popup/ResponsePopup";
-import {regex} from "../../../constants/valid/regex";
+import {regex} from "../../../constants/regexp";
 
 
 const cn = classNames.bind(styles)

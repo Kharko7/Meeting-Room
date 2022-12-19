@@ -94,7 +94,17 @@ const InviteCoworkers = ({ edit, value, onChange }: InviteCoworkersProps) => {
             },
             '& .MuiChip-label': {
               color: 'var(--mainColorFont)'
-            }
+            },
+            '& .MuiFormLabel-root[data-shrink="true"]': {
+              fontSize: ' 20px',
+              top: '-11px',
+              left: '9px',
+              color: 'var(--label)',
+            },
+            '& .MuiFormLabel-root[data-shrink="false"]': {
+              left: '10px',
+              color: 'var(--mainColorFont)'
+            },
           }}
           {...params}
           label="Invite coworkers"

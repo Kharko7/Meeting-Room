@@ -7,6 +7,7 @@ import { forgotPasswordSaga } from "./forgotPassword.saga";
 import { changePasswordSaga } from "./changePassword.saga";
 import { GetInvitationSaga } from "./getInvitation.saga";
 import BookingSagas from "./booking.saga";
+import UserSagas from "./user.saga";
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     changePasswordSaga(),
     GetInvitationSaga(),
     BookingSagas(),
+    UserSagas(),
   ]);
 }

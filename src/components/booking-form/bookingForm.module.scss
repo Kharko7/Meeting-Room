@@ -1,20 +1,13 @@
-:global(div.MuiInputBase-multiline),
-:global(input.MuiInputBase-input) {
-  color: var(--mainColorFont);
-  padding-left: 23px;
-}
-:global(div.MuiInputBase-root) {
-  padding-right: 20px;
-}
-:global(fieldset.MuiOutlinedInput-notchedOutline) {
-  border: 0px solid var(--PickerGlobalColor) !important;
-  border-radius: 100px;
-  box-shadow: var(--inset-input-shadow);
-}
-:global(label.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root) {
-  left: 10px;
-  color: var(--mainColorFont);
-}
-:global(p.MuiFormHelperText-contained) {
-  margin-left: 24px;
+
+.label {
+  & label[data-shrink="true"] {
+    font-size: 20px;
+    top: -11px;
+    left: 9px;
+    color: var(--label);
+  }
+  & label[data-shrink="false"] {
+    left: 10px;
+    color: var(--mainColorFont);
+  }
 }

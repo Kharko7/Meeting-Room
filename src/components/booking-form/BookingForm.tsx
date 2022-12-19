@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
-import TextField from "@mui/material/TextField";
-import "./bookingForm.module.scss";
+import style from "./bookingForm.module.scss";
 import DateAndTimePicker from "components/date-time-picker";
 import Button from "components/button";
 import ConfirmDialog from "components/confirm-dialog";
@@ -20,6 +19,7 @@ import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFlo
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { bookingSchema } from "validators/booking";
+import Input from "components/UI/input";
 
 interface BookingFormProps {
   edit: boolean;
@@ -57,7 +57,6 @@ const BookingForm = ({
   };
 
   const {
-    register,
     getValues,
     control,
     setValue,
@@ -104,34 +103,47 @@ const BookingForm = ({
         <Grid container maxWidth={1000} spacing={3}>
           <Grid item xs={6}>
             <Box sx={{ mb: "25px", height: "75px" }}>
-              <TextField
-                error={Boolean(Error.title)}
-                autoFocus
-                label="Title"
-                data-testid="input-title"
-                fullWidth
-                helperText={Error.title?.message}
-                {...register('title')}
+              <Controller
+                name="title"
+                control={control}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <Input
+                    error={Boolean(Error.title)}
+                    autoFocus
+                    label="Title"
+                    data-testid="input-title"
+                    fullWidth
+                    helperText={Error.title?.message}
+                    onChange={onChange}
+                    value={value}
+                    onBlur={onBlur}
+                  />
+                )}
               />
             </Box>
             <Box
               sx={{
                 mb: "25px",
                 height: "120px",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderRadius: "25px",
-                },
               }}
             >
-              <TextField
-                label="Description"
-                fullWidth
-                multiline
-                rows={3}
-                data-testid="input-description"
-                error={Boolean(Error.description)}
-                helperText={Error.description?.message}
-                {...register('description')}
+              <Controller
+                name="description"
+                control={control}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <Input
+                    label="Description"
+                    fullWidth
+                    multiline
+                    rows={3}
+                    data-testid="input-description"
+                    error={Boolean(Error.description)}
+                    helperText={Error.description?.message}
+                    onChange={onChange}
+                    value={value}
+                    onBlur={onBlur}
+                  />
+                )}
               />
             </Box>
             <Box sx={{ display: "flex", gap: "15px", height: "80px" }}>

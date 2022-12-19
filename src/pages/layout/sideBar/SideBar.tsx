@@ -5,7 +5,6 @@ import OwnBookingsContainer from "./components/OwnBookingsContainer";
 import ActionButton from "../../../components/icon-button/IconButton";
 import NavButtons from "pages/layout/sideBar/NavButtons";
 import {NavLink, useLocation} from "react-router-dom";
-import {PseudoAvatar} from "../../../components";
 import {useAppSelector} from "hooks/toolkitHooks";
 import {useModal} from "../../../hooks/show.modal";
 import {DialogComponent} from "../../../components/dialog/DialogComponent";
@@ -13,6 +12,7 @@ import AdminModalTool from "../../../components/admin/admin-modal-tools/AdminMod
 import BadgeRe from "../../../components/badge/BadgeRe";
 import {getUserData} from "../../../services/local-storage.service";
 import {colors, colorsFn} from "../../../utils/colors.arr";
+import { PseudoAvatar } from "components";
 
 type SideBarProps = { userName: string };
 

@@ -26,7 +26,7 @@ const Rooms = () => {
     }
   };
   useEffect(() => {
-    rooms.length == 0 && dispatch(roomsActions.getRooms());
+    //rooms.length == 0 && dispatch(roomsActions.getRooms());
   }, []);
   useEffect(() => {
     if (rooms.length > 0) {

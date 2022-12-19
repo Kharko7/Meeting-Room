@@ -25,9 +25,7 @@ const SelectorMultiple = ({ dataTestId, value, label, daysOfWeek, onChange }: Se
   return (
     <FormControl
       fullWidth
-      sx={{
-        '& .MuiSelect-select': styles.input
-      }}>
+      sx={styles.selector }>
       <InputLabel >{label}</InputLabel>
       <Select
         data-testid={dataTestId}
