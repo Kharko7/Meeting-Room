@@ -11,35 +11,31 @@ export const LoginSchema = yup.object().shape({
 });
 
 export const RegisterSchema = yup.object().shape({
-  login: yup.string()
-    .required("")
-    .matches(regex.twoWordsBySpace,
-      Errors.email),
+  firstName: yup.string()
+    .required(Errors.emptyField),
+  lastName: yup.string()
+    .required(Errors.emptyField),
   password: yup.string()
-    .required("")
+    .min(8, Errors.passwordLength)
+    .max(25, Errors.passwordLength)
     .matches(regex.strongPassword,
       Errors.password),
-  passwordConfirm: yup.string()
-    .required("")
-    .matches(regex.strongPassword,
-      Errors.password)
-
+  confirmPassword: yup.string()
+    .required(Errors.emptyField)
+    .oneOf([yup.ref('password'), null], "Passwords don't match!")
 });
 
 export const ChangePasswordSchema = yup.object().shape({
   newPassword: yup.string()
-    .required("")
+    .min(8, Errors.passwordLength)
+    .max(25, Errors.passwordLength)
     .matches(regex.strongPassword,
-      Errors.password)
-  ,
-  passwordConfirm: yup.string()
-    .required("")
-    .matches(regex.strongPassword,
-      Errors.password)
-  ,
+      Errors.password),
+  confirmPassword: yup.string()
+    .required(Errors.emptyField)
+    .oneOf([yup.ref('newPassword'), null], "Passwords don't match!"),
   password: yup.string()
-    .required(""),
-
+    .required(Errors.emptyField),
 });
 
 export const EmailSchema = yup.object().shape({

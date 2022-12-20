@@ -34,9 +34,9 @@ const OwnBookingsContainer = () => {
       dispatch(ownBookingsActions.getOwnBookings(page + 1));
     } 
   };
-  useEffect(() => {
-    dispatch(ownBookingsActions.getTotal(1));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(ownBookingsActions.getTotal(1));
+  // }, []);
 
   return (
     <div className={styles.myRoomsContainer} data-testid="my-rooms">

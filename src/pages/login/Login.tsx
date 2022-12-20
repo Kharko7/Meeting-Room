@@ -1,18 +1,17 @@
-import { Box, IconButton, InputAdornment, Typography } from "@mui/material";
-import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { Box, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { CircularProgress } from '@mui/material';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Navigate, useLocation } from "react-router-dom";
 
 import Input from "components/UI/input"
 import Button from "components/UI/button"
-import { useContext, useEffect, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext, useEffect } from "react";
 import { LoginSchema } from "validators/auth";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
-import { userLogin, setError } from "redux&saga/slices/user.slice";
-import { Navigate, useLocation } from "react-router-dom";
+import { userLogin, setNotification } from "redux&saga/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
-import { snackbarVariants } from "constants/snackbar";
+import useVisibilityInput from "hooks/use-visibility-input";
 
 interface FormValues {
   email: string;
@@ -24,27 +23,25 @@ const Login = () => {
   const location = useLocation()
 
   const { setAlert } = useContext(SnackBarContext)
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-  const { userRole, error, loading } = useAppSelector((state) => state.user);
+  const { userRole, notification, loading } = useAppSelector((state) => state.user);
+  const { inputAdornment: passwordVisibility, showText: showPassword } = useVisibilityInput()
   const pathFrom = location.state?.from?.pathname || '/';
 
   useEffect(() => {
-    if (error) {
+    if (notification.message) {
       setAlert({
-        severity: snackbarVariants.error,
-        message: error,
+        severity: notification.status,
+        message: notification.message,
       })
-      dispatch(setError(''));
+      dispatch(setNotification({ message: '' }));
     }
-  }, [dispatch, error, setAlert]);
+  }, [dispatch, notification, setAlert]);
 
 
   const {
-    reset,
     handleSubmit,
     control,
-    formState: { errors, isDirty, isValid }
+    formState: { errors }
   } = useForm<FormValues>({
     mode: 'onBlur',
     resolver: yupResolver(LoginSchema),
@@ -56,8 +53,8 @@ const Login = () => {
 
   const submit = (data: any) => {
     dispatch(userLogin(data))
-    reset()
   }
+
   if (userRole) {
     return <Navigate to={pathFrom} replace={true} />
   }
@@ -73,8 +70,8 @@ const Login = () => {
     >
       <Box
         sx={{
-          width: '400px',
-          height: '400px',
+          minWidth: '400px',
+          minHeight: '400px',
           boxShadow: '-2px -2px 12px var(--base2), 2px 2px 8px var(--base3), 2px 2px 4px var(--base2)',
           borderRadius: '40px',
           padding: '40px 20px',
@@ -128,17 +125,7 @@ const Login = () => {
                   onChange={onChange}
                   value={value}
                   onBlur={onBlur}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={handleClickShowPassword}
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    )
-                  }}
+                  InputProps={passwordVisibility}
                 />
               )}
             />
@@ -148,7 +135,7 @@ const Login = () => {
               disabled={loading}
               size='large'
               type='submit'>
-              {loading ? <CircularProgress sx={{ color: '#7e7e82',margin: '0 21px' }} size={22} /> : 'Log in'}
+              {loading ? <CircularProgress sx={{ color: '#7e7e82', margin: '0 21px' }} size={22} /> : 'Log in'}
             </Button>
           </Box>
         </Box>

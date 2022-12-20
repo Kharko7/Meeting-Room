@@ -8,6 +8,7 @@ export enum Role {
   'admin'
 }
 
+
 export interface UserResponse {
   firstName: string;
   lastName: string;
@@ -17,4 +18,15 @@ export interface UserResponse {
   iat: number,
   exp: number,
   id: number
+}
+export interface RegisterInterface {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+export interface ChangePasswordInterface {
+  password: string;
+  newPassword: string;
+  email: string;
 }

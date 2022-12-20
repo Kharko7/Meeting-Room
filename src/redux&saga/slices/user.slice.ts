@@ -1,8 +1,13 @@
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import jwt_decode from "jwt-decode";
-import { Login, Role, UserResponse } from 'interfaces/User';
+import { ChangePasswordInterface, Login, RegisterInterface, Role, UserResponse } from 'interfaces/User';
+import { snackbarVariants } from 'constants/snackbar';
 
+interface Notification {
+    message: string;
+    status: snackbarVariants;
+}
 export interface InitialStateUser {
     firstName: string;
     lastName: string;
@@ -10,7 +15,7 @@ export interface InitialStateUser {
     userRole: Role | null;
     userEmail: string;
     loading: boolean;
-    error: string;
+    notification: Notification;
 }
 
 const initialState: InitialStateUser = {
@@ -20,7 +25,7 @@ const initialState: InitialStateUser = {
     userId: null,
     userRole: null,
     loading: true,
-    error: '',
+    notification: { message: '', status: snackbarVariants.error },
 };
 
 const userSlice = createSlice({
@@ -32,7 +37,6 @@ const userSlice = createSlice({
         },
         userLoginSuccess(state, action: PayloadAction<string>) {
             const userData: UserResponse = jwt_decode(action.payload);
-            console.log(userData)
             state.loading = false;
             state.firstName = userData.firstName;
             state.lastName = userData.lastName;
@@ -42,14 +46,39 @@ const userSlice = createSlice({
 
         },
         userLoginError(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+            state.notification = { status: snackbarVariants.error, message: action.payload };
             state.loading = false;
         },
+
+        userSignup(state, action: PayloadAction<RegisterInterface>) {
+            state.loading = true;
+        },
+        userSignupSuccess(state, action: PayloadAction<string>) {
+            state.notification = { status: snackbarVariants.success, message: action.payload };
+            state.loading = false;
+        },
+        userSignupError(state, action: PayloadAction<string>) {
+            state.notification = { status: snackbarVariants.error, message: action.payload };
+            state.loading = false;
+        },
+
+        changePassword(state, action: PayloadAction<ChangePasswordInterface>) {
+            state.loading = true;
+        },
+        changePasswordError(state, action: PayloadAction<string>) {
+            state.notification = { status: snackbarVariants.error, message: action.payload };
+            state.loading = false;
+        },
+        changePasswordSuccess(state, action: PayloadAction<string>) {
+            state.notification = { status: snackbarVariants.success, message: action.payload };
+            state.loading = false;
+        },
+        
         setLoading(state, action: PayloadAction<boolean>) {
             state.loading = action.payload;
         },
-        setError(state, action: PayloadAction<string>) {
-            state.error = action.payload;
+        setNotification(state, action: PayloadAction<Partial<Notification>>) {
+            state.notification = { ...state.notification, ...action.payload };
         },
         resetState(state) {
             state.userId = initialState.userId
@@ -64,8 +93,15 @@ export const {
     userLogin,
     userLoginSuccess,
     userLoginError,
+    userSignup,
+    userSignupSuccess,
+    userSignupError,
+    changePassword,
+    changePasswordSuccess,
+    changePasswordError,
+
     setLoading,
-    setError,
+    setNotification,
     resetState,
 } = userSlice.actions;
 
