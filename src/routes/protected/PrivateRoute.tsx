@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 
 const PrivateRoute = ({ role, loading }: ProtectedRouteProps) => {
   const location = useLocation()
-  if(loading){
+  if (loading && !role) {
     return null
   }
   return role

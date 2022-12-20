@@ -1,5 +1,4 @@
 import { useLayoutEffect } from 'react';
-import { CircularProgress, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
 import { userLoginSuccess, setLoading } from 'redux&saga/slices/user.slice';
 import { getFromLocalStorage } from 'services/local-storage.service';

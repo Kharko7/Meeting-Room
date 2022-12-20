@@ -12,6 +12,7 @@ import { AdminRoute } from "./AdminRoute";
 import Login from 'pages/login/Login';
 import PrivateRoute from './protected/PrivateRoute';
 import { Role } from 'interfaces/User';
+import Register from 'pages/register/Register';
 
 interface AppRouterProps {
     role: Role | null;
@@ -33,11 +34,15 @@ const AppRouter = ({ role, loading }: AppRouterProps) => {
 
 
             <Route path={'login'} element={<Login />}></Route>
+            <Route path={'changePassword'} element={<Profile />}></Route>
+            <Route path={'register/email=:email'} element={<Register />}></Route>
+
+
 
             <Route path={'auth/login'} element={<LoginPage />}></Route>
             <Route path={'auth/signup/email=:email'} element={<RegisterPage />}></Route>
             <Route path={'auth/forgotPassword'} element={<ForgotPasswordPage />}></Route>
-
+            <Route path={'getInvitation'} element={<VerifyEmailPage />}></Route>
 
             {/* <Route path='' element={<ProtectedRoute />}>
                 <Route path={"/"} element={<AppMain />} >
