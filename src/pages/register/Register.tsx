@@ -84,7 +84,13 @@ const Register = () => {
         > Registration
         </Typography>
         <RegisterForm loading={loading} onSubmit={submit} />
-        <Link to="/login">Log in</Link>
+        <Box
+          component={Link}
+          to="/login"
+          sx={{ color: 'var(--accent-text-color)', '&:hover': { textDecoration: 'underline' } }}
+        >
+          Log in?
+        </Box>
       </Box >
     </Box>
   )

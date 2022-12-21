@@ -40,9 +40,8 @@ export const ChangePasswordSchema = yup.object().shape({
 
 export const EmailSchema = yup.object().shape({
   email: yup.string()
-    .required("")
-    .matches(regex.incoraEmail
-      , Errors.email)
+    .required(Errors.emptyField)
+    .matches(regex.incoraEmail, Errors.email)
 });
 
 export const GetInvitationSchema = yup.object({
