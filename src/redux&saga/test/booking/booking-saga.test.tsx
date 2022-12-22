@@ -1,7 +1,7 @@
 import { getAllBookings, addOneBooking, addRecurringBooking, deleteBooking, editOneBooking, editRecurringBooking } from 'redux&saga/saga/booking.saga';
 import { call, put } from 'redux-saga/effects';
 import { addBookingSuccess, deleteBookingSuccess, editOneBookingSuccess, editRecurringBookingSuccess, getAllBookingsSuccess, setBookingError } from 'redux&saga/slices/booking.slice';
-import { bookingService } from 'services/booking.service/booking.service';
+import { bookingService } from 'services/booking.service';
 import { actionAddOneBooking, actionAddRecurringBooking, actionEditOneBooking, actionEditRecurringBooking, actionGetAllBookings, bookingsSuccsess, urlGetAllBookings } from './reducer.variables';
 
 let saga: any;

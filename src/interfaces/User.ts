@@ -4,8 +4,8 @@ export interface Login {
 }
 
 export enum Role {
-  'user',
-  'admin'
+  user = 'user',
+  admin = 'admin'
 }
 
 export interface UserResponse {
@@ -32,3 +32,7 @@ export interface ChangePasswordInterface {
 export interface RecoveryPasswordInterface {
   email: string;
 }
+export interface InviteUsersInterface {
+  email: string;
+};
+

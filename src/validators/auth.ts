@@ -44,9 +44,10 @@ export const EmailSchema = yup.object().shape({
     .matches(regex.incoraEmail, Errors.email)
 });
 
-export const GetInvitationSchema = yup.object({
-  questions: yup.lazy(() => yup.array().of(yup.object({
-    email: yup.string().required("")
+export const InviteUsersSchema = yup.object({
+  emails: yup.lazy(() => yup.array().of(yup.object({
+    email: yup.string()
+      .required(Errors.emptyField)
       .matches(regex.incoraEmail,
         Errors.email)
   })))

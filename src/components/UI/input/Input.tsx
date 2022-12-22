@@ -3,11 +3,13 @@ import { TextField, TextFieldProps } from "@mui/material"
 import { styles } from "./input.styles"
 
 const Input = ({ ...props }: TextFieldProps) => {
+  const { sx, ...rest } = props
+
   return (
     <TextField
-      sx={styles.input}
-     // className={styles.label}
-      {...props}
+      sx={{ ...styles.input, ...sx }}
+      // className={styles.label}
+      {...rest}
     />
   )
 }

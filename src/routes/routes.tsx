@@ -34,7 +34,6 @@ const AppRouter = ({ role, loading }: AppRouterProps) => {
             </Route>
 
 
-
             <Route path={'login'} element={<Login />}></Route>
             <Route path={'resetPassword'} element={<ResetPassword />}></Route>
             <Route path={'register/email=:email'} element={<Register />}></Route>

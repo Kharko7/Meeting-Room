@@ -1,28 +1,25 @@
-import { Box, MenuItem, MenuList, Typography } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { Box, Typography } from "@mui/material";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { CircularProgress } from '@mui/material';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
 import Input from "components/UI/input"
 import Button from "components/UI/button"
-import { EmailSchema } from "validators/auth";
+import { InviteUsersSchema } from "validators/auth";
 import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
-import { setNotification, recoveryPassword, inviteUsers } from "redux&saga/slices/user.slice";
+import { setNotification, inviteUsers } from "redux&saga/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
 
 interface FormValues {
-  '1': string;
+  emails: { email: string }[];
 }
-
 
 const SendInvitation = () => {
   const dispatch = useAppDispatch();
 
   const { setAlert } = useContext(SnackBarContext)
   const { notification, loading } = useAppSelector((state) => state.user);
-
-  const [inputs, setInputs] = useState<string[]>(['1', '2'])
 
   useEffect(() => {
     if (notification.message) {
@@ -36,78 +33,31 @@ const SendInvitation = () => {
 
   const {
     handleSubmit,
-    setValue,
     control,
     formState: { errors }
-  } = useForm<any>({
+  } = useForm<FormValues>({
     mode: 'onBlur',
-    //resolver: yupResolver(EmailSchema),
-    // defaultValues: {
-    //   '1': '',
-    // }
+    resolver: yupResolver(InviteUsersSchema),
+    defaultValues: {
+      emails: [{ email: "", }]
+    }
+  });
+
+  const {
+    fields,
+    append,
+    remove,
+  } = useFieldArray<FormValues, 'emails', 'emailId'>({
+    control,
+    name: "emails",
+    keyName: 'emailId',
   });
 
 
-  const handleDeleteInput = (input: string) => {
-    const newInputs = inputs.filter((i) => i !== input)
-    setInputs(newInputs)
-    console.log(input)
-    setValue(input, '')
-
+  const submit = (data: FormValues) => {
+    dispatch(inviteUsers(data.emails))
   }
 
-  const handleAddInput = () => {
-    const number = String(+inputs[inputs.length - 1] + 1)
-    console.log(number)
-    setInputs(prev => [...prev, number])
-  }
-
-  console.log(inputs)
-  const submit = (data: any) => {
-    const newData = Object.values(data).map((email) => ({ 'email': email }))
-    //const eee = newData.map((email) => ({ 'email': email }))
-    console.log(newData)
-    dispatch(inviteUsers(newData))
-    console.log(data)
-  }
-
-  const quantity = inputs.map((input, index) => (
-    <Box
-      key={input}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        mb: "25px",
-        height: "75px",
-
-      }}>
-      <Controller
-        name={input}
-        control={control}
-        defaultValue=''
-        render={({ field: { ref, value, onChange, onBlur } }) => (
-          <Input
-            //error={Boolean(errors['1'])}
-            label="Email"
-            fullWidth
-            // defaultValue=''
-            //helperText={errors['1']?.message}
-            onChange={onChange}
-            value={value}
-            onBlur={onBlur}
-            inputRef={ref}
-          />
-        )}
-      />
-      <Button
-        disabled={index === 0 ? true : false}
-        onClick={() => handleDeleteInput(input)}
-        size='medium'>
-        Delete
-      </Button>
-
-    </Box>
-  ))
 
   return (
     <Box
@@ -129,7 +79,7 @@ const SendInvitation = () => {
           sx={{
             color: 'var(--accent-text-color)',
             textAlign: 'center',
-            mb: '30px'
+            mb: '20px'
           }}
         >Enter the email(s) that will receive the invitation
         </Typography>
@@ -137,30 +87,49 @@ const SendInvitation = () => {
           component='form'
           onSubmit={handleSubmit(submit)}
         >
-          {quantity}
-          {/* <Box sx={{ mb: "25px", height: "75px" }}>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field: { value, onChange, onBlur } }) => (
-                <Input
-                  error={Boolean(errors.email)}
-                  autoFocus
-                  label="Email"
-                  data-testid="input-email"
-                  fullWidth
-                  helperText={errors.email?.message}
-                  onChange={onChange}
-                  value={value}
-                  onBlur={onBlur}
+          <Box
+            component='ul'
+            sx={{ maxHeight: '580px', overflow: 'auto', p: '20px 8px 0 0' }}>
+            {fields.map((item, index) => (
+              <Box
+                key={item.emailId}
+                component='li'
+                sx={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  mb: "25px",
+                  height: "85px",
+
+                }}>
+                <Controller
+                  name={`emails.${index}.email`}
+                  control={control}
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <Input
+                      error={Boolean(errors.emails?.[index]?.email)}
+                      label="Email"
+                      fullWidth
+                      helperText={errors.emails?.[index]?.email?.message}
+                      onChange={onChange}
+                      value={value}
+                      onBlur={onBlur}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Box> */}
+                <Button
+                  disabled={index === 0 ? true : false}
+                  onClick={() => remove(index)}
+                  size='medium'
+                  sx={{ ml: '10px' }}
+                >
+                  Delete
+                </Button>
+              </Box>
+            ))}
+          </Box>
           <Button
-            disabled={loading}
             size='large'
-            onClick={handleAddInput}
+            onClick={() => append({ email: "" })}
           >
             Add
           </Button>
@@ -176,7 +145,7 @@ const SendInvitation = () => {
           </Box>
         </Box>
       </Box >
-    </Box>
+    </Box >
   )
 }
 

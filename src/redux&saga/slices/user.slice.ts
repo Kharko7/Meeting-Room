@@ -1,7 +1,7 @@
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import jwt_decode from "jwt-decode";
-import { ChangePasswordInterface, Login, RecoveryPasswordInterface, RegisterInterface, Role, UserResponse } from 'interfaces/User';
+import { ChangePasswordInterface, InviteUsersInterface, Login, RecoveryPasswordInterface, RegisterInterface, Role, UserResponse } from 'interfaces/User';
 import { snackbarVariants } from 'constants/snackbar';
 
 interface Notification {
@@ -88,7 +88,7 @@ const userSlice = createSlice({
             state.loading = false;
         },
 
-        inviteUsers(state, action: PayloadAction<any>) {
+        inviteUsers(state, action: PayloadAction<InviteUsersInterface[]>) {
             state.loading = true;
         },
 

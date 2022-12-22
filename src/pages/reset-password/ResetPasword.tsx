@@ -46,7 +46,7 @@ const ResetPasword = () => {
   });
 
   const submit = (data: FormValues) => {
-    dispatch(recoveryPassword(data))
+    //dispatch(recoveryPassword(data))
   }
 
   return (

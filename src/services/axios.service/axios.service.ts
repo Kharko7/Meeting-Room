@@ -2,8 +2,8 @@
 import { createBrowserHistory } from "history";
 import { authService } from "../auth.service/auth.services";
 import axios from "axios";
-import { baseURL } from "../../constants/urls/urls";
 import { getFromLocalStorage } from "services/local-storage.service";
+import { baseURL } from "constants/request";
 const axiosService = axios.create({ baseURL });
 
 axiosService.interceptors.request.use((config: any) => {
