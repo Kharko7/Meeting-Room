@@ -1,7 +1,7 @@
 import styles from "./rooms.module.scss";
 import Header from "./header/Header";
 import Floors from "./main/Floor";
-import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
+import { useAppSelector, useAppDispatch } from "hooks/use-toolkit-hooks";
 import { useEffect } from "react";
 import moment, { now } from "moment";
 import { roomsActions } from "redux&saga/slices/rooms.slice";

@@ -9,8 +9,7 @@ const useVisibilityInput = () => {
     endAdornment: (
       <InputAdornment position="end">
         <IconButton
-          onClick={() => setShowText(!showText)}
-        >
+          onClick={() => setShowText(!showText)}>
           {showText ? <Visibility /> : <VisibilityOff />}
         </IconButton>
       </InputAdornment>

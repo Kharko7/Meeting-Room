@@ -7,7 +7,7 @@ import Button from "../../../../components/button";
 import BookingForm from "components/booking-form";
 import React, { useEffect } from "react";
 import { getFromLocalStorage } from "services/local-storage.service";
-import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 // import { bookingActions } from "redux&saga/slices/booking.slice";
 import dayjs from "dayjs";
 import {

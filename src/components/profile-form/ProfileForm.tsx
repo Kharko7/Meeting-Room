@@ -14,7 +14,7 @@ import {
 } from 'services/local-storage.service';
 import { Errors } from 'constants/errors';
 import Toggle from "../toggle/Toggle";
-import { useAppDispatch, useAppSelector } from 'hooks/toolkitHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
 import { resetState } from 'redux&saga/slices/user.slice';
 
 const cn = classNames.bind(styles);

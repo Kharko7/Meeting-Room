@@ -1,5 +1,4 @@
 import { axiosService } from "../axios.service/axios.service";
-import { RegistrationProps } from "../../interfaces/auth/AuthProps";
 import axios from "axios";
 
 export const OwnBookingsService = {

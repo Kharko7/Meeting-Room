@@ -4,7 +4,7 @@ import BookingForm from "components/booking-form";
 import React, { useEffect, useContext } from "react";
 import Loader from "pages/layout/loader/Loader";
 import { getFromLocalStorage } from "services/local-storage.service";
-import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 
 import {
   addOneBooking,
@@ -23,7 +23,7 @@ import dayjs from "dayjs";
 import { Errors } from "constants/errors";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
-import { BookingEvent } from "interfaces/booking/Booking";
+import { BookingEvent } from "interfaces/Booking";
 //@ts-ignore
 const ModalOwnRooms = ({ setOpenModal, booking }) => {
   const weekends = getFromLocalStorage("weekends");

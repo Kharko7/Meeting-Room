@@ -1,5 +1,4 @@
 import {FieldError, FieldErrorsImpl, Merge, useForm} from 'react-hook-form';
-import {InputRe} from "../index";
 import BadgeRe from "./BadgeRe";
 import {ComponentStory} from "@storybook/react";
 

@@ -1,4 +1,4 @@
-import { OneBooking, EditRecurringBooking, AddRecurringBooking } from "interfaces/booking/Booking";
+import { OneBooking, EditRecurringBooking, AddRecurringBooking } from "interfaces/Booking";
 import { axiosService } from "services/axios.service/axios.service";
 
 interface bookingServiceProps {

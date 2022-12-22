@@ -2,11 +2,11 @@ import { Box, Typography } from "@mui/material";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
-import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import { setNotification, userSignup } from "redux&saga/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
-import { regex } from "constants/regexp";
+import { regExp } from "constants/regExp";
 import { RegisterInterface } from "interfaces/User";
 import RegisterForm from "./register-form/RegisterForm";
 
@@ -48,7 +48,7 @@ const Register = () => {
     dispatch(userSignup(data as RegisterInterface))
   }
 
-  if (!regex.incoraEmail.test(email)) {
+  if (!regExp.incoraEmail.test(email)) {
     setAlert({
       severity: snackbarVariants.error,
       message: 'Wrong registration link',

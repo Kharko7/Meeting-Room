@@ -5,7 +5,7 @@ import Modal from 'components/modal';
 import { getFromLocalStorage } from 'services/local-storage.service';
 import Calendar from 'components/calendar';
 import BookingForm from 'components/booking-form';
-import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import {
   addOneBooking,
   addRecurringBooking,
@@ -21,7 +21,7 @@ import {
 import dayjs from "dayjs";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
-import { BookingEvent } from "interfaces/booking/Booking";
+import { BookingEvent } from "interfaces/Booking";
 import { disabledPressedButton } from "utils/disabled-pressed-button";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { setFloor, setRoomId } from 'redux&saga/slices/booking.slice';
