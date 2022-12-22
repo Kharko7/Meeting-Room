@@ -11,8 +11,6 @@ import { DialogComponent } from "../../../components/dialog/DialogComponent";
 import AdminModalTool from "../../../components/admin/admin-modal-tools/AdminModalTool";
 import BadgeRe from "../../../components/badge/BadgeRe";
 import { colors, colorsFn } from "../../../utils/colors.arr";
-import { PseudoAvatar } from "components";
-import { Role } from "interfaces/User";
 
 type SideBarProps = { userName: string };
 
@@ -24,7 +22,7 @@ const SideBar = ({ userName }: SideBarProps) => {
 
   return (
     <div className={styles.position}>
-      {userRole === Role.admin &&
+      {userRole === 'admin' &&
         isShowing &&
         <div>
           <DialogComponent
@@ -34,9 +32,7 @@ const SideBar = ({ userName }: SideBarProps) => {
         </div>}
       <div className={styles.sideBar}>
         <div className={styles.settContainer}>
-          <div className={styles.userImg}>
-            <PseudoAvatar firstname={firstName[0]} lastname={lastName[0]} color={colorsFn} />
-          </div>
+
           <span className={styles.label}>{firstName + ' ' + lastName}</span>
           <NavLink state={{ from: location }} to="/profile">
             <ActionButton
@@ -46,7 +42,7 @@ const SideBar = ({ userName }: SideBarProps) => {
             ></ActionButton>
           </NavLink>
         </div>
-        {userRole === Role.admin &&
+        {userRole === 'admin' &&
           <div className={styles.tools}>
             <div onClick={toggle}><BadgeRe component={'Tools'} variant={"dot"} badgeColor={"mint"} /></div>
           </div>}

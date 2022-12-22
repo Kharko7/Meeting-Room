@@ -1,7 +1,6 @@
 import { useAuth } from "hooks";
 import {Navigate, Outlet, Route, useLocation, useNavigate} from "react-router-dom";
 import {getFromLocalStorage, getUserData} from "../services/local-storage.service";
-import {VerifyEmailPage} from "../pages";
 
 
 export const useRole = () => {

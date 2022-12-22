@@ -3,10 +3,7 @@ export interface Login {
   password: string;
 }
 
-export enum Role {
-  user = 'user',
-  admin = 'admin'
-}
+export type Role = 'user' | 'admin';
 
 export interface UserResponse {
   firstName: string;

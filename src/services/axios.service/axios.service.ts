@@ -15,14 +15,6 @@ axiosService.interceptors.request.use((config: any) => {
 });
 
 
-// axiosService.interceptors.request.use((config:any)=>{
-//     const access = authService.getAccessToken();
-//     if(access){
-//         config.headers.Authorization = `Bearer ${access}`
-//     }
-//     return config
-// });
-
 
 
 let isAuth = false;
