@@ -1,6 +1,6 @@
 import RoomCard from "../components/RoomCard";
 import styles from "../rooms.module.scss";
-import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
+import { useAppSelector, useAppDispatch } from "hooks/use-toolkit-hooks";
 interface floor {
   currentFloor: number;
 }

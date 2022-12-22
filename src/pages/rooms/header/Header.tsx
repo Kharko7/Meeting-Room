@@ -5,7 +5,7 @@ import SearchByName from "../components/SearchByName";
 // import DatePickerComponent from "../../../components/datePicker";
 import Selector from "../selector/Selector";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
-import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
+import { useAppSelector, useAppDispatch } from "hooks/use-toolkit-hooks";
 import { MenuItem } from "@material-ui/core";
 const Header = () => {
   const dispatch = useAppDispatch();

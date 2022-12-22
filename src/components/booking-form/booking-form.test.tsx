@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import BookingForm from './BookingForm';
 import '@testing-library/jest-dom'
-import * as hooks from 'hooks/toolkitHooks'
+import * as hooks from 'hooks/use-toolkit-hooks'
 
 const handleSubmit = jest.fn()
 const handleRemoveEvent = jest.fn();

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./navButtons.module.scss";
 import cn from "classnames";
 import { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "hooks/toolkitHooks";
+import { useAppSelector, useAppDispatch } from "hooks/use-toolkit-hooks";
 import { roomsActions } from "redux&saga/slices/rooms.slice";
 const NavButtons = () => {
   const dispatch = useAppDispatch();

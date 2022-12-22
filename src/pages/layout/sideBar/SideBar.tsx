@@ -5,12 +5,11 @@ import OwnBookingsContainer from "./components/OwnBookingsContainer";
 import ActionButton from "../../../components/icon-button/IconButton";
 import NavButtons from "pages/layout/sideBar/NavButtons";
 import { NavLink, useLocation } from "react-router-dom";
-import { useAppSelector } from "hooks/toolkitHooks";
+import { useAppSelector } from "hooks/use-toolkit-hooks";
 import { useModal } from "../../../hooks/show.modal";
 import { DialogComponent } from "../../../components/dialog/DialogComponent";
 import AdminModalTool from "../../../components/admin/admin-modal-tools/AdminModalTool";
 import BadgeRe from "../../../components/badge/BadgeRe";
-import { colors, colorsFn } from "../../../utils/colors.arr";
 
 type SideBarProps = { userName: string };
 
@@ -18,7 +17,6 @@ const SideBar = ({ userName }: SideBarProps) => {
   const location = useLocation();
   let { isShowing, toggle } = useModal();
   const { firstName, lastName, userRole } = useAppSelector((state) => state.user);
-  useEffect(() => { }, [colorsFn])
 
   return (
     <div className={styles.position}>

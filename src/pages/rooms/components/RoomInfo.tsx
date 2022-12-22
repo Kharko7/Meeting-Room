@@ -3,7 +3,7 @@ import cn from "classnames";
 import { useEffect, useState } from "react";
 import Loader from "pages/layout/loader/Loader";
 import "../rooms.module.scss";
-import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import InfiniteScroll from "react-infinite-scroll-component";
 import dayjs from "dayjs";
 //@ts-ignore

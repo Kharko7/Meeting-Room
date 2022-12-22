@@ -5,14 +5,14 @@ import 'animate.css';
 
 import classNames from 'classnames/bind';
 import styles from './notFound.module.scss'
-import {getFromLocalStorage} from "../../services/local-storage.service";
+import { getFromLocalStorage } from "../../services/local-storage.service";
 const cn = classNames.bind(styles)
 
 const NotFound = () => {
   return (
     <div className={cn("container")}>
       <div className={cn("scene",
-          'animate__animated animate__fadeIn'
+        'animate__animated animate__fadeIn'
       )}>
         <div className={cn("box")}>
           <div className={cn("facet", "front")}>4</div>
@@ -26,32 +26,32 @@ const NotFound = () => {
       </div>
 
       <div className={cn("desk")}>
-        <p className={cn("oops","animate")}>
-        <span>O</span>
-        <span>o</span>
-        <span>p</span>
-        <span>s</span>
-        <span>!&nbsp;	</span>
-        <span>P</span>
-        <span>a</span>
-        <span>g</span>
-        <span>e&nbsp;	 </span>
-        <span>i</span>
-        <span>s&nbsp;	 </span>
-        <span>n</span>
-        <span>o</span>
-        <span>t &nbsp;	</span>
-        <span>f</span>
-        <span>o</span>
-        <span>u</span>
-        <span>n</span>
-        <span>d</span>
-        <span>!</span>
+        <p className={cn("oops", "animate")}>
+          <span>O</span>
+          <span>o</span>
+          <span>p</span>
+          <span>s</span>
+          <span>!&nbsp;	</span>
+          <span>P</span>
+          <span>a</span>
+          <span>g</span>
+          <span>e&nbsp;	 </span>
+          <span>i</span>
+          <span>s&nbsp;	 </span>
+          <span>n</span>
+          <span>o</span>
+          <span>t &nbsp;	</span>
+          <span>f</span>
+          <span>o</span>
+          <span>u</span>
+          <span>n</span>
+          <span>d</span>
+          <span>!</span>
         </p>
-        <NavLink to={getFromLocalStorage('access')?'/rooms':'/auth/login'}
-                 className={cn('animate__animated animate__fadeIn')}
+        <NavLink to={getFromLocalStorage('token') ? '/rooms' : '/login'}
+          className={cn('animate__animated animate__fadeIn')}
         >
-          <Button onclick={() => {}} size="large">
+          <Button onclick={() => { }} size="large">
             Go Back
           </Button>
         </NavLink>

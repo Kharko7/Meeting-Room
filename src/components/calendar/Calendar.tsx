@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
 import { getFromLocalStorage, setToLocalStorage } from 'services/local-storage.service';
-import { BookingEvent } from 'interfaces/booking/Booking';
+import { BookingEvent } from 'interfaces/Booking';
 import CircularProgress from '@mui/material/CircularProgress';
 
 interface CalendarProps {

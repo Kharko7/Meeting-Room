@@ -1,7 +1,7 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { OneBooking, EditRecurringBooking, BookingEvent, DeleteBookingInterface, AddRecurringBooking, EditBooking } from 'interfaces/booking/Booking';
+import { OneBooking, EditRecurringBooking, BookingEvent, DeleteBookingInterface, AddRecurringBooking, EditBooking } from 'interfaces/Booking';
 export interface InitialStateBookig {
     title: string;
     start: string;

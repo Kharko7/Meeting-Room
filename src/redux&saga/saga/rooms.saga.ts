@@ -13,7 +13,7 @@ import moment, { now } from "moment";
 import { ResponsePopup } from "pages/rooms/PopupStatus";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RoomsService } from "services/room.service/rooms.service";
-import { useAppSelector } from "hooks/toolkitHooks";
+import { useAppSelector } from "hooks/use-toolkit-hooks";
 import { NavLink, useLocation } from "react-router-dom";
 function* workerStatus(arr: any) {
   const { timeStatusUdated, rooms, statusUpdatedCounter } = yield select(

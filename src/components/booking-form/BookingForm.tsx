@@ -4,7 +4,7 @@ import style from "./bookingForm.module.scss";
 import DateAndTimePicker from "components/date-time-picker";
 import Button from "components/button";
 import ConfirmDialog from "components/confirm-dialog";
-import { useAppDispatch, useAppSelector } from "hooks/toolkitHooks";
+import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import {
   setFloor,
   setBookingError,

@@ -6,7 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { SnackBarContextProvider } from './context/snackbar-context';
 import {store} from "./redux&saga/store";
-import styles from "./components/toggle/toggle.module.scss";
 import {getFromLocalStorage} from "./services/local-storage.service";
 
 const root = ReactDOM.createRoot(

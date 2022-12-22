@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Calendar from './Calendar';
-import { BookingEvent } from 'interfaces/booking/Booking';
+import { BookingEvent } from 'interfaces/Booking';
 import * as localStorage from 'services/local-storage.service';
 
 const mockDateSelect = jest.fn()

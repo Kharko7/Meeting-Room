@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import * as hooks from 'hooks/toolkitHooks'
+import * as hooks from 'hooks/use-toolkit-hooks'
 import SelectorFloorAndRoom from './SelectorFloorAndRoom';
 
 const handleChangeFloor = jest.fn()
