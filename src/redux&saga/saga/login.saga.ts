@@ -4,12 +4,12 @@ import {LoginProps} from "../../interfaces/auth/AuthProps";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {fnErrorSaga, pending, setJWT, success} from "./fn/fn.saga";
 import {AxiosResponse} from "axios";
-import {UserService} from "../../services/user.service/user.service";
+import {AuthService} from "../../services/auth.service";
 
 function* handleLogin(action:PayloadAction<any>) {
     try {
         yield pending();
-        const {data}: AxiosResponse = yield call(UserService.login, action.payload);
+        const {data}: AxiosResponse = yield call(AuthService.login, action.payload);
         yield setJWT(data.token);
         yield success();
     } catch (error: any) {

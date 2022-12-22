@@ -20,7 +20,7 @@ import {
   EditRecurringBooking,
   AddRecurringBooking,
 } from "interfaces/booking/Booking";
-import { bookingService } from "services/booking.service/booking.service";
+import { bookingService } from "services/booking.service";
 
 dayjs.extend(utc);
 

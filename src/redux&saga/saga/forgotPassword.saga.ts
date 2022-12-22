@@ -1,6 +1,6 @@
 import {call, fork, take} from 'redux-saga/effects';
 import {authActions} from 'redux&saga/slices/auth.slice';
-import {UserService} from "../../services/user.service/user.service";
+import {AuthService} from "../../services/auth.service";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {AxiosResponse} from "axios";
 import {fnErrorSaga, pending, success} from "./fn/fn.saga";
@@ -9,7 +9,7 @@ import {ForgotPasswordProps} from "../../interfaces/auth/AuthProps";
 function* handleForgotPassword(action:PayloadAction<ForgotPasswordProps>) {
     try {
         yield pending();
-        const data: AxiosResponse = yield call(UserService.forgotPassword, action.payload);
+        const data: AxiosResponse = yield call(AuthService.recoveryPassword, action.payload);
         yield success();
     } catch (error: any) {
         yield fnErrorSaga(error);

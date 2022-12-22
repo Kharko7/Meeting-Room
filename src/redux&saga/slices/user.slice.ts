@@ -1,7 +1,7 @@
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import jwt_decode from "jwt-decode";
-import { ChangePasswordInterface, Login, RegisterInterface, Role, UserResponse } from 'interfaces/User';
+import { ChangePasswordInterface, InviteUsersInterface, Login, RecoveryPasswordInterface, RegisterInterface, Role, UserResponse } from 'interfaces/User';
 import { snackbarVariants } from 'constants/snackbar';
 
 interface Notification {
@@ -16,6 +16,7 @@ export interface InitialStateUser {
     userEmail: string;
     loading: boolean;
     notification: Notification;
+    userRecovered: boolean;
 }
 
 const initialState: InitialStateUser = {
@@ -26,6 +27,7 @@ const initialState: InitialStateUser = {
     userRole: null,
     loading: true,
     notification: { message: '', status: snackbarVariants.error },
+    userRecovered: false
 };
 
 const userSlice = createSlice({
@@ -73,7 +75,24 @@ const userSlice = createSlice({
             state.notification = { status: snackbarVariants.success, message: action.payload };
             state.loading = false;
         },
-        
+
+        recoveryPassword(state, action: PayloadAction<RecoveryPasswordInterface>) {
+            state.loading = true;
+        },
+        recoveryPasswordError(state, action: PayloadAction<string>) {
+            state.notification = { status: snackbarVariants.error, message: action.payload };
+            state.loading = false;
+        },
+        recoveryPasswordSuccess(state, action: PayloadAction<boolean>) {
+            state.userRecovered = action.payload
+            state.loading = false;
+        },
+
+        inviteUsers(state, action: PayloadAction<InviteUsersInterface[]>) {
+            state.loading = true;
+        },
+
+
         setLoading(state, action: PayloadAction<boolean>) {
             state.loading = action.payload;
         },
@@ -99,6 +118,10 @@ export const {
     changePassword,
     changePasswordSuccess,
     changePasswordError,
+    recoveryPassword,
+    recoveryPasswordSuccess,
+    recoveryPasswordError,
+    inviteUsers,
 
     setLoading,
     setNotification,

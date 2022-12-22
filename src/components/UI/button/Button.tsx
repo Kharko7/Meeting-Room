@@ -27,12 +27,13 @@ const theme = createTheme({
 })
 
 const ButtonMI = ({ ...props }: ButtonProps) => {
+  const { sx, ...rest } = props
 
   return (
     <ThemeProvider theme={theme}>
       <Button
-        sx={styles.button}
-        {...props}
+        sx={{ ...styles.button, ...sx }}
+        {...rest}
       />
     </ThemeProvider>
 

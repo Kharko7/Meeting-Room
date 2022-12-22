@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { CircularProgress } from '@mui/material';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 import Input from "components/UI/input"
 import Button from "components/UI/button"
@@ -70,11 +70,11 @@ const Login = () => {
     >
       <Box
         sx={{
-          minWidth: '400px',
+          minWidth: '450px',
           minHeight: '400px',
           boxShadow: '-2px -2px 12px var(--base2), 2px 2px 8px var(--base3), 2px 2px 4px var(--base2)',
           borderRadius: '40px',
-          padding: '40px 20px',
+          padding: '40px 30px',
 
         }}>
         <Typography
@@ -88,7 +88,6 @@ const Login = () => {
         </Typography>
         <Box
           component='form'
-          //autoComplete="off"
           onSubmit={handleSubmit(submit)}
         >
           <Box sx={{ mb: "25px", height: "75px" }}>
@@ -130,13 +129,22 @@ const Login = () => {
               )}
             />
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: '25px' }}>
             <Button
               disabled={loading}
               size='large'
               type='submit'>
               {loading ? <CircularProgress sx={{ color: '#7e7e82', margin: '0 21px' }} size={22} /> : 'Log in'}
             </Button>
+          </Box>
+        </Box>
+        <Box sx={{ textAlign: 'end' }}>
+          <Box
+            component={Link}
+            to="/resetPassword"
+            sx={{ color: 'var(--accent-text-color)', '&:hover': { textDecoration: 'underline' } }}
+          >
+            Forgot password?
           </Box>
         </Box>
       </Box >

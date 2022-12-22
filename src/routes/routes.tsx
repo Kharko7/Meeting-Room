@@ -9,10 +9,12 @@ import CalendarPage from "../pages/calendar-page";
 import Profile from "../pages/profile";
 import { AuthRoute } from "./AuthRoute";
 import { AdminRoute } from "./AdminRoute";
-import Login from 'pages/login/Login';
 import PrivateRoute from './protected/PrivateRoute';
 import { Role } from 'interfaces/User';
-import Register from 'pages/register/Register';
+import Login from 'pages/login';
+import Register from 'pages/register';
+import ResetPassword from 'pages/reset-password';
+import SendInvitation from 'pages/send-invitation';
 
 interface AppRouterProps {
     role: Role | null;
@@ -32,10 +34,10 @@ const AppRouter = ({ role, loading }: AppRouterProps) => {
             </Route>
 
 
-
             <Route path={'login'} element={<Login />}></Route>
-            <Route path={'changePassword'} element={<Profile />}></Route>
+            <Route path={'resetPassword'} element={<ResetPassword />}></Route>
             <Route path={'register/email=:email'} element={<Register />}></Route>
+            <Route path={'sendInvitation'} element={<SendInvitation />}></Route>
 
 
 

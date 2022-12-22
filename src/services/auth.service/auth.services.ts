@@ -1,5 +1,5 @@
+import { urls } from "constants/request";
 import {axiosService} from "../axios.service/axios.service";
-import {urls} from "../../constants/urls/urls";
 import {getFromLocalStorage, removeFromLocalStorage, setToLocalStorage} from "../local-storage.service";
 
 const _access = 'access';

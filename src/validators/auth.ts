@@ -40,14 +40,14 @@ export const ChangePasswordSchema = yup.object().shape({
 
 export const EmailSchema = yup.object().shape({
   email: yup.string()
-    .required("")
-    .matches(regex.incoraEmail
-      , Errors.email)
+    .required(Errors.emptyField)
+    .matches(regex.incoraEmail, Errors.email)
 });
 
-export const GetInvitationSchema = yup.object({
-  questions: yup.lazy(() => yup.array().of(yup.object({
-    email: yup.string().required("")
+export const InviteUsersSchema = yup.object({
+  emails: yup.lazy(() => yup.array().of(yup.object({
+    email: yup.string()
+      .required(Errors.emptyField)
       .matches(regex.incoraEmail,
         Errors.email)
   })))
