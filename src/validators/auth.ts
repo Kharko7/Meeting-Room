@@ -52,3 +52,14 @@ export const InviteUsersSchema = yup.object({
         Errors.email)
   })))
 })
+
+export const UserSchema = yup.object().shape({
+  firstName: yup.string()
+    .required(Errors.emptyField)
+    .min(2, Errors.userLength)
+    .max(25, Errors.userLength),
+  lastName: yup.string()
+    .required(Errors.emptyField)
+    .min(2, Errors.userLength)
+    .max(25, Errors.userLength),
+});

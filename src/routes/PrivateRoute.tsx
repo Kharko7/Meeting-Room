@@ -3,7 +3,7 @@ import { Role } from "interfaces/User"
 
 interface ProtectedRouteProps {
   role: Role | null;
-  loading: any;
+  loading: boolean;
 }
 
 const PrivateRoute = ({ role, loading }: ProtectedRouteProps) => {

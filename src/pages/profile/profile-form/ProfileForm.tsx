@@ -1,29 +1,31 @@
-import {TextField, Typography, Box} from '@mui/material';
+import { Typography, Box, IconButton, Tooltip } from '@mui/material';
 import { useState } from 'react'
-import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom';
+import { Controller, useForm } from "react-hook-form";
+import { Link, useNavigate } from 'react-router-dom';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import classNames from 'classnames/bind';
 import styles from './profileForm.module.scss'
 import Avatar from './avatar/Avatar';
-import Button from 'components/button';
 import CheckboxWithLabel from 'components/checkbox-with-label';
 import {
     getFromLocalStorage,
     removeFromLocalStorage,
     setToLocalStorage
 } from 'services/local-storage.service';
-import { Errors } from 'constants/errors';
-import Toggle from "../toggle/Toggle";
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
 import { resetState } from 'redux&saga/slices/user.slice';
+import Toggle from 'components/toggle/Toggle';
+import ButtonMI from 'components/UI/button';
+import Input from 'components/UI/input';
+import { UserSchema } from 'validators/auth';
 
 const cn = classNames.bind(styles);
 interface FormValues {
     firstName: string;
     lastName: string;
 }
-type FormName = 'firstName' | 'lastName'
-const userName: FormName[] = ['firstName', 'lastName']
 
 const ProfileForm = () => {
     const dispatch = useAppDispatch();
@@ -32,7 +34,7 @@ const ProfileForm = () => {
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const { lastName, userEmail, firstName } = useAppSelector((state) => state.user);
+    const { userRole, lastName, userEmail, firstName } = useAppSelector((state) => state.user);
 
 
     const handleWeekendsToggle = () => {
@@ -53,15 +55,16 @@ const ProfileForm = () => {
     }
 
     const {
-        reset,
-        register,
         handleSubmit,
+        control,
+        reset,
         formState: { errors, isDirty, isValid }
     } = useForm<FormValues>({
         mode: 'onBlur',
+        resolver: yupResolver(UserSchema),
         defaultValues: {
             firstName,
-            lastName
+            lastName,
         }
     });
 
@@ -71,28 +74,6 @@ const ProfileForm = () => {
 
     const themeLS = getFromLocalStorage('theme');
     let theme = themeLS ? JSON.parse(themeLS) : undefined;
-
-    const inputUserName = userName.map((name: FormName) => (
-        <TextField
-            key={name}
-            sx={{ mr: '10px', width: '290px' }}
-            label={name === 'firstName' ? 'First name' : 'Last name'}
-            error={Boolean(errors[name])}
-            data-testid={name}
-            helperText={errors[name] ? errors[name]?.message : ''}
-            {...register(name, {
-                required: Errors.userLength,
-                maxLength: {
-                    value: 25,
-                    message: Errors.userLength
-                },
-                minLength: {
-                    value: 2,
-                    message: Errors.userLength
-                }
-            })}
-        />
-    ))
 
     return (
         <Box className={cn('ProfileContainer')}>
@@ -122,19 +103,75 @@ const ProfileForm = () => {
                 autoComplete="off"
                 onSubmit={handleSubmit(submit)}
             >
-                <Box sx={{ mb: '20px', height: '80px' }}>
-                    {inputUserName}
+                <Box sx={{ mb: '20px', height: '80px', display: 'flex', }}>
+                    <Box sx={{ mr: '10px', width: '290px' }}>
+                        <Controller
+                            name="firstName"
+                            control={control}
+                            render={({ field: { value, onChange, onBlur } }) => (
+                                <Input
+                                    error={Boolean(errors.firstName)}
+                                    label="First name"
+                                    fullWidth
+                                    helperText={errors.firstName?.message}
+                                    onChange={onChange}
+                                    value={value}
+                                    onBlur={onBlur}
+                                />
+                            )}
+                        />
+                    </Box>
+                    <Box sx={{ width: '290px' }}>
+                        <Controller
+                            name="lastName"
+                            control={control}
+                            render={({ field: { value, onChange, onBlur } }) => (
+                                <Input
+                                    error={Boolean(errors.lastName)}
+                                    label="Last name"
+                                    fullWidth
+                                    helperText={errors.lastName?.message}
+                                    onChange={onChange}
+                                    value={value}
+                                    onBlur={onBlur}
+                                />
+                            )}
+                        />
+                    </Box>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button
-                        disabled={!isDirty || !isValid}
+                    <ButtonMI
+                        size='large'
                         type='submit'
-                        onclick={() => {
-                        }}>
+                        disabled={!isDirty || !isValid}
+                        data-testid='button-log-out'
+                    >
                         save changes
-                    </Button>
+                    </ButtonMI>
+
                 </Box>
             </Box>
+            {userRole === 'admin'
+                && <Tooltip
+                    arrow
+                    title={<Typography fontSize={14}>Invite users</Typography>}
+                    placement="right">
+                    <IconButton
+                        disableRipple
+                        sx={{
+                            mt: '30px',
+                            width: '50px',
+                            height: '50px',
+                            boxShadow: 'var(--datePicker-box-shadow)',
+                            '&:active': {
+                                boxShadow: 'var(--inset-input-shadow)',
+                            }
+                        }}
+                        component={Link}
+                        to="/sendInvitation">
+                        <GroupAddIcon />
+                    </IconButton>
+                </Tooltip>}
             <Box sx={{ m: '30px 0' }}>
                 < CheckboxWithLabel
                     label='Show weekends on calendar'
@@ -143,15 +180,17 @@ const ProfileForm = () => {
                     sx={{ marginLeft: '0', color: 'var(--accent-text-color)', fontSize: '20px' }}
                 />
             </Box>
+
             <Box sx={{ textAlign: 'end' }}>
-                <Button
-                    dataTestId='button-log-out'
-                    onclick={handleLogOut}
+                <ButtonMI
+                    size='large'
+                    data-testid='button-log-out'
+                    onClick={handleLogOut}
                 >
                     Log out
-                </Button>
+                </ButtonMI>
             </Box>
-        </Box>
+        </Box >
     )
 }
 

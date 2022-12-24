@@ -25,7 +25,7 @@ const Login = () => {
   const { setAlert } = useContext(SnackBarContext)
   const { userRole, notification, loading } = useAppSelector((state) => state.user);
   const { inputAdornment: passwordVisibility, showText: showPassword } = useVisibilityInput()
-  const pathFrom = location.state?.from?.pathname || '/';
+  const pathFrom = location.state?.from?.pathname || '/calendar';
 
   useEffect(() => {
     if (notification.message) {

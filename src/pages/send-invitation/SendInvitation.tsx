@@ -10,6 +10,7 @@ import { InviteUsersSchema } from "validators/auth";
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import { setNotification, inviteUsers } from "redux&saga/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
+import { Link, Navigate } from "react-router-dom";
 
 interface FormValues {
   emails: { email: string }[];
@@ -19,7 +20,7 @@ const SendInvitation = () => {
   const dispatch = useAppDispatch();
 
   const { setAlert } = useContext(SnackBarContext)
-  const { notification, loading } = useAppSelector((state) => state.user);
+  const { userRole, notification, loading } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (notification.message) {
@@ -53,9 +54,12 @@ const SendInvitation = () => {
     keyName: 'emailId',
   });
 
-
   const submit = (data: FormValues) => {
     dispatch(inviteUsers(data.emails))
+  }
+
+  if (userRole !== "admin") {
+    return <Navigate to={'/profile'} replace={true} />
   }
 
 
@@ -142,6 +146,14 @@ const SendInvitation = () => {
                 ? <CircularProgress sx={{ color: '#7e7e82', margin: '0 21px' }} size={22} />
                 : 'Invite'}
             </Button>
+
+          </Box>
+          <Box
+            component={Link}
+            to="/profile"
+            sx={{ color: 'var(--accent-text-color)', '&:hover': { textDecoration: 'underline' } }}
+          >
+            Go back to settings
           </Box>
         </Box>
       </Box >
