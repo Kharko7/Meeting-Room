@@ -1,9 +1,10 @@
 import { Box } from '@mui/material';
 import React from 'react'
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+
 import classNames from 'classnames/bind';
 import styles from './avatar.module.scss'
 import UserIcon from 'assets/User.png'
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 const cn = classNames.bind(styles);
 

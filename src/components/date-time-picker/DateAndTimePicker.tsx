@@ -1,10 +1,9 @@
-import style from './styles/dateAndTimePicker.module.scss'
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { Ico, popperSx } from "./styles/style";
+import { styles } from "./style";
 interface DateAndTimePickerProps {
   date: string;
   label?: string;
@@ -16,9 +15,8 @@ interface DateAndTimePickerProps {
 const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ errorMsg, label = '', minDate, date, onChange }) => {
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} >
       <DateTimePicker
-        components={{ OpenPickerIcon: Ico }}
         dayOfWeekFormatter={day => day.charAt(0).toUpperCase() + day.charAt(1)}
         inputFormat="DD/MM/YYYY hh:mm A"
         value={date}
@@ -26,13 +24,14 @@ const DateAndTimePicker: React.FC<DateAndTimePickerProps> = ({ errorMsg, label =
         label={label}
         minDateTime={minDate ? dayjs(minDate).add(15, 'minute') : undefined}
         minutesStep={15}
-        PopperProps={{ sx: popperSx, placement: "top-start", }}
+        PopperProps={{ sx: styles.popperSx, placement: "top-start", }}
         renderInput={(params) => (
           <TextField
             {...params}
-            className={style.label}
+            sx={styles.input}
             onKeyDown={(e) => e.preventDefault()}
             error={Boolean(errorMsg)}
+            fullWidth
             helperText={errorMsg}
           />)}
       />

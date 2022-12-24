@@ -27,6 +27,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { setFloor, setRoomId } from 'redux&saga/slices/booking.slice';
 import CheckboxWithLabel from "components/checkbox-with-label";
 import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
+import ModalPopup from "components/modal-popup";
 
 const CalendarPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -230,16 +231,16 @@ const CalendarPage = () => {
           handleGetDate={memoizedGetDate}
         />
       </Box>
-      {
-        openModal &&
-        <Modal closeModal={handleCloseModal}>
-          <BookingForm
-            handleSubmit={handleSubmit}
-            handleRemoveEvent={handleRemoveEvent}
-            edit={Boolean(bookingId)}
-          />
-        </Modal>
-      }
+      <ModalPopup
+        open={openModal}
+        onClose={handleCloseModal}
+      >
+        <BookingForm
+          handleSubmit={handleSubmit}
+          handleRemoveEvent={handleRemoveEvent}
+          edit={Boolean(bookingId)}
+        />
+      </ModalPopup>
     </Box >
   );
 };

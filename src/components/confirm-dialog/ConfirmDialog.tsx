@@ -3,7 +3,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Button from "../../components/button";
+import ButtonMI from 'components/UI/button';
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -28,7 +28,7 @@ const ConfirmDialog = ({ open, message, onDismiss, onConfirm }: ConfirmDialogPro
       color: 'var(--mainColorFont)',
     },
     '& .MuiDialogActions-root': {
-      justifyContent: 'space-between',
+      justifyContent: 'center',
     },
     '& .MuiDialogContent-root': {
       display: 'flex',
@@ -54,8 +54,8 @@ const ConfirmDialog = ({ open, message, onDismiss, onConfirm }: ConfirmDialogPro
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ p: '20px' }}>
-          <Button styleType='error' onclick={onConfirm}>Yes</Button>
-          <Button onclick={onDismiss}> No </Button>
+          <ButtonMI size='large' sx={{ color: 'red' }} onClick={onConfirm}>Yes</ButtonMI>
+          <ButtonMI size='large' onClick={onDismiss}> No </ButtonMI>
         </DialogActions>
       </Dialog>
     </>

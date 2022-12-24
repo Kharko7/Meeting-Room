@@ -14,13 +14,17 @@ import SendInvitation from 'pages/send-invitation';
 
 interface AppRouterProps {
     role: Role | null;
-    loading: any;
+    loading: boolean;
 }
 
 const AppRouter = ({ role, loading }: AppRouterProps) => {
 
     return (
         <Routes>
+            <Route path={'login'} element={<Login />}></Route>
+            <Route path={'resetPassword'} element={<ResetPassword />}></Route>
+            <Route path={'register/email=:email'} element={<Register />}></Route>
+            <Route path={'sendInvitation'} element={<SendInvitation />}></Route>
             <Route element={<PrivateRoute role={role} loading={loading} />}>
                 <Route path={"/"} element={<AppMain />} >
                     <Route path={"rooms"} element={<Rooms />} />
@@ -28,25 +32,6 @@ const AppRouter = ({ role, loading }: AppRouterProps) => {
                 </Route>
                 <Route path={"profile"} element={<Profile />} />
             </Route>
-
-
-            <Route path={'login'} element={<Login />}></Route>
-            <Route path={'resetPassword'} element={<ResetPassword />}></Route>
-            <Route path={'register/email=:email'} element={<Register />}></Route>
-            <Route path={'sendInvitation'} element={<SendInvitation />}></Route>
-
-
-            {/* <Route path='' element={<ProtectedRoute />}>
-                <Route path={"/"} element={<AppMain />} >
-                    <Route path={"rooms"} element={<Rooms />} />
-                    <Route path={"calendar"} element={<CalendarPage />} />
-                </Route>
-                <Route path={"/profile"} element={<Profile />} />
-                <Route path={'/admin'} element={<AdminRoute />}>
-                    <Route path={'getInvitation'} element={<VerifyEmailPage />}></Route>
-                </Route>
-            </Route> */}
-
             <Route path={"*"} element={<NotFound />} />
         </Routes>
     )

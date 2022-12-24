@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useContext, useEffect } from 'react';
 
-import ProfileForm from 'components/profile-form';
 import ChangePassword from './change-password/ChangePassword';
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
 import { setNotification } from 'redux&saga/slices/user.slice';
 import { SnackBarContext } from 'context/snackbar-context';
+import ProfileForm from './profile-form';
 
 const Profile = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ const Profile = () => {
   const location = useLocation()
   const { setAlert } = useContext(SnackBarContext)
   const goBack = () => navigate(-1)
-  const from = location.state?.from?.pathname;
+  const from = location.state?.from?.pathname || '/';
   const { userEmail, notification, loading } = useAppSelector((state) => state.user);
 
   const checkPath = (from: string) => {

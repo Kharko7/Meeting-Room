@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
-import style from "./bookingForm.module.scss";
 import DateAndTimePicker from "components/date-time-picker";
-import Button from "components/button";
 import ConfirmDialog from "components/confirm-dialog";
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import {
@@ -20,6 +18,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { bookingSchema } from "validators/booking";
 import Input from "components/UI/input";
+import ButtonMI from "components/UI/button";
 
 interface BookingFormProps {
   edit: boolean;
@@ -95,13 +94,14 @@ const BookingForm = ({
         Booking
       </Typography>
       <Box
-        sx={{ displa: "flex", flexDirection: "column", p: "20px" }}
+        sx={{ display: "flex", flexDirection: "column", p: "20px" }}
         component="form"
         onSubmit={Submit(handleSubmit)}
         autoComplete="off"
       >
-        <Grid container maxWidth={1000} spacing={3}>
-          <Grid item xs={6}>
+        <Grid container
+          spacing={3}>
+          <Grid item width={400} xs={6}>
             <Box sx={{ mb: "25px", height: "75px" }}>
               <Controller
                 name="title"
@@ -174,7 +174,7 @@ const BookingForm = ({
               />
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item width={400} xs={6}>
             <Box
               sx={{
                 mb: "21px",
@@ -235,22 +235,23 @@ const BookingForm = ({
               sx={{ display: "flex", justifyContent: "center", gap: "50px" }}
             >
               {edit && (
-                <Button
-                  styleType="error"
-                  dataTestId="button-delete"
-                  onclick={() => setOpenConfirmation(true)}
+                <ButtonMI
+                  sx={{ color: 'red' }}
+                  size='large'
+                  data-testid="button-delete"
+                  onClick={() => setOpenConfirmation(true)}
                 >
                   Delete
-                </Button>
+                </ButtonMI>
               )}
-              <Button
+              <ButtonMI
+                size='large'
                 disabled={!isDirty}
                 type="submit"
-                onclick={() => { }}
-                dataTestId="button-submit"
+                data-testid="button-submit"
               >
                 Save
-              </Button>
+              </ButtonMI>
             </Box>
           </Grid>
         </Grid>
@@ -261,7 +262,6 @@ const BookingForm = ({
         onConfirm={onConfirm}
         onDismiss={onDismiss}
       />
-
     </>
   );
 };
