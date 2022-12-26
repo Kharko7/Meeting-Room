@@ -8,6 +8,7 @@ const Main = () => {
          flexGrow: '1'
          }}
     >
+      
       Main
     </Box >
   )

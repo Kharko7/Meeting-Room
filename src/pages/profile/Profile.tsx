@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react';
 
 import ChangePassword from './change-password/ChangePassword';
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
-import { setNotification } from 'redux&saga/slices/user.slice';
+import { setNotification } from 'redux/slices/user.slice';
 import { SnackBarContext } from 'context/snackbar-context';
 import ProfileForm from './profile-form';
 

@@ -9,7 +9,7 @@ import Button from "components/UI/button"
 import { useContext, useEffect } from "react";
 import { EmailSchema } from "validators/auth";
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
-import { setNotification, recoveryPassword } from "redux&saga/slices/user.slice";
+import { setNotification, recoveryPassword } from "redux/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
 import { enterEmail, success, successInstructions } from "constants/constant";
 

@@ -8,7 +8,7 @@ import Input from "components/UI/input"
 import Button from "components/UI/button"
 import { InviteUsersSchema } from "validators/auth";
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
-import { setNotification, inviteUsers } from "redux&saga/slices/user.slice";
+import { setNotification, inviteUsers } from "redux/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
 import { Link, Navigate } from "react-router-dom";
 

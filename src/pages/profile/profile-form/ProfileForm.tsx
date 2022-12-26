@@ -15,7 +15,7 @@ import {
     setToLocalStorage
 } from 'services/local-storage.service';
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
-import { resetState } from 'redux&saga/slices/user.slice';
+import { resetState } from 'redux/slices/user.slice';
 import Toggle from 'components/toggle/Toggle';
 import ButtonMI from 'components/UI/button';
 import Input from 'components/UI/input';

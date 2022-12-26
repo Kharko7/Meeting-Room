@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
 import {
   setFloor,
   setBookingError,
-} from "redux&saga/slices/booking.slice";
+} from "redux/slices/booking.slice";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import InviteCoworkers from "./invite-coworkers/InviteCoworkers";
