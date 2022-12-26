@@ -101,7 +101,7 @@ const BookingForm = ({
       >
         <Grid container
           spacing={3}>
-          <Grid item width={400} xs={6}>
+          <Grid item width={420} xs={6}>
             <Box sx={{ mb: "25px", height: "75px" }}>
               <Controller
                 name="title"
@@ -174,7 +174,7 @@ const BookingForm = ({
               />
             </Box>
           </Grid>
-          <Grid item width={400} xs={6}>
+          <Grid item width={420} xs={6}>
             <Box
               sx={{
                 mb: "21px",

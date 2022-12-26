@@ -1,4 +1,5 @@
 import { useLayoutEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
 import { userLoginSuccess, setLoading } from 'redux&saga/slices/user.slice';
 import { getFromLocalStorage } from 'services/local-storage.service';
@@ -15,7 +16,7 @@ const App = () => {
     }, [dispatch])
 
     return (
-        <AppRouter role={userRole} loading={loading}/>
+        <AppRouter role={userRole} loading={loading} />
     );
 };
 

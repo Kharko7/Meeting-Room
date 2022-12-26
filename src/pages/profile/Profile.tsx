@@ -9,24 +9,25 @@ import { setNotification } from 'redux&saga/slices/user.slice';
 import { SnackBarContext } from 'context/snackbar-context';
 import ProfileForm from './profile-form';
 
+const checkPath = (from: string) => {
+  if (from === '/calendar') {
+    return 'to calendar'
+  }
+  if (from === '/rooms') {
+    return 'to rooms'
+  }
+  return ''
+}
+
 const Profile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
   const location = useLocation()
   const { setAlert } = useContext(SnackBarContext)
-  const goBack = () => navigate(-1)
-  const from = location.state?.from?.pathname || '/';
   const { userEmail, notification, loading } = useAppSelector((state) => state.user);
+  const from = location.state?.from?.pathname || '/';
 
-  const checkPath = (from: string) => {
-    if (from === '/calendar') {
-      return 'to calendar'
-    }
-    if (from === '/rooms') {
-      return 'to rooms'
-    }
-    return ''
-  }
+  const goBack = () => navigate(from)
 
   useEffect(() => {
     if (notification.message) {

@@ -1,7 +1,7 @@
-import { Typography, Box, IconButton, Tooltip } from '@mui/material';
+import { Typography, Box, Tooltip } from '@mui/material';
 import { useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -20,6 +20,7 @@ import Toggle from 'components/toggle/Toggle';
 import ButtonMI from 'components/UI/button';
 import Input from 'components/UI/input';
 import { UserSchema } from 'validators/auth';
+import IconButtonMUI from 'components/UI/icon-button/IconButtonMUI';
 
 const cn = classNames.bind(styles);
 interface FormValues {
@@ -156,21 +157,11 @@ const ProfileForm = () => {
                     arrow
                     title={<Typography fontSize={14}>Invite users</Typography>}
                     placement="right">
-                    <IconButton
-                        disableRipple
-                        sx={{
-                            mt: '30px',
-                            width: '50px',
-                            height: '50px',
-                            boxShadow: 'var(--datePicker-box-shadow)',
-                            '&:active': {
-                                boxShadow: 'var(--inset-input-shadow)',
-                            }
-                        }}
-                        component={Link}
-                        to="/sendInvitation">
-                        <GroupAddIcon />
-                    </IconButton>
+                    <IconButtonMUI
+                        sx={{ mt: '30px' }}
+                        to="/sendInvitation"
+                        icon={<GroupAddIcon />}
+                    />
                 </Tooltip>}
             <Box sx={{ m: '30px 0' }}>
                 < CheckboxWithLabel
