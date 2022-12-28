@@ -42,7 +42,8 @@ const Footer = () => {
     <Box
       sx={{
         boxShadow: 'var(--outset-box-shadow)',
-        borderRadius: ' 20px',
+        backgroundColor: 'var(--calendar-bg)',
+        borderRadius: ' 15px',
         height: 'Calc(8% - 10px)',
         display: 'flex',
         alignItems: 'center',

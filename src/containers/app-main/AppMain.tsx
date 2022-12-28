@@ -10,7 +10,10 @@ const AppMain: React.FunctionComponent = () => {
       <Box sx={{ flex: '1 1 auto' }}>
         <Outlet />
       </Box>
-      <Box sx={{ flex: '0 0 20%' }}>
+      <Box sx={{
+        flex: '0 0 20%',
+        overflow: 'hidden',
+      }}>
         {/* <SideBar userName={"Some Guy"} /> */}
         <SideBar />
       </Box>

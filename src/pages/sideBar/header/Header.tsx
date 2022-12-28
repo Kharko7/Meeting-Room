@@ -25,6 +25,7 @@ const Header = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          mb: '5px',
         }}>
         <Box
           component={'img'}

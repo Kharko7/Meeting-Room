@@ -10,7 +10,6 @@ const SideBar = () => {
       sx={{
         m: '10px 10px 14px 0',
         height: 'Calc(100% - 20px)',
-
       }}
     >
       <Box
@@ -18,13 +17,13 @@ const SideBar = () => {
           display: 'flex',
           flexDirection: 'column',
           boxShadow: 'var(--outset-box-shadow)',
-          borderRadius: ' 20px',
+          borderRadius: ' 15px',
           height: '92%',
           mb: '10px',
-          p: '10px'
+          p: '10px',
+          backgroundColor: 'var(--calendar-bg)',
         }}
       >
-
         <Header />
         <Main />
       </Box>
