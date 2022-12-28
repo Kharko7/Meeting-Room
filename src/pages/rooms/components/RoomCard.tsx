@@ -4,8 +4,8 @@ import cn from "classnames";
 import ModalRooms from "./ModalRooms";
 import RoomInfo from "./RoomInfo";
 import { useAppSelector, useAppDispatch } from "hooks/use-toolkit-hooks";
-import { roomsActions } from "redux&saga/slices/rooms.slice";
-import { setRoomId, setFloor } from "redux&saga/slices/booking.slice";
+import { roomsActions } from "redux/slices/rooms.slice";
+import { setRoomId, setFloor } from "redux/slices/booking.slice";
 import Button from "components/button";
 interface MyroomsData {
   data: rooms;

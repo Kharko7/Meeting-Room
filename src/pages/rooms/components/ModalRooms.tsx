@@ -13,7 +13,7 @@ import {
   resetState,
   setBookingError,
   setSelectedDate,
-} from "redux&saga/slices/booking.slice";
+} from "redux/slices/booking.slice";
 import dayjs from "dayjs";
 import { Errors } from "constants/errors";
 import { SnackBarContext } from "context/snackbar-context";

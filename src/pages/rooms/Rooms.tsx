@@ -4,7 +4,7 @@ import Floors from "./main/Floor";
 import { useAppSelector, useAppDispatch } from "hooks/use-toolkit-hooks";
 import { useEffect } from "react";
 import moment, { now } from "moment";
-import { roomsActions } from "redux&saga/slices/rooms.slice";
+import { roomsActions } from "redux/slices/rooms.slice";
 import Loader from "pages/layout/loader/Loader";
 const Rooms = () => {
   const {
