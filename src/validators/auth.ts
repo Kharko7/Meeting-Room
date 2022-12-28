@@ -12,9 +12,13 @@ export const LoginSchema = yup.object().shape({
 
 export const RegisterSchema = yup.object().shape({
   firstName: yup.string()
-    .required(Errors.emptyField),
+    .required(Errors.emptyField)
+    .min(2, Errors.userLength)
+    .max(25, Errors.userLength),
   lastName: yup.string()
-    .required(Errors.emptyField),
+    .required(Errors.emptyField)
+    .min(2, Errors.userLength)
+    .max(25, Errors.userLength),
   password: yup.string()
     .min(8, Errors.passwordLength)
     .max(25, Errors.passwordLength)

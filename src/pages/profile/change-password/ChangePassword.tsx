@@ -6,7 +6,7 @@ import Input from "components/UI/input"
 import Button from "components/UI/button"
 import { ChangePasswordSchema } from "validators/auth";
 import { useAppDispatch } from "hooks/use-toolkit-hooks";
-import { changePassword } from "redux&saga/slices/user.slice";
+import { changePassword } from "redux/slices/user.slice";
 import { ChangePasswordInterface } from "interfaces/User";
 import useVisibilityInput from "hooks/use-visibility-input";
 

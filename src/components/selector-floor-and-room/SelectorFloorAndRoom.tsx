@@ -5,7 +5,7 @@ import { FormHelperText } from '@material-ui/core';
 import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
-import { Rooms, roomsActions } from 'redux&saga/slices/rooms.slice';
+import { Rooms, roomsActions } from 'redux/slices/rooms.slice';
 import { styles } from './selector-styles'
 
 interface SelectorProps {

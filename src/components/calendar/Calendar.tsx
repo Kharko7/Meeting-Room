@@ -1,17 +1,18 @@
+import React, { useEffect, useState } from 'react'
 import FullCalendar, { DateSelectArg, DatesSetArg, EventClickArg } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
-import './calendar.module.scss'
 import ukLocale from '@fullcalendar/core/locales/uk';
 import enLocale from '@fullcalendar/core/locales/en-gb';
-import React, { useEffect, useState } from 'react'
+import CircularProgress from '@mui/material/CircularProgress';
+
+import './calendar.module.scss'
 import { setActiveClass } from '../../utils/set-active-class';
 import { Box } from '@mui/material';
 import { getFromLocalStorage, setToLocalStorage } from 'services/local-storage.service';
 import { BookingEvent } from 'interfaces/Booking';
-import CircularProgress from '@mui/material/CircularProgress';
 
 interface CalendarProps {
   data: BookingEvent[];
@@ -104,7 +105,6 @@ export default React.memo(function Calendar({ data, calendarRef, weekends, loadi
         alignItems: 'center',
         position: 'absolute',
         top: '10%', left: '0%',
-        fontSize: '40px',
         zIndex: loading ? '3' : '-1000',
         width: '100%',
         height: 'calc(100% - 10%)',

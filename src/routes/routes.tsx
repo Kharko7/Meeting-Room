@@ -27,8 +27,8 @@ const AppRouter = ({ role, loading }: AppRouterProps) => {
             <Route path={'sendInvitation'} element={<SendInvitation />}></Route>
             <Route element={<PrivateRoute role={role} loading={loading} />}>
                 <Route path={"/"} element={<AppMain />} >
-                    <Route path={"rooms"} element={<Rooms />} />
-                    <Route path={"calendar"} element={<CalendarPage />} />
+                    <Route path={"rooms"} element={<Rooms />}  />
+                    <Route path={"calendar"} element={<CalendarPage />}  />
                 </Route>
                 <Route path={"profile"} element={<Profile />} />
             </Route>

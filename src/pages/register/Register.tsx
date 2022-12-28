@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
-import { setNotification, userSignup } from "redux&saga/slices/user.slice";
+import { setNotification, userSignup } from "redux/slices/user.slice";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { regExp } from "constants/regExp";
@@ -60,7 +60,7 @@ const Register = () => {
   return (
     <Box
       sx={{
-        height: '100vh',
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'

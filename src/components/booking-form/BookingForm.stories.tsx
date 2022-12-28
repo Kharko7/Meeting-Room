@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import BookingFormAdd from './BookingForm';
 import { Provider } from 'react-redux'
-import { store } from 'redux&saga/store';
+import { store } from 'redux/store';
 
 export default {
   title: 'UI/BookingFormAdd',

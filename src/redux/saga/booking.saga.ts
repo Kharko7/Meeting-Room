@@ -1,7 +1,9 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 import { AxiosResponse } from "axios";
-import { RoomBookingPopup } from "pages/rooms/PopupRoom";
+import utc from "dayjs/plugin/utc";
+
 import {
   addBookingSuccess,
   deleteBookingSuccess,
@@ -11,9 +13,6 @@ import {
   editOneBookingSuccess,
   editRecurringBookingSuccess,
 } from "redux/slices/booking.slice";
-import dayjs from "dayjs";
-import { ownBookingsActions } from "redux&saga/slices/ownBookings.slice";
-import utc from "dayjs/plugin/utc";
 import {
   DeleteBookingInterface,
   OneBooking,
@@ -21,6 +20,7 @@ import {
   AddRecurringBooking,
 } from "interfaces/Booking";
 import { bookingService } from "services/booking.service";
+import { deleteOwnBooking, setOwnAddBookigs, setOwnEditBookigs } from "redux/slices/ownBookings.slice";
 
 dayjs.extend(utc);
 
@@ -69,19 +69,12 @@ export function* addOneBooking(action: PayloadAction<OneBooking>) {
         roomId: room_FK,
       }
     }]));
-    yield put(ownBookingsActions.reset());
-    yield put(ownBookingsActions.getTotal(1));
-    const location = window.location.pathname.toString();
-    if (location == "/rooms") {
-      yield RoomBookingPopup.Success();
-    }
+
+    yield put(setOwnAddBookigs());
+
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
-    const location = window.location.pathname.toString();
-    if (location == "/rooms") {
-      yield RoomBookingPopup.ErrorPopup(error);
-    }
   }
 }
 
@@ -103,32 +96,21 @@ export function* addRecurringBooking(action: PayloadAction<AddRecurringBooking>)
       }
     }))
     yield put(addBookingSuccess(getEvents));
-    yield put(ownBookingsActions.reset());
-    yield put(ownBookingsActions.getTotal(1));
-    const location = window.location.pathname.toString();
-    if (location == "/rooms") {
-      yield RoomBookingPopup.Success();
-    }
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
-    const location = window.location.pathname.toString();
-    if (location == "/rooms") {
-      yield RoomBookingPopup.ErrorPopup(error);
-    }
   }
 }
 
 export function* editOneBooking(action: PayloadAction<OneBooking>) {
   try {
-    const response: AxiosResponse = yield call(bookingService.patch, {
-      url: "bookings/one-time",
-      body: action.payload,
-    });
+    const response: AxiosResponse = yield call(bookingService.patch, { url: "bookings/one-time", body: action.payload, });
     const { bookingId } = response.data;
+    console.log(response.data)
     yield put(editOneBookingSuccess(bookingId));
-    yield put(ownBookingsActions.reset());
-    yield put(ownBookingsActions.getTotal(1));
+    yield put(setOwnEditBookigs(response.data));
+
+
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
@@ -142,8 +124,7 @@ export function* editRecurringBooking(action: PayloadAction<EditRecurringBooking
     if (recurringId) {
       yield put(editRecurringBookingSuccess(recurringId));
     }
-    yield put(ownBookingsActions.reset());
-    yield put(ownBookingsActions.getTotal(1));
+
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));
@@ -155,8 +136,8 @@ export function* deleteBooking(action: PayloadAction<DeleteBookingInterface>) {
   try {
     yield call(bookingService.delete, { url: `bookings/${isRecurring ? "recurring" : "one-time"}/${id}` });
     yield put(deleteBookingSuccess({ id: id, isRecurring: isRecurring }));
-    yield put(ownBookingsActions.reset());
-    yield put(ownBookingsActions.getTotal(1));
+    yield put(deleteOwnBooking(id));
+
   } catch (error: any) {
     yield put(setBookingError({ errorMsg: error.response.data.message }));
     yield put(setLoading(false));

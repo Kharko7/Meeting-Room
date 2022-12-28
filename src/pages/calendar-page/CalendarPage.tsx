@@ -17,14 +17,14 @@ import {
   resetState,
   setBookingError,
   setSelectedDate,
-} from "redux&saga/slices/booking.slice";
+} from "redux/slices/booking.slice";
 import dayjs from "dayjs";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
 import { BookingEvent } from "interfaces/Booking";
 import { disabledPressedButton } from "utils/disabled-pressed-button";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { setFloor, setRoomId } from 'redux&saga/slices/booking.slice';
+import { setFloor, setRoomId } from 'redux/slices/booking.slice';
 import CheckboxWithLabel from "components/checkbox-with-label";
 import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
 import ModalPopup from "components/modal-popup";
@@ -190,13 +190,13 @@ const CalendarPage = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh', flexDirection: 'column' }}>
+    <Box sx={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
       <Box sx={{
         height: '100%',
         m: '10px 15px 14px 10px',
         backgroundColor: 'var(--calendar-bg)',
         boxShadow: 'var(--SCREENCALENDAR-box-shadow)',
-        borderRadius: '10px'
+        borderRadius: '15px'
       }}>
         <Box
           sx={{
