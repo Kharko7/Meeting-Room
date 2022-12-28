@@ -7,7 +7,7 @@ import {
   fork,
   takeLatest,
 } from "redux-saga/effects";
-import { roomsActions } from "redux&saga/slices/rooms.slice";
+import { roomsActions } from "redux/slices/rooms.slice";
 import { AxiosResponse } from "axios";
 import moment, { now } from "moment";
 import { ResponsePopup } from "pages/rooms/PopupStatus";
