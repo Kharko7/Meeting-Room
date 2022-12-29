@@ -23,6 +23,7 @@ import ModalPopup from "components/modal-popup"
 import BookingForm from "components/booking-form"
 import { snackbarVariants } from "constants/snackbar"
 import { SnackBarContext } from "context/snackbar-context"
+import styles from './main.module.scss'
 
 interface ChoosedBookingId {
   bookingId: number;
@@ -173,6 +174,7 @@ const Main = () => {
       > My Bookings
       </Typography>
       <InfiniteScroll
+        className={styles.scroll}
         dataLength={cards.length}
         next={handleMoreData}
         hasMore={hasMore}
