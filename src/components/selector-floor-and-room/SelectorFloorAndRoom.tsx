@@ -1,12 +1,11 @@
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+import { InputLabel, FormControl, MenuItem, FormHelperText } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { FormHelperText } from '@material-ui/core';
-import MenuItem from '@mui/material/MenuItem';
 import { useEffect, useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
-import { Rooms, roomsActions } from 'redux/slices/rooms.slice';
 import { styles } from './selector-styles'
+import { Rooms } from 'interfaces/Rooms';
+import { getRooms } from 'redux/slices/room.slice';
 
 interface SelectorProps {
   edit?: boolean;
@@ -18,19 +17,23 @@ interface SelectorProps {
   onChangeRoom: (event: SelectChangeEvent<string>) => void;
 }
 
-const SelectorFloorAndRoom = ({ valueFloor, valueRoom='', errorFloor = '', errorRoom = '', edit = false, onChangeFloor, onChangeRoom }: SelectorProps) => {
+const SelectorFloorAndRoom = ({ valueFloor, valueRoom = '', errorFloor = '', errorRoom = '', edit = false, onChangeFloor, onChangeRoom }: SelectorProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const { rooms, floors } = useAppSelector((state) => state.rooms);
+  const { rooms, floors } = useAppSelector((state) => state.room);
   const dispatch = useAppDispatch();
+  let roomsInArray: Rooms[] = []
+  Object.values(rooms).forEach((roomsArray) => roomsInArray.push(...roomsArray))
 
-  const loading = open && rooms.length === 0;
-  const loadingEdit = edit && rooms.length === 0
+  const loading = open && roomsInArray.length === 0;
+  const loadingEdit = edit && roomsInArray.length === 0
+
+
   useEffect(() => {
     if (!loading) {
       return
     };
 
-    dispatch(roomsActions.getRooms());
+    dispatch(getRooms());
   }, [dispatch, loading]);
 
   useEffect(() => {
@@ -38,29 +41,29 @@ const SelectorFloorAndRoom = ({ valueFloor, valueRoom='', errorFloor = '', error
       return;
     }
 
-    dispatch(roomsActions.getRooms());
+    dispatch(getRooms());
   }, [dispatch, loadingEdit]);
 
   let floorByRoomId: Rooms | undefined;
   if (valueRoom) {
-    floorByRoomId = rooms.find((room) => {
+    floorByRoomId = roomsInArray.find((room) => {
       return room.roomId === Number(valueRoom)
     })
   }
   const getFloor = valueFloor && !valueRoom ? valueFloor : floorByRoomId?.floor || '';
 
-  const roomsByFloor = rooms.filter((room) => {
-    return room.floor ===  Number(getFloor)
+  const roomsByFloor = roomsInArray.filter((room) => {
+    return room.floor === Number(getFloor)
   })
   const itemLoading = <MenuItem sx={{ cursor: 'default' }} ><i>Loading...</i></MenuItem >
 
-  const menuItemsRoom = roomsByFloor ? roomsByFloor.map((room: any) => (
+  const menuItemsRoom = floors.length && roomsByFloor ? roomsByFloor.map((room: any) => (
     <MenuItem
       key={room.roomId}
       value={room.roomId}>
       {room.name}
     </MenuItem>
-  )) : null
+  )) : itemLoading
 
   const menuItemsFloor = floors.length ? floors.map((floor) => (
     <MenuItem

@@ -8,8 +8,12 @@ const SideBar = () => {
   return (
     <Box
       sx={{
-        m: '10px 10px 14px 0',
+        position: 'fixed',
+        top: '0',
+        right: '10px',
+        width: 'Calc(100% - 80% - 10px)',
         height: 'Calc(100% - 20px)',
+        m: '10px 0px 14px 0',
       }}
     >
       <Box

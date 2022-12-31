@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import React, { useCallback, useState, useEffect, useContext, useRef } from "react";
 import FullCalendar, { DateSelectArg, DatesSetArg, EventClickArg } from '@fullcalendar/react';
-import Modal from 'components/modal';
 import { getFromLocalStorage } from 'services/local-storage.service';
 import Calendar from 'components/calendar';
 import BookingForm from 'components/booking-form';
@@ -21,13 +20,14 @@ import {
 import dayjs from "dayjs";
 import { SnackBarContext } from "context/snackbar-context";
 import { snackbarVariants } from "constants/snackbar";
-import { BookingEvent } from "interfaces/Booking";
+import { BookingEvent, FormValues } from "interfaces/Booking";
 import { disabledPressedButton } from "utils/disabled-pressed-button";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { setFloor, setRoomId } from 'redux/slices/booking.slice';
 import CheckboxWithLabel from "components/checkbox-with-label";
 import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
 import ModalPopup from "components/modal-popup";
+import { setEventBooking } from "utils/set-event-submit";
 
 const CalendarPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -127,36 +127,9 @@ const CalendarPage = () => {
     }
     handleCloseModal();
   };
-  const handleSubmit = (values: any) => {
-    const {
-      title,
-      description,
-      selectRoom,
-      iviteCoworkers,
-      dateStart,
-      dateEnd,
-      selectDays,
-    } = values
-
-    const baseParams = {
-      title: title,
-      description: description,
-      roomId: Number(selectRoom),
-      invitations: iviteCoworkers,
-    }
-    const eventOneDay = {
-      ...baseParams,
-      startDateTime: dateStart,
-      endDateTime: dateEnd,
-    }
-    const eventRecurring = {
-      ...baseParams,
-      startDate: dayjs(dateStart).format('YYYY-MM-DD'),
-      startTime: dayjs(dateStart).format('HH:mm'),
-      endDate: dayjs(dateEnd).format('YYYY-MM-DD'),
-      endTime: dayjs(dateEnd).format('HH:mm'),
-      daysOfWeek: selectDays.length ? selectDays.map((id: string) => Number(id)) : selectDays,
-    }
+  const handleSubmit = (values: FormValues) => {
+    const { selectDays } = values
+    const { eventOneDay, eventRecurring } = setEventBooking(values)
 
     const existEvent = bookings.some((event: BookingEvent) => event.extendedProps.bookingId === bookingId)
     if (!existEvent) {

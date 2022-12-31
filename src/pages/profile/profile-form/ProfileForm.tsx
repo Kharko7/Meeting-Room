@@ -78,14 +78,14 @@ const ProfileForm = () => {
 
     return (
         <Box className={cn('ProfileContainer')}>
-            <div className={cn('profile')}><Box sx={{ color: 'var(--accent-text-color)' }} component="h1"> Profile</Box>
+            {/* <div className={cn('profile')}><Box sx={{ color: 'var(--accent-text-color)' }} component="h1"> Profile</Box>
                 <div className={cn('toggle')}><Toggle type={"themeToggle"} onclick={() => {
                     theme = !theme;
                     setToLocalStorage('theme', JSON.stringify(theme));
                     theme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
                 }} size={"large"} />
                 </div>
-            </div>
+            </div> */}
             <Box sx={{ position: 'relative', textAlign: 'center', mb: '40px', }}>
                 <Avatar
                     imageUrl={imageUrl}

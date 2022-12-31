@@ -49,7 +49,7 @@ export interface EditRecurringBooking {
     startTime: string,
     endDate: string,
     endTime: string,
-    daysOfWeek: number[] | null,
+    daysOfWeek: number[] | string[] | null,
     invitations: number[],
 }
 
@@ -61,10 +61,20 @@ export interface AddRecurringBooking {
     startTime: string,
     endDate: string,
     endTime: string,
-    daysOfWeek: number[] | null,
+    daysOfWeek: number[] | string[] | null,
     invitations: number[],
 }
 export interface DeleteBookingInterface {
     id: number;
     isRecurring: boolean;
+}
+
+export interface FormValues {
+    title: string;
+    description: string;
+    dateStart: string;
+    dateEnd: string;
+    selectRoom: string;
+    selectDays: string[];
+    iviteCoworkers: number[];
 }

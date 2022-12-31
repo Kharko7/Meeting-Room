@@ -1,6 +1,5 @@
 import { Box, CircularProgress, Typography } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
-import dayjs from "dayjs"
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks"
@@ -24,6 +23,8 @@ import BookingForm from "components/booking-form"
 import { snackbarVariants } from "constants/snackbar"
 import { SnackBarContext } from "context/snackbar-context"
 import styles from './main.module.scss'
+import { setEventBooking } from "utils/set-event-submit"
+import { FormValues } from "interfaces/Booking"
 
 interface ChoosedBookingId {
   bookingId: number;
@@ -84,36 +85,9 @@ const Main = () => {
     setOpenModal(true);
   };
 
-  const handleSubmit = (values: any) => {
-    const {
-      title,
-      description,
-      selectRoom,
-      iviteCoworkers,
-      dateStart,
-      dateEnd,
-      selectDays,
-    } = values
-
-    const baseParams = {
-      title: title,
-      description: description,
-      roomId: Number(selectRoom),
-      invitations: iviteCoworkers,
-    }
-    const eventOneDay = {
-      ...baseParams,
-      startDateTime: dateStart,
-      endDateTime: dateEnd,
-    }
-    const eventRecurring = {
-      ...baseParams,
-      startDate: dayjs(dateStart).format('YYYY-MM-DD'),
-      startTime: dayjs(dateStart).format('HH:mm'),
-      endDate: dayjs(dateEnd).format('YYYY-MM-DD'),
-      endTime: dayjs(dateEnd).format('HH:mm'),
-      daysOfWeek: selectDays.length ? selectDays.map((id: string) => Number(id)) : selectDays,
-    }
+  const handleSubmit = (values: FormValues) => {
+    const { selectDays } = values
+    const { eventOneDay, eventRecurring } = setEventBooking(values)
 
     selectDays.length
       ? dispatch(editRecurringBooking({ ...eventRecurring, recurringId: choosedBookingId?.recurringId as number | null, }))

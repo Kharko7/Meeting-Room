@@ -3,14 +3,14 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./saga/root-saga";
 import bookingReducer from './slices/booking.slice';
 import ownBookingsReducer from './slices/ownBookings.slice';
-import roomsReducer from './slices/rooms.slice';
+import roomReducer from './slices/room.slice';
 import userReducer from './slices/user.slice';
 
 const rootReducer = combineReducers({
   booking: bookingReducer,
   ownBookings: ownBookingsReducer,
-  rooms: roomsReducer,
   user: userReducer,
+  room: roomReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware()

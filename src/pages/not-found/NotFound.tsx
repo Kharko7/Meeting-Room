@@ -1,4 +1,3 @@
-import Button from "../../components/button";
 import { NavLink } from "react-router-dom";
 import 'animate.css';
 
@@ -6,6 +5,7 @@ import 'animate.css';
 import classNames from 'classnames/bind';
 import styles from './notFound.module.scss'
 import { getFromLocalStorage } from "../../services/local-storage.service";
+import ButtonMI from "components/UI/button/Button";
 const cn = classNames.bind(styles)
 
 const NotFound = () => {
@@ -48,12 +48,12 @@ const NotFound = () => {
           <span>d</span>
           <span>!</span>
         </p>
-        <NavLink to={getFromLocalStorage('token') ? '/rooms' : '/login'}
+        <NavLink to={getFromLocalStorage('token') ? '/room' : '/login'}
           className={cn('animate__animated animate__fadeIn')}
         >
-          <Button onclick={() => { }} size="large">
+          <ButtonMI size="large">
             Go Back
-          </Button>
+          </ButtonMI>
         </NavLink>
       </div>
     </div>
