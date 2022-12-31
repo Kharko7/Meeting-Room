@@ -1,11 +1,10 @@
-
 .ProfileContainer {
   display: flex;
   flex-direction: column;
   padding: 20px;
   box-shadow: -2px -2px 12px var(--base2), 2px 2px 8px var(--base3), 2px 2px 4px var(--base2);
   border-radius: 40px;
-  margin: 40px;
+  margin-bottom: 40px;
   background-color: var(--base1);
 }
 .form {
@@ -13,12 +12,12 @@
   border-bottom: 3px var(--accent-text-color) solid;
 }
 
-.profile{
+.profile {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.toggle{
+.toggle {
   width: 112px;
   height: 40px;
   display: flex;

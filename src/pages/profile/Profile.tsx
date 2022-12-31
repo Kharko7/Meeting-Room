@@ -53,7 +53,13 @@ const Profile = () => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', flexDirection: "column" }}>
+      <Box sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: "column"
+      }}>
         <ProfileForm />
         <ChangePassword email={userEmail} loading={loading} />
       </Box>

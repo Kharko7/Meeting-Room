@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Box } from "@mui/system";
+import { SelectChangeEvent, Typography, Box, Grid } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import DateAndTimePicker from "components/date-time-picker";
 import ConfirmDialog from "components/confirm-dialog";
 import { useAppDispatch, useAppSelector } from "hooks/use-toolkit-hooks";
@@ -7,39 +10,25 @@ import {
   setFloor,
   setBookingError,
 } from "redux/slices/booking.slice";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import InviteCoworkers from "./invite-coworkers/InviteCoworkers";
-import { SelectChangeEvent } from "@mui/material/Select";
 import { daysOfTheWeek } from "constants/booking-form";
 import SelectorMultiple from "./selector/SelectorMultiple";
 import SelectorFloorAndRoom from "components/selector-floor-and-room/SelectorFloorAndRoom";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { bookingSchema } from "validators/booking";
 import Input from "components/UI/input";
 import ButtonMI from "components/UI/button";
+import { FormValues } from "interfaces/Booking";
 
 interface BookingFormProps {
   edit: boolean;
-  handleSubmit: (data: any) => void;
-  handleRemoveEvent: () => void;
-}
-
-interface FormValues {
-  title: string;
-  description: string;
-  dateStart: string;
-  dateEnd: string;
-  selectRoom: string;
-  selectDays: string[];
-  iviteCoworkers: number[];
+  handleSubmit: (data: FormValues) => void;
+  handleRemoveEvent?: () => void;
 }
 
 const BookingForm = ({
   edit,
   handleSubmit,
-  handleRemoveEvent,
+  handleRemoveEvent = () => { },
 }: BookingFormProps) => {
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false);
   const dispatch = useAppDispatch();

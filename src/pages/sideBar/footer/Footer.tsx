@@ -11,7 +11,7 @@ interface Pages {
 }
 
 const pages: Pages[] = [
-  { route: '/rooms', icon: Home },
+  { route: '/room', icon: Home },
   { route: '/calendar', icon: CalendarMonth },
   { route: '/map', icon: LocationOn },
 ]

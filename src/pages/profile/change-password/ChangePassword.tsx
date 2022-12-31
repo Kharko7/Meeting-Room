@@ -57,6 +57,7 @@ const ChangePassword = ({ email, loading }: ChangePasswordProps) => {
         boxShadow: '-2px -2px 12px var(--base2), 2px 2px 8px var(--base3), 2px 2px 4px var(--base2)',
         borderRadius: '40px',
         padding: '40px 30px',
+        mb: '40px'
       }}>
       <Typography
         variant='h4'
