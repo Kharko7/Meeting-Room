@@ -48,8 +48,6 @@ npm config set legacy-peer-deps true
 
 For questions write to
 hanley77@ukr.net or
-eva.cherkashyna2108@gmail.com or
-lavideos1313@gmail.com
 
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/
