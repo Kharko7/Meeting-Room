@@ -45,7 +45,7 @@ const BookingForm = ({
   };
 
   const {
-    getValues,
+    watch,
     control,
     setValue,
     handleSubmit: Submit,
@@ -90,7 +90,7 @@ const BookingForm = ({
       >
         <Grid container
           spacing={3}>
-          <Grid item width={420} xs={6}>
+          <Grid item width={470} xs={6}>
             <Box sx={{ mb: "25px", height: "75px" }}>
               <Controller
                 name="title"
@@ -155,7 +155,7 @@ const BookingForm = ({
                   <DateAndTimePicker
                     errorMsg={Error.dateEnd?.message ? Error.dateEnd.message : ''}
                     label="End"
-                    minDate={getValues('dateStart')}
+                    minDate={watch('dateStart')}
                     date={value}
                     onChange={onChange}
                   />
@@ -163,7 +163,7 @@ const BookingForm = ({
               />
             </Box>
           </Grid>
-          <Grid item width={420} xs={6}>
+          <Grid item width={470} xs={6}>
             <Box
               sx={{
                 mb: "21px",

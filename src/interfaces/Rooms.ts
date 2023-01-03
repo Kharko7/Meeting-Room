@@ -1,4 +1,4 @@
-interface Devices {
+export interface Devices {
   deviceId: number;
   name: string;
 }

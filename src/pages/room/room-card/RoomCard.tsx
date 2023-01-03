@@ -1,19 +1,23 @@
 import { Box, Typography } from "@mui/material"
+import { Groups } from '@mui/icons-material';
+
 import MeetingRoom from 'assets/Meeting-room.jpg'
 import ButtonMI from "components/UI/button/Button"
+import { Devices } from "interfaces/Rooms";
+import { showDevices } from "utils/show-devices";
 
 interface RoomCardProps {
   title: string;
   roomId: number;
-  floor: number;
   capacity: number;
+  devices: Devices[];
   onClick: (id: number) => void;
 }
 
-const RoomCard = ({ title, roomId, floor, capacity, onClick }: RoomCardProps) => {
+const RoomCard = ({ title, roomId, capacity, devices, onClick }: RoomCardProps) => {
+
   return (
     <Box
-
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -42,20 +46,49 @@ const RoomCard = ({ title, roomId, floor, capacity, onClick }: RoomCardProps) =>
         sx={{
           m: '10px 0',
           flexGrow: 1,
+          p: '0 7px',
         }}
       >
-        <Typography
-          component='span'
-          variant="h6"
+        <Box
           sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             mb: "20px",
-            textAlign: "center",
-            color: "var(--accent-text-color)",
-            textTransform: 'uppercase',
+
           }}
         >
-          {title}
-        </Typography>
+          <Typography
+            component='span'
+            variant="h6"
+            sx={{
+              textAlign: "center",
+              color: "var(--accent-text-color)",
+              textTransform: 'uppercase',
+            }}
+          >
+            {title}
+          </Typography>
+          <Box sx={{ display: 'flex' }}>
+            <Typography
+              component='span'
+              sx={{
+                fontSize: '18px',
+                fontWeight: '500',
+                color: 'rgba(0, 0, 0, 0.54)',
+                lineHeight: '1.9'
+              }}
+            >
+              {capacity}
+            </Typography>
+            <Groups sx={{
+              color: 'rgba(0, 0, 0, 0.54)',
+              ml: '10px',
+              fontSize: '30px'
+            }} />
+          </Box>
+        </Box>
+        {showDevices(devices)}
       </Box>
       <Box
         sx={{
