@@ -1,5 +1,6 @@
 import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+
 import rootSaga from "./saga/root-saga";
 import bookingReducer from './slices/booking.slice';
 import ownBookingsReducer from './slices/ownBookings.slice';

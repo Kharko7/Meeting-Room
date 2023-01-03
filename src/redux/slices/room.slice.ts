@@ -30,12 +30,21 @@ const roomSlice = createSlice({
       state.floors = action.payload.floors
       state.loading = false
     },
+    getRoomsError(state, action: PayloadAction<string>) {
+      state.notification = action.payload;
+      state.loading = false;
+    },
+    setNotification(state, action: PayloadAction<string>) {
+      state.notification = action.payload;
+    }
   },
 });
 
 export const {
   getRooms,
   getRoomsSuccess,
+  getRoomsError,
+  setNotification
 
 } = roomSlice.actions;
 

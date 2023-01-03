@@ -30,7 +30,7 @@ const SendInvitation = () => {
       })
       dispatch(setNotification({ message: '' }));
     }
-  }, [dispatch, notification, setAlert]);
+  }, [dispatch, notification.message, notification.status, setAlert]);
 
   const {
     handleSubmit,

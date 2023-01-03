@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
-import SideBar from 'pages/layout/sideBar';
-//import SideBar from '../../pages/layout/sideBar/SideBar';
 import { Outlet } from 'react-router-dom';
+
+import SideBar from 'pages/layout/sideBar';
 
 const AppMain: React.FunctionComponent = () => {
 
@@ -14,7 +14,6 @@ const AppMain: React.FunctionComponent = () => {
         flex: '0 0 20%',
         overflow: 'hidden',
       }}>
-        {/* <SideBar userName={"Some Guy"} /> */}
         <SideBar />
       </Box>
     </Box>
