@@ -1,10 +1,3 @@
-* {
-  -ms-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
 .container {
   display: flex;
   width: 100%;
@@ -29,6 +22,10 @@
   animation-name: rotateAnimation;
   animation-duration: 4s;
   animation-iteration-count: infinite;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .facet {
@@ -39,43 +36,39 @@
   font-size: 120px;
   line-height: 200px;
   text-align: center;
-  color: transparent;
+  color: white;
   text-shadow: var(--facet);
-
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
   border: 1px solid var(--accent-text-color);
 
   &.front {
     transform: rotateY(0deg) translateZ(100px);
-    background-color: var(--accent-text-color);
+    background: var(--shadowNotFoundPage3);
   }
 
   &.back {
     transform: rotateY(90deg) translateZ(100px);
-    background-color: var(--shadowNotFoundPage4);
+    background: var(--shadowNotFoundPage3);
   }
 
   &.right {
     transform: rotateY(180deg) translateZ(100px);
-    background-color: var(--shadowNotFoundPage5);
+    background: var(--shadowNotFoundPage3);
   }
 
   &.left {
     transform: rotateY(-90deg) translateZ(100px);
-    background-color: var(--shadowNotFoundPage6);
+    background: var(--shadowNotFoundPage3);
   }
 
   &.top {
     transform: rotateX(90deg) translateZ(100px);
-    background-color: var(--shadowNotFoundPage2);
+    background: var(--shadowNotFoundPage3);
     font-size: 65px;
   }
 
   &.bottom {
     transform: rotateX(-90deg) translateZ(100px);
-    background-color: var(--shadowNotFoundPage5);
+    background: var(--shadowNotFoundPage3);
   }
 }
 
@@ -107,23 +100,6 @@
   border-radius: 50%;
   background: linear-gradient(to bottom, var(--shadowNotFoundPage1), var(--shadowNotFoundPage2));
   filter: blur(20px);
-
-  transform-style: preserve-3d;
-  transform: rotateX(60deg);
-  transition: all 0.3s linear;
-  animation-name: spansd;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes spansd {
-  25% {
-    background: linear-gradient(90deg, var(--shadowNotFoundPage3), var(--shadowNotFoundPage2));
-  }
-
-  100% {
-    background: linear-gradient(180deg, var(--shadowNotFoundPage3), var(--shadowNotFoundPage2));
-  }
 }
 
 .desk {
@@ -134,11 +110,11 @@
   flex-direction: column;
 }
 
-
 .oops {
   font-size: 75px;
   font-weight: 700;
   text-shadow: var(--text-box-shadow);
+  margin-bottom: 40px;
 }
 
 .oops span {
@@ -146,74 +122,69 @@
 }
 
 .oops span:nth-of-type(2) {
-  animation-delay: .05s;
+  animation-delay: 0.05s;
 }
 .oops span:nth-of-type(3) {
-  animation-delay: .1s;
+  animation-delay: 0.1s;
 }
 .oops span:nth-of-type(4) {
-  animation-delay: .15s;
+  animation-delay: 0.15s;
 }
 .oops span:nth-of-type(5) {
-  animation-delay: .2s;
+  animation-delay: 0.2s;
 }
 .oops span:nth-of-type(6) {
-  animation-delay: .25s;
+  animation-delay: 0.25s;
 }
 .oops span:nth-of-type(7) {
-  animation-delay: .3s;
+  animation-delay: 0.3s;
 }
 .oops span:nth-of-type(8) {
-  animation-delay: .35s;
+  animation-delay: 0.35s;
 }
 .oops span:nth-of-type(9) {
-  animation-delay: .4s;
+  animation-delay: 0.4s;
 }
 .oops span:nth-of-type(10) {
-  animation-delay: .45s;
+  animation-delay: 0.45s;
 }
 .oops span:nth-of-type(11) {
-  animation-delay: .5s;
+  animation-delay: 0.5s;
 }
 .oops span:nth-of-type(12) {
-  animation-delay: .55s;
+  animation-delay: 0.55s;
 }
 .oops span:nth-of-type(13) {
-  animation-delay: .6s;
+  animation-delay: 0.6s;
 }
 .oops span:nth-of-type(14) {
-  animation-delay: .65s;
+  animation-delay: 0.65s;
 }
 .oops span:nth-of-type(15) {
-  animation-delay: .7s;
+  animation-delay: 0.7s;
 }
 .oops span:nth-of-type(16) {
-  animation-delay: .75s;
+  animation-delay: 0.75s;
 }
 .oops span:nth-of-type(17) {
-  animation-delay: .8s;
+  animation-delay: 0.8s;
 }
 .oops span:nth-of-type(18) {
-  animation-delay: .85s;
+  animation-delay: 0.85s;
 }
 .oops span:nth-of-type(19) {
-  animation-delay: .9s;
+  animation-delay: 0.9s;
 }
 .oops span:nth-of-type(20) {
-  animation-delay: .95s;
+  animation-delay: 0.95s;
 }
 
 .animate span {
   opacity: 0;
   transform: translate(-300px, 0) scale(0);
-  animation: sideSlide .5s forwards;
-  text-shadow: var(--text-box-shadow);
-    background-color: var(--accent-text-color);
-    color: transparent;
-    text-shadow: var(--facet);
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
+  animation: sideSlide 0.5s forwards;
+  color: var(--shadowNotFoundPage3);
+  text-shadow: var(--facet);
 }
 
 @keyframes sideSlide {
