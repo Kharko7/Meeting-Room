@@ -1,5 +1,5 @@
-// const baseURL = 'https://coursep.herokuapp.com/';
 export const baseURL = 'https://cors-anywhere.herokuapp.com/https://coursep.herokuapp.com/';
+//export const baseURL = 'http://localhost:5000';
 
 export const urls = {
     login: '/signin',
