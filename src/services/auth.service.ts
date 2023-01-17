@@ -5,7 +5,8 @@ import {
     RegisterInterface,
     ChangePasswordInterface,
     RecoveryPasswordInterface,
-    InviteUsersInterface
+    InviteUsersInterface,
+    UpdateUser
 } from "interfaces/User";
 
 export const AuthService = {
@@ -13,5 +14,6 @@ export const AuthService = {
     register: (data: RegisterInterface) => axiosService.post(urls.register, data),
     changePassword: (data: ChangePasswordInterface) => axiosService.post(urls.changePassword, data),
     recoveryPassword: (data: RecoveryPasswordInterface) => axiosService.post(urls.forgotPassword, data),
-    sendInvitation: (email: InviteUsersInterface[]) => axiosService.post(urls.sendInvitation, email)
+    sendInvitation: (email: InviteUsersInterface[]) => axiosService.post(urls.sendInvitation, email),
+    updateUser: (data: UpdateUser) => axiosService.patch(urls.updateUser, data, { headers: { "Content-Type": "multipart/form-data" } }),
 };

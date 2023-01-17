@@ -1,7 +1,7 @@
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import jwt_decode from "jwt-decode";
-import { ChangePasswordInterface, InviteUsersInterface, Login, RecoveryPasswordInterface, RegisterInterface, Role, UserResponse } from 'interfaces/User';
+import { UpdateUser, ChangePasswordInterface, InviteUsersInterface, Login, RecoveryPasswordInterface, RegisterInterface, Role, UserResponse } from 'interfaces/User';
 import { snackbarVariants } from 'constants/snackbar';
 
 interface Notification {
@@ -14,6 +14,7 @@ export interface InitialStateUser {
     userId: number | null;
     userRole: Role | null;
     userEmail: string;
+    userImg: string;
     loading: boolean;
     notification: Notification;
     userRecovered: boolean;
@@ -25,6 +26,7 @@ const initialState: InitialStateUser = {
     userEmail: '',
     userId: null,
     userRole: null,
+    userImg: '',
     loading: true,
     notification: { message: '', status: snackbarVariants.error },
     userRecovered: false
@@ -45,6 +47,7 @@ const userSlice = createSlice({
             state.userId = userData.id;
             state.userRole = userData.role;
             state.userEmail = userData.email;
+            state.userImg = userData.image;
 
         },
         userLoginError(state, action: PayloadAction<string>) {
@@ -60,6 +63,21 @@ const userSlice = createSlice({
             state.loading = false;
         },
         userSignupError(state, action: PayloadAction<string>) {
+            state.notification = { status: snackbarVariants.error, message: action.payload };
+            state.loading = false;
+        },
+
+        updateUser(state, action: PayloadAction<UpdateUser>) {
+            state.loading = true;
+        },
+        updateUserSuccess(state, action: PayloadAction<any>) {
+            state.notification = { status: snackbarVariants.success, message: action.payload.msg };
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
+            state.userImg = action.payload.image;
+            state.loading = false;
+        },
+        updateUserError(state, action: PayloadAction<string>) {
             state.notification = { status: snackbarVariants.error, message: action.payload };
             state.loading = false;
         },
@@ -105,6 +123,7 @@ const userSlice = createSlice({
             state.userEmail = initialState.userEmail
             state.firstName = initialState.firstName
             state.lastName = initialState.lastName
+            state.userImg = initialState.userImg
         },
     },
 });
@@ -115,6 +134,11 @@ export const {
     userSignup,
     userSignupSuccess,
     userSignupError,
+
+    updateUser,
+    updateUserSuccess,
+    updateUserError,
+
     changePassword,
     changePasswordSuccess,
     changePasswordError,

@@ -5,11 +5,12 @@ import { useLocation } from "react-router-dom";
 import { useAppSelector } from "hooks/use-toolkit-hooks";
 import IconButtonMUI from "components/UI/icon-button/IconButtonMUI";
 import UserIcon from 'assets/User.png'
+import { URL_IMG } from "constants/constant";
 
 
 const Header = () => {
   const location = useLocation();
-  const { firstName, lastName } = useAppSelector((state) => state.user);
+  const { firstName, lastName, userImg } = useAppSelector((state) => state.user);
 
   return (
     <Box
@@ -30,7 +31,7 @@ const Header = () => {
         <Box
           component={'img'}
           alt='User'
-          src={UserIcon}
+          src={userImg ? URL_IMG + userImg : UserIcon}
           sx={{
             width: '50px',
             height: '50px',
