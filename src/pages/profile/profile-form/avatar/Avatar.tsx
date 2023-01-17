@@ -4,29 +4,27 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 import classNames from 'classnames/bind';
 import styles from './avatar.module.scss'
-import UserIcon from 'assets/User.png'
 
 const cn = classNames.bind(styles);
 
 interface AvatarProps {
-  imageUrl: string | null
+  imageUrl: string
   handleImageUrl: (url: string) => void;
   handleSelectedImg: (file: File) => void;
 }
 const Avatar = ({ imageUrl, handleImageUrl, handleSelectedImg }: AvatarProps) => {
-  const reader = new FileReader();
-
-  reader.onloadend = () => {
-    //@ts-ignore
-    handleImageUrl(reader.result)
-  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target != null) {
       const files = (event.target as HTMLInputElement).files
       if (files) {
-        //handleSelectedImg(files[0])
+        const reader = new FileReader();
+        handleSelectedImg(files[0])
         reader.readAsDataURL(files[0]);
+        reader.onloadend = () => {
+          //@ts-ignore
+          handleImageUrl(reader.result)
+        }
       }
     }
   }
@@ -36,7 +34,7 @@ const Avatar = ({ imageUrl, handleImageUrl, handleSelectedImg }: AvatarProps) =>
         component='img'
         className={cn('image')}
         alt='User'
-        src={imageUrl ? imageUrl : UserIcon}
+        src={imageUrl}
       />
       <Box
         component='input'

@@ -10,6 +10,7 @@ export interface UserResponse {
   lastName: string;
   email: string;
   password: string;
+  image: string;
   role: Role,
   iat: number,
   exp: number,
@@ -33,3 +34,8 @@ export interface InviteUsersInterface {
   email: string;
 };
 
+export interface UpdateUser {
+  firstName: string;
+  lastName: string;
+  image: File | null;
+};

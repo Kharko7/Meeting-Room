@@ -2,9 +2,11 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 
-import { ChangePasswordInterface, InviteUsersInterface, Login, RecoveryPasswordInterface, RegisterInterface } from "interfaces/User";
+import { UpdateUser, ChangePasswordInterface, InviteUsersInterface, Login, RecoveryPasswordInterface, RegisterInterface } from "interfaces/User";
 import { AuthService } from "services/auth.service";
 import {
+  updateUserError,
+  updateUserSuccess,
   changePasswordError,
   changePasswordSuccess,
   recoveryPasswordError,
@@ -54,6 +56,18 @@ function* workerChangePassword(action: PayloadAction<ChangePasswordInterface>) {
   }
 }
 
+function* workerUpdateUser(action: PayloadAction<UpdateUser>) {
+  try {
+    const response: AxiosResponse = yield call(AuthService.updateUser, action.payload)
+    console.log(response)
+    const { firstName, lastName, image } = response.data
+    yield put(updateUserSuccess({ firstName, lastName, image, msg: 'Firrst name and Last name has been changed' }))
+  } catch (error: any) {
+    console.log(error)
+    yield put(updateUserError(error.response.data?.message || error.response.statusText))
+  }
+}
+
 function* workerRecoveryPassword(action: PayloadAction<RecoveryPasswordInterface>) {
   try {
     const response: AxiosResponse = yield call(AuthService.recoveryPassword, action.payload)
@@ -87,4 +101,5 @@ export default function* UserSagas() {
   yield takeEvery("user/changePassword", workerChangePassword);
   yield takeEvery("user/recoveryPassword", workerRecoveryPassword);
   yield takeEvery("user/inviteUsers", workerInviteUsers);
+  yield takeEvery("user/updateUser", workerUpdateUser);
 }

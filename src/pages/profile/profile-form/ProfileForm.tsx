@@ -15,12 +15,15 @@ import {
     setToLocalStorage
 } from 'services/local-storage.service';
 import { useAppDispatch, useAppSelector } from 'hooks/use-toolkit-hooks';
-import { resetState } from 'redux/slices/user.slice';
+import { updateUser, resetState } from 'redux/slices/user.slice';
 import Toggle from 'components/toggle/Toggle';
 import ButtonMI from 'components/UI/button';
 import Input from 'components/UI/input';
 import { UserSchema } from 'validators/auth';
 import IconButtonMUI from 'components/UI/icon-button/IconButtonMUI';
+import UserIcon from 'assets/User.png'
+import { URL_IMG } from 'constants/constant';
+import { UpdateUser } from 'interfaces/User';
 
 const cn = classNames.bind(styles);
 interface FormValues {
@@ -35,8 +38,7 @@ const ProfileForm = () => {
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
-    const { userRole, lastName, userEmail, firstName } = useAppSelector((state) => state.user);
-
+    const { userRole, lastName, userEmail, firstName, userImg } = useAppSelector((state) => state.user);
 
     const handleWeekendsToggle = () => {
         setWeekends(prev => !prev)
@@ -69,7 +71,10 @@ const ProfileForm = () => {
         }
     });
 
-    const submit = (data: any) => {
+    const submit = (data: Partial<UpdateUser>) => {
+        data.image = selectedImage
+
+        dispatch(updateUser(data as UpdateUser))
         reset()
     }
 
@@ -88,7 +93,7 @@ const ProfileForm = () => {
             </div>
             <Box sx={{ position: 'relative', textAlign: 'center', mb: '40px', }}>
                 <Avatar
-                    imageUrl={imageUrl}
+                    imageUrl={imageUrl ? imageUrl : userImg ? URL_IMG + userImg : UserIcon}
                     handleImageUrl={handleImageUrl}
                     handleSelectedImg={handleSelectedImg}
                 />
