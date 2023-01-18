@@ -71,10 +71,13 @@ const userSlice = createSlice({
             state.loading = true;
         },
         updateUserSuccess(state, action: PayloadAction<any>) {
+            const userData: UserResponse = jwt_decode(action.payload.token);
+            
+            state.firstName = userData.firstName;
+            state.lastName = userData.lastName;
+            state.userRole = userData.role;
+            state.userImg = userData.image;
             state.notification = { status: snackbarVariants.success, message: action.payload.msg };
-            state.firstName = action.payload.firstName;
-            state.lastName = action.payload.lastName;
-            state.userImg = action.payload.image;
             state.loading = false;
         },
         updateUserError(state, action: PayloadAction<string>) {

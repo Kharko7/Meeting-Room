@@ -59,22 +59,20 @@ function* workerChangePassword(action: PayloadAction<ChangePasswordInterface>) {
 function* workerUpdateUser(action: PayloadAction<UpdateUser>) {
   try {
     const response: AxiosResponse = yield call(AuthService.updateUser, action.payload)
-    console.log(response)
-    const { firstName, lastName, image } = response.data
-    yield put(updateUserSuccess({ firstName, lastName, image, msg: 'Firrst name and Last name has been changed' }))
+
+    const { token } = response.data
+    setToLocalStorage('token', token)
+    yield put(updateUserSuccess({ token, msg: 'User data updated' }))
   } catch (error: any) {
-    console.log(error)
     yield put(updateUserError(error.response.data?.message || error.response.statusText))
   }
 }
 
 function* workerRecoveryPassword(action: PayloadAction<RecoveryPasswordInterface>) {
   try {
-    const response: AxiosResponse = yield call(AuthService.recoveryPassword, action.payload)
-    console.log(response)
+    yield call(AuthService.recoveryPassword, action.payload)
     yield put(recoveryPasswordSuccess(true))
   } catch (error: any) {
-    console.log(error)
     yield put(recoveryPasswordError(error.response.data?.message || error.response.statusText))
   }
 }
@@ -85,7 +83,6 @@ function* workerInviteUsers(action: PayloadAction<InviteUsersInterface[]>) {
     yield put(setNotification({ status: snackbarVariants.success, message: 'User(s) was invited' }))
     yield put(setLoading(false))
   } catch (error: any) {
-    console.log(error)
     yield put(setNotification({
       status: snackbarVariants.error,
       message: error.response.data?.message || error.response.statusText

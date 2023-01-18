@@ -3,7 +3,7 @@ import { TextField, TextFieldProps } from "@mui/material"
 import { styles } from "./input.styles"
 
 const Input = ({ ...props }: TextFieldProps) => {
-  const { sx, ...rest } = props
+  const { sx = {}, ...rest } = props
 
   return (
     <TextField
