@@ -8,18 +8,19 @@ import styles from './avatar.module.scss'
 const cn = classNames.bind(styles);
 
 interface AvatarProps {
-  imageUrl: string
+  imageUrl: string;
+  onChangeForm: (file: File) => void;
   handleImageUrl: (url: string) => void;
-  handleSelectedImg: (file: File) => void;
 }
-const Avatar = ({ imageUrl, handleImageUrl, handleSelectedImg }: AvatarProps) => {
+const Avatar = ({ imageUrl, onChangeForm, handleImageUrl, }: AvatarProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target != null) {
       const files = (event.target as HTMLInputElement).files
       if (files) {
         const reader = new FileReader();
-        handleSelectedImg(files[0])
+
+        onChangeForm(files[0])
         reader.readAsDataURL(files[0]);
         reader.onloadend = () => {
           //@ts-ignore
@@ -28,6 +29,7 @@ const Avatar = ({ imageUrl, handleImageUrl, handleSelectedImg }: AvatarProps) =>
       }
     }
   }
+
   return (
     <>
       <Box

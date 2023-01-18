@@ -1,5 +1,5 @@
-import { Typography, Box, Tooltip } from '@mui/material';
-import { useState } from 'react'
+import { Typography, Box } from '@mui/material';
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -29,6 +29,7 @@ const cn = classNames.bind(styles);
 interface FormValues {
     firstName: string;
     lastName: string;
+    image: File | null;
 }
 
 const ProfileForm = () => {
@@ -37,25 +38,7 @@ const ProfileForm = () => {
 
     const [weekends, setWeekends] = useState<boolean>(getFromLocalStorage('weekends') || false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const { userRole, lastName, userEmail, firstName, userImg } = useAppSelector((state) => state.user);
-
-    const handleWeekendsToggle = () => {
-        setWeekends(prev => !prev)
-        setToLocalStorage('weekends', !weekends)
-    }
-
-    const handleImageUrl = (url: string) => {
-        setImageUrl(url)
-    }
-    const handleSelectedImg = (file: File) => {
-        setSelectedImage(file)
-    }
-    const handleLogOut = () => {
-        dispatch(resetState())
-        removeFromLocalStorage('token')
-        navigate('/login', { replace: true })
-    }
 
     const {
         handleSubmit,
@@ -68,14 +51,37 @@ const ProfileForm = () => {
         defaultValues: {
             firstName,
             lastName,
+            image: null,
         }
     });
 
-    const submit = (data: Partial<UpdateUser>) => {
-        data.image = selectedImage
+    useEffect(() => {
+        reset({
+            firstName,
+            lastName,
+            image: null
+        })
+        setImageUrl(null)
 
-        dispatch(updateUser(data as UpdateUser))
-        reset()
+    }, [firstName, lastName, userImg, reset])
+
+    const handleWeekendsToggle = () => {
+        setWeekends(prev => !prev)
+        setToLocalStorage('weekends', !weekends)
+    }
+
+    const handleImageUrl = (url: string) => {
+        setImageUrl(url)
+    }
+
+    const handleLogOut = () => {
+        dispatch(resetState())
+        removeFromLocalStorage('token')
+        navigate('/login', { replace: true })
+    }
+
+    const submit = (data: UpdateUser) => {
+        dispatch(updateUser(data))
     }
 
     const themeLS = getFromLocalStorage('theme');
@@ -83,32 +89,44 @@ const ProfileForm = () => {
 
     return (
         <Box className={cn('ProfileContainer')}>
-            <div className={cn('profile')}><Box sx={{ color: 'var(--accent-text-color)' }} component="h1"> Profile</Box>
-                <div className={cn('toggle')}><Toggle type={"themeToggle"} onclick={() => {
-                    theme = !theme;
-                    setToLocalStorage('theme', JSON.stringify(theme));
-                    theme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
-                }} size={"large"} />
+            <div className={cn('profile')}>
+                <Box sx={{ color: 'var(--accent-text-color)' }} component="h1"> Profile</Box>
+                <div className={cn('toggle')}>
+                    <Toggle
+                        type="themeToggle"
+                        onclick={() => {
+                            theme = !theme;
+                            setToLocalStorage('theme', JSON.stringify(theme));
+                            theme ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
+                        }}
+                        size={"large"}
+                    />
                 </div>
             </div>
-            <Box sx={{ position: 'relative', textAlign: 'center', mb: '40px', }}>
-                <Avatar
-                    imageUrl={imageUrl ? imageUrl : userImg ? URL_IMG + userImg : UserIcon}
-                    handleImageUrl={handleImageUrl}
-                    handleSelectedImg={handleSelectedImg}
-                />
-                <Typography
-                    variant='h5'
-                    sx={{ mt: '20px', textAlign: 'center', color: 'var(--accent-text-color)' }}
-                > {userEmail}
-                </Typography>
-            </Box>
             <Box
                 component='form'
                 className={cn('form')}
                 autoComplete="off"
                 onSubmit={handleSubmit(submit)}
             >
+                <Box sx={{ position: 'relative', textAlign: 'center', mb: '40px', }}>
+                    <Controller
+                        name="image"
+                        control={control}
+                        render={({ field: { onChange } }) => (
+                            <Avatar
+                                imageUrl={imageUrl ? imageUrl : userImg ? URL_IMG + userImg : UserIcon}
+                                handleImageUrl={handleImageUrl}
+                                onChangeForm={onChange}
+                            />
+                        )}
+                    />
+                    <Typography
+                        variant='h5'
+                        sx={{ mt: '20px', textAlign: 'center', color: 'var(--accent-text-color)' }}
+                    > {userEmail}
+                    </Typography>
+                </Box>
                 <Box sx={{ mb: '20px', height: '80px', display: 'flex', }}>
                     <Box sx={{ mr: '10px', width: '290px' }}>
                         <Controller
@@ -157,17 +175,12 @@ const ProfileForm = () => {
 
                 </Box>
             </Box>
-            {userRole === 'admin'
-                && <Tooltip
-                    arrow
-                    title={<Typography fontSize={14}>Invite users</Typography>}
-                    placement="right">
-                    <IconButtonMUI
-                        sx={{ mt: '30px' }}
-                        to="/sendInvitation"
-                        icon={<GroupAddIcon />}
-                    />
-                </Tooltip>}
+            {userRole === 'admin' &&
+                <IconButtonMUI
+                    sx={{ mt: '30px' }}
+                    to="/sendInvitation"
+                    icon={<GroupAddIcon />}
+                />}
             <Box sx={{ m: '30px 0' }}>
                 < CheckboxWithLabel
                     label='Show weekends on calendar'
